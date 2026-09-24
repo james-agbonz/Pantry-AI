@@ -15,6 +15,8 @@ export const BodyStats = z.strictObject({
   age: z.number().int().positive(),
   sex: Sex,
   activity: Activity,
+  /** Target weight. `null` if not given. On a cut below current weight, protein is based on it. */
+  target_kg: z.number().positive().nullable(),
 });
 export type BodyStats = z.infer<typeof BodyStats>;
 
@@ -53,7 +55,9 @@ export interface NeedsInput {
 
 /**
  * Daily targets for the engine (SPEC §8). No body stats → `null`, and the
- * engine steers by goal alone. Rounded to whole kcal and grams.
+ * engine steers by goal alone. Protein is per kg of current weight, except on
+ * a cut with a target weight below it, where it's per kg of target weight.
+ * Rounded to whole kcal and grams.
  */
 export function computeTargets({ goal, condition, stats }: NeedsInput): Targets | null {
   if (stats === null) return null;
@@ -66,8 +70,10 @@ export function computeTargets({ goal, condition, stats }: NeedsInput): Targets 
   if (goal === "cut") kcal = Math.max(kcal, CUT_FLOOR_KCAL[s.sex ?? "other"]);
 
   const perKg = condition === "kidney" ? KIDNEY_PROTEIN_PER_KG : rule.protein_per_kg;
+  // Calories stay a fixed percentage; only protein follows the target weight.
+  const proteinKg = goal === "cut" && s.target_kg !== null && s.target_kg < s.weight_kg ? s.target_kg : s.weight_kg;
 
-  return Targets.parse({ kcal: Math.round(kcal), protein: Math.round(perKg * s.weight_kg) });
+  return Targets.parse({ kcal: Math.round(kcal), protein: Math.round(perKg * proteinKg) });
 }
 
 /** Mifflin-St Jeor resting energy, kcal/day. Other or skipped sex: the average of the two formulas. */
