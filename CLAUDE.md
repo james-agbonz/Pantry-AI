@@ -31,7 +31,7 @@ Pantry is a working name.
 - `packages/contract` — engine input, card output, card validation, and the onboarding profile and session (SPEC §3–§5, §7).
 - `packages/vocabulary` — families → groups → items (SPEC §6). Data lives in `data/*.json` and is checked on load; a monthly price refresh edits only those files.
 - `packages/engine` — constraint builder and recipe engine (SPEC §7). Pure logic; talks to a model only through the `LlmClient` interface.
-- `apps/mobile` — the Expo app (expo-router, routes in `src/app/`). Theme comes from `design/tokens.json` via `src/theme`; a test fails on raw colours or sizes elsewhere. Vitest covers pure helpers; screens are checked in Expo web (`npm run web -w @pantry/mobile`). Pins TypeScript ~6.0 because Expo SDK 57 requires it; the packages use 7.
+- `apps/mobile` — the Expo app (expo-router, routes in `src/app/`). Theme comes from `design/tokens.json` via `src/theme`; a test fails on raw colours or sizes elsewhere. Vitest covers pure helpers; screens are checked in Expo web (`npm run web -w @pantry/mobile`). Decks and photos come through `DeckSource` / `ImageSource` (`src/data`); until `/api/deck` exists they're mocks in `src/mock`, whose prices are placeholders and whose pricing and sort are stand-ins for step 6. Root `overrides` pins one copy of react-native-reanimated and react-native-worklets (expo-router otherwise pulls a second, newer one). Pins TypeScript ~6.0 because Expo SDK 57 requires it; the packages use 7.
 - `packages/needs` — needs calculator: body stats → daily `targets` (SPEC §8).
 - `packages/backend` — config, model and image adapters (SPEC §16). The only package that reads env or holds keys. `npm run deal -w @pantry/backend` deals one deck; offline by default.
 

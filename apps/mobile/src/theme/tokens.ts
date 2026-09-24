@@ -95,6 +95,8 @@ export const size = {
   badge: 28,
   icon: 20,
   iconLg: 24,
+  /** Round pass and select buttons under the deck. */
+  swipe: 56,
   iconStroke: 1.5,
   /** Hairline and control edges. */
   border: 1,

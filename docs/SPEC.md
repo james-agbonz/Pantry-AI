@@ -254,6 +254,8 @@ Session ─┘       (contract)          (groups only)              │     ^
 
 Backend endpoints (suggested): `POST /api/deck` runs constraint builder → engine → validation → pricing → sort; `POST /api/image` proxies Flux. All keys server-side.
 
+`/api/deck` reports each stage as it finishes (`reading` → `building` → `pricing` → `sorting`), for example as streamed lines, so Loading ticks with the real work and never on a timer.
+
 ### Providers and config
 
 The model and the image generator sit behind two interfaces, so either can be swapped without code changes:
