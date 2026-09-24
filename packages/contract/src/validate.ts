@@ -184,6 +184,20 @@ function checkExclude(card: Card, ctx: ValidateContext): CardError[] {
   return errors;
 }
 
+/**
+ * The exclude terms that rule a group out: its id, family or a `contains` tag
+ * equals the term, or the term is a word in its id (`chicken` → `ground_chicken`).
+ * The same tests `validateCard` applies, so the engine can drop these groups
+ * from the prompt before the model ever sees them.
+ */
+export function excludedBy(group: GroupRef, exclude: readonly string[]): string[] {
+  const tags = new Set([normalize(group.group), normalize(group.family), ...group.contains.map(normalize)]);
+  return exclude
+    .map(normalize)
+    .filter(Boolean)
+    .filter((term) => tags.has(term) || termPattern(term).test(group.group));
+}
+
 /** Lowercase, with spaces and hyphens folded to `_` so "white fish" = `white_fish`. */
 function normalize(s: string): string {
   return s.trim().toLowerCase().replace(/[\s-]+/g, "_");

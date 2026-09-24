@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Card, EngineInput, validateCard, validateDeck, type GroupRef, type ValidateContext } from "../src";
+import { Card, EngineInput, excludedBy, validateCard, validateDeck, type GroupRef, type ValidateContext } from "../src";
 
 // Test fixtures only — the real list comes from the vocabulary (build step 2).
 const groups: GroupRef[] = [
@@ -184,5 +184,16 @@ describe("validateDeck", () => {
   it("fails every slot when the deck is not valid JSON or not an array", () => {
     expect(validateDeck("nope", ctx, 6).failed).toHaveLength(6);
     expect(validateDeck({ cards: [] }, ctx, 6).failed).toHaveLength(6);
+  });
+});
+
+describe("excludedBy", () => {
+  it("names the terms that rule a group out, by id, family, tag or word in its id", () => {
+    const bacon = groups.find((g) => g.group === "bacon")!;
+    const soy = groups.find((g) => g.group === "soy_sauce")!;
+    expect(excludedBy(bacon, ["pork", "nuts"])).toEqual(["pork"]);
+    expect(excludedBy(soy, ["Gluten"])).toEqual(["gluten"]);
+    expect(excludedBy({ group: "ground_chicken", family: "poultry", contains: [] }, ["chicken"])).toEqual(["chicken"]);
+    expect(excludedBy({ group: "chickpeas", family: "legumes", contains: [] }, ["chicken"])).toEqual([]);
   });
 });
