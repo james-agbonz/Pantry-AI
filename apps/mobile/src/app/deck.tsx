@@ -7,6 +7,7 @@ import { Button } from "@/components/Button";
 import { MealCard, type Photo } from "@/components/MealCard";
 import { SwipeCard, type SwipeCardHandle } from "@/components/SwipeCard";
 import { Num, T } from "@/components/Text";
+import { priceNote } from "@/format";
 import { allPassed, canRewind, counterText, decksLeftText, topCard } from "@/deck/state";
 import { needsBodyStats } from "@/meal/bodyStats";
 import { useLog } from "@/state/log";
@@ -115,7 +116,7 @@ export default function Deck() {
           </View>
         )}
         <T variant="body-sm" tone="muted" style={styles.centerText}>
-          Prices are typical, not quotes.
+          {priceNote(deck.cards.some((c) => c.pricing.placeholder))}
         </T>
       </View>
     </SafeAreaView>

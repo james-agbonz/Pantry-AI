@@ -24,10 +24,17 @@ describe("shipped data", () => {
     });
   });
 
-  it("has no real prices yet (build step 2: price column empty)", () => {
+  it("prices every item, all placeholders until step 7, and says so", () => {
     for (const item of v.items) {
-      expect(item).toMatchObject({ price: null, price_source: "placeholder", updated: null });
+      expect(item.price).toBeGreaterThan(0);
+      expect(item.price_source).toBe("placeholder");
     }
+    expect(v.placeholder).toBe(true);
+    expect(v.version).toBe("2026-09-placeholder");
+  });
+
+  it("the seasoning blend is $7.00, as in SPEC §9", () => {
+    expect(v.items.find((i) => i.id === "seasoning_all_purpose_250g")?.price).toBe(7);
   });
 
   it("puts nuts and nut butters in the nuts family", () => {
@@ -164,10 +171,13 @@ describe("loadVocabulary rejects bad data", () => {
       { id: "ground_beef", family: "beef", label: "Ground beef", contains: [] as string[] },
       { id: "rice", family: "grains", label: "Rice", contains: [] as string[] },
     ],
-    items: [
-      { id: "gb", family: "beef", group: "ground_beef", name: "Ground beef", unit: "454g", halal: false, price: null, price_source: "placeholder", updated: null },
-      { id: "r", family: "grains", group: "rice", name: "Rice", unit: "900g", price: null, price_source: "placeholder", updated: null },
-    ],
+    table: {
+      version: "2026-09-placeholder",
+      items: [
+        { id: "gb", family: "beef", group: "ground_beef", name: "Ground beef", unit: "454g", halal: false, price: 7.99 as number | null, price_source: "placeholder", updated: null as string | null },
+        { id: "r", family: "grains", group: "rice", name: "Rice", unit: "900g", price: 3.99 as number | null, price_source: "placeholder", updated: null as string | null },
+      ],
+    },
   });
 
   it("accepts good data", () => {
@@ -175,18 +185,21 @@ describe("loadVocabulary rejects bad data", () => {
   });
 
   const bad: [string, (d: ReturnType<typeof base>) => void][] = [
-    ["duplicate item id", (d) => void (d.items[1]!.id = "gb")],
-    ["unknown group", (d) => void (d.items[1]!.group = "pasta")],
-    ["family mismatch", (d) => void (d.items[1]!.family = "beef")],
-    ["meat item without halal flag", (d) => void delete (d.items[0] as { halal?: boolean }).halal],
-    ["halal flag on a non-meat item", (d) => void Object.assign(d.items[1]!, { halal: true })],
+    ["duplicate item id", (d) => void (d.table.items[1]!.id = "gb")],
+    ["unknown group", (d) => void (d.table.items[1]!.group = "pasta")],
+    ["family mismatch", (d) => void (d.table.items[1]!.family = "beef")],
+    ["meat item without halal flag", (d) => void delete (d.table.items[0] as { halal?: boolean }).halal],
+    ["halal flag on a non-meat item", (d) => void Object.assign(d.table.items[1]!, { halal: true })],
     ["group with no items", (d) => void d.groups.push({ id: "pasta", family: "grains", label: "Pasta", contains: ["wheat", "gluten"] })],
     ["group without contains", (d) => void delete (d.groups[1] as { contains?: string[] }).contains],
     ["unknown allergen", (d) => void (d.groups[1]!.contains = ["celery"])],
     ["duplicate allergen", (d) => void (d.groups[1]!.contains = ["milk", "milk"])],
     ["unknown family", (d) => void (d.groups[1]!.family = "cereal")],
-    ["real price without a date", (d) => void Object.assign(d.items[1]!, { price: 3.49, price_source: "statcan" })],
-    ["a price key typo", (d) => void Object.assign(d.items[1]!, { cost: 3.49 })],
+    ["real price without a date", (d) => void Object.assign(d.table.items[1]!, { price: 3.49, price_source: "statcan" })],
+    ["a price key typo", (d) => void Object.assign(d.table.items[1]!, { cost: 3.49 })],
+    ["an item with no price", (d) => void (d.table.items[1]!.price = null)],
+    ["a table without a version", (d) => void delete (d.table as { version?: string }).version],
+    ["a malformed version", (d) => void (d.table.version = "October")],
   ];
   it.each(bad)("rejects %s", (_, mutate) => {
     const d = base();
@@ -194,9 +207,30 @@ describe("loadVocabulary rejects bad data", () => {
     expect(() => loadVocabulary(d)).toThrow();
   });
 
+  it("names the item that has no price", () => {
+    const d = base();
+    d.table.items[1]!.price = null;
+    expect(() => loadVocabulary(d)).toThrow(/item 'r' has no price/);
+  });
+
+  it("swaps in another price table, keeping groups, and knows when prices are real", () => {
+    const d = base();
+    const voc = loadVocabulary(d);
+    expect(voc.placeholder).toBe(true);
+    const real = {
+      version: "2026-10",
+      items: d.table.items.map((i) => ({ ...i, price: (i.price ?? 1) + 1, price_source: "statcan", updated: "2026-10-01" })),
+    };
+    const next = voc.withTable(real);
+    expect(next.version).toBe("2026-10");
+    expect(next.placeholder).toBe(false);
+    expect(next.itemsFor("rice")[0]?.price).toBe(4.99);
+    expect(() => voc.withTable({ version: "2026-10", items: [] })).toThrow(/has no items/);
+  });
+
   it("accepts a real price with a date", () => {
     const d = base();
-    Object.assign(d.items[1]!, { price: 3.49, price_source: "statcan", updated: "2026-08-01" });
+    Object.assign(d.table.items[1]!, { price: 3.49, price_source: "statcan", updated: "2026-08-01" });
     expect(() => loadVocabulary(d)).not.toThrow();
   });
 });
@@ -217,7 +251,7 @@ describe("flavour groups", () => {
   });
 
   it("a hand flavour mark inside a seasoning family is rejected as redundant", () => {
-    const raw = { families: [{ id: "spices", label: "Spices" }], groups: [{ id: "cumin", family: "spices", label: "Cumin", contains: [], flavour: true }], items: [] };
+    const raw = { families: [{ id: "spices", label: "Spices" }], groups: [{ id: "cumin", family: "spices", label: "Cumin", contains: [], flavour: true }], table: { version: "2026-09", items: [] } };
     expect(() => loadVocabulary(raw)).toThrow(/flavour by family already/);
   });
 });

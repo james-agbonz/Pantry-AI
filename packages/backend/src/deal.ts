@@ -3,13 +3,15 @@
  * prints it. `npm run deal -w @pantry/backend` loads the repo's `.env` if there
  * is one; with none, LLM_PROVIDER defaults to `mock` and nothing leaves the machine.
  */
-import { buildConstraints, dealDeck } from "@pantry/engine";
 import { vocabulary } from "@pantry/vocabulary";
 import { loadConfig } from "./config";
+import { dealPricedDeck } from "./deck";
 import { createLlm } from "./llm";
+import { currentPriceTable } from "./prices";
 
 const config = loadConfig();
-const { input, diet } = buildConstraints(
+const priced = vocabulary.withTable(currentPriceTable());
+const deal = await dealPricedDeck(
   {
     goal: "eat_well",
     condition: null,
@@ -20,11 +22,14 @@ const { input, diet } = buildConstraints(
     targets: { kcal: 2400, protein: 140 },
   },
   { have: ["rice", "corn"], have_other: [], budget: 15, avoid: [] },
+  { llm: createLlm(config.llm), vocabulary: priced, onStage: (s) => console.log(`  ✓ ${s}`) },
 );
-
-const deal = await dealDeck(input, diet, { llm: createLlm(config.llm), vocabulary });
-for (const c of deal.cards) {
-  const buy = c.missing.map((m) => `${m.group} ${m.qty} (${m.role})`).join(", ");
-  console.log(`- ${c.name} · ~${c.kcal} kcal · ~${c.protein_g} g protein · ${c.time_min} min\n  buy: ${buy}`);
+const money = (n: number) => `~$${n.toFixed(2)}`;
+for (const { card: c, pricing: p } of deal.cards) {
+  const status = p.over_by > 0 ? `over by ${money(p.over_by)}` : p.to_complete.length ? `+${money(p.complete_cost)} to complete` : "fits";
+  console.log(`- ${c.name} · ${money(p.total)} of $${p.budget} (${status}) · ~${c.kcal} kcal · ~${c.protein_g} g protein`);
+  for (const b of p.buy) console.log(`    buy ${b.item}, ${b.unit} ${money(b.price)}${b.role === "completes" ? " (completes)" : ""}`);
+  for (const t of p.to_complete) console.log(`    to complete: ${t.item}, ${t.unit} ${money(t.price)}`);
 }
 for (const d of deal.dropped) console.log(`- slot ${d.index} dropped: ${d.errors.map((e) => e.message).join("; ")}`);
+console.log(priced.placeholder ? `Prices are samples for testing, not real (table ${priced.version}).` : `Prices are typical, not quotes (table ${priced.version}).`);

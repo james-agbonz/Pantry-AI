@@ -10,7 +10,7 @@ import { Button } from "@/components/Button";
 import { OptionRow } from "@/components/Choice";
 import { Screen } from "@/components/Screen";
 import { Num, T } from "@/components/Text";
-import { kcal, minutes, money, protein, whole } from "@/format";
+import { kcal, minutes, money, priceNote, protein, whole } from "@/format";
 import { shoppingList } from "@/meal/shopping";
 import { useLog } from "@/state/log";
 import { useProfile } from "@/state/profile";
@@ -107,7 +107,7 @@ export default function Meal() {
           <BudgetBadge pricing={pricing} withTotal={false} />
         </View>
         <T variant="body-sm" tone="muted">
-          Prices are typical, not quotes.
+          {priceNote(pricing.placeholder)}
         </T>
       </View>
 

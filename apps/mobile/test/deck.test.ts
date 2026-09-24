@@ -1,4 +1,4 @@
-import { validateCard, type PricedCard, type Profile } from "@pantry/contract";
+import { validateCard, type Profile } from "@pantry/contract";
 import { buildConstraints } from "@pantry/engine";
 import { vocabulary } from "@pantry/vocabulary";
 import { describe, expect, it } from "vitest";
@@ -7,7 +7,10 @@ import { allPassed, canRewind, counterText, countDeck, dayKey, deckReducer, deck
 import { kcal, money, parseBudget, protein } from "../src/format";
 import { excludeTerms } from "@pantry/contract";
 import { hiddenGroups, search, sections, OPEN_BY_DEFAULT } from "../src/home/groups";
-import { MOCK_CARDS, mockDeckSource, mockPrice, mockSort } from "../src/mock/deck";
+import { MOCK_CARDS, mockDeckSource } from "../src/mock/deck";
+import { tablePricer } from "../src/data/pricer";
+
+const mockPrice = (card: (typeof MOCK_CARDS)[number], budget: number) => tablePricer(vocabulary, { halal: false }).price(card, budget);
 
 const profile: Profile = { goal: "eat_well", condition: null, limits: [], limits_other: [], appliances: ["stove", "microwave", "fridge"], servings: 1, targets: null };
 const session = { have: ["rice", "corn"], have_other: [], budget: 15, avoid: [] };
@@ -30,7 +33,7 @@ describe("format", () => {
 });
 
 describe("budget badge", () => {
-  const base = { buy: [], to_complete: [], total: 13.49, budget: 15, over_by: 0, complete_cost: 0 };
+  const base = { buy: [], to_complete: [], total: 13.49, budget: 15, over_by: 0, complete_cost: 0, placeholder: false };
   it("fits: word then figure; without the figure where the total sits beside it", () => {
     expect(badgeFor(base)).toMatchObject({ status: "fits", label: "Fits ~$13.49" });
     expect(badgeFor(base, { withTotal: false })).toMatchObject({ status: "fits", label: "Fits" });
@@ -154,33 +157,22 @@ describe("mock data", () => {
     }
   });
 
-  it("stand-in pricing: needed first, completes while they fit, over shown", () => {
-    const salmon = MOCK_CARDS.find((c) => c.name.startsWith("Salmon"))!;
-    expect(mockPrice(salmon, 10)).toMatchObject({ over_by: expect.any(Number) });
-    expect(mockPrice(salmon, 10).over_by).toBeGreaterThan(0);
-    const fish = MOCK_CARDS[0]!;
-    const roomy = mockPrice(fish, 50);
-    expect(roomy.to_complete).toEqual([]);
-    expect(roomy.buy.map((b) => b.role)).toEqual(["needed", "needed", "completes"]);
-  });
-
-  it("stand-in sort: fits, then to complete, then over (least over first)", () => {
-    const priced: PricedCard[] = MOCK_CARDS.map((card) => ({ card, pricing: mockPrice(card, 12) }));
-    const order = mockSort(priced, null).map((p) => badgeFor(p.pricing).status);
+  it("the mock deck is priced and sorted by the real modules: fits, then to complete, then over", async () => {
+    const deck = await mockDeckSource(() => vocabulary, 0).deal(profile, { ...session, budget: 12 });
     const rank = { fits: 0, complete: 1, over: 2 };
-    expect(order.map((s) => rank[s])).toEqual([...order.map((s) => rank[s])].sort());
-    const overs = mockSort(priced, null).filter((p) => p.pricing.over_by > 0).map((p) => p.pricing.over_by);
-    expect(overs).toEqual([...overs].sort((a, b) => a - b));
+    const order = deck.map((p) => rank[badgeFor(p.pricing).status]);
+    expect(order).toEqual([...order].sort());
+    expect(deck.every((p) => p.pricing.placeholder)).toBe(true);
   });
 
   it("reports the four stages in order, once each", async () => {
     const seen: string[] = [];
-    await mockDeckSource(0).deal(profile, session, { onStage: (s) => seen.push(s) });
+    await mockDeckSource(() => vocabulary, 0).deal(profile, session, { onStage: (s) => seen.push(s) });
     expect(seen).toEqual(["reading", "building", "pricing", "sorting"]);
   });
 
   it("a new deck avoids passed dishes", async () => {
-    const src = mockDeckSource(0);
+    const src = mockDeckSource(() => vocabulary, 0);
     const first = await src.deal(profile, session);
     const second = await src.deal(profile, { ...session, avoid: first.map((p) => p.card.name) });
     expect(first).toHaveLength(6);
