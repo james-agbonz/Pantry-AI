@@ -42,6 +42,7 @@ The reader is tired, hungry and counting.
 ## Imagery and icons
 
 - Photos are the only imagery: home cooking, normal plate, realistic portion, kitchen light. `surface-soft` while loading.
+- One exception: the kitchen illustration on the appliances screen of onboarding, where you tap to highlight what you have (SPEC §3). Until it's drawn, that screen uses tiles with outline icons. It must be in place before launch.
 - Outline icons, 1.5px stroke, 20px in running UI, 24px on swipe buttons. No emoji in the interface.
 - No logo yet: the word "Pantry" in `display`.
 
