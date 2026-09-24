@@ -20,10 +20,16 @@ Pantry is a working name.
 6. Pricing math, tested with placeholder prices marked as such
 7. Real prices — data change only, no code change
 
+## Stack (confirmed)
+
+- Expo (React Native) for iOS + Android, with a small TypeScript serverless backend.
+- npm workspaces under `packages/`. Shared code is `@pantry/*`.
+- Zod for runtime validation; types are inferred from the schemas. Vitest for tests.
+- `packages/contract` — engine input, card output, card validation (SPEC §5, §7).
+
 ## Open decisions — ask the user before scaffolding
 
-- Stack. Suggested: Expo (React Native) for iOS + Android, with a small serverless backend. Not yet confirmed.
-- App name.
+- App name. Packages use `pantry` until then.
 
 ## Rules that must never break
 

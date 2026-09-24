@@ -73,6 +73,7 @@ Every screen is required, and each has a one-tap way through.
     { "group": "white_fish", "qty": "300g", "role": "needed" },
     { "group": "frozen_veg", "qty": "1 cup", "role": "completes" }
   ],
+  "methods": ["stove"],
   "steps": [],
   "image_prompt": ""
 }
@@ -81,6 +82,7 @@ Every screen is required, and each has a one-tap way through.
 - **needed** — the dish can't be made without it.
 - **completes** — the dish works without it, but this makes it a proper meal.
 - The engine decides roles. It never outputs a price.
+- `methods` lists the appliances the dish needs, from the same set as the input. Empty for a no-cook dish.
 
 ## 6. Vocabulary and prices
 
@@ -115,6 +117,10 @@ Rules:
 - Avoids anything in `avoid`
 
 **Validation** — nothing reaches the user unchecked. Every card is checked for: valid JSON, no excluded ingredient anywhere, every group exists, every method allowed. A failing card is regenerated alone.
+
+- *Excluded ingredient:* a card fails if any group it uses or is missing is excluded, or belongs to an excluded family (`dairy` catches `cheese`), or if an exclude term appears as a word anywhere in its text (name, groups, steps, image prompt). Diets such as halal or vegetarian are expanded into ingredient terms by the constraint builder before they reach `exclude`.
+- *Group exists:* every `missing` group is in the group list. Each `uses` entry is a group or a `have_other` item.
+- *Method allowed:* every card `methods` entry is in the input `methods`.
 
 **Nutrition** — calories and protein are the model's estimates in v1, shown with `~`. Later: nutrition per group in the table, computed like prices.
 

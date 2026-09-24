@@ -1,0 +1,20 @@
+{
+  "name": "@pantry/contract",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Engine input, card output and card validation (SPEC sections 5 and 7).",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.1"
+  }
+}
