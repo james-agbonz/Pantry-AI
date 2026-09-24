@@ -3,13 +3,15 @@ import { Card, EngineInput, validateCard, validateDeck, type GroupRef, type Vali
 
 // Test fixtures only — the real list comes from the vocabulary (build step 2).
 const groups: GroupRef[] = [
-  { group: "rice", family: "grains" },
-  { group: "corn", family: "vegetables" },
-  { group: "white_fish", family: "fish" },
-  { group: "frozen_veg", family: "vegetables" },
-  { group: "bacon", family: "pork" },
-  { group: "cheese", family: "dairy" },
-  { group: "seasoning", family: "pantry" },
+  { group: "rice", family: "grains", contains: [] },
+  { group: "corn", family: "vegetables", contains: [] },
+  { group: "white_fish", family: "fish", contains: ["fish"] },
+  { group: "frozen_veg", family: "vegetables", contains: [] },
+  { group: "bacon", family: "pork", contains: [] },
+  { group: "cheese", family: "dairy", contains: ["milk"] },
+  { group: "seasoning", family: "pantry", contains: ["mustard"] },
+  { group: "soy_sauce", family: "soy", contains: ["soy", "wheat", "gluten"] },
+  { group: "rice_noodles", family: "grains", contains: [] },
 ];
 
 const input: EngineInput = {
@@ -118,6 +120,21 @@ describe("validateCard", () => {
     it("fails an excluded family by name, e.g. dairy → cheese", () => {
       const c = { ...ctx, input: { ...input, exclude: ["dairy"] } };
       expect(codes(validateCard({ ...good, missing: [{ group: "cheese", qty: "1 block", role: "completes" }] }, c))).toContain(
+        "excluded_ingredient",
+      );
+    });
+
+    it("fails a group whose contains tags hit an exclude, e.g. gluten → soy sauce", () => {
+      const c = { ...ctx, input: { ...input, exclude: ["gluten"] } };
+      const r = validateCard({ ...good, missing: [{ group: "soy_sauce", qty: "2 tbsp", role: "needed" }] }, c);
+      expect(r.ok ? [] : r.errors).toEqual([expect.objectContaining({ code: "excluded_ingredient", path: "missing.0.group" })]);
+      expect(validateCard({ ...good, missing: [{ group: "rice_noodles", qty: "200g", role: "needed" }] }, c).ok).toBe(true);
+    });
+
+    it("matches multi-word tags however the exclude is written", () => {
+      const g = [...groups, { group: "almonds", family: "nuts", contains: ["tree_nuts"] }];
+      const c = { input: { ...input, exclude: ["Tree nuts"] }, groups: g };
+      expect(codes(validateCard({ ...good, missing: [{ group: "almonds", qty: "30g", role: "completes" }] }, c))).toContain(
         "excluded_ingredient",
       );
     });

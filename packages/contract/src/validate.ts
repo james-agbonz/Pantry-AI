@@ -2,12 +2,15 @@ import { Card } from "./card";
 import type { EngineInput } from "./input";
 
 /**
- * The slice of the vocabulary the validator needs: which groups exist and
- * which family each belongs to (SPEC §6). Supplied by the vocabulary module.
+ * The slice of the vocabulary the validator needs: which groups exist, which
+ * family each belongs to, and which allergens it contains (SPEC §6).
+ * Supplied by the vocabulary module.
  */
 export interface GroupRef {
   group: string;
   family: string;
+  /** Health Canada priority allergens plus gluten, e.g. `["soy", "wheat", "gluten"]`. */
+  contains: readonly string[];
 }
 
 export type CardErrorCode =
@@ -136,16 +139,17 @@ function checkMethods(card: Card, ctx: ValidateContext): CardError[] {
 }
 
 /**
- * An exclude term fails the card if it names a group or family the card
- * touches, or if it appears as a word in any text on the card. The text scan
- * catches free-text excludes (e.g. "cilantro"); the family match catches
- * "dairy" when the card uses `cheese`.
+ * An exclude term fails the card if it names a group, family or `contains`
+ * tag the card touches, or if it appears as a word in any text on the card.
+ * The text scan catches free-text excludes (e.g. "cilantro"); the family match
+ * catches "dairy" when the card uses `cheese`; the tags catch "gluten" when it
+ * uses `soy_sauce`.
  */
 function checkExclude(card: Card, ctx: ValidateContext): CardError[] {
   const terms = ctx.input.exclude.map(normalize).filter(Boolean);
   if (!terms.length) return [];
 
-  const familyOf = new Map(ctx.groups.map((g) => [g.group, normalize(g.family)]));
+  const tagsOf = new Map(ctx.groups.map((g) => [g.group, new Set([normalize(g.family), ...g.contains.map(normalize)])]));
   const errors: CardError[] = [];
 
   const groupRefs: [string, string][] = [
@@ -154,9 +158,9 @@ function checkExclude(card: Card, ctx: ValidateContext): CardError[] {
   ];
   for (const [group, path] of groupRefs) {
     const g = normalize(group);
-    const family = familyOf.get(group);
+    const tags = tagsOf.get(group);
     for (const term of terms) {
-      if (term === g || term === family) {
+      if (term === g || tags?.has(term)) {
         errors.push({ code: "excluded_ingredient", message: `'${group}' is excluded ('${term}')`, path });
       }
     }

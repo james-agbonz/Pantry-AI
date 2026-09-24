@@ -38,7 +38,7 @@ export function loadVocabulary(raw: unknown): Vocabulary {
     (byGroup.get(group) ?? []).filter((i) => !diet.halal || !MEAT_FAMILIES.includes(i.family) || i.halal === true);
 
   const groupList = (diet: Diet = NO_DIET): GroupRef[] =>
-    groups.filter((g) => itemsFor(g.id, diet).length > 0).map((g) => ({ group: g.id, family: g.family }));
+    groups.filter((g) => itemsFor(g.id, diet).length > 0).map((g) => ({ group: g.id, family: g.family, contains: g.contains }));
 
   return { families, groups, items, itemsFor, groupList };
 }

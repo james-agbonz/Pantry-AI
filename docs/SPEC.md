@@ -89,6 +89,8 @@ Every screen is required, and each has a one-tap way through.
 Three levels: **family** (fish) → **group** (white fish) → **item** (basa fillets, frozen, 400g).
 
 ```json
+{ "id": "white_fish", "family": "fish", "label": "White fish", "contains": ["fish"] }
+
 { "id": "basa_frozen", "family": "fish", "group": "white_fish",
   "name": "Basa fillets, frozen", "unit": "400g",
   "price": null, "price_source": "placeholder", "updated": null }
@@ -102,6 +104,7 @@ Three levels: **family** (fish) → **group** (white fish) → **item** (basa fi
 - Target size: 150–200 items.
 - **Halal** — meat items (poultry, beef, pork, lamb) carry `"halal": true | false`; nothing else does. Under the halal diet, a meat group resolves to its halal-certified items only, and a group with none (all pork, some cuts) is left out of the group list the engine and validator see.
 - **Nuts** — nuts and nut butters, peanuts included, are one `nuts` family, so excluding `nuts` catches them by family.
+- **Allergens** — every group carries `contains`: Health Canada's priority allergens plus gluten — `peanuts`, `tree_nuts`, `sesame`, `milk`, `eggs`, `fish`, `shellfish` (crustaceans and molluscs), `soy`, `wheat`, `mustard`, `sulphites`, `gluten`. Tags are set by hand per group, never by name matching (rice noodles: none; soy sauce: soy, wheat, gluten). They cover every item in the group, including typical "may contain" labelling. `[]` means checked and none. Every wheat group is also gluten.
 
 **Price source.** Baseline candidate: Statistics Canada table 18-10-0245-01, *Monthly average retail prices for selected products* — monthly, from retailer scanner data, national and by province. These are averages, not lowest prices: label them "typical prices". The list is limited and lags a month or two; gaps are filled by hand. Until then, prices are placeholders marked `"price_source": "placeholder"`.
 
@@ -120,7 +123,7 @@ Rules:
 
 **Validation** — nothing reaches the user unchecked. Every card is checked for: valid JSON, no excluded ingredient anywhere, every group exists, every method allowed. A failing card is regenerated alone.
 
-- *Excluded ingredient:* a card fails if any group it uses or is missing is excluded, or belongs to an excluded family (`dairy` catches `cheese`), or if an exclude term appears as a word anywhere in its text (name, groups, steps, image prompt). Diets such as halal or vegetarian are expanded into ingredient terms by the constraint builder before they reach `exclude`.
+- *Excluded ingredient:* a card fails if any group it uses or is missing is excluded, belongs to an excluded family (`dairy` catches `cheese`), or has an excluded `contains` tag (`gluten` catches `soy_sauce`), or if an exclude term appears as a word anywhere in its text (name, groups, steps, image prompt). Diets such as vegetarian are expanded into terms by the constraint builder before they reach `exclude`; halal acts on items instead (§6). Hard limits map to terms that hit both family and tags: No dairy → `dairy`, `milk`; Nuts → `nuts`, `peanuts`, `tree_nuts`; Gluten → `gluten`.
 - *Group exists:* every `missing` group is in the group list. Each `uses` entry is a group or a `have_other` item.
 - *Method allowed:* every card `methods` entry is in the input `methods`.
 

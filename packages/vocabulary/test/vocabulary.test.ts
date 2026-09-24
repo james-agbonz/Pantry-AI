@@ -46,6 +46,54 @@ describe("shipped data", () => {
   });
 });
 
+describe("allergen tags", () => {
+  const tags = (id: string) => v.groups.find((g) => g.id === id)?.contains;
+
+  it("are set deliberately, not by name", () => {
+    expect(tags("rice_noodles")).toEqual([]);
+    expect(tags("soy_sauce")).toEqual(expect.arrayContaining(["soy", "wheat", "gluten"]));
+    expect(tags("oats")).toEqual(["gluten"]);
+    expect(tags("barley")).toEqual(["gluten"]);
+    expect(tags("egg_noodles")).toEqual(expect.arrayContaining(["eggs", "wheat", "gluten"]));
+    expect(tags("mayonnaise")).toContain("eggs");
+    expect(tags("margarine")).toContain("milk");
+    expect(tags("shrimp")).toContain("shellfish");
+  });
+
+  it("tag every wheat group with gluten too", () => {
+    for (const g of v.groups.filter((g) => g.contains.includes("wheat"))) expect(g.contains).toContain("gluten");
+  });
+
+  it("agree with the family where the family is itself an allergen", () => {
+    const expected: Record<string, string[]> = { dairy: ["milk"], eggs: ["eggs"], fish: ["fish"], shellfish: ["shellfish"], soy: ["soy"] };
+    for (const g of v.groups) {
+      for (const tag of expected[g.family] ?? []) expect(g.contains, g.id).toContain(tag);
+    }
+    for (const g of v.groups.filter((g) => g.family === "nuts")) {
+      expect(g.contains.some((t) => t === "peanuts" || t === "tree_nuts"), g.id).toBe(true);
+    }
+  });
+
+  it("reach the validator through groupList", () => {
+    const input = { exclude: ["gluten"], methods: [], have_other: [] };
+    const card = (group: string): Card => ({
+      id: "",
+      name: "Noodle bowl",
+      time_min: 15,
+      kcal: 500,
+      protein_g: 20,
+      uses: [],
+      missing: [{ group, qty: "1", role: "needed" }],
+      methods: [],
+      steps: ["Assemble."],
+      image_prompt: "",
+    });
+    expect(validateCard(card("rice_noodles"), { input, groups: v.groupList() }).ok).toBe(true);
+    expect(validateCard(card("soy_sauce"), { input, groups: v.groupList() }).ok).toBe(false);
+    expect(validateCard(card("oats"), { input, groups: v.groupList() }).ok).toBe(false);
+  });
+});
+
 describe("halal diet", () => {
   it("resolves meat groups to halal-certified items only", () => {
     expect(ids(v.itemsFor("chicken_thighs")).length).toBeGreaterThan(1);
@@ -113,8 +161,8 @@ describe("loadVocabulary rejects bad data", () => {
       { id: "grains", label: "Grains" },
     ],
     groups: [
-      { id: "ground_beef", family: "beef", label: "Ground beef" },
-      { id: "rice", family: "grains", label: "Rice" },
+      { id: "ground_beef", family: "beef", label: "Ground beef", contains: [] as string[] },
+      { id: "rice", family: "grains", label: "Rice", contains: [] as string[] },
     ],
     items: [
       { id: "gb", family: "beef", group: "ground_beef", name: "Ground beef", unit: "454g", halal: false, price: null, price_source: "placeholder", updated: null },
@@ -132,7 +180,10 @@ describe("loadVocabulary rejects bad data", () => {
     ["family mismatch", (d) => void (d.items[1]!.family = "beef")],
     ["meat item without halal flag", (d) => void delete (d.items[0] as { halal?: boolean }).halal],
     ["halal flag on a non-meat item", (d) => void Object.assign(d.items[1]!, { halal: true })],
-    ["group with no items", (d) => void d.groups.push({ id: "pasta", family: "grains", label: "Pasta" })],
+    ["group with no items", (d) => void d.groups.push({ id: "pasta", family: "grains", label: "Pasta", contains: ["wheat", "gluten"] })],
+    ["group without contains", (d) => void delete (d.groups[1] as { contains?: string[] }).contains],
+    ["unknown allergen", (d) => void (d.groups[1]!.contains = ["celery"])],
+    ["duplicate allergen", (d) => void (d.groups[1]!.contains = ["milk", "milk"])],
     ["unknown family", (d) => void (d.groups[1]!.family = "cereal")],
     ["real price without a date", (d) => void Object.assign(d.items[1]!, { price: 3.49, price_source: "statcan" })],
     ["a price key typo", (d) => void Object.assign(d.items[1]!, { cost: 3.49 })],

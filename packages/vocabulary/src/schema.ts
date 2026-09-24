@@ -11,8 +11,39 @@ const Id = z.string().regex(/^[a-z0-9]+(_[a-z0-9]+)*$/, "ids are snake_case");
 export const Family = z.strictObject({ id: Id, label: z.string().min(1) });
 export type Family = z.infer<typeof Family>;
 
+/**
+ * Health Canada's priority food allergens, plus gluten. `shellfish` covers
+ * crustaceans and molluscs; `wheat` covers wheat and triticale; `gluten`
+ * covers wheat, barley, rye, oats and triticale.
+ */
+export const Allergen = z.enum([
+  "peanuts",
+  "tree_nuts",
+  "sesame",
+  "milk",
+  "eggs",
+  "fish",
+  "shellfish",
+  "soy",
+  "wheat",
+  "mustard",
+  "sulphites",
+  "gluten",
+]);
+export type Allergen = z.infer<typeof Allergen>;
+
 /** Groups never change: the engine and saved data depend on these ids. */
-export const Group = z.strictObject({ id: Id, family: Id, label: z.string().min(1) });
+export const Group = z.strictObject({
+  id: Id,
+  family: Id,
+  label: z.string().min(1),
+  /**
+   * Allergens any item in the group may contain, including typical "may
+   * contain" labelling. Set by hand for every group; `[]` means checked and
+   * none, not unknown.
+   */
+  contains: z.array(Allergen).refine((a) => new Set(a).size === a.length, "duplicate allergen"),
+});
 export type Group = z.infer<typeof Group>;
 
 /**
