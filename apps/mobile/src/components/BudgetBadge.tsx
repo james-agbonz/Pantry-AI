@@ -16,8 +16,8 @@ const LOOK = {
  * three status colours are close in lightness, so it always carries a word
  * and an icon, never colour alone.
  */
-export function BudgetBadge({ pricing }: { pricing: Pricing }) {
-  const b = badgeFor(pricing);
+export function BudgetBadge({ pricing, withTotal = true }: { pricing: Pricing; withTotal?: boolean }) {
+  const b = badgeFor(pricing, { withTotal });
   const look = LOOK[b.status];
   return (
     <View accessible accessibilityLabel={b.label} style={[styles.badge, { backgroundColor: color[look.bg] }]}>

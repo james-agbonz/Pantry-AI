@@ -5,6 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { LogProvider } from "@/state/log";
 import { ProfileProvider } from "@/state/profile";
 import { SessionProvider } from "@/state/session";
 import { color } from "@/theme";
@@ -26,8 +27,10 @@ export default function RootLayout() {
       <SafeAreaProvider>
         <ProfileProvider>
           <SessionProvider>
-            <StatusBar style="dark" />
-            <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: color.canvas } }} />
+            <LogProvider>
+              <StatusBar style="dark" />
+              <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: color.canvas } }} />
+            </LogProvider>
           </SessionProvider>
         </ProfileProvider>
       </SafeAreaProvider>

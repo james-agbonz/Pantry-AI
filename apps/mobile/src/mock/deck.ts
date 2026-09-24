@@ -1,8 +1,8 @@
 import { budgetStatus, Card, excludeTerms, type PricedCard, type Pricing, type Profile, type Session } from "@pantry/contract";
-import { vocabulary } from "@pantry/vocabulary";
+import { NO_DIET, type Diet } from "@pantry/vocabulary";
 import type { DeckSource, ImageSource } from "@/data/sources";
 import cardsJson from "./cards.json";
-import { PLACEHOLDER_PRICES } from "./prices";
+import { mockPricer } from "./pricer";
 
 /**
  * Mock data for building screens (step 5). Replaced by `/api/deck` (engine →
@@ -15,32 +15,9 @@ export const MOCK_CARDS: readonly Card[] = cardsJson.map((c) => Card.parse(c));
 
 const TIER = { fits: 0, complete: 1, over: 2 } as const;
 
-/** Stand-in for SPEC §9: needed first, then completes in order while they fit. */
-export function mockPrice(card: Card, budget: number): Pricing {
-  const line = (group: string) => ({
-    item: vocabulary.itemsFor(group)[0]?.name ?? group,
-    price: PLACEHOLDER_PRICES[group] ?? 3.0,
-  });
-  const round = (n: number) => Math.round(n * 100) / 100;
-
-  const buy: Pricing["buy"] = card.missing.filter((m) => m.role === "needed").map((m) => ({ ...line(m.group), role: "needed" }));
-  let total = buy.reduce((s, b) => s + b.price, 0);
-  const to_complete: Pricing["to_complete"] = [];
-  for (const m of card.missing.filter((x) => x.role === "completes")) {
-    const l = line(m.group);
-    if (total + l.price <= budget) {
-      buy.push({ ...l, role: "completes" });
-      total += l.price;
-    } else to_complete.push(l);
-  }
-  return {
-    buy,
-    to_complete,
-    total: round(total),
-    budget,
-    over_by: round(Math.max(0, total - budget)),
-    complete_cost: round(to_complete.reduce((s, t) => s + t.price, 0)),
-  };
+/** Stand-in pricing on placeholder prices, cheapest item per group. Kept for tests and the deck. */
+export function mockPrice(card: Card, budget: number, diet: Diet = NO_DIET): Pricing {
+  return mockPricer(diet).price(card, budget);
 }
 
 /** Stand-in for SPEC §10 order: tier, then closest to the per-meal protein target. */
@@ -71,7 +48,8 @@ export const mockDeckSource = (buildMs = 900): DeckSource => ({
     const pick = MOCK_CARDS.filter((c) => !avoid.has(c.name.toLowerCase())).slice(0, size);
     onStage?.("building");
 
-    const priced = pick.map((c) => ({ card: { ...c, id: `mock-${nextId++}` }, pricing: mockPrice(c, input.budget) }));
+    const pricer = mockPricer({ halal: profile.limits.includes("halal") });
+    const priced = pick.map((c) => ({ card: { ...c, id: `mock-${nextId++}` }, pricing: pricer.price(c, input.budget) }));
     onStage?.("pricing");
 
     const sorted = mockSort(priced, profile.targets?.protein ?? null);

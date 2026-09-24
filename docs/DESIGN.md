@@ -50,7 +50,7 @@ The reader is tired, hungry and counting.
 ## Components
 
 - **Button** — primary (`primary` fill, `on-primary` label, 44px), secondary (`surface`, `border-strong` edge), text (no fill or edge). A text button's label is `ink` whenever a primary button is on the same screen, so the primary stays the only olive thing; it's `primary` only when it's the screen's only action. Pressed `primary-active`; disabled `primary-soft` with `muted`.
-- **BudgetBadge** — fits / to complete / over; pill, 28px, word + icon + `num-sm` figure.
+- **BudgetBadge** — fits / to complete / over; pill, 28px, word + icon + `num-sm` figure. On the meal screen, where the total sits beside it, the fits badge drops its figure (just "Fits"); over and to-complete keep theirs.
 - **IngredientChip** — unselected `surface` + `border-strong`; selected `primary-soft` + `primary` edge and label + check. 40px, grouped under a `caption` family label.
 - **MealCard** — photo first (4:3; on the deck the card fills the space between the counter and the buttons and the photo takes the extra height), name in `title`, meta row (time, ~kcal, ~protein) in `num-sm`, one BudgetBadge. The next card's edge shows below the top one so it reads as a deck. Below: round pass, rewind (always visible; quiet `surface-soft` fill with no edge and a `muted` icon when there's nothing to rewind), round select. Buttons mirror the swipes.
 

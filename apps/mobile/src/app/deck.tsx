@@ -8,6 +8,9 @@ import { MealCard, type Photo } from "@/components/MealCard";
 import { SwipeCard, type SwipeCardHandle } from "@/components/SwipeCard";
 import { Num, T } from "@/components/Text";
 import { allPassed, canRewind, counterText, decksLeftText, topCard } from "@/deck/state";
+import { needsBodyStats } from "@/meal/bodyStats";
+import { useLog } from "@/state/log";
+import { useProfile } from "@/state/profile";
 import { useSession } from "@/state/session";
 import { color, radius, size, space } from "@/theme";
 
@@ -18,6 +21,8 @@ import { color, radius, size, space } from "@/theme";
  */
 export default function Deck() {
   const s = useSession();
+  const { profile } = useProfile();
+  const { log } = useLog();
   const deck = s.deck;
   const card = useRef<SwipeCardHandle>(null);
   const [photos, setPhotos] = useState<Record<string, Photo>>({});
@@ -45,10 +50,13 @@ export default function Deck() {
   const left = s.decksLeft ?? 0;
 
   const pass = () => s.dispatch({ type: "deck", action: { type: "pass" } });
+  /** Swipe right: the deck ends, the meal is logged, and the meal screen opens (SPEC §10). */
   const select = () => {
     if (!top) return;
     s.dispatch({ type: "select", card: top });
-    router.replace("/meal");
+    void log({ id: top.card.id, name: top.card.name, kcal: top.card.kcal, protein_g: top.card.protein_g });
+    // First meal for cut, bulk or condition: body stats come first, then the meal (SPEC §3).
+    router.replace(profile && needsBodyStats(profile) ? "/body-stats" : "/meal");
   };
 
   return (
