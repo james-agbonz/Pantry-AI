@@ -27,7 +27,7 @@ Every screen is required, and each has a one-tap way through.
 | 3 | Appliances (many) | A kitchen illustration; tap to highlight: stove/hotplate · oven · microwave · fridge · freezer · kettle · blender · air fryer · rice cooker/slow cooker. Knife, pan, bowl and plate are assumed |
 | 4 | Cooking for | Defaults to 1 |
 
-**Body stats** — asked after the first meal is selected, only for cut, bulk or condition: height, weight, age, sex, activity level, target. Their only job is computing daily needs (section 8).
+**Body stats** — asked after the first meal is selected, only for cut, bulk or condition: height, weight, age, sex, activity level, target weight (optional). Their only job is computing daily needs (section 8).
 
 ## 4. Home
 
@@ -143,8 +143,10 @@ Rules:
 | Eat well | maintenance | 1.0 |
 | Cut | −15% | 1.8 |
 | Bulk | +10% | 1.8 |
+| Managing a condition | maintenance | 1.0 |
 
-   - Cut floor: never below 1500 kcal for men, 1200 for women.
+   - Cut floor: never below 1500 kcal for men, 1200 for women, 1350 (the average) for other or skipped sex.
+   - Protein is per kg of current weight. On a cut with a target weight below current weight, it's per kg of target weight instead. Calories stay the fixed percentages above; there is no timeline input.
 4. **Condition**
    - Kidney: protein ~0.8 g/kg — overrides the goal.
    - Diabetes, blood pressure, anemia: passed to the engine as dish rules.
