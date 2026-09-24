@@ -16,7 +16,7 @@ export interface ValidationStats {
 
 export interface DealOptions {
   llm: LlmClient;
-  vocabulary: Pick<Vocabulary, "groups" | "groupList">;
+  vocabulary: Pick<Vocabulary, "groupList">;
   /** Tries per slot, counting the deck call. Default 3: the deck, then two regenerations. */
   maxAttempts?: number;
   /** Receives one `card_validation` event per deck. Default: a JSON line on `console.info`. */
@@ -40,8 +40,7 @@ export interface Deal {
 export async function dealDeck(input: EngineInput, diet: Diet, opts: DealOptions): Promise<Deal> {
   const { llm, vocabulary, maxAttempts = 3, log = defaultLog } = opts;
   const groups = vocabulary.groupList(diet);
-  const labels = new Map(vocabulary.groups.map((g) => [g.id, g.label]));
-  const promptGroups: PromptGroup[] = groups.map((g) => ({ ...g, label: labels.get(g.group) ?? g.group }));
+  const promptGroups: PromptGroup[] = groups.map((g) => ({ ...g, label: g.label ?? g.group }));
   const ctx: ValidateContext = { input, groups };
 
   let validated = input.deck;

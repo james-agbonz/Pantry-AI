@@ -13,4 +13,4 @@ The test input is `have: rice, corn`, limits `no_pork` and `nuts`, appliances `s
 | `not-json.txt` | A chatty prose reply with no JSON |
 | `deck-three-bad.json` | Six cards with three faults: slot 1 uses `bacon` (pork), slot 3 asks for `quinoa` (no such group), slot 4 needs the `oven` (not allowed) |
 | `card-fix-*.json` | Valid single-card regenerations |
-| `card-still-bad.json` | A regeneration that fails again: "ground pork" in a step |
+| `card-still-bad.json` | A regeneration that fails again: "ground pork" (the `ground_pork` group) in a step |

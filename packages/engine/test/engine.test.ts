@@ -84,7 +84,7 @@ describe("dealDeck", () => {
     bad[4].methods = ["oven"];
     const r = await deal([JSON.stringify(bad), fixture("card-still-bad.json"), fixture("card-fix-omelette.json")]);
     expect(r.llm.calls).toHaveLength(3);
-    expect(r.llm.calls[2]!.user).toContain("mentions excluded 'pork'");
+    expect(r.llm.calls[2]!.user).toContain("mentions 'ground pork', excluded ('pork')");
     expect(r.cards[4]!.name).toBe("Corn and rice omelette");
     expect(r.dropped).toEqual([]);
   });

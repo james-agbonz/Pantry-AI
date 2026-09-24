@@ -115,6 +115,16 @@ describe("with the real vocabulary", () => {
     expect(check(["vegetarian"], veg).ok).toBe(true);
   });
 
+  it("no dairy allows coconut milk and soy milk, named anywhere", () => {
+    const coconut = { ...card, missing: [{ group: "coconut_milk", qty: "1 can", role: "needed" as const }], steps: ["Simmer the beans in coconut milk, or soy milk."] };
+    expect(check(["no_dairy"], coconut).ok).toBe(true);
+    expect(check(["no_dairy"], { ...card, steps: ["Add a splash of milk."] }).ok).toBe(false);
+  });
+
+  it("vegetarian allows a meat-free dish", () => {
+    expect(check(["vegetarian"], { ...card, name: "Meat-free bean chili" }).ok).toBe(true);
+  });
+
   it("halal drops meat groups with no halal item, keeps those with one", () => {
     const { diet } = buildConstraints({ ...profile, limits: ["halal"] }, session);
     const ids = vocabulary.groupList(diet).map((g) => g.group);

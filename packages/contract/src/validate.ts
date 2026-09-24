@@ -11,6 +11,8 @@ export interface GroupRef {
   family: string;
   /** Health Canada priority allergens plus gluten, e.g. `["soy", "wheat", "gluten"]`. */
   contains: readonly string[];
+  /** Display name, e.g. "Coconut milk". Lets the text scan recognise the group when a step names it. */
+  label?: string;
 }
 
 export type CardErrorCode =
@@ -139,33 +141,35 @@ function checkMethods(card: Card, ctx: ValidateContext): CardError[] {
 }
 
 /**
- * An exclude term fails the card if it names a group, family or `contains`
- * tag the card touches, or if it appears as a word in any text on the card.
- * The text scan catches free-text excludes (e.g. "cilantro"); the family match
- * catches "dairy" when the card uses `cheese`; the tags catch "gluten" when it
- * uses `soy_sauce`.
+ * An exclude term fails the card if it rules out a group the card uses, is
+ * missing or names in its text, or if it appears as a word in the text that's
+ * left once group names are masked. Groups are judged by their tags (see
+ * `excludeHits`), so "coconut milk" in a step passes No dairy while "cheese"
+ * fails it. The word scan catches free-text excludes (e.g. "cilantro") and
+ * things no group covers ("gelatin"). "-free" compounds never match.
  */
 function checkExclude(card: Card, ctx: ValidateContext): CardError[] {
   const terms = ctx.input.exclude.map(normalize).filter(Boolean);
   if (!terms.length) return [];
 
-  const tagsOf = new Map(ctx.groups.map((g) => [g.group, new Set([normalize(g.family), ...g.contains.map(normalize)])]));
+  const tagTerms = tagTermsOf(ctx.groups);
+  const byId = new Map(ctx.groups.map((g) => [g.group, g]));
   const errors: CardError[] = [];
+  const fail = (path: string, message: string) => {
+    if (!errors.some((e) => e.path === path)) errors.push({ code: "excluded_ingredient", message, path });
+  };
 
   const groupRefs: [string, string][] = [
     ...card.uses.map((g, i): [string, string] => [g, `uses.${i}`]),
     ...card.missing.map((m, i): [string, string] => [m.group, `missing.${i}.group`]),
   ];
-  for (const [group, path] of groupRefs) {
-    const g = normalize(group);
-    const tags = tagsOf.get(group);
-    for (const term of terms) {
-      if (term === g || tags?.has(term)) {
-        errors.push({ code: "excluded_ingredient", message: `'${group}' is excluded ('${term}')`, path });
-      }
-    }
+  for (const [id, path] of groupRefs) {
+    const group = byId.get(id);
+    const hit = group && excludeHits(group, terms, tagTerms)[0];
+    if (hit) fail(path, `'${id}' is excluded ('${hit}')`);
   }
 
+  const names = groupNames(ctx.groups);
   const texts: [string, string][] = [
     [card.name, "name"],
     ...card.uses.map((t, i): [string, string] => [t, `uses.${i}`]),
@@ -173,29 +177,57 @@ function checkExclude(card: Card, ctx: ValidateContext): CardError[] {
     ...card.steps.map((t, i): [string, string] => [t, `steps.${i}`]),
     [card.image_prompt, "image_prompt"],
   ];
-  for (const term of terms) {
-    const re = termPattern(term);
-    for (const [text, path] of texts) {
-      if (re.test(text) && !errors.some((e) => e.path === path)) {
-        errors.push({ code: "excluded_ingredient", message: `mentions excluded '${term}'`, path });
-      }
+  for (const [text, path] of texts) {
+    let rest = text;
+    for (const { group, re } of names) {
+      rest = rest.replace(re, (match) => {
+        const hit = excludeHits(group, terms, tagTerms)[0];
+        if (hit) fail(path, `mentions '${match}', excluded ('${hit}')`);
+        return " ";
+      });
     }
+    const term = terms.find((t) => termPattern(t).test(rest));
+    if (term) fail(path, `mentions excluded '${term}'`);
   }
   return errors;
 }
 
 /**
- * The exclude terms that rule a group out: its id, family or a `contains` tag
- * equals the term, or the term is a word in its id (`chicken` → `ground_chicken`).
- * The same tests `validateCard` applies, so the engine can drop these groups
+ * The exclude terms that rule a group out. Supply the full group list so it
+ * knows which terms are families or allergen tags.
+ * The same rules `validateCard` applies, so the engine can drop these groups
  * from the prompt before the model ever sees them.
  */
-export function excludedBy(group: GroupRef, exclude: readonly string[]): string[] {
+export function excludedBy(group: GroupRef, exclude: readonly string[], groups: readonly GroupRef[]): string[] {
+  return excludeHits(group, exclude.map(normalize).filter(Boolean), tagTermsOf(groups));
+}
+
+/**
+ * A group is ruled out by a term equal to its id, family or a `contains` tag.
+ * A term that is some group's family or tag (`milk`, `dairy`, `gluten`) judges
+ * a group only that way, so `milk` doesn't catch `coconut_milk`. Any other term
+ * is free text, and also matches as a word in the group's id or label, so
+ * `chicken` catches `ground_chicken`.
+ */
+function excludeHits(group: GroupRef, terms: readonly string[], tagTerms: ReadonlySet<string>): string[] {
   const tags = new Set([normalize(group.group), normalize(group.family), ...group.contains.map(normalize)]);
-  return exclude
-    .map(normalize)
-    .filter(Boolean)
-    .filter((term) => tags.has(term) || termPattern(term).test(group.group));
+  return terms.filter(
+    (t) =>
+      tags.has(t) ||
+      (!tagTerms.has(t) && (termPattern(t).test(group.group) || (group.label !== undefined && termPattern(t).test(group.label)))),
+  );
+}
+
+function tagTermsOf(groups: readonly GroupRef[]): Set<string> {
+  return new Set(groups.flatMap((g) => [normalize(g.family), ...g.contains.map(normalize)]));
+}
+
+/** Every way a group is written (id and label), longest first so "coconut milk" masks before "milk". */
+function groupNames(groups: readonly GroupRef[]): { group: GroupRef; re: RegExp }[] {
+  return groups
+    .flatMap((group) => [group.group, ...(group.label ? [group.label] : [])].map((name) => ({ group, name: normalize(name) })))
+    .sort((a, b) => b.name.length - a.name.length)
+    .map(({ group, name }) => ({ group, re: termPattern(name, "giu") }));
 }
 
 /** Lowercase, with spaces and hyphens folded to `_` so "white fish" = `white_fish`. */
@@ -206,9 +238,10 @@ function normalize(s: string): string {
 /**
  * Whole-word, case-insensitive, singular or plural: "nuts" matches "nut" and
  * "Nuts"; "white_fish" matches "white fish". Letters only count as word
- * characters, so `_` in group ids acts as a separator.
+ * characters, so `_` in group ids acts as a separator. Never matches the
+ * first half of a "-free" compound: "meat-free" doesn't mention meat.
  */
-function termPattern(term: string): RegExp {
+function termPattern(term: string, flags = "iu"): RegExp {
   const stems = new Set([term, term.replace(/s$/, ""), term.replace(/es$/, "")]);
   const body = [...stems]
     .filter((s) => s.length >= 3 || s === term)
@@ -219,5 +252,5 @@ function termPattern(term: string): RegExp {
         .join("[\\s_-]+"),
     )
     .join("|");
-  return new RegExp(`(?<![\\p{L}])(?:${body})(?:e?s)?(?![\\p{L}])`, "iu");
+  return new RegExp(`(?<![\\p{L}])(?:${body})(?:e?s)?(?![\\p{L}])(?!-free)`, flags);
 }

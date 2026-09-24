@@ -83,7 +83,7 @@ export function cardPrompt(
 
 /** Everything both prompts share: the §7 rules, the user's situation and the group list. */
 function context(input: EngineInput, groups: readonly PromptGroup[]): string[] {
-  const allowed = groups.filter((g) => excludedBy(g, input.exclude).length === 0);
+  const allowed = groups.filter((g) => excludedBy(g, input.exclude, groups).length === 0);
   const allowedIds = new Set(allowed.map((g) => g.group));
   const have = input.have.map((h) => h.group).filter((g) => allowedIds.has(g));
 
