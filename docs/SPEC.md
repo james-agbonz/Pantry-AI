@@ -123,7 +123,7 @@ Rules:
 
 **Validation** — nothing reaches the user unchecked. Every card is checked for: valid JSON, no excluded ingredient anywhere, every group exists, every method allowed. A failing card is regenerated alone.
 
-- *Excluded ingredient:* a card fails if any group it uses or is missing is excluded, belongs to an excluded family (`dairy` catches `cheese`), or has an excluded `contains` tag (`gluten` catches `soy_sauce`), or if an exclude term appears as a word anywhere in its text (name, groups, steps, image prompt). Diets such as vegetarian are expanded into terms by the constraint builder before they reach `exclude`; halal acts on items instead (§6). Hard limits map to terms that hit both family and tags: No dairy → `dairy`, `milk`; Nuts → `nuts`, `peanuts`, `tree_nuts`; Gluten → `gluten`.
+- *Excluded ingredient:* a card fails if any group it uses or is missing is excluded, belongs to an excluded family (`dairy` catches `cheese`), or has an excluded `contains` tag (`gluten` catches `soy_sauce`), or if an exclude term appears as a word anywhere in its text (name, groups, steps, image prompt). Group names in the text are masked first and judged by their family and `contains` tags like any other group, so "coconut milk" passes No dairy and "soy sauce" in a step fails Gluten. A term that is a family or tag judges groups only that way; a free-text term ("chicken") also matches words in group names. An exclude term never matches inside a "-free" compound ("meat-free", "dairy-free"). Diets such as vegetarian are expanded into terms by the constraint builder before they reach `exclude`; halal acts on items instead (§6). Hard limits map to terms that hit both family and tags: No dairy → `dairy`, `milk`; Nuts → `nuts`, `peanuts`, `tree_nuts`; Gluten → `gluten`.
 - *Group exists:* every `missing` group is in the group list. Each `uses` entry is a group or a `have_other` item.
 - *Method allowed:* every card `methods` entry is in the input `methods`.
 
@@ -251,3 +251,22 @@ Session ─┘       (contract)          (groups only)              │     ^
 ```
 
 Backend endpoints (suggested): `POST /api/deck` runs constraint builder → engine → validation → pricing → sort; `POST /api/image` proxies Flux. All keys server-side.
+
+### Providers and config
+
+The model and the image generator sit behind two interfaces, so either can be swapped without code changes:
+
+- **`LlmClient`** (`@pantry/engine`) — `complete({ system, user }) → text`. The engine owns the prompts; an adapter only moves text. Adapters live in `@pantry/backend`: `anthropic` and `mock` (a recorded sample deck, offline).
+- **`ImageClient`** (`@pantry/backend`) — `generate(prompt) → { url } | null`; `null` shows the card's fallback. Only `mock` exists; Flux is added as an adapter later.
+
+Chosen by environment variables, read only by the backend:
+
+| Variable | Values | Notes |
+|---|---|---|
+| `LLM_PROVIDER` | `anthropic` · `mock` | Default `mock` |
+| `LLM_MODEL` | e.g. `claude-sonnet-5` | Required for a real provider. No model id is hard-coded |
+| `PANTRY_LLM_API_KEY` | the provider's key | Required for a real provider |
+| `IMAGE_PROVIDER` | `mock` | More as adapters are added |
+
+- **Keys** come from `process.env`. On a host, the platform injects them. In dev, the repo's `.env` (gitignored) is loaded with Node's `--env-file`. The key is named `PANTRY_LLM_API_KEY`, not `ANTHROPIC_API_KEY`, so tools that read the standard name (Claude Code among them) never pick it up.
+- **Validation failure rate.** Every deck logs one line: `{"event":"card_validation","provider","model","validated","failed","rate"}`, counting every card checked, retries included. Aggregating these lines compares providers and models.

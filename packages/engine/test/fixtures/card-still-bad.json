@@ -1,0 +1,26 @@
+{
+  "id": "",
+  "name": "Corn rice with ground meat",
+  "time_min": 20,
+  "kcal": 650,
+  "protein_g": 35,
+  "uses": [
+    "rice",
+    "corn"
+  ],
+  "missing": [
+    {
+      "group": "ground_beef",
+      "qty": "250g",
+      "role": "needed"
+    }
+  ],
+  "methods": [
+    "stove"
+  ],
+  "steps": [
+    "Brown the beef, or use ground pork if cheaper.",
+    "Stir in rice and corn."
+  ],
+  "image_prompt": "Rice with corn and ground meat in a pan"
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Card, EngineInput, validateCard, validateDeck, type GroupRef, type ValidateContext } from "../src";
+import { Card, EngineInput, excludedBy, validateCard, validateDeck, type GroupRef, type ValidateContext } from "../src";
 
 // Test fixtures only — the real list comes from the vocabulary (build step 2).
 const groups: GroupRef[] = [
@@ -184,5 +184,84 @@ describe("validateDeck", () => {
   it("fails every slot when the deck is not valid JSON or not an array", () => {
     expect(validateDeck("nope", ctx, 6).failed).toHaveLength(6);
     expect(validateDeck({ cards: [] }, ctx, 6).failed).toHaveLength(6);
+  });
+});
+
+describe("excludedBy", () => {
+  const g = (group: string, family: string, contains: string[] = [], label?: string): GroupRef => ({ group, family, contains, ...(label ? { label } : {}) });
+
+  it("names the terms that rule a group out, by id, family or tag", () => {
+    const bacon = groups.find((x) => x.group === "bacon")!;
+    const soy = groups.find((x) => x.group === "soy_sauce")!;
+    expect(excludedBy(bacon, ["pork", "nuts"], groups)).toEqual(["pork"]);
+    expect(excludedBy(soy, ["Gluten"], groups)).toEqual(["gluten"]);
+  });
+
+  it("judges a group by its tags when the term is a family or tag: milk doesn't catch coconut milk", () => {
+    const all = [...groups, g("milk", "dairy", ["milk"], "Milk"), g("coconut_milk", "pantry", ["sulphites"], "Coconut milk")];
+    expect(excludedBy(all.at(-1)!, ["dairy", "milk"], all)).toEqual([]);
+    expect(excludedBy(all.at(-2)!, ["dairy", "milk"], all)).toEqual(["dairy", "milk"]);
+  });
+
+  it("matches a free-text term as a word in the id or label", () => {
+    const all = [...groups, g("ground_chicken", "poultry"), g("deli_turkey", "poultry", [], "Sliced turkey"), g("chickpeas", "legumes")];
+    expect(excludedBy(all.at(-3)!, ["chicken"], all)).toEqual(["chicken"]);
+    expect(excludedBy(all.at(-2)!, ["sliced"], all)).toEqual(["sliced"]);
+    expect(excludedBy(all.at(-1)!, ["chicken"], all)).toEqual([]);
+  });
+});
+
+describe("exclude text scan", () => {
+  const all: GroupRef[] = [
+    ...groups,
+    { group: "milk", family: "dairy", contains: ["milk"], label: "Milk" },
+    { group: "coconut_milk", family: "pantry", contains: ["sulphites"], label: "Coconut milk" },
+    { group: "soy_milk", family: "soy", contains: ["soy"], label: "Soy milk" },
+    { group: "ground_chicken", family: "poultry", contains: [], label: "Ground chicken" },
+  ];
+  const check = (exclude: string[], patch: Partial<Card>) => validateCard({ ...good, ...patch }, { input: { ...input, exclude }, groups: all });
+  const noDairy = ["dairy", "milk"];
+
+  describe("masks group names and judges them by their tags", () => {
+    it("coconut milk and soy milk pass No dairy, in steps, name and missing", () => {
+      expect(check(noDairy, { steps: ["Simmer the corn in coconut milk."] }).ok).toBe(true);
+      expect(check(noDairy, { name: "Coconut Milk Rice", image_prompt: "rice in coconut milk" }).ok).toBe(true);
+      expect(check(noDairy, { steps: ["Add a splash of soy milk."] }).ok).toBe(true);
+      expect(check(noDairy, { missing: [{ group: "coconut_milk", qty: "1 can", role: "needed" }] }).ok).toBe(true);
+    });
+
+    it("plain milk still fails No dairy", () => {
+      const r = check(noDairy, { steps: ["Stir in the coconut milk, then a splash of milk."] });
+      expect(r.ok ? [] : r.errors).toEqual([expect.objectContaining({ code: "excluded_ingredient", path: "steps.0" })]);
+    });
+
+    it("a group named only in the text is judged by its tags: gluten catches soy sauce in a step", () => {
+      const r = check(["gluten"], { steps: ["Season with soy sauce."] });
+      expect(r.ok ? [] : r.errors).toEqual([expect.objectContaining({ path: "steps.0", message: expect.stringContaining("soy sauce") })]);
+      expect(check(["dairy"], { steps: ["Grate some cheese on top."] }).ok).toBe(false);
+    });
+
+    it("a free-text exclude still catches a group whose name holds the word", () => {
+      expect(check(["chicken"], { steps: ["Brown the ground chicken."] }).ok).toBe(false);
+      expect(check(["chicken"], { missing: [{ group: "ground_chicken", qty: "450g", role: "needed" }] }).ok).toBe(false);
+    });
+  });
+
+  describe('never matches inside a "-free" compound', () => {
+    it("meat-free, dairy-free, nut-free, egg-free pass", () => {
+      expect(check(["meat"], { name: "Meat-free corn chili" }).ok).toBe(true);
+      expect(check(noDairy, { steps: ["Use a dairy-free spread."] }).ok).toBe(true);
+      expect(check(["nuts"], { image_prompt: "Nut-free rice bowl" }).ok).toBe(true);
+      expect(check(["eggs"], { steps: ["This is egg-free."] }).ok).toBe(true);
+    });
+
+    it("the bare word still fails, even next to a -free compound", () => {
+      expect(check(["meat"], { name: "Meat and corn rice" }).ok).toBe(false);
+      expect(check(["meat"], { steps: ["Meat-free, or add leftover meat."] }).ok).toBe(false);
+    });
+
+    it("gluten-free doesn't clear an ingredient whose tags contain gluten", () => {
+      expect(check(["gluten"], { steps: ["Add gluten-free soy sauce."] }).ok).toBe(false);
+    });
   });
 });

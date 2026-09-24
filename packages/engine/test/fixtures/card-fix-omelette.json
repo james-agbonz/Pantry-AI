@@ -1,0 +1,32 @@
+{
+  "id": "",
+  "name": "Corn and rice omelette",
+  "time_min": 12,
+  "kcal": 500,
+  "protein_g": 26,
+  "uses": [
+    "rice",
+    "corn"
+  ],
+  "missing": [
+    {
+      "group": "eggs",
+      "qty": "3",
+      "role": "needed"
+    },
+    {
+      "group": "cheese",
+      "qty": "30g",
+      "role": "completes"
+    }
+  ],
+  "methods": [
+    "stove"
+  ],
+  "steps": [
+    "Beat the eggs.",
+    "Fry the rice and corn briefly, pour over the eggs and cook until set.",
+    "Fold with cheese inside."
+  ],
+  "image_prompt": "Folded omelette with rice and corn on a plain plate, home kitchen"
+}
