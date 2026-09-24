@@ -251,3 +251,22 @@ Session ─┘       (contract)          (groups only)              │     ^
 ```
 
 Backend endpoints (suggested): `POST /api/deck` runs constraint builder → engine → validation → pricing → sort; `POST /api/image` proxies Flux. All keys server-side.
+
+### Providers and config
+
+The model and the image generator sit behind two interfaces, so either can be swapped without code changes:
+
+- **`LlmClient`** (`@pantry/engine`) — `complete({ system, user }) → text`. The engine owns the prompts; an adapter only moves text. Adapters live in `@pantry/backend`: `anthropic` and `mock` (a recorded sample deck, offline).
+- **`ImageClient`** (`@pantry/backend`) — `generate(prompt) → { url } | null`; `null` shows the card's fallback. Only `mock` exists; Flux is added as an adapter later.
+
+Chosen by environment variables, read only by the backend:
+
+| Variable | Values | Notes |
+|---|---|---|
+| `LLM_PROVIDER` | `anthropic` · `mock` | Default `mock` |
+| `LLM_MODEL` | e.g. `claude-sonnet-5` | Required for a real provider. No model id is hard-coded |
+| `PANTRY_LLM_API_KEY` | the provider's key | Required for a real provider |
+| `IMAGE_PROVIDER` | `mock` | More as adapters are added |
+
+- **Keys** come from `process.env`. On a host, the platform injects them. In dev, the repo's `.env` (gitignored) is loaded with Node's `--env-file`. The key is named `PANTRY_LLM_API_KEY`, not `ANTHROPIC_API_KEY`, so tools that read the standard name (Claude Code among them) never pick it up.
+- **Validation failure rate.** Every deck logs one line: `{"event":"card_validation","provider","model","validated","failed","rate"}`, counting every card checked, retries included. Aggregating these lines compares providers and models.

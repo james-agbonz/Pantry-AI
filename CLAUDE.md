@@ -19,6 +19,7 @@ Pantry is a working name.
 5. Screens
 6. Pricing math, tested with placeholder prices marked as such
 7. Real prices — data change only, no code change
+   - To do: check allergen tags against real labels (`contains` in `packages/vocabulary/data/groups.json` was set by hand)
 
 ## Stack (confirmed)
 
@@ -27,6 +28,8 @@ Pantry is a working name.
 - Zod for runtime validation; types are inferred from the schemas. Vitest for tests.
 - `packages/contract` — engine input, card output, card validation (SPEC §5, §7).
 - `packages/vocabulary` — families → groups → items (SPEC §6). Data lives in `data/*.json` and is checked on load; a monthly price refresh edits only those files.
+- `packages/engine` — constraint builder and recipe engine (SPEC §7). Pure logic; talks to a model only through the `LlmClient` interface.
+- `packages/backend` — config, model and image adapters (SPEC §16). The only package that reads env or holds keys. `npm run deal -w @pantry/backend` deals one deck; offline by default.
 
 ## Open decisions — ask the user before scaffolding
 
@@ -43,5 +46,6 @@ Pantry is a working name.
 
 ## Keys and cost
 
-- The app's Anthropic key goes in `.env` (gitignored), read only by the backend. Do not export `ANTHROPIC_API_KEY` in the shell: Claude Code would bill API usage instead of the subscription.
-- Image generation (Flux) key: same rule.
+- Provider and model come from config (`LLM_PROVIDER`, `LLM_MODEL`, `IMAGE_PROVIDER`), never from code. See SPEC §16.
+- The app's model key is `PANTRY_LLM_API_KEY`, read from `process.env` by the backend only: from `.env` (gitignored) via `--env-file` in dev, and injected by the host in production. Claude Code only reads `ANTHROPIC_API_KEY`, so the app key can't be picked up by it. Never name the app key `ANTHROPIC_API_KEY`.
+- Image generation key: same rule, with its own `PANTRY_*` name when a real adapter is added.
