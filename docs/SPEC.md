@@ -27,7 +27,7 @@ Every screen is required, and each has a one-tap way through.
 | 3 | Appliances (many) | A kitchen illustration; tap to highlight: stove/hotplate · oven · microwave · fridge · freezer · kettle · blender · air fryer · rice cooker/slow cooker. Knife, pan, bowl and plate are assumed |
 | 4 | Cooking for | Defaults to 1 |
 
-**Body stats** — asked after the first meal is selected, only for cut, bulk or condition, and required for those goals: height, weight, age, sex, activity level, target weight. Only target weight may be left blank. Eat well never asks, so its `targets` stay `null`. Their only job is computing daily needs (section 8).
+**Body stats** — asked after the first meal is selected, only for cut, bulk or condition, and required for those goals: height, weight, age, sex, activity level, target weight. Only target weight may be left blank. Eat well never asks, so its `targets` stay `null`. They're asked right after the first meal is picked, before its meal screen opens, with no skip. Only the resulting targets are kept. Their only job is computing daily needs (section 8).
 
 ## 4. Home
 
@@ -166,10 +166,10 @@ Output becomes `targets`. No body stats (Eat well, or before the first meal) →
 ```json
 {
   "buy": [
-    { "item": "Basa fillets, frozen", "price": 6.49, "role": "needed" },
-    { "item": "Seasoning blend", "price": 7.00, "role": "needed" }
+    { "group": "white_fish", "item": "Basa fillets, frozen", "unit": "400g", "price": 6.49, "role": "needed" },
+    { "group": "seasoning", "item": "Seasoning blend", "unit": "250g", "price": 7.00, "role": "needed" }
   ],
-  "to_complete": [{ "item": "Frozen mixed veg", "price": 2.00 }],
+  "to_complete": [{ "group": "frozen_veg", "item": "Frozen mixed veg", "unit": "750g", "price": 2.00 }],
   "total": 13.49,
   "budget": 15,
   "over_by": 0,
@@ -177,6 +177,7 @@ Output becomes `targets`. No body stats (Eat well, or before the first meal) →
 }
 ```
 
+- Each line carries its `group` (the meal screen swaps within it) and the item's `unit` (the shopping list names it).
 - `needed` alone over budget → the card still shows with `over_by`. Never hidden, never blocked.
 - Tax is ignored: basic groceries are zero-rated in Canada.
 - Every figure displays with `~`, and each money screen says once that prices are typical, not quotes.
