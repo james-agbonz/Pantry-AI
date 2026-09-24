@@ -19,7 +19,7 @@ Pantry is a working name.
 5. Screens — 5a app shell and onboarding · 5b home and deck · 5c meal screen
    - To do before launch: the kitchen illustration on the appliances screen (tiles with outline icons stand in; DESIGN.md › Imagery)
 6. Pricing math, tested with placeholder prices marked as such
-7. Real prices — data change only, no code change
+7. Real prices — data change only, no code change: replace the figures and `price_source` in `data/price-table.json` and bump its `version`
    - To do: check allergen tags against real labels (`contains` in `packages/vocabulary/data/groups.json` was set by hand)
 
 ## Stack (confirmed)
@@ -29,7 +29,8 @@ Pantry is a working name.
 - npm 11.6.1 or later, enforced by `devEngines` in `package.json` (npm 11.6.0 and earlier refuse to run here). npm 11.5–11.6.0 marked the optional platform binaries of peer-only packages (rolldown under vite) as peer, then pruned them on the next install, breaking vitest. `allowScripts` records which install scripts run; esbuild's and fsevents' are denied because neither is needed.
 - Zod for runtime validation; types are inferred from the schemas. Vitest for tests.
 - `packages/contract` — engine input, card output, card validation, and the onboarding profile and session (SPEC §3–§5, §7).
-- `packages/vocabulary` — families → groups → items (SPEC §6). Data lives in `data/*.json` and is checked on load; a monthly price refresh edits only those files.
+- `packages/vocabulary` — families → groups → items (SPEC §6). `data/groups.json` never changes; `data/price-table.json` is the versioned monthly table (items and prices), checked on load. A monthly refresh edits only the price table, and the app fetches it from the backend (SPEC §16), so no release is needed.
+- `packages/pricing` — pricing and deck sort (SPEC §9, §10), in whole cents. Pure; runs on the server and on the phone for swaps.
 - `packages/engine` — constraint builder and recipe engine (SPEC §7). Pure logic; talks to a model only through the `LlmClient` interface.
 - `apps/mobile` — the Expo app (expo-router, routes in `src/app/`). Theme comes from `design/tokens.json` via `src/theme`; a test fails on raw colours or sizes elsewhere. Vitest covers pure helpers; screens are checked in Expo web (`npm run web -w @pantry/mobile`). Decks and photos come through `DeckSource` / `ImageSource` (`src/data`); until `/api/deck` exists they're mocks in `src/mock`, whose prices are placeholders and whose pricing and sort are stand-ins for step 6. Root `overrides` pins one copy of react-native-reanimated and react-native-worklets (expo-router otherwise pulls a second, newer one). Pins TypeScript ~6.0 because Expo SDK 57 requires it; the packages use 7.
 - `packages/needs` — needs calculator: body stats → daily `targets` (SPEC §8).

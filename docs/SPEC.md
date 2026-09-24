@@ -176,14 +176,16 @@ Output becomes `targets`. No body stats (Eat well, or before the first meal) →
   "total": 13.49,
   "budget": 15,
   "over_by": 0,
-  "complete_cost": 2.00
+  "complete_cost": 2.00,
+  "placeholder": false
 }
 ```
 
 - Each line carries its `group` (the meal screen swaps within it) and the item's `unit` (the shopping list names it).
 - `needed` alone over budget → the card still shows with `over_by`. Never hidden, never blocked.
 - Tax is ignored: basic groceries are zero-rated in Canada.
-- Every figure displays with `~`, and each money screen says once that prices are typical, not quotes.
+- Every figure displays with `~`, and each money screen says once that prices are typical, not quotes. While any price on a card is a placeholder (`"placeholder": true`), that line says instead that they're sample prices for testing, not real: invented numbers are never called typical.
+- Money is added up in whole cents. Among items at the same price, the lowest item id wins, so results never shift between runs.
 
 ## 10. The deck
 
@@ -257,6 +259,14 @@ Session ─┘       (contract)          (groups only)              │     ^
 ```
 
 Backend endpoints (suggested): `POST /api/deck` runs constraint builder → engine → validation → pricing → sort; `POST /api/image` proxies Flux. All keys server-side.
+
+### Price table
+
+Prices and items change monthly; groups never do. So the price table is versioned data, separate from the app:
+
+- **One table, versioned.** `{ "version": "2026-10", "items": [...] }`: every item with its price and source. Version is `YYYY-MM`, with an optional suffix (`2026-09-placeholder`). Every item must have a price; a table that doesn't fit the groups is refused, naming the problem.
+- **The app fetches it** from the backend (`GET /api/prices`, suggested) and caches the last good copy. A copy is bundled with the app as the fallback. Order of preference: a freshly fetched table that checks out; else the cached one if it's at least as new as the bundled one; else the bundled one. A monthly refresh reaches phones without an app release.
+- **One pricing module** (`@pantry/pricing`) runs on the server for decks and on the phone for swaps, over whichever table is in use.
 
 `/api/deck` reports each stage as it finishes (`reading` → `building` → `pricing` → `sorting`), for example as streamed lines, so Loading ticks with the real work and never on a timer.
 

@@ -15,6 +15,7 @@
     "@anthropic-ai/sdk": "^0.128.0",
     "@pantry/contract": "*",
     "@pantry/engine": "*",
+    "@pantry/pricing": "*",
     "@pantry/vocabulary": "*",
     "zod": "^4.6.5"
   },

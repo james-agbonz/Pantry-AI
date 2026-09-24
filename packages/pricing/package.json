@@ -1,0 +1,21 @@
+{
+  "name": "@pantry/pricing",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pricing and deck sort (SPEC sections 9 and 10). Pure: runs on the server and on the phone for swaps.",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@pantry/contract": "*",
+    "@pantry/vocabulary": "*"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.1"
+  }
+}
