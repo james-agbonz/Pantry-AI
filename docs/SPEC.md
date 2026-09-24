@@ -27,11 +27,11 @@ Every screen is required, and each has a one-tap way through.
 | 3 | Appliances (many) | A kitchen illustration; tap to highlight: stove/hotplate · oven · microwave · fridge · freezer · kettle · blender · air fryer · rice cooker/slow cooker. Knife, pan, bowl and plate are assumed |
 | 4 | Cooking for | Defaults to 1 |
 
-**Body stats** — asked after the first meal is selected, only for cut, bulk or condition: height, weight, age, sex, activity level, target weight (optional). Their only job is computing daily needs (section 8).
+**Body stats** — asked after the first meal is selected, only for cut, bulk or condition, and required for those goals: height, weight, age, sex, activity level, target weight. Only target weight may be left blank. Eat well never asks, so its `targets` stay `null`. Their only job is computing daily needs (section 8).
 
 ## 4. Home
 
-- **What you have** — preset chips grouped by family, drawn from the vocabulary (section 6). No typing as the main input. A small "something else" search is the fallback.
+- **What you have** — preset chips drawn from the vocabulary (section 6), in collapsible sections, one per family. A few common families start open; the rest start closed, so the screen never shows every group at once. No typing as the main input. A search sits on top: it finds groups by name, and anything it can't match is added as a free-text item (`have_other`).
 - **Budget** — one number in CAD, for this session.
 - **Deal me meals.**
 
@@ -151,7 +151,7 @@ Rules:
    - Kidney: protein ~0.8 g/kg — overrides the goal.
    - Diabetes, blood pressure, anemia: passed to the engine as dish rules.
 
-Output becomes `targets`. No body stats → `targets: null`.
+Output becomes `targets`. No body stats (Eat well, or before the first meal) → `targets: null`.
 
 ## 9. Pricing
 
