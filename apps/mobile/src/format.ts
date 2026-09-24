@@ -21,3 +21,11 @@ export function parseBudget(text: string): number | null {
   const n = Number(t);
   return n > 0 && n <= 1000 ? n : null;
 }
+
+/**
+ * The once-per-money-screen line (SPEC §9). Invented numbers are never
+ * called typical: while prices are placeholders, it says so.
+ */
+export function priceNote(placeholder: boolean): string {
+  return placeholder ? "Sample prices for testing, not real." : "Prices are typical, not quotes.";
+}

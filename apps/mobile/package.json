@@ -17,6 +17,7 @@
     "@expo-google-fonts/inter": "^0.4.2",
     "@pantry/contract": "*",
     "@pantry/needs": "*",
+    "@pantry/pricing": "*",
     "@pantry/vocabulary": "*",
     "@react-native-async-storage/async-storage": "2.2.0",
     "expo": "~57.0.25",

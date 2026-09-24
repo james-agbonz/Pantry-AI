@@ -1,11 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import type { PricedCard, Session } from "@pantry/contract";
-import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef, useState, type ReactNode } from "react";
 import type { DeckSource, ImageSource, Pricer } from "@/data/sources";
 import { countDeck, dayKey, deckReducer, decksLeft, passedNames, type DeckAction, type DeckCount, type DeckState } from "@/deck/state";
 import { parseBudget } from "@/format";
 import { mockDeckSource, mockImageSource } from "@/mock/deck";
-import { mockPricer } from "@/mock/pricer";
+import { tablePricer } from "@/data/pricer";
+import { usePriceTable } from "./prices";
 import { useProfile } from "./profile";
 
 const COUNT_KEY = "pantry.decks.v1";
@@ -75,6 +76,8 @@ interface SessionState extends SessionData {
   images: ImageSource;
   /** Re-prices the picked meal when an item is swapped. Halal narrows meat to certified items. */
   pricer: Pricer;
+  /** True while the price table is placeholder: the UI calls prices samples, never typical. */
+  placeholderPrices: boolean;
 }
 
 const Ctx = createContext<SessionState | null>(null);
@@ -82,10 +85,14 @@ const Ctx = createContext<SessionState | null>(null);
 export function SessionProvider({ children }: { children: ReactNode }) {
   const [data, dispatch] = useReducer(reduce, START);
   const [count, setCount] = useState<DeckCount | null | undefined>(undefined);
-  const [sources] = useState(() => ({ decks: mockDeckSource(), images: mockImageSource() }));
   const { profile } = useProfile();
+  const vocabulary = usePriceTable();
+  // The deck source reads the table at deal time, so a fresh table applies to the next deck.
+  const tableRef = useRef(vocabulary);
+  tableRef.current = vocabulary;
+  const [sources] = useState(() => ({ decks: mockDeckSource(() => tableRef.current), images: mockImageSource() }));
   const halal = profile?.limits.includes("halal") ?? false;
-  const pricer = useMemo(() => mockPricer({ halal }), [halal]);
+  const pricer = useMemo(() => tablePricer(vocabulary, { halal }), [vocabulary, halal]);
 
   useEffect(() => {
     AsyncStorage.getItem(COUNT_KEY)
@@ -116,8 +123,9 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       countDealt,
       ...sources,
       pricer,
+      placeholderPrices: vocabulary.placeholder,
     }),
-    [data, budget, count, toSession, countDealt, sources, pricer],
+    [data, budget, count, toSession, countDealt, sources, pricer, vocabulary],
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

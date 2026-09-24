@@ -6,6 +6,7 @@ import { View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { LogProvider } from "@/state/log";
+import { PriceTableProvider } from "@/state/prices";
 import { ProfileProvider } from "@/state/profile";
 import { SessionProvider } from "@/state/session";
 import { color } from "@/theme";
@@ -26,12 +27,14 @@ export default function RootLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <ProfileProvider>
-          <SessionProvider>
-            <LogProvider>
-              <StatusBar style="dark" />
-              <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: color.canvas } }} />
-            </LogProvider>
-          </SessionProvider>
+          <PriceTableProvider>
+            <SessionProvider>
+              <LogProvider>
+                <StatusBar style="dark" />
+                <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: color.canvas } }} />
+              </LogProvider>
+            </SessionProvider>
+          </PriceTableProvider>
         </ProfileProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>

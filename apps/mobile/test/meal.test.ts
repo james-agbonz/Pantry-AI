@@ -5,7 +5,10 @@ import { EMPTY_FORM, needsBodyStats, readStats, switchUnits } from "../src/meal/
 import { logMeal, todayTotals } from "../src/meal/log";
 import { shoppingList } from "../src/meal/shopping";
 import { MOCK_CARDS } from "../src/mock/deck";
-import { mockPricer } from "../src/mock/pricer";
+import { vocabulary } from "@pantry/vocabulary";
+import { tablePricer } from "../src/data/pricer";
+
+const mockPricer = (diet: { halal: boolean }) => tablePricer(vocabulary, diet);
 
 const fish = MOCK_CARDS[0]!;
 const pricer = mockPricer({ halal: false });
@@ -19,7 +22,9 @@ describe("shopping list", () => {
     for (const b of p.buy) expect(text).toContain(`- ${b.item}, ${b.unit}: ~$${b.price.toFixed(2)}`);
     expect(p.to_complete.length).toBeGreaterThan(0);
     expect(text).toContain(`To complete (+~$${p.complete_cost.toFixed(2)}):`);
-    expect(text.trimEnd().endsWith("Prices are typical, not quotes.")).toBe(true);
+    // The shipped table is placeholder, so the list must not call these prices typical.
+    expect(text.trimEnd().endsWith("Sample prices for testing, not real.")).toBe(true);
+    expect(text).not.toContain("typical");
     // Every estimate carries ~; the only bare figure is the budget the user typed.
     expect(text.match(/(?<!~)\$\d+(\.\d+)?/g)).toEqual(["$10"]);
   });
@@ -38,6 +43,7 @@ describe("swapping an item", () => {
     const cheapest = pricer.price(fish, 50);
     const swapped = pricer.price(fish, 50, { white_fish: opts.at(-1)!.id });
     expect(swapped.total).toBeCloseTo(cheapest.total + opts.at(-1)!.price - opts[0]!.price, 2);
+    expect(opts.at(-1)!.price).toBeGreaterThan(opts[0]!.price);
     expect(swapped.buy.find((b) => b.group === "white_fish")?.item).toBe(opts.at(-1)!.name);
   });
 
