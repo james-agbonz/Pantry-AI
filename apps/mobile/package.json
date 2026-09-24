@@ -10,7 +10,8 @@
     "ios": "expo start --ios",
     "android": "expo start --android",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "e2e": "playwright test"
   },
   "dependencies": {
     "@expo-google-fonts/ibm-plex-sans": "^0.4.1",
@@ -42,6 +43,7 @@
   },
   "devDependencies": {
     "@pantry/engine": "*",
+    "@playwright/test": "^1.63.0",
     "@types/node": "^22.0.0",
     "@types/react": "~19.2.2",
     "typescript": "~6.0.3",
