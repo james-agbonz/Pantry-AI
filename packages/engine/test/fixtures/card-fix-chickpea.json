@@ -1,0 +1,42 @@
+{
+  "id": "",
+  "name": "Chickpea and corn curry",
+  "time_min": 25,
+  "kcal": 600,
+  "protein_g": 23,
+  "uses": [
+    "rice",
+    "corn"
+  ],
+  "missing": [
+    {
+      "group": "chickpeas",
+      "qty": "1 can",
+      "role": "needed"
+    },
+    {
+      "group": "curry_powder",
+      "qty": "1 tbsp",
+      "role": "needed"
+    },
+    {
+      "group": "canned_tomatoes",
+      "qty": "1 can",
+      "role": "needed"
+    },
+    {
+      "group": "spinach",
+      "qty": "2 cups",
+      "role": "completes"
+    }
+  ],
+  "methods": [
+    "stove"
+  ],
+  "steps": [
+    "Toast the curry powder in oil for 30 seconds.",
+    "Add chickpeas, tomatoes and corn; simmer 15 minutes.",
+    "Wilt in the spinach and serve over rice."
+  ],
+  "image_prompt": "Chickpea curry with spinach over rice in a plain bowl, home kitchen light"
+}

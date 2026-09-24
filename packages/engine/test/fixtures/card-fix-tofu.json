@@ -1,0 +1,37 @@
+{
+  "id": "",
+  "name": "Crispy tofu with corn rice",
+  "time_min": 25,
+  "kcal": 590,
+  "protein_g": 28,
+  "uses": [
+    "rice",
+    "corn"
+  ],
+  "missing": [
+    {
+      "group": "tofu",
+      "qty": "350g",
+      "role": "needed"
+    },
+    {
+      "group": "soy_sauce",
+      "qty": "1 tbsp",
+      "role": "needed"
+    },
+    {
+      "group": "broccoli",
+      "qty": "1 head",
+      "role": "completes"
+    }
+  ],
+  "methods": [
+    "stove"
+  ],
+  "steps": [
+    "Press and cube the tofu, then pan-fry until crisp.",
+    "Toss with soy sauce.",
+    "Serve over rice with corn and steamed broccoli."
+  ],
+  "image_prompt": "Crispy tofu cubes over corn rice with broccoli, home kitchen"
+}
