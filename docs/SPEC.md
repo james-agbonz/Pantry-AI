@@ -143,8 +143,9 @@ Rules:
 | Eat well | maintenance | 1.0 |
 | Cut | −15% | 1.8 |
 | Bulk | +10% | 1.8 |
+| Managing a condition | maintenance | 1.0 |
 
-   - Cut floor: never below 1500 kcal for men, 1200 for women.
+   - Cut floor: never below 1500 kcal for men, 1200 for women, 1350 (the average) for other or skipped sex.
 4. **Condition**
    - Kidney: protein ~0.8 g/kg — overrides the goal.
    - Diabetes, blood pressure, anemia: passed to the engine as dish rules.

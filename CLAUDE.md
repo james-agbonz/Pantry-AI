@@ -29,6 +29,7 @@ Pantry is a working name.
 - `packages/contract` — engine input, card output, card validation (SPEC §5, §7).
 - `packages/vocabulary` — families → groups → items (SPEC §6). Data lives in `data/*.json` and is checked on load; a monthly price refresh edits only those files.
 - `packages/engine` — constraint builder and recipe engine (SPEC §7). Pure logic; talks to a model only through the `LlmClient` interface.
+- `packages/needs` — needs calculator: body stats → daily `targets` (SPEC §8).
 - `packages/backend` — config, model and image adapters (SPEC §16). The only package that reads env or holds keys. `npm run deal -w @pantry/backend` deals one deck; offline by default.
 
 ## Open decisions — ask the user before scaffolding
