@@ -5,7 +5,8 @@ import { describe, expect, it } from "vitest";
 import { badgeFor } from "../src/deck/badge";
 import { allPassed, canRewind, counterText, countDeck, dayKey, deckReducer, decksLeft, decksLeftText, passedNames, topCard, type DeckState } from "../src/deck/state";
 import { kcal, money, parseBudget, protein } from "../src/format";
-import { search, sections, OPEN_BY_DEFAULT } from "../src/home/groups";
+import { excludeTerms } from "@pantry/contract";
+import { hiddenGroups, search, sections, OPEN_BY_DEFAULT } from "../src/home/groups";
 import { MOCK_CARDS, mockDeckSource, mockPrice, mockSort } from "../src/mock/deck";
 
 const profile: Profile = { goal: "eat_well", condition: null, limits: [], limits_other: [], appliances: ["stove", "microwave", "fridge"], servings: 1, targets: null };
@@ -106,6 +107,41 @@ describe("home sections and search", () => {
   });
 });
 
+describe("home hides what hard limits rule out", () => {
+  const families = (limits: Profile["limits"], limits_other: string[] = []) =>
+    sections(vocabulary, excludeTerms({ limits, limits_other })).map((s) => s.family);
+  const familyGroups = (f: string) => vocabulary.groups.filter((g) => g.family === f).map((g) => g.id);
+
+  it("hides nothing with no limits", () => {
+    expect(hiddenGroups(vocabulary, [])).toEqual(new Set());
+  });
+
+  it("halal hides the pork family and nothing else", () => {
+    expect([...hiddenGroups(vocabulary, excludeTerms({ limits: ["halal"], limits_other: [] }))].sort()).toEqual(familyGroups("pork").sort());
+    expect(families(["halal"])).toEqual(expect.arrayContaining(["poultry", "beef", "lamb"]));
+    expect(families(["halal"])).not.toContain("pork");
+  });
+
+  it("vegetarian hides every flesh family and chicken broth", () => {
+    const f = families(["vegetarian"]);
+    for (const x of ["poultry", "beef", "pork", "lamb", "fish", "shellfish"]) expect(f).not.toContain(x);
+    expect(f).toEqual(expect.arrayContaining(["eggs", "dairy", "legumes", "soy"]));
+  });
+
+  it("no dairy hides dairy and milk-tagged groups but keeps coconut and soy milk", () => {
+    const hidden = hiddenGroups(vocabulary, excludeTerms({ limits: ["no_dairy"], limits_other: [] }));
+    expect(hidden.has("cheese")).toBe(true);
+    expect(hidden.has("margarine")).toBe(true);
+    expect(hidden.has("coconut_milk")).toBe(false);
+    expect(hidden.has("soy_milk")).toBe(false);
+  });
+
+  it("search leaves hidden groups out too", () => {
+    const ex = excludeTerms({ limits: ["vegetarian"], limits_other: [] });
+    expect(search(vocabulary, "chick", ex).groups.map((g) => g.id)).toEqual(["chickpeas"]);
+  });
+});
+
 describe("mock data", () => {
   it("every mock card passes the real validator", () => {
     const { input, diet } = buildConstraints(profile, session);
@@ -132,6 +168,12 @@ describe("mock data", () => {
     expect(order.map((s) => rank[s])).toEqual([...order.map((s) => rank[s])].sort());
     const overs = mockSort(priced, null).filter((p) => p.pricing.over_by > 0).map((p) => p.pricing.over_by);
     expect(overs).toEqual([...overs].sort((a, b) => a - b));
+  });
+
+  it("reports the four stages in order, once each", async () => {
+    const seen: string[] = [];
+    await mockDeckSource(0).deal(profile, session, { onStage: (s) => seen.push(s) });
+    expect(seen).toEqual(["reading", "building", "pricing", "sorting"]);
   });
 
   it("a new deck avoids passed dishes", async () => {

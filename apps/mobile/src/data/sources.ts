@@ -1,12 +1,15 @@
-import type { PricedCard, Profile, Session } from "@pantry/contract";
+import type { DealStage, PricedCard, Profile, Session } from "@pantry/contract";
 
 /**
  * Where decks come from. Mock now; later a client for `POST /api/deck`,
  * which runs constraint builder → engine → validation → pricing → sort.
  */
 export interface DeckSource {
-  /** Priced cards in deck order (SPEC §10). */
-  deal(profile: Profile, session: Session, size?: number): Promise<PricedCard[]>;
+  /**
+   * Priced cards in deck order (SPEC §10). `onStage` is called as each stage
+   * of the pipeline finishes, so Loading can show real progress.
+   */
+  deal(profile: Profile, session: Session, opts?: { size?: number; onStage?: (done: DealStage) => void }): Promise<PricedCard[]>;
 }
 
 /**

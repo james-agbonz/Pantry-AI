@@ -65,12 +65,12 @@ export const SwipeCard = forwardRef<SwipeCardHandle, Props>(function SwipeCard({
   return (
     <GestureDetector gesture={pan}>
       <Animated.View style={[styles.lift, style]}>
-        <MealCard item={item} photo={photo} />
+        <MealCard item={item} photo={photo} fill />
       </Animated.View>
     </GestureDetector>
   );
 });
 
 const styles = StyleSheet.create({
-  lift: { boxShadow: shadowLift, borderRadius: radius["radius-lg"] },
+  lift: { flex: 1, boxShadow: shadowLift, borderRadius: radius["radius-lg"] },
 });

@@ -73,11 +73,14 @@ export default function Deck() {
       ) : (
         <View style={styles.stack}>
           {next ? (
+            // The next card's edge shows below the top one, so it reads as a deck.
             <View style={styles.under} pointerEvents="none">
-              <MealCard item={next} photo={photos[next.card.id]} />
+              <MealCard item={next} photo={photos[next.card.id]} fill />
             </View>
           ) : null}
-          {top ? <SwipeCard key={top.card.id} ref={card} item={top} photo={photos[top.card.id]} onPass={pass} onSelect={select} /> : null}
+          <View style={styles.top}>
+            {top ? <SwipeCard key={top.card.id} ref={card} item={top} photo={photos[top.card.id]} onPass={pass} onSelect={select} /> : null}
+          </View>
         </View>
       )}
 
@@ -125,7 +128,10 @@ function Round(props: { label: string; onPress: () => void; keep?: boolean; smal
         { width: d, height: d },
         props.keep
           ? { backgroundColor: pressed ? color["primary-active"] : color.primary, borderColor: color.primary }
-          : { backgroundColor: pressed ? color["surface-soft"] : color.surface },
+          : props.disabled
+            ? // Nothing to act on: no edge, a quiet fill, a muted icon.
+              { backgroundColor: color["surface-soft"], borderColor: color["surface-soft"] }
+            : { backgroundColor: pressed ? color["surface-soft"] : color.surface },
       ]}
     >
       {props.children}
@@ -137,8 +143,9 @@ const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: color.canvas },
   bar: { minHeight: size.touch, flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: space["space-2"] },
   iconBtn: { width: size.touch, height: size.touch, alignItems: "center", justifyContent: "center" },
-  stack: { flex: 1, paddingHorizontal: space["space-4"], paddingTop: space["space-2"] },
-  under: { position: "absolute", left: space["space-4"], right: space["space-4"], top: space["space-2"] },
+  stack: { flex: 1, marginHorizontal: space["space-4"], marginTop: space["space-2"], marginBottom: space["space-4"] },
+  top: { flex: 1, marginBottom: space["space-3"] },
+  under: { position: "absolute", left: space["space-3"], right: space["space-3"], top: space["space-3"], bottom: 0 },
   done: { flex: 1, paddingHorizontal: space["space-4"], paddingTop: space["space-8"], gap: space["space-2"] },
   footer: { paddingHorizontal: space["space-4"], paddingBottom: space["space-4"], gap: space["space-3"] },
   buttons: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: space["space-6"] },

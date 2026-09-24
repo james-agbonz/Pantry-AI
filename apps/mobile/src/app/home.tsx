@@ -1,3 +1,4 @@
+import { excludeTerms } from "@pantry/contract";
 import { vocabulary } from "@pantry/vocabulary";
 import { router } from "expo-router";
 import { ChevronDown, ChevronRight, Plus } from "lucide-react-native";
@@ -9,11 +10,12 @@ import { TextField } from "@/components/Inputs";
 import { Screen } from "@/components/Screen";
 import { Num, T } from "@/components/Text";
 import { decksLeftText } from "@/deck/state";
+import { dealBlocker } from "@/home/deal";
 import { OPEN_BY_DEFAULT, search, sections } from "@/home/groups";
+import { useProfile } from "@/state/profile";
 import { useSession } from "@/state/session";
 import { color, radius, size, space } from "@/theme";
 
-const SECTIONS = sections(vocabulary);
 const LABEL = new Map(vocabulary.groups.map((g) => [g.id, g.label]));
 
 /**
@@ -22,9 +24,12 @@ const LABEL = new Map(vocabulary.groups.map((g) => [g.id, g.label]));
  */
 export default function Home() {
   const s = useSession();
+  const { profile } = useProfile();
+  const exclude = useMemo(() => (profile ? excludeTerms(profile) : []), [profile]);
+  const secs = useMemo(() => sections(vocabulary, exclude), [exclude]);
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState<ReadonlySet<string>>(() => new Set(OPEN_BY_DEFAULT));
-  const results = useMemo(() => search(vocabulary, query), [query]);
+  const results = useMemo(() => search(vocabulary, query, exclude), [query, exclude]);
 
   const toggleFamily = (f: string) =>
     setOpen((prev) => {
@@ -39,20 +44,37 @@ export default function Home() {
     setQuery("");
   };
 
-  const noneLeft = s.decksLeft === 0;
   const picked = s.have.length + s.have_other.length;
+  const blocker = dealBlocker({ decksLeft: s.decksLeft, picked, budget: s.budget });
 
   return (
     <Screen
       title="What's in the fridge?"
       footer={
         <>
-          {s.decksLeft !== undefined ? (
-            <T variant="body-sm" tone="muted" style={styles.center}>
-              {noneLeft ? "That's today's decks. More tomorrow." : decksLeftText(s.decksLeft)}
-            </T>
-          ) : null}
-          <Button label="Deal me meals" disabled={s.budget === null || noneLeft} onPress={() => router.push("/loading")} />
+          <View style={styles.budgetRow}>
+            <T variant="title-sm">Budget</T>
+            <View style={styles.money}>
+              <Num variant="num" tone="muted">
+                $
+              </Num>
+              <TextField
+                value={s.budgetText}
+                onChangeText={(t) => s.dispatch({ type: "budget", text: t })}
+                keyboardType="decimal-pad"
+                placeholder="15"
+                accessibilityLabel="Budget in Canadian dollars"
+                style={styles.grow}
+              />
+              <T variant="caption" tone="muted">
+                CAD
+              </T>
+            </View>
+          </View>
+          <T variant="body-sm" tone="muted" style={styles.center}>
+            {blocker ?? (s.decksLeft !== undefined ? decksLeftText(s.decksLeft) : " ")}
+          </T>
+          <Button label="Deal me meals" disabled={blocker !== null} onPress={() => router.push("/loading")} />
         </>
       }
     >
@@ -95,7 +117,7 @@ export default function Home() {
       ) : null}
 
       <View>
-        {SECTIONS.map((sec) => {
+        {secs.map((sec) => {
           const isOpen = open.has(sec.family);
           const count = sec.groups.filter((g) => s.have.includes(g.id)).length;
           const Chevron = isOpen ? ChevronDown : ChevronRight;
@@ -129,25 +151,6 @@ export default function Home() {
         })}
       </View>
 
-      <View style={styles.block}>
-        <T variant="title-sm">Budget</T>
-        <View style={styles.budgetRow}>
-          <Num variant="num" tone="muted">
-            $
-          </Num>
-          <TextField
-            value={s.budgetText}
-            onChangeText={(t) => s.dispatch({ type: "budget", text: t })}
-            keyboardType="decimal-pad"
-            placeholder="15"
-            accessibilityLabel="Budget in Canadian dollars"
-            style={styles.grow}
-          />
-        </View>
-        <T variant="body-sm" tone="muted">
-          CAD, for this shop.
-        </T>
-      </View>
     </Screen>
   );
 }
@@ -171,7 +174,8 @@ const styles = StyleSheet.create({
   sectionBody: { paddingBottom: space["space-3"] },
   grow: { flex: 1 },
   center: { textAlign: "center" },
-  budgetRow: { flexDirection: "row", alignItems: "center", gap: space["space-2"] },
+  budgetRow: { flexDirection: "row", alignItems: "center", gap: space["space-3"] },
+  money: { flex: 1, flexDirection: "row", alignItems: "center", gap: space["space-2"] },
   add: {
     minHeight: size.chip,
     flexDirection: "row",

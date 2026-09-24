@@ -11,14 +11,15 @@ import { Num, T } from "./Text";
 export type Photo = string | null | undefined;
 
 /**
- * DESIGN.md › MealCard: photo 4:3 first, name in `title`, meta row (time,
- * ~kcal, ~protein) in `num-sm`, one budget badge.
+ * DESIGN.md › MealCard: photo first, name in `title`, meta row (time, ~kcal,
+ * ~protein) in `num-sm`, one budget badge. The photo is 4:3; with `fill`
+ * (the deck) the card takes the height it's given and the photo grows into it.
  */
-export function MealCard({ item, photo }: { item: PricedCard; photo: Photo }) {
+export function MealCard({ item, photo, fill = false }: { item: PricedCard; photo: Photo; fill?: boolean }) {
   const { card, pricing } = item;
   return (
-    <View style={styles.card}>
-      <View style={styles.photo}>
+    <View style={[styles.card, fill && styles.fill]}>
+      <View style={[styles.photo, fill && styles.photoFill]}>
         {photo ? (
           <Animated.Image entering={FadeIn.duration(300)} source={{ uri: photo }} style={StyleSheet.absoluteFill} accessibilityIgnoresInvertColors />
         ) : photo === null ? (
@@ -56,6 +57,8 @@ export function MealCard({ item, photo }: { item: PricedCard; photo: Photo }) {
 
 const styles = StyleSheet.create({
   card: { backgroundColor: color.surface, borderRadius: radius["radius-lg"], overflow: "hidden" },
+  fill: { flex: 1 },
+  photoFill: { flex: 1, aspectRatio: undefined, minHeight: 0 },
   photo: { aspectRatio: 4 / 3, backgroundColor: color["surface-soft"], alignItems: "center", justifyContent: "center" },
   body: { padding: space["space-4"], gap: space["space-2"] },
   meta: { flexDirection: "row", alignItems: "center", flexWrap: "wrap", gap: space["space-1"] },

@@ -1,4 +1,4 @@
-import { budgetStatus, Card, type PricedCard, type Pricing, type Profile, type Session } from "@pantry/contract";
+import { budgetStatus, Card, excludeTerms, type PricedCard, type Pricing, type Profile, type Session } from "@pantry/contract";
 import { vocabulary } from "@pantry/vocabulary";
 import type { DeckSource, ImageSource } from "@/data/sources";
 import cardsJson from "./cards.json";
@@ -56,14 +56,27 @@ export function mockSort(deck: PricedCard[], proteinTarget: number | null): Pric
 
 let nextId = 1;
 
-/** Deals up to six mock cards the session hasn't passed, after a short wait so Loading shows. */
-export const mockDeckSource = (delayMs = 900): DeckSource => ({
-  async deal(profile: Profile, session: Session, size = 6) {
-    await new Promise((r) => setTimeout(r, delayMs));
-    const avoid = new Set(session.avoid.map((n) => n.toLowerCase()));
+/**
+ * Runs the same four stages as `/api/deck`, reporting each as it finishes.
+ * The wait sits inside "building", standing in for the model call; the UI
+ * only ever moves on these events.
+ */
+export const mockDeckSource = (buildMs = 900): DeckSource => ({
+  async deal(profile: Profile, session: Session, { size = 6, onStage } = {}) {
+    const input = { ...session, exclude: excludeTerms(profile) };
+    onStage?.("reading");
+
+    await new Promise((r) => setTimeout(r, buildMs));
+    const avoid = new Set(input.avoid.map((n) => n.toLowerCase()));
     const pick = MOCK_CARDS.filter((c) => !avoid.has(c.name.toLowerCase())).slice(0, size);
-    const priced = pick.map((c) => ({ card: { ...c, id: `mock-${nextId++}` }, pricing: mockPrice(c, session.budget) }));
-    return mockSort(priced, profile.targets?.protein ?? null);
+    onStage?.("building");
+
+    const priced = pick.map((c) => ({ card: { ...c, id: `mock-${nextId++}` }, pricing: mockPrice(c, input.budget) }));
+    onStage?.("pricing");
+
+    const sorted = mockSort(priced, profile.targets?.protein ?? null);
+    onStage?.("sorting");
+    return sorted;
   },
 });
 

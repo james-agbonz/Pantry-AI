@@ -1,17 +1,24 @@
+import type { DealStage } from "@pantry/contract";
 import { router } from "expo-router";
+import { Check, Circle } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { Button } from "@/components/Button";
 import { Screen } from "@/components/Screen";
 import { T } from "@/components/Text";
+import { STAGES, stepStates } from "@/deck/stages";
 import { useProfile } from "@/state/profile";
 import { useSession } from "@/state/session";
-import { color, space } from "@/theme";
+import { color, size, space } from "@/theme";
 
-/** Loading (SPEC §2): engine → validate → price → sort, then the deck. */
+/**
+ * Loading (SPEC §2): four steps, one per pipeline stage. Each ticks when the
+ * deck source reports that stage finished, never on a timer.
+ */
 export default function Loading() {
   const { profile } = useProfile();
   const s = useSession();
+  const [done, setDone] = useState<ReadonlySet<DealStage>>(new Set());
   const [failed, setFailed] = useState(false);
   const [attempt, setAttempt] = useState(0);
 
@@ -23,8 +30,9 @@ export default function Loading() {
     }
     let live = true;
     setFailed(false);
+    setDone(new Set());
     s.decks
-      .deal(profile, session)
+      .deal(profile, session, { onStage: (stage) => live && setDone((d) => new Set(d).add(stage)) })
       .then(async (cards) => {
         if (!live) return;
         await s.countDealt();
@@ -54,18 +62,36 @@ export default function Loading() {
     );
   }
 
+  const states = stepStates(done);
   return (
-    <Screen title="Dealing your meals" intro="Checking each one against what you never eat, then pricing it.">
-      <View style={styles.spin}>
-        <ActivityIndicator size="large" color={color.primary} accessibilityLabel="Loading" />
-        <T variant="body-sm" tone="muted">
-          Six meals, sorted by what fits your budget.
-        </T>
+    <Screen title="Dealing your meals">
+      <View style={styles.steps} accessibilityRole="progressbar" accessibilityValue={{ min: 0, max: STAGES.length, now: done.size }}>
+        {STAGES.map((st, i) => {
+          const state = states[i];
+          return (
+            <View key={st.stage} style={styles.step}>
+              <View style={styles.mark}>
+                {state === "done" ? (
+                  <Check size={size.icon} strokeWidth={size.iconStroke} color={color.ink} />
+                ) : state === "active" ? (
+                  <ActivityIndicator size="small" color={color.primary} />
+                ) : (
+                  <Circle size={size.icon} strokeWidth={size.iconStroke} color={color["border-strong"]} />
+                )}
+              </View>
+              <T variant="body" tone={state === "waiting" ? "muted" : "ink"}>
+                {st.label}
+              </T>
+            </View>
+          );
+        })}
       </View>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  spin: { alignItems: "center", gap: space["space-4"], paddingTop: space["space-8"] },
+  steps: { gap: space["space-3"] },
+  step: { minHeight: size.touch, flexDirection: "row", alignItems: "center", gap: space["space-3"] },
+  mark: { width: size.icon, alignItems: "center" },
 });
