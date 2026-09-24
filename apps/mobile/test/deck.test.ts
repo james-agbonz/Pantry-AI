@@ -18,6 +18,7 @@ describe("format", () => {
     expect(money(7)).toBe("~$7.00");
     expect(kcal(560.4)).toBe("~560 kcal");
     expect(protein(38)).toBe("~38 g protein");
+    expect(kcal(2345)).toBe("~2,345 kcal");
   });
 
   it("parses a budget as typed", () => {
@@ -30,11 +31,13 @@ describe("format", () => {
 
 describe("budget badge", () => {
   const base = { buy: [], to_complete: [], total: 13.49, budget: 15, over_by: 0, complete_cost: 0 };
-  it("fits: word then figure", () => {
+  it("fits: word then figure; without the figure where the total sits beside it", () => {
     expect(badgeFor(base)).toMatchObject({ status: "fits", label: "Fits ~$13.49" });
+    expect(badgeFor(base, { withTotal: false })).toMatchObject({ status: "fits", label: "Fits" });
+    expect(badgeFor({ ...base, total: 18, over_by: 3 }, { withTotal: false }).label).toBe("Over by ~$3.00");
   });
   it("to complete: '+~$2.00 to complete'", () => {
-    expect(badgeFor({ ...base, to_complete: [{ item: "Frozen mixed veg", price: 2 }], complete_cost: 2 })).toMatchObject({
+    expect(badgeFor({ ...base, to_complete: [{ group: "frozen_veg", item: "Frozen mixed veg", unit: "750g", price: 2 }], complete_cost: 2 })).toMatchObject({
       status: "complete",
       label: "+~$2.00 to complete",
     });
@@ -43,7 +46,7 @@ describe("budget badge", () => {
     expect(badgeFor({ ...base, total: 18, over_by: 3 })).toMatchObject({ status: "over", label: "Over by ~$3.00" });
   });
   it("is at most three words plus the figure", () => {
-    const words = badgeFor({ ...base, to_complete: [{ item: "x", price: 2 }], complete_cost: 2 }).parts.filter((p) => p.kind === "word");
+    const words = badgeFor({ ...base, to_complete: [{ group: "x", item: "x", unit: "1", price: 2 }], complete_cost: 2 }).parts.filter((p) => p.kind === "word");
     expect(words.map((w) => w.text.split(" ").length).reduce((a, b) => a + b)).toBeLessThanOrEqual(3);
   });
 });

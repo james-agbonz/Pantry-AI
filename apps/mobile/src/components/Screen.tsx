@@ -9,6 +9,10 @@ import { T } from "./Text";
 interface Props {
   /** The question the screen asks, in `display`. One per screen. */
   title: string;
+  /** `title` for a screen named after a meal (DESIGN.md › Type). */
+  titleVariant?: "display" | "title";
+  /** Shown above the title, full width, e.g. the meal photo. */
+  hero?: ReactNode;
   /** e.g. "2 of 4". */
   step?: string;
   intro?: string;
@@ -19,7 +23,7 @@ interface Props {
 }
 
 /** A screen on `canvas` with `space-4` gutters (DESIGN.md › Shape and space). */
-export function Screen({ title, step, intro, back = false, footer, children }: Props) {
+export function Screen({ title, titleVariant = "display", hero, step, intro, back = false, footer, children }: Props) {
   return (
     <SafeAreaView style={styles.safe} edges={["top", "bottom"]}>
       <View style={styles.bar}>
@@ -37,7 +41,8 @@ export function Screen({ title, step, intro, back = false, footer, children }: P
         ) : null}
       </View>
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
-        <T variant="display" accessibilityRole="header">
+        {hero}
+        <T variant={titleVariant} accessibilityRole="header">
           {title}
         </T>
         {intro ? (

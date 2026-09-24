@@ -4,8 +4,11 @@ export function money(n: number): string {
   return `~$${n.toFixed(2)}`;
 }
 
-export const kcal = (n: number) => `~${Math.round(n)} kcal`;
-export const protein = (n: number) => `~${Math.round(n)} g protein`;
+/** Whole number with thousands separators: 2345 → "2,345". */
+export const whole = (n: number) => Math.round(n).toLocaleString("en-CA");
+
+export const kcal = (n: number) => `~${whole(n)} kcal`;
+export const protein = (n: number) => `~${whole(n)} g protein`;
 export const minutes = (n: number) => `${Math.round(n)} min`;
 
 /**

@@ -8,9 +8,18 @@ const Money = z.number().nonnegative();
  * (build step 6), never by the engine. Every figure is a typical price and
  * displays with `~`.
  */
+const Line = {
+  /** The group the item was resolved from; the meal screen swaps within it (SPEC §12). */
+  group: z.string().min(1),
+  item: z.string().min(1),
+  /** Minimum sellable unit, e.g. "400g". The price is for the whole unit. */
+  unit: z.string().min(1),
+  price: Money,
+};
+
 export const Pricing = z.strictObject({
-  buy: z.array(z.strictObject({ item: z.string().min(1), price: Money, role: z.enum(["needed", "completes"]) })),
-  to_complete: z.array(z.strictObject({ item: z.string().min(1), price: Money })),
+  buy: z.array(z.strictObject({ ...Line, role: z.enum(["needed", "completes"]) })),
+  to_complete: z.array(z.strictObject(Line)),
   total: Money,
   budget: Money,
   over_by: Money,
