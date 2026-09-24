@@ -26,6 +26,7 @@ Pantry is a working name.
 - npm workspaces under `packages/`. Shared code is `@pantry/*`.
 - Zod for runtime validation; types are inferred from the schemas. Vitest for tests.
 - `packages/contract` — engine input, card output, card validation (SPEC §5, §7).
+- `packages/vocabulary` — families → groups → items (SPEC §6). Data lives in `data/*.json` and is checked on load; a monthly price refresh edits only those files.
 
 ## Open decisions — ask the user before scaffolding
 

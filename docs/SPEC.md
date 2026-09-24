@@ -100,6 +100,8 @@ Three levels: **family** (fish) → **group** (white fish) → **item** (basa fi
 - Tap an item on the meal screen to swap it for others in the same group.
 - The engine's prompt receives the group list. Missing items must use existing groups.
 - Target size: 150–200 items.
+- **Halal** — meat items (poultry, beef, pork, lamb) carry `"halal": true | false`; nothing else does. Under the halal diet, a meat group resolves to its halal-certified items only, and a group with none (all pork, some cuts) is left out of the group list the engine and validator see.
+- **Nuts** — nuts and nut butters, peanuts included, are one `nuts` family, so excluding `nuts` catches them by family.
 
 **Price source.** Baseline candidate: Statistics Canada table 18-10-0245-01, *Monthly average retail prices for selected products* — monthly, from retailer scanner data, national and by province. These are averages, not lowest prices: label them "typical prices". The list is limited and lags a month or two; gaps are filled by hand. Until then, prices are placeholders marked `"price_source": "placeholder"`.
 
