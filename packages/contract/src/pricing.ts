@@ -24,6 +24,11 @@ export const Pricing = z.strictObject({
   budget: Money,
   over_by: Money,
   complete_cost: Money,
+  /**
+   * True when any price on the card is a placeholder. The UI then says the
+   * prices are samples, never that they are typical.
+   */
+  placeholder: z.boolean(),
 });
 export type Pricing = z.infer<typeof Pricing>;
 

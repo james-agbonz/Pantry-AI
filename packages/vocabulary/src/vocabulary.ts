@@ -21,11 +21,19 @@ export interface Vocabulary {
    * meat group with no halal item (bacon, ham, ground chicken…).
    */
   groupList(diet?: Diet): GroupRef[];
+  /** The price table's version, e.g. "2026-10". */
+  version: string;
+  /** True while any price is a placeholder: the UI must not call them typical. */
+  placeholder: boolean;
+  /** The same families and groups with another price table. Throws if the table doesn't fit them. */
+  withTable(table: unknown): Vocabulary;
 }
 
 /** Parses and checks the raw data; throws if any rule in the schema breaks. */
 export function loadVocabulary(raw: unknown): Vocabulary {
-  const { families, groups, items } = VocabularyData.parse(raw);
+  const data = VocabularyData.parse(raw);
+  const { families, groups, table } = data;
+  const items = table.items;
 
   const byGroup = new Map<string, Item[]>();
   for (const item of items) {
@@ -46,5 +54,14 @@ export function loadVocabulary(raw: unknown): Vocabulary {
         flavour: g.flavour === true || FLAVOUR_FAMILIES.includes(g.family),
       }));
 
-  return { families, groups, items, itemsFor, groupList };
+  return {
+    families,
+    groups,
+    items,
+    itemsFor,
+    groupList,
+    version: table.version,
+    placeholder: items.some((i) => i.price_source === "placeholder"),
+    withTable: (next: unknown) => loadVocabulary({ families, groups, table: next }),
+  };
 }

@@ -87,13 +87,26 @@ export const Item = z
   });
 export type Item = z.infer<typeof Item>;
 
+/**
+ * The monthly data: every item with its price, under a version like
+ * "2026-10" or "2026-09-placeholder". Groups never change; this does. The
+ * app fetches the current table from the backend and caches it, with the
+ * bundled copy as a fallback (SPEC §16), so a refresh never needs a release.
+ */
+export const PriceTable = z.strictObject({
+  version: z.string().regex(/^\d{4}-\d{2}(-[a-z0-9-]+)?$/, "version is YYYY-MM, optionally with a -suffix"),
+  items: z.array(Item),
+});
+export type PriceTable = z.infer<typeof PriceTable>;
+
 export const VocabularyData = z
   .strictObject({
     families: z.array(Family),
     groups: z.array(Group),
-    items: z.array(Item),
+    table: PriceTable,
   })
-  .superRefine((v, ctx) => {
+  .superRefine((data, ctx) => {
+    const v = { families: data.families, groups: data.groups, items: data.table.items };
     const issue = (message: string, path: (string | number)[]) => ctx.addIssue({ code: "custom", message, path });
 
     const dupes = (ids: string[], path: string) => {
@@ -105,7 +118,7 @@ export const VocabularyData = z
     };
     dupes(v.families.map((f) => f.id), "families");
     dupes(v.groups.map((g) => g.id), "groups");
-    dupes(v.items.map((i) => i.id), "items");
+    dupes(v.items.map((i) => i.id), "table.items");
 
     const families = new Set(v.families.map((f) => f.id));
     const familyOf = new Map(v.groups.map((g) => [g.id, g.family]));
@@ -117,12 +130,14 @@ export const VocabularyData = z
     const stocked = new Set<string>();
     v.items.forEach((item, i) => {
       const family = familyOf.get(item.group);
-      if (family === undefined) issue(`unknown group '${item.group}'`, ["items", i, "group"]);
-      else if (family !== item.family) issue(`group '${item.group}' is in family '${family}', not '${item.family}'`, ["items", i, "family"]);
+      // Pricing never silently leaves an item out: a missing price stops the load and names the item.
+      if (item.price === null) issue(`item '${item.id}' has no price`, ["table", "items", i, "price"]);
+      if (family === undefined) issue(`unknown group '${item.group}'`, ["table", "items", i, "group"]);
+      else if (family !== item.family) issue(`group '${item.group}' is in family '${family}', not '${item.family}'`, ["table", "items", i, "family"]);
       const meat = MEAT_FAMILIES.includes(item.family);
-      if (meat && item.halal === undefined) issue(`meat item '${item.id}' needs a halal flag`, ["items", i, "halal"]);
-      if (!meat && item.halal !== undefined) issue(`halal flag is for meat items only`, ["items", i, "halal"]);
-      if (item.family === "pork" && item.halal) issue(`pork can't be halal`, ["items", i, "halal"]);
+      if (meat && item.halal === undefined) issue(`meat item '${item.id}' needs a halal flag`, ["table", "items", i, "halal"]);
+      if (!meat && item.halal !== undefined) issue(`halal flag is for meat items only`, ["table", "items", i, "halal"]);
+      if (item.family === "pork" && item.halal) issue(`pork can't be halal`, ["table", "items", i, "halal"]);
       stocked.add(item.group);
     });
     v.groups.forEach((g, i) => {

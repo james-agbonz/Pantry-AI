@@ -277,6 +277,7 @@ describe("pricing (SPEC §9 shape)", () => {
     budget: 15,
     over_by: 0,
     complete_cost: 2.0,
+    placeholder: false,
   };
 
   it("accepts the SPEC example", () => {
