@@ -1,6 +1,14 @@
 {
   "name": "pantry",
   "private": true,
+  "packageManager": "npm@11.20.0",
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "version": ">=11.6.1",
+      "onFail": "error"
+    }
+  },
   "workspaces": [
     "packages/*",
     "apps/*"
@@ -8,5 +16,9 @@
   "scripts": {
     "test": "npm test --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "allowScripts": {
+    "esbuild": false,
+    "fsevents": false
   }
 }

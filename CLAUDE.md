@@ -25,7 +25,8 @@ Pantry is a working name.
 ## Stack (confirmed)
 
 - Expo (React Native) for iOS + Android, with a small TypeScript serverless backend.
-- npm workspaces under `packages/`. Shared code is `@pantry/*`.
+- npm workspaces under `packages/` and `apps/`. Shared code is `@pantry/*`.
+- npm 11.6.1 or later, enforced by `devEngines` in `package.json` (npm 11.6.0 and earlier refuse to run here). npm 11.5–11.6.0 marked the optional platform binaries of peer-only packages (rolldown under vite) as peer, then pruned them on the next install, breaking vitest. `allowScripts` records which install scripts run; esbuild's and fsevents' are denied because neither is needed.
 - Zod for runtime validation; types are inferred from the schemas. Vitest for tests.
 - `packages/contract` — engine input, card output, card validation, and the onboarding profile and session (SPEC §3–§5, §7).
 - `packages/vocabulary` — families → groups → items (SPEC §6). Data lives in `data/*.json` and is checked on load; a monthly price refresh edits only those files.
