@@ -44,11 +44,12 @@ The reader is tired, hungry and counting.
 - Photos are the only imagery: home cooking, normal plate, realistic portion, kitchen light. `surface-soft` while loading.
 - One exception: the kitchen illustration on the appliances screen of onboarding, where you tap to highlight what you have (SPEC §3). Until it's drawn, that screen uses tiles with outline icons. It must be in place before launch.
 - Outline icons, 1.5px stroke, 20px in running UI, 24px on swipe buttons. No emoji in the interface.
+- Icons are lucide. Where lucide has nothing fitting, draw one on its 24px grid with round caps and joins (the oven). Never borrow a food icon for a non-food thing: a croissant for "oven" sitting next to ingredient chips reads as food.
 - No logo yet: the word "Pantry" in `display`.
 
 ## Components
 
-- **Button** — primary (`primary` fill, `on-primary` label, 44px), secondary (`surface`, `border-strong` edge), text (`primary` label). Pressed `primary-active`; disabled `primary-soft` with `muted`.
+- **Button** — primary (`primary` fill, `on-primary` label, 44px), secondary (`surface`, `border-strong` edge), text (no fill or edge). A text button's label is `ink` whenever a primary button is on the same screen, so the primary stays the only olive thing; it's `primary` only when it's the screen's only action. Pressed `primary-active`; disabled `primary-soft` with `muted`.
 - **BudgetBadge** — fits / to complete / over; pill, 28px, word + icon + `num-sm` figure.
 - **IngredientChip** — unselected `surface` + `border-strong`; selected `primary-soft` + `primary` edge and label + check. 40px, grouped under a `caption` family label.
 - **MealCard** — photo 4:3 first, name in `title`, meta row (time, ~kcal, ~protein) in `num-sm`, one BudgetBadge. Below: round pass, rewind (always visible), round keep. Buttons mirror the swipes.

@@ -1,6 +1,7 @@
-import { Check, type LucideIcon } from "lucide-react-native";
+import { Check } from "lucide-react-native";
 import { Pressable, StyleSheet, View } from "react-native";
 import { color, radius, size, space } from "@/theme";
+import type { Icon } from "./icons/types";
 import { T } from "./Text";
 
 interface ChoiceProps {
@@ -63,7 +64,7 @@ export function OptionRow({ label, hint, selected, onPress, testID }: ChoiceProp
 }
 
 /** A square tile with an outline icon, for appliances. Stands in for the kitchen illustration. */
-export function Tile({ label, icon: Icon, selected, onPress, testID }: ChoiceProps & { icon: LucideIcon }) {
+export function Tile({ label, icon: TileIcon, selected, onPress, testID }: ChoiceProps & { icon: Icon }) {
   return (
     <Pressable
       accessibilityRole="checkbox"
@@ -73,7 +74,7 @@ export function Tile({ label, icon: Icon, selected, onPress, testID }: ChoicePro
       testID={testID}
       style={({ pressed }) => [styles.tile, frame(selected, pressed)]}
     >
-      <Icon size={size.iconLg} strokeWidth={size.iconStroke} color={selected ? color.primary : color.ink} />
+      <TileIcon size={size.iconLg} strokeWidth={size.iconStroke} color={selected ? color.primary : color.ink} />
       <T variant="caption" tone={selected ? "primary" : "ink"} style={styles.tileLabel}>
         {label}
       </T>

@@ -5,14 +5,20 @@ import { T } from "./Text";
 interface Props {
   label: string;
   onPress: () => void;
-  /** primary: the one olive action per screen. secondary: surface with an edge. text: olive label only. */
+  /** primary: the one olive action per screen. secondary: surface with an edge. text: a label only. */
   kind?: "primary" | "secondary" | "text";
+  /**
+   * A text button is `ink` whenever a primary button shares the screen, so the
+   * primary stays the only olive thing. Set this when it's the screen's only
+   * action, and it's olive.
+   */
+  only?: boolean;
   disabled?: boolean;
   testID?: string;
 }
 
 /** DESIGN.md › Button. 44px, `radius-sm`, `label` type. */
-export function Button({ label, onPress, kind = "primary", disabled = false, testID }: Props) {
+export function Button({ label, onPress, kind = "primary", only = false, disabled = false, testID }: Props) {
   return (
     <Pressable
       accessibilityRole="button"
@@ -29,7 +35,7 @@ export function Button({ label, onPress, kind = "primary", disabled = false, tes
     >
       <T
         variant="label"
-        tone={kind === "primary" ? (disabled ? "muted" : "on-primary") : disabled ? "muted" : kind === "text" ? "primary" : "ink"}
+        tone={kind === "primary" ? (disabled ? "muted" : "on-primary") : disabled ? "muted" : kind === "text" && only ? "primary" : "ink"}
       >
         {label}
       </T>

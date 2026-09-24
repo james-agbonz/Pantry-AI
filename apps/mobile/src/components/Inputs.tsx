@@ -1,11 +1,27 @@
 import { Minus, Plus } from "lucide-react-native";
+import { useState } from "react";
 import { Pressable, StyleSheet, TextInput, View, type TextInputProps } from "react-native";
 import { color, radius, size, space, type } from "@/theme";
 import { Num } from "./Text";
 
-/** `surface` input with a `border-strong` edge, `radius-md`, 44px. */
+/** `surface` input with a `border-strong` edge, `radius-md`, 44px. Focus: the 2px `focus` ring, offset 2px. */
 export function TextField(props: TextInputProps) {
-  return <TextInput placeholderTextColor={color.muted} {...props} style={[styles.field, props.style]} />;
+  const [focused, setFocused] = useState(false);
+  return (
+    <TextInput
+      placeholderTextColor={color.muted}
+      {...props}
+      onFocus={(e) => {
+        setFocused(true);
+        props.onFocus?.(e);
+      }}
+      onBlur={(e) => {
+        setFocused(false);
+        props.onBlur?.(e);
+      }}
+      style={[styles.field, focused && styles.focused, props.style]}
+    />
+  );
 }
 
 interface StepperProps {
@@ -57,6 +73,12 @@ const styles = StyleSheet.create({
     borderWidth: size.border,
     borderColor: color["border-strong"],
     borderRadius: radius["radius-md"],
+  },
+  focused: {
+    outlineStyle: "solid",
+    outlineColor: color.focus,
+    outlineWidth: size.focus,
+    outlineOffset: size.focus,
   },
   stepper: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: space["space-6"] },
   value: { minWidth: size.touch, textAlign: "center" },

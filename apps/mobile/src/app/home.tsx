@@ -33,6 +33,7 @@ export default function Home() {
       footer={
         <Button
           kind="text"
+          only
           label="Redo setup"
           onPress={async () => {
             await clear();
