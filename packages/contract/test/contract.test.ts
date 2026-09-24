@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Card, EngineInput, excludedBy, validateCard, validateDeck, type GroupRef, type ValidateContext } from "../src";
+import { budgetStatus, Card, EngineInput, excludedBy, PricedCard, Pricing, validateCard, validateDeck, type GroupRef, type ValidateContext } from "../src";
 
 // Test fixtures only — the real list comes from the vocabulary (build step 2).
 const groups: GroupRef[] = [
@@ -263,5 +263,30 @@ describe("exclude text scan", () => {
     it("gluten-free doesn't clear an ingredient whose tags contain gluten", () => {
       expect(check(["gluten"], { steps: ["Add gluten-free soy sauce."] }).ok).toBe(false);
     });
+  });
+});
+
+describe("pricing (SPEC §9 shape)", () => {
+  const spec: Pricing = {
+    buy: [
+      { item: "Basa fillets, frozen", price: 6.49, role: "needed" },
+      { item: "Seasoning blend", price: 7.0, role: "needed" },
+    ],
+    to_complete: [{ item: "Frozen mixed veg", price: 2.0 }],
+    total: 13.49,
+    budget: 15,
+    over_by: 0,
+    complete_cost: 2.0,
+  };
+
+  it("accepts the SPEC example", () => {
+    expect(Pricing.parse(spec)).toEqual(spec);
+    expect(PricedCard.safeParse({ card: good, pricing: spec }).success).toBe(true);
+  });
+
+  it("gives the deck tier: fits, to complete, over", () => {
+    expect(budgetStatus(spec)).toBe("complete");
+    expect(budgetStatus({ ...spec, to_complete: [], complete_cost: 0 })).toBe("fits");
+    expect(budgetStatus({ ...spec, over_by: 3 })).toBe("over");
   });
 });
