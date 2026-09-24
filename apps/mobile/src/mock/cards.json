@@ -1,0 +1,460 @@
+[
+  {
+    "id": "",
+    "name": "Pan-fried white fish with corn rice",
+    "time_min": 25,
+    "kcal": 610,
+    "protein_g": 42,
+    "uses": [
+      "rice",
+      "corn"
+    ],
+    "missing": [
+      {
+        "group": "white_fish",
+        "qty": "300g",
+        "role": "needed"
+      },
+      {
+        "group": "chili_powder",
+        "qty": "1 tsp",
+        "role": "needed"
+      },
+      {
+        "group": "frozen_veg",
+        "qty": "1 cup",
+        "role": "completes"
+      }
+    ],
+    "methods": [
+      "stove"
+    ],
+    "steps": [
+      "Cook the rice.",
+      "Season the fish with chili powder and a pinch of salt, then pan-fry 3\u20134 minutes a side.",
+      "Warm the corn and frozen veg in the same pan and serve with the rice."
+    ],
+    "image_prompt": "Pan-fried white fish fillet with corn rice and mixed vegetables on a plain white plate, home kitchen light"
+  },
+  {
+    "id": "",
+    "name": "Egg fried rice with corn",
+    "time_min": 15,
+    "kcal": 540,
+    "protein_g": 22,
+    "uses": [
+      "rice",
+      "corn"
+    ],
+    "missing": [
+      {
+        "group": "eggs",
+        "qty": "3",
+        "role": "needed"
+      },
+      {
+        "group": "soy_sauce",
+        "qty": "1 tbsp",
+        "role": "needed"
+      },
+      {
+        "group": "green_onion",
+        "qty": "2 stalks",
+        "role": "completes"
+      }
+    ],
+    "methods": [
+      "stove"
+    ],
+    "steps": [
+      "Scramble the eggs in a hot oiled pan and set aside.",
+      "Fry the cooked rice and corn for 3 minutes.",
+      "Stir the eggs back in with soy sauce and top with green onion."
+    ],
+    "image_prompt": "Egg fried rice with corn and green onion in a simple bowl, home kitchen"
+  },
+  {
+    "id": "",
+    "name": "Black bean and corn burrito bowl",
+    "time_min": 10,
+    "kcal": 580,
+    "protein_g": 24,
+    "uses": [
+      "rice",
+      "corn"
+    ],
+    "missing": [
+      {
+        "group": "black_beans",
+        "qty": "1 can",
+        "role": "needed"
+      },
+      {
+        "group": "salsa",
+        "qty": "1/3 cup",
+        "role": "needed"
+      },
+      {
+        "group": "cheese",
+        "qty": "30g",
+        "role": "completes"
+      }
+    ],
+    "methods": [
+      "microwave"
+    ],
+    "steps": [
+      "Microwave the rice, corn and drained beans until hot.",
+      "Top with salsa and grated cheese."
+    ],
+    "image_prompt": "Rice bowl with black beans, corn, salsa and grated cheese, everyday dinner on a kitchen table"
+  },
+  {
+    "id": "",
+    "name": "Chicken thighs with spiced corn rice",
+    "time_min": 35,
+    "kcal": 690,
+    "protein_g": 45,
+    "uses": [
+      "rice",
+      "corn"
+    ],
+    "missing": [
+      {
+        "group": "chicken_thighs",
+        "qty": "2 thighs",
+        "role": "needed"
+      },
+      {
+        "group": "onion",
+        "qty": "1",
+        "role": "needed"
+      },
+      {
+        "group": "cumin",
+        "qty": "1 tsp",
+        "role": "completes"
+      }
+    ],
+    "methods": [
+      "stove"
+    ],
+    "steps": [
+      "Brown the chicken thighs skin-side down, 8 minutes, then turn and cook through.",
+      "Soften the onion in the chicken fat with cumin.",
+      "Stir in the rice and corn, warm through and serve with the chicken."
+    ],
+    "image_prompt": "Two browned chicken thighs on spiced corn rice, plain plate, home kitchen light"
+  },
+  {
+    "id": "",
+    "name": "Tuna and corn rice salad",
+    "time_min": 10,
+    "kcal": 520,
+    "protein_g": 34,
+    "uses": [
+      "rice",
+      "corn"
+    ],
+    "missing": [
+      {
+        "group": "canned_tuna",
+        "qty": "1 can",
+        "role": "needed"
+      },
+      {
+        "group": "mayonnaise",
+        "qty": "1 tbsp",
+        "role": "needed"
+      },
+      {
+        "group": "cucumber",
+        "qty": "1/2",
+        "role": "completes"
+      }
+    ],
+    "methods": [
+      "microwave",
+      "fridge"
+    ],
+    "steps": [
+      "Microwave the rice, then chill it in the fridge for 10 minutes.",
+      "Mix the rice with tuna, corn, mayonnaise and diced cucumber."
+    ],
+    "image_prompt": "Cold rice salad with tuna, corn and cucumber in a bowl, home kitchen"
+  },
+  {
+    "id": "",
+    "name": "Lentil, tomato and corn rice soup",
+    "time_min": 30,
+    "kcal": 480,
+    "protein_g": 21,
+    "uses": [
+      "rice",
+      "corn"
+    ],
+    "missing": [
+      {
+        "group": "lentils",
+        "qty": "1/2 cup",
+        "role": "needed"
+      },
+      {
+        "group": "canned_tomatoes",
+        "qty": "1 can",
+        "role": "needed"
+      },
+      {
+        "group": "garlic",
+        "qty": "2 cloves",
+        "role": "completes"
+      }
+    ],
+    "methods": [
+      "stove"
+    ],
+    "steps": [
+      "Soften the garlic in a little oil.",
+      "Add lentils, tomatoes and 3 cups of water; simmer 20 minutes.",
+      "Stir in the rice and corn and heat through."
+    ],
+    "image_prompt": "Thick lentil and tomato soup with rice and corn in a plain bowl, home kitchen light"
+  },
+  {
+    "id": "",
+    "name": "Chickpea and corn curry",
+    "time_min": 25,
+    "kcal": 600,
+    "protein_g": 23,
+    "uses": [
+      "rice",
+      "corn"
+    ],
+    "missing": [
+      {
+        "group": "chickpeas",
+        "qty": "1 can",
+        "role": "needed"
+      },
+      {
+        "group": "curry_powder",
+        "qty": "1 tbsp",
+        "role": "needed"
+      },
+      {
+        "group": "canned_tomatoes",
+        "qty": "1 can",
+        "role": "needed"
+      },
+      {
+        "group": "spinach",
+        "qty": "2 cups",
+        "role": "completes"
+      }
+    ],
+    "methods": [
+      "stove"
+    ],
+    "steps": [
+      "Toast the curry powder in oil for 30 seconds.",
+      "Add chickpeas, tomatoes and corn; simmer 15 minutes.",
+      "Wilt in the spinach and serve over rice."
+    ],
+    "image_prompt": "Chickpea curry with spinach over rice in a plain bowl, home kitchen light"
+  },
+  {
+    "id": "",
+    "name": "Crispy tofu with corn rice",
+    "time_min": 25,
+    "kcal": 590,
+    "protein_g": 28,
+    "uses": [
+      "rice",
+      "corn"
+    ],
+    "missing": [
+      {
+        "group": "tofu",
+        "qty": "350g",
+        "role": "needed"
+      },
+      {
+        "group": "soy_sauce",
+        "qty": "1 tbsp",
+        "role": "needed"
+      },
+      {
+        "group": "broccoli",
+        "qty": "1 head",
+        "role": "completes"
+      }
+    ],
+    "methods": [
+      "stove"
+    ],
+    "steps": [
+      "Press and cube the tofu, then pan-fry until crisp.",
+      "Toss with soy sauce.",
+      "Serve over rice with corn and steamed broccoli."
+    ],
+    "image_prompt": "Crispy tofu cubes over corn rice with broccoli, home kitchen"
+  },
+  {
+    "id": "",
+    "name": "Corn and rice omelette",
+    "time_min": 12,
+    "kcal": 500,
+    "protein_g": 26,
+    "uses": [
+      "rice",
+      "corn"
+    ],
+    "missing": [
+      {
+        "group": "eggs",
+        "qty": "3",
+        "role": "needed"
+      },
+      {
+        "group": "cheese",
+        "qty": "30g",
+        "role": "completes"
+      }
+    ],
+    "methods": [
+      "stove"
+    ],
+    "steps": [
+      "Beat the eggs.",
+      "Fry the rice and corn briefly, pour over the eggs and cook until set.",
+      "Fold with cheese inside."
+    ],
+    "image_prompt": "Folded omelette with rice and corn on a plain plate, home kitchen"
+  },
+  {
+    "id": "",
+    "name": "Salmon rice bowl with corn",
+    "time_min": 20,
+    "kcal": 720,
+    "protein_g": 46,
+    "uses": [
+      "rice",
+      "corn"
+    ],
+    "missing": [
+      {
+        "group": "salmon",
+        "qty": "2 fillets",
+        "role": "needed"
+      },
+      {
+        "group": "soy_sauce",
+        "qty": "1 tbsp",
+        "role": "needed"
+      },
+      {
+        "group": "cucumber",
+        "qty": "1/2",
+        "role": "completes"
+      }
+    ],
+    "methods": [
+      "stove"
+    ],
+    "steps": [
+      "Pan-fry the salmon skin-side down for 5 minutes, then turn for 2.",
+      "Warm the rice and corn.",
+      "Flake the salmon over the bowl with soy sauce and sliced cucumber."
+    ],
+    "image_prompt": "Salmon fillet flaked over rice with corn and cucumber in a bowl, home kitchen light"
+  },
+  {
+    "id": "",
+    "name": "Beef and bean chili with rice",
+    "time_min": 40,
+    "kcal": 780,
+    "protein_g": 48,
+    "uses": [
+      "rice",
+      "corn"
+    ],
+    "missing": [
+      {
+        "group": "ground_beef",
+        "qty": "450g",
+        "role": "needed"
+      },
+      {
+        "group": "kidney_beans",
+        "qty": "1 can",
+        "role": "needed"
+      },
+      {
+        "group": "canned_tomatoes",
+        "qty": "1 can",
+        "role": "needed"
+      },
+      {
+        "group": "chili_powder",
+        "qty": "1 tbsp",
+        "role": "needed"
+      },
+      {
+        "group": "sour_cream",
+        "qty": "2 tbsp",
+        "role": "completes"
+      }
+    ],
+    "methods": [
+      "stove"
+    ],
+    "steps": [
+      "Brown the beef and drain the fat.",
+      "Add chili powder, beans, tomatoes and corn; simmer 25 minutes.",
+      "Serve over rice with a spoon of sour cream."
+    ],
+    "image_prompt": "Beef and bean chili over rice with sour cream in a plain bowl, home kitchen"
+  },
+  {
+    "id": "",
+    "name": "Sardine and tomato rice",
+    "time_min": 20,
+    "kcal": 560,
+    "protein_g": 30,
+    "uses": [
+      "rice",
+      "corn"
+    ],
+    "missing": [
+      {
+        "group": "sardines",
+        "qty": "1 can",
+        "role": "needed"
+      },
+      {
+        "group": "canned_tomatoes",
+        "qty": "1 can",
+        "role": "needed"
+      },
+      {
+        "group": "onion",
+        "qty": "1",
+        "role": "needed"
+      },
+      {
+        "group": "lemon",
+        "qty": "1",
+        "role": "completes"
+      }
+    ],
+    "methods": [
+      "stove"
+    ],
+    "steps": [
+      "Soften the onion in the sardine oil.",
+      "Add tomatoes and simmer 10 minutes, then fold in the sardines.",
+      "Stir through the rice and corn; finish with lemon."
+    ],
+    "image_prompt": "Tomato rice with sardines and lemon wedge on a plain plate, home kitchen light"
+  }
+]
