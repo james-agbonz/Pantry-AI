@@ -15,7 +15,8 @@
   ],
   "scripts": {
     "test": "npm test --workspaces --if-present",
-    "typecheck": "npm run typecheck --workspaces --if-present"
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "e2e": "npm run e2e -w @pantry/mobile"
   },
   "allowScripts": {
     "esbuild": false,
