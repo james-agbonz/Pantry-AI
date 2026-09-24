@@ -1,31 +1,8 @@
-import { EngineInput, Profile, Session, type Limit } from "@pantry/contract";
+import { EngineInput, excludeTerms, Profile, Session } from "@pantry/contract";
 import type { Diet } from "@pantry/vocabulary";
 
-// Profile, Session and Limit moved to the contract: the app sends them to the backend.
-export { Limit, Profile, Session } from "@pantry/contract";
-
-/**
- * Exclude terms per hard limit. Each term is matched against group ids,
- * families and `contains` tags, and as a word in every text on the card
- * (SPEC §7), so family names catch whole families and words catch free text.
- *
- * The first four rows are the SPEC's. Vegetarian and halal are expanded here:
- * - vegetarian — every animal-flesh family, plus words for flesh and flesh
- *   products the families don't cover when they turn up in steps or names.
- * - halal — acts on items (meat groups resolve to halal-certified items, §6),
- *   and these terms keep pork, pork fats, gelatin and alcohol out of the text.
- */
-export const LIMIT_TERMS: Record<Limit, readonly string[]> = {
-  no_pork: ["pork"],
-  no_dairy: ["dairy", "milk"],
-  nuts: ["nuts", "peanuts", "tree_nuts"],
-  gluten: ["gluten"],
-  vegetarian: [
-    "poultry", "beef", "pork", "lamb", "fish", "shellfish",
-    "meat", "chicken", "turkey", "bacon", "ham", "sausage", "gelatin", "lard",
-  ],
-  halal: ["pork", "bacon", "ham", "lard", "gelatin", "alcohol", "wine", "beer"],
-};
+// Profile, Session, Limit and the limit terms moved to the contract: the app uses them too.
+export { excludeTerms, Limit, LIMIT_TERMS, Profile, Session } from "@pantry/contract";
 
 export interface Constraints {
   input: EngineInput;
@@ -41,7 +18,7 @@ export function buildConstraints(profile: Profile, session: Session, deck = 6): 
   const p = Profile.parse(profile);
   const s = Session.parse(session);
 
-  const exclude = dedupe([...p.limits.flatMap((l) => LIMIT_TERMS[l]), ...p.limits_other]);
+  const exclude = excludeTerms(p);
 
   const input = EngineInput.parse({
     have: s.have.map((group) => ({ group })),

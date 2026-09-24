@@ -32,3 +32,11 @@ export function budgetStatus(p: Pricing): BudgetStatus {
   if (p.over_by > 0) return "over";
   return p.to_complete.length > 0 ? "complete" : "fits";
 }
+
+/**
+ * The stages of dealing a deck (SPEC §16), in order: constraint builder,
+ * engine with validation, pricing, sort. `/api/deck` reports each one as it
+ * finishes, so Loading ticks with the real work, never on a timer.
+ */
+export const DealStage = z.enum(["reading", "building", "pricing", "sorting"]);
+export type DealStage = z.infer<typeof DealStage>;
