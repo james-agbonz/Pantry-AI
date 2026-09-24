@@ -24,6 +24,8 @@ interface SessionData {
   deck: DeckState | null;
   /** The meal picked by swiping right. Opens the meal screen (5c). */
   selected: PricedCard | null;
+  /** The photo the deck loaded for it, reused so the meal screen doesn't ask again. `null` if it failed. */
+  selectedPhoto: string | null;
 }
 
 type Action =
@@ -33,9 +35,9 @@ type Action =
   | { type: "budget"; text: string }
   | { type: "dealt"; cards: PricedCard[] }
   | { type: "deck"; action: DeckAction }
-  | { type: "select"; card: PricedCard };
+  | { type: "select"; card: PricedCard; photo: string | null };
 
-const START: SessionData = { have: [], have_other: [], budgetText: "", avoid: [], deck: null, selected: null };
+const START: SessionData = { have: [], have_other: [], budgetText: "", avoid: [], deck: null, selected: null, selectedPhoto: null };
 
 function reduce(s: SessionData, a: Action): SessionData {
   switch (a.type) {
@@ -56,7 +58,7 @@ function reduce(s: SessionData, a: Action): SessionData {
     case "deck":
       return s.deck ? { ...s, deck: deckReducer(s.deck, a.action) } : s;
     case "select":
-      return { ...s, selected: a.card };
+      return { ...s, selected: a.card, selectedPhoto: a.photo };
   }
 }
 

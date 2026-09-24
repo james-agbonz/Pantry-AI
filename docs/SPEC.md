@@ -27,7 +27,9 @@ Every screen is required, and each has a one-tap way through.
 | 3 | Appliances (many) | A kitchen illustration; tap to highlight: stove/hotplate · oven · microwave · fridge · freezer · kettle · blender · air fryer · rice cooker/slow cooker. Knife, pan, bowl and plate are assumed |
 | 4 | Cooking for | Defaults to 1 |
 
-**Body stats** — asked after the first meal is selected, only for cut, bulk or condition, and required for those goals: height, weight, age, sex, activity level, target weight. Only target weight may be left blank. Eat well never asks, so its `targets` stay `null`. They're asked right after the first meal is picked, before its meal screen opens, with no skip. Only the resulting targets are kept. Their only job is computing daily needs (section 8).
+**Body stats** — asked after the first meal is selected, only for cut, bulk or condition, and required for those goals: height, weight, age, sex, activity level, target weight. Only target weight may be left blank. Eat well never asks, so its `targets` stay `null`. They're asked right after the first meal is picked, before its meal screen opens, with no skip. Only the resulting targets are kept. They can be entered in cm and kg or in feet, inches and pounds, and are always stored metric; a number outside a plausible adult range is named with that range, in the units on screen.
+
+**Settings** — edit goal, hard limits, appliances and cooking for with the onboarding controls, and "Redo my numbers" to enter body stats again. Changing the goal or condition clears the targets, since they were worked out for the old goal. Their only job is computing daily needs (section 8).
 
 ## 4. Home
 

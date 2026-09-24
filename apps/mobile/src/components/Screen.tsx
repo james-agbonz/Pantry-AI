@@ -13,6 +13,8 @@ interface Props {
   titleVariant?: "display" | "title";
   /** Shown above the title, full width, e.g. the meal photo. */
   hero?: ReactNode;
+  /** A control at the top right, e.g. the Settings button on Home. */
+  barRight?: ReactNode;
   /** e.g. "2 of 4". */
   step?: string;
   intro?: string;
@@ -23,7 +25,7 @@ interface Props {
 }
 
 /** A screen on `canvas` with `space-4` gutters (DESIGN.md › Shape and space). */
-export function Screen({ title, titleVariant = "display", hero, step, intro, back = false, footer, children }: Props) {
+export function Screen({ title, titleVariant = "display", hero, barRight, step, intro, back = false, footer, children }: Props) {
   return (
     <SafeAreaView style={styles.safe} edges={["top", "bottom"]}>
       <View style={styles.bar}>
@@ -35,10 +37,12 @@ export function Screen({ title, titleVariant = "display", hero, step, intro, bac
           <View style={styles.back} />
         )}
         {step ? (
-          <T variant="caption" tone="muted">
+          <T variant="caption" tone="muted" style={styles.step}>
             {step}
           </T>
-        ) : null}
+        ) : (
+          barRight ?? null
+        )}
       </View>
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
         {hero}
@@ -65,8 +69,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: space["space-2"],
-    paddingRight: space["space-4"],
   },
+  step: { marginRight: space["space-2"] },
   back: { width: size.touch, height: size.touch, alignItems: "center", justifyContent: "center" },
   content: { paddingHorizontal: space["space-4"], paddingTop: space["space-4"], paddingBottom: space["space-8"], gap: space["space-2"] },
   body: { marginTop: space["space-4"], gap: space["space-6"] },

@@ -1,7 +1,7 @@
 import { excludeTerms } from "@pantry/contract";
 import { vocabulary } from "@pantry/vocabulary";
 import { router } from "expo-router";
-import { ChevronDown, ChevronRight, Plus } from "lucide-react-native";
+import { ChevronDown, ChevronRight, Plus, Settings } from "lucide-react-native";
 import { useMemo, useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import { Button } from "@/components/Button";
@@ -50,6 +50,11 @@ export default function Home() {
   return (
     <Screen
       title="What's in the fridge?"
+      barRight={
+        <Pressable accessibilityRole="button" accessibilityLabel="Settings" onPress={() => router.push("/settings")} style={styles.iconBtn}>
+          <Settings size={size.iconLg} strokeWidth={size.iconStroke} color={color.ink} />
+        </Pressable>
+      }
       footer={
         <>
           <View style={styles.budgetRow}>
@@ -167,6 +172,7 @@ function AddChip({ text, onPress }: { text: string; onPress: () => void }) {
 
 const styles = StyleSheet.create({
   block: { gap: space["space-2"] },
+  iconBtn: { width: size.touch, height: size.touch, alignItems: "center", justifyContent: "center" },
   wrap: { flexDirection: "row", flexWrap: "wrap", gap: space["space-2"] },
   headRow: { flexDirection: "row", alignItems: "center", gap: space["space-2"] },
   section: { borderBottomWidth: size.border, borderBottomColor: color.hairline },

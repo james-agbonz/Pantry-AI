@@ -3,7 +3,7 @@ import * as Clipboard from "expo-clipboard";
 import { Redirect, router } from "expo-router";
 import { ChevronRight, Clock, Utensils } from "lucide-react-native";
 import { useMemo, useState } from "react";
-import { Modal, Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { Image, Modal, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BudgetBadge } from "@/components/BudgetBadge";
 import { Button } from "@/components/Button";
@@ -25,7 +25,7 @@ const LABEL = new Map(vocabulary.groups.map((g) => [g.id, g.label]));
  * item to swap it for another in its group; the totals follow.
  */
 export default function Meal() {
-  const { selected, pricer } = useSession();
+  const { selected, selectedPhoto, pricer } = useSession();
   const { profile } = useProfile();
   const { today, loggedIds } = useLog();
   const [choices, setChoices] = useState<Record<string, string>>({});
@@ -57,7 +57,12 @@ export default function Meal() {
       titleVariant="title"
       hero={
         <View style={styles.photo}>
-          <Utensils size={size.iconLg} strokeWidth={size.iconStroke} color={color.muted} accessibilityLabel="No photo" />
+          {selectedPhoto ? (
+            // The deck already loaded it (SPEC §11): no second request.
+            <Image source={{ uri: selectedPhoto }} style={StyleSheet.absoluteFill} accessibilityIgnoresInvertColors />
+          ) : (
+            <Utensils size={size.iconLg} strokeWidth={size.iconStroke} color={color.muted} accessibilityLabel="No photo" />
+          )}
         </View>
       }
       footer={
@@ -227,6 +232,7 @@ function SwapSheet(props: {
 
 const styles = StyleSheet.create({
   photo: {
+    overflow: "hidden",
     aspectRatio: 4 / 3,
     borderRadius: radius["radius-lg"],
     backgroundColor: color["surface-soft"],
