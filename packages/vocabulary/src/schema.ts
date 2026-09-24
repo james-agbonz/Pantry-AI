@@ -32,6 +32,12 @@ export const Allergen = z.enum([
 ]);
 export type Allergen = z.infer<typeof Allergen>;
 
+/**
+ * Families that are seasoning or flavour: they make a dish taste right, not
+ * make it a complete meal. Their groups can be `needed`, never `completes`.
+ */
+export const FLAVOUR_FAMILIES: readonly string[] = ["spices", "condiments", "oils", "baking"];
+
 /** Groups never change: the engine and saved data depend on these ids. */
 export const Group = z.strictObject({
   id: Id,
@@ -43,6 +49,11 @@ export const Group = z.strictObject({
    * none, not unknown.
    */
   contains: z.array(Allergen).refine((a) => new Set(a).size === a.length, "duplicate allergen"),
+  /**
+   * Set by hand on flavour groups outside FLAVOUR_FAMILIES (garlic, lemon,
+   * broth…). Flavour never `completes` a meal (SPEC §5).
+   */
+  flavour: z.literal(true).optional(),
 });
 export type Group = z.infer<typeof Group>;
 
@@ -100,6 +111,7 @@ export const VocabularyData = z
     const familyOf = new Map(v.groups.map((g) => [g.id, g.family]));
     v.groups.forEach((g, i) => {
       if (!families.has(g.family)) issue(`unknown family '${g.family}'`, ["groups", i, "family"]);
+      if (g.flavour && FLAVOUR_FAMILIES.includes(g.family)) issue(`'${g.id}' is flavour by family already`, ["groups", i, "flavour"]);
     });
 
     const stocked = new Set<string>();

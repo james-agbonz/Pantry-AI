@@ -80,7 +80,7 @@ Every screen is required, and each has a one-tap way through.
 ```
 
 - **needed** — the dish can't be made without it.
-- **completes** — the dish works without it, but this makes it a proper meal.
+- **completes** — the dish works without it, but this makes it a nutritionally complete meal: protein, vegetables or fibre. Never seasoning, sauce, oil or anything added for flavour; those are `needed` or left out.
 - The engine decides roles. It never outputs a price.
 - `methods` lists the appliances the dish needs, from the same set as the input. Empty for a no-cook dish.
 
@@ -121,11 +121,12 @@ Rules:
 - The six differ in protein, method or cuisine
 - Avoids anything in `avoid`
 
-**Validation** — nothing reaches the user unchecked. Every card is checked for: valid JSON, no excluded ingredient anywhere, every group exists, every method allowed. A failing card is regenerated alone.
+**Validation** — nothing reaches the user unchecked. Every card is checked for: valid JSON, no excluded ingredient anywhere, every group exists, every method allowed, no flavour marked `completes`. A failing card is regenerated alone.
 
 - *Excluded ingredient:* a card fails if any group it uses or is missing is excluded, belongs to an excluded family (`dairy` catches `cheese`), or has an excluded `contains` tag (`gluten` catches `soy_sauce`), or if an exclude term appears as a word anywhere in its text (name, groups, steps, image prompt). Group names in the text are masked first and judged by their family and `contains` tags like any other group, so "coconut milk" passes No dairy and "soy sauce" in a step fails Gluten. A term that is a family or tag judges groups only that way; a free-text term ("chicken") also matches words in group names. An exclude term never matches inside a "-free" compound ("meat-free", "dairy-free"). Diets such as vegetarian are expanded into terms by the constraint builder before they reach `exclude`; halal acts on items instead (§6). Hard limits map to terms that hit both family and tags: No dairy → `dairy`, `milk`; Nuts → `nuts`, `peanuts`, `tree_nuts`; Gluten → `gluten`.
 - *Group exists:* every `missing` group is in the group list. Each `uses` entry is a group or a `have_other` item.
 - *Method allowed:* every card `methods` entry is in the input `methods`.
+- *Completes is food, not flavour:* no `completes` item is a flavour group. Flavour groups are every group in the spices, condiments, oils and baking families, plus groups marked `"flavour": true` by hand (garlic, green onion, tomato paste, lemon, soy sauce, broths).
 
 **Nutrition** — calories and protein are the model's estimates in v1, shown with `~`. Later: nutrition per group in the table, computed like prices.
 

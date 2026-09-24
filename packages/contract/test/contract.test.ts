@@ -290,3 +290,20 @@ describe("pricing (SPEC §9 shape)", () => {
     expect(budgetStatus({ ...spec, over_by: 3 })).toBe("over");
   });
 });
+
+describe("completes is never seasoning or flavour", () => {
+  const g: GroupRef[] = [...groups, { group: "cumin", family: "spices", contains: [], flavour: true }, { group: "spinach", family: "vegetables", contains: [], flavour: false }];
+  const c = { input, groups: g };
+
+  it("fails a flavour group marked completes, naming the fix", () => {
+    const r = validateCard({ ...good, missing: [...good.missing, { group: "cumin", qty: "1 tsp", role: "completes" }] }, c);
+    expect(r.ok ? [] : r.errors).toEqual([
+      expect.objectContaining({ code: "flavour_completes", path: "missing.2.role", message: expect.stringContaining("protein, vegetables or fibre") }),
+    ]);
+  });
+
+  it("allows flavour as needed, and vegetables as completes", () => {
+    expect(validateCard({ ...good, missing: [...good.missing, { group: "cumin", qty: "1 tsp", role: "needed" }] }, c).ok).toBe(true);
+    expect(validateCard({ ...good, missing: [...good.missing, { group: "spinach", qty: "2 cups", role: "completes" }] }, c).ok).toBe(true);
+  });
+});

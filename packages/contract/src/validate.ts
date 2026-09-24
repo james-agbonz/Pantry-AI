@@ -13,6 +13,8 @@ export interface GroupRef {
   contains: readonly string[];
   /** Display name, e.g. "Coconut milk". Lets the text scan recognise the group when a step names it. */
   label?: string;
+  /** Seasoning or flavour (cumin, garlic, oil). May be `needed`, never `completes`. */
+  flavour?: boolean;
 }
 
 export type CardErrorCode =
@@ -20,7 +22,8 @@ export type CardErrorCode =
   | "invalid_shape"
   | "excluded_ingredient"
   | "unknown_group"
-  | "method_not_allowed";
+  | "method_not_allowed"
+  | "flavour_completes";
 
 export interface CardError {
   code: CardErrorCode;
@@ -67,6 +70,7 @@ export function validateCard(raw: unknown, ctx: ValidateContext): CardCheck {
   const errors = [
     ...checkGroups(card, ctx),
     ...checkMethods(card, ctx),
+    ...checkCompletes(card, ctx),
     ...checkExclude(card, ctx),
   ];
   return errors.length ? { ok: false, errors } : { ok: true, card };
@@ -137,6 +141,26 @@ function checkMethods(card: Card, ctx: ValidateContext): CardError[] {
   const allowed = new Set(ctx.input.methods);
   return card.methods.flatMap((m, i) =>
     allowed.has(m) ? [] : [{ code: "method_not_allowed" as const, message: `'${m}' is not an allowed method`, path: `methods.${i}` }],
+  );
+}
+
+/**
+ * `completes` is what makes the dish a nutritionally complete meal: protein,
+ * vegetables, fibre. Seasoning and flavour never are; the dish either needs
+ * them or does without.
+ */
+function checkCompletes(card: Card, ctx: ValidateContext): CardError[] {
+  const flavour = new Set(ctx.groups.filter((g) => g.flavour).map((g) => g.group));
+  return card.missing.flatMap((m, i) =>
+    m.role === "completes" && flavour.has(m.group)
+      ? [
+          {
+            code: "flavour_completes" as const,
+            message: `'${m.group}' is seasoning or flavour: mark it needed or leave it out. "completes" is only protein, vegetables or fibre`,
+            path: `missing.${i}.role`,
+          },
+        ]
+      : [],
   );
 }
 

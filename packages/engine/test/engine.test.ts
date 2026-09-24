@@ -129,6 +129,23 @@ describe("dealDeck", () => {
   });
 });
 
+describe("completes is never seasoning", () => {
+  it("the prompt says what completes means and what it never is", async () => {
+    const { llm } = await deal([fixture("clean-deck.json")]);
+    expect(llm.calls[0]!.user).toMatch(/"completes" is only for protein, vegetables or fibre/);
+    expect(llm.calls[0]!.user).toMatch(/Never seasoning, spices, sauces, oil, garlic, lemon, broth/);
+  });
+
+  it("a card with cumin as completes is regenerated, and told why", async () => {
+    const deck = JSON.parse(fixture("clean-deck.json"));
+    deck[3].missing = deck[3].missing.map((m: { group: string; role: string }) => (m.group === "cumin" ? { ...m, role: "completes" } : m));
+    const r = await deal([JSON.stringify(deck), fixture("card-fix-omelette.json")]);
+    expect(r.llm.calls).toHaveLength(2);
+    expect(r.llm.calls[1]!.user).toContain("'cumin' is seasoning or flavour");
+    expect(r.cards[3]!.name).toBe("Corn and rice omelette");
+  });
+});
+
 describe("prompts", () => {
   it("never carry a price", async () => {
     const r = await deal([fixture("deck-three-bad.json"), ...["card-fix-tofu.json", "card-fix-chickpea.json", "card-fix-omelette.json"].map(fixture)]);
