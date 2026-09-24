@@ -53,7 +53,7 @@ export default function Deck() {
   /** Swipe right: the deck ends, the meal is logged, and the meal screen opens (SPEC §10). */
   const select = () => {
     if (!top) return;
-    s.dispatch({ type: "select", card: top });
+    s.dispatch({ type: "select", card: top, photo: photos[top.card.id] ?? null });
     void log({ id: top.card.id, name: top.card.name, kcal: top.card.kcal, protein_g: top.card.protein_g });
     // First meal for cut, bulk or condition: body stats come first, then the meal (SPEC §3).
     router.replace(profile && needsBodyStats(profile) ? "/body-stats" : "/meal");

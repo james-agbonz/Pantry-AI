@@ -200,3 +200,25 @@ describe("loadVocabulary rejects bad data", () => {
     expect(() => loadVocabulary(d)).not.toThrow();
   });
 });
+
+describe("flavour groups", () => {
+  const flavour = new Map(v.groupList().map((g) => [g.group, g.flavour]));
+
+  it("every group in a seasoning family is flavour", () => {
+    for (const g of v.groups.filter((x) => ["spices", "condiments", "oils", "baking"].includes(x.family))) expect(flavour.get(g.id)).toBe(true);
+  });
+
+  it("garlic, lemon, green onion, soy sauce, tomato paste and broths are flavour by hand", () => {
+    for (const id of ["garlic", "lemon", "green_onion", "soy_sauce", "tomato_paste", "chicken_broth", "beef_broth", "vegetable_broth"]) expect(flavour.get(id)).toBe(true);
+  });
+
+  it("protein, vegetables and grains are not", () => {
+    for (const id of ["spinach", "frozen_veg", "broccoli", "eggs", "chicken_thighs", "lentils", "rice", "cheese", "tofu"]) expect(flavour.get(id)).toBe(false);
+  });
+
+  it("a hand flavour mark inside a seasoning family is rejected as redundant", () => {
+    const raw = { families: [{ id: "spices", label: "Spices" }], groups: [{ id: "cumin", family: "spices", label: "Cumin", contains: [], flavour: true }], items: [] };
+    expect(() => loadVocabulary(raw)).toThrow(/flavour by family already/);
+  });
+});
+

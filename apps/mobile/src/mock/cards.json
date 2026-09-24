@@ -58,8 +58,8 @@
         "role": "needed"
       },
       {
-        "group": "green_onion",
-        "qty": "2 stalks",
+        "group": "frozen_veg",
+        "qty": "1 cup",
         "role": "completes"
       }
     ],
@@ -68,10 +68,10 @@
     ],
     "steps": [
       "Scramble the eggs in a hot oiled pan and set aside.",
-      "Fry the cooked rice and corn for 3 minutes.",
-      "Stir the eggs back in with soy sauce and top with green onion."
+      "Fry the cooked rice, corn and frozen veg for 3 minutes.",
+      "Stir the eggs back in with soy sauce."
     ],
-    "image_prompt": "Egg fried rice with corn and green onion in a simple bowl, home kitchen"
+    "image_prompt": "Egg fried rice with corn and mixed vegetables in a simple bowl, home kitchen"
   },
   {
     "id": "",
@@ -133,6 +133,11 @@
       {
         "group": "cumin",
         "qty": "1 tsp",
+        "role": "needed"
+      },
+      {
+        "group": "broccoli",
+        "qty": "1 head",
         "role": "completes"
       }
     ],
@@ -142,7 +147,8 @@
     "steps": [
       "Brown the chicken thighs skin-side down, 8 minutes, then turn and cook through.",
       "Soften the onion in the chicken fat with cumin.",
-      "Stir in the rice and corn, warm through and serve with the chicken."
+      "Stir in the rice and corn, warm through and serve with the chicken.",
+      "Serve with steamed broccoli."
     ],
     "image_prompt": "Two browned chicken thighs on spiced corn rice, plain plate, home kitchen light"
   },
@@ -207,6 +213,11 @@
       {
         "group": "garlic",
         "qty": "2 cloves",
+        "role": "needed"
+      },
+      {
+        "group": "spinach",
+        "qty": "2 cups",
         "role": "completes"
       }
     ],
@@ -216,7 +227,7 @@
     "steps": [
       "Soften the garlic in a little oil.",
       "Add lentils, tomatoes and 3 cups of water; simmer 20 minutes.",
-      "Stir in the rice and corn and heat through."
+      "Stir in the rice, corn and spinach and heat through."
     ],
     "image_prompt": "Thick lentil and tomato soup with rice and corn in a plain bowl, home kitchen light"
   },
@@ -442,8 +453,8 @@
         "role": "needed"
       },
       {
-        "group": "lemon",
-        "qty": "1",
+        "group": "spinach",
+        "qty": "2 cups",
         "role": "completes"
       }
     ],
@@ -452,9 +463,9 @@
     ],
     "steps": [
       "Soften the onion in the sardine oil.",
-      "Add tomatoes and simmer 10 minutes, then fold in the sardines.",
-      "Stir through the rice and corn; finish with lemon."
+      "Add tomatoes and simmer 10 minutes, then fold in the sardines and spinach.",
+      "Stir through the rice and corn."
     ],
-    "image_prompt": "Tomato rice with sardines and lemon wedge on a plain plate, home kitchen light"
+    "image_prompt": "Tomato rice with sardines and spinach on a plain plate, home kitchen light"
   }
 ]

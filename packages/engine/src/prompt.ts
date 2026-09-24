@@ -108,7 +108,8 @@ function context(input: EngineInput, groups: readonly PromptGroup[]): string[] {
         ? `- Only these appliances: ${input.methods.join(", ")}. List the ones the dish needs in "methods". A knife, pan, bowl and plate are always available.`
         : `- The user has no appliances: no-cook dishes only, with "methods": [].`,
       `- "uses" lists what the dish uses from the user's groups or other items, spelled exactly as above.`,
-      `- "missing" lists what must be bought, only from the group list below, by group id. Tag each "needed" if the dish can't be made without it, or "completes" if the dish works without it but it makes a proper meal.`,
+      `- "missing" lists what must be bought, only from the group list below, by group id. Tag each "needed" if the dish can't be made without it, or "completes" if the dish works without it but it makes a nutritionally complete meal.`,
+      `- "completes" is only for protein, vegetables or fibre that round out the meal. Never seasoning, spices, sauces, oil, garlic, lemon, broth or anything added for flavour: if the dish needs it, it's "needed"; otherwise leave it out.`,
       `- Quantities for ${input.servings} serving${input.servings === 1 ? "" : "s"}. "kcal" and "protein_g" are per serving.`,
       `- Budget is ${input.budget} CAD for everything bought: favour cheap staples. Never state a cost; leave all money out of the card.`,
       `- ${GOAL_RULES[input.goal]}`,

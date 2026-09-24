@@ -1,7 +1,7 @@
 import type { Profile } from "@pantry/contract";
 import { computeTargets } from "@pantry/needs";
 import { describe, expect, it } from "vitest";
-import { EMPTY_FORM, needsBodyStats, readStats } from "../src/meal/bodyStats";
+import { EMPTY_FORM, needsBodyStats, readStats, switchUnits } from "../src/meal/bodyStats";
 import { logMeal, todayTotals } from "../src/meal/log";
 import { shoppingList } from "../src/meal/shopping";
 import { MOCK_CARDS } from "../src/mock/deck";
@@ -77,18 +77,48 @@ describe("body stats", () => {
 
   it("everything but target weight is required, and the first gap is named", () => {
     expect(readStats(EMPTY_FORM)).toEqual({ ok: false, fix: "Enter your height in cm" });
-    expect(readStats({ ...filled, age: "" })).toEqual({ ok: false, fix: "Enter your age" });
+    expect(readStats({ ...filled, age: "" })).toEqual({ ok: false, fix: "Enter your age in whole years" });
     expect(readStats({ ...filled, sex: null })).toEqual({ ok: false, fix: "Choose an answer for sex" });
     expect(readStats({ ...filled, activity: null })).toEqual({ ok: false, fix: "Choose how active you are" });
     expect(readStats(filled)).toMatchObject({ ok: true, stats: { target_kg: null } });
   });
 
-  it("rejects typos, accepts a comma decimal, and 'Prefer not to say' is skipped sex", () => {
-    expect(readStats({ ...filled, height_cm: "18" }).ok).toBe(false);
-    expect(readStats({ ...filled, age: "30.5" }).ok).toBe(false);
-    expect(readStats({ ...filled, target_kg: "7" })).toEqual({ ok: false, fix: "Check your target weight, or leave it blank" });
+  it("names out-of-range numbers with the range, in the units on screen", () => {
+    expect(readStats({ ...filled, height_cm: "18" })).toEqual({ ok: false, fix: "Height should be between 100 and 250 cm" });
+    expect(readStats({ ...filled, weight_kg: "800" })).toEqual({ ok: false, fix: "Weight should be between 30 and 300 kg" });
+    expect(readStats({ ...filled, age: "12" })).toEqual({ ok: false, fix: "Age should be between 16 and 110" });
+    expect(readStats({ ...filled, age: "30.5" })).toEqual({ ok: false, fix: "Enter your age in whole years" });
+    expect(readStats({ ...filled, target_kg: "7" })).toEqual({ ok: false, fix: "Target weight should be between 30 and 300 kg, or left blank" });
+  });
+
+  it("accepts a comma decimal, and 'Prefer not to say' is skipped sex", () => {
     expect(readStats({ ...filled, weight_kg: "80,5" })).toMatchObject({ ok: true, stats: { weight_kg: 80.5 } });
     expect(readStats({ ...filled, sex: "skip" })).toMatchObject({ ok: true, stats: { sex: null } });
+  });
+
+  describe("feet, inches and pounds", () => {
+    const imp = { ...EMPTY_FORM, units: "imperial" as const, height_ft: "5", height_in: "11", weight_lb: "176", age: "30", sex: "male" as const, activity: "moderate" as const };
+
+    it("store metric", () => {
+      expect(readStats(imp)).toMatchObject({ ok: true, stats: { height_cm: 180.3, weight_kg: 79.8 } });
+      expect(readStats({ ...imp, height_in: "" })).toMatchObject({ ok: true, stats: { height_cm: 152.4 } });
+    });
+
+    it("name the problem in feet and pounds", () => {
+      expect(readStats({ ...imp, height_ft: "" })).toEqual({ ok: false, fix: "Enter your height in feet and inches" });
+      expect(readStats({ ...imp, height_in: "14" })).toEqual({ ok: false, fix: "Inches should be 0 to 11" });
+      expect(readStats({ ...imp, height_ft: "2" })).toEqual({ ok: false, fix: "Height should be between 3 ft 3 in and 8 ft 2 in" });
+      expect(readStats({ ...imp, weight_lb: "20" })).toEqual({ ok: false, fix: "Weight should be between 67 and 661 lb" });
+      expect(readStats({ ...imp, weight_lb: "" })).toEqual({ ok: false, fix: "Enter your weight in lb" });
+    });
+
+    it("switching units converts what's typed, both ways", () => {
+      const toImp = switchUnits({ ...filled, target_kg: "70" }, "imperial");
+      expect(toImp).toMatchObject({ units: "imperial", height_ft: "5", height_in: "11", weight_lb: "176", target_lb: "154" });
+      const back = switchUnits(toImp, "metric");
+      expect(back).toMatchObject({ units: "metric", height_cm: "180", weight_kg: "79.8", target_kg: "69.9" });
+      expect(switchUnits(EMPTY_FORM, "imperial")).toMatchObject({ height_ft: "", weight_lb: "" });
+    });
   });
 
   it("feed the needs calculator: a cut with a lower target uses target weight for protein", () => {
