@@ -8,7 +8,9 @@ describe("loadConfig", () => {
       image: { provider: "mock" },
       limits: { perDevicePerDay: 3, perIpPerDay: 200, perIpPerMinute: 5, globalPerDay: 2000 },
       allowedOrigins: [],
+      logReplies: false,
     });
+    expect(loadConfig({ PANTRY_LOG_REPLIES: "1" }).logReplies).toBe(true);
   });
 
   it("reads limits from the environment, so they change without a code change", () => {

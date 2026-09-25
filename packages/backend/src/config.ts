@@ -23,6 +23,8 @@ const Env = z
     PANTRY_LIMIT_IP_PER_DAY: count(DEFAULT_LIMITS.perIpPerDay),
     PANTRY_LIMIT_IP_PER_MINUTE: count(DEFAULT_LIMITS.perIpPerMinute),
     PANTRY_LIMIT_GLOBAL_PER_DAY: count(DEFAULT_LIMITS.globalPerDay),
+    /** "1" to log each raw model reply (staging only: for re-recording sample responses). */
+    PANTRY_LOG_REPLIES: z.enum(["", "0", "1", "true", "false"]).default(""),
     /** Comma-separated web origins allowed to call the API from a browser. Empty: none. */
     PANTRY_ALLOWED_ORIGINS: z.string().default(""),
   })
@@ -46,6 +48,7 @@ export interface Config {
   image: ImageConfig;
   limits: LimitConfig;
   allowedOrigins: string[];
+  logReplies: boolean;
 }
 
 /** Throws a message naming each bad or missing variable. */
@@ -67,5 +70,6 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     globalPerDay: e.PANTRY_LIMIT_GLOBAL_PER_DAY,
   };
   const allowedOrigins = e.PANTRY_ALLOWED_ORIGINS.split(",").map((s) => s.trim()).filter(Boolean);
-  return { llm, image: { provider: e.IMAGE_PROVIDER }, limits, allowedOrigins };
+  const logReplies = e.PANTRY_LOG_REPLIES === "1" || e.PANTRY_LOG_REPLIES === "true";
+  return { llm, image: { provider: e.IMAGE_PROVIDER }, limits, allowedOrigins, logReplies };
 }

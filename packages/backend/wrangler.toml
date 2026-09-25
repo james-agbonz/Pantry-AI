@@ -23,8 +23,17 @@ new_sqlite_classes = ["LimiterObject"]
 [env.staging]
 name = "pantry-api-staging"
 
+# Staging uses the real model. Its key is a secret on staging only:
+#   npx wrangler secret put PANTRY_LLM_API_KEY --env staging
 [env.staging.vars]
-LLM_PROVIDER = "mock"
+LLM_PROVIDER = "anthropic"
+LLM_MODEL = "claude-sonnet-5"
+# Log each raw model reply, to re-record the engine's sample responses.
+PANTRY_LOG_REPLIES = "1"
+
+# Workers Logs: every request with its CPU time, readable in the dashboard.
+[env.staging.observability]
+enabled = true
 
 [[env.staging.durable_objects.bindings]]
 name = "LIMITER"

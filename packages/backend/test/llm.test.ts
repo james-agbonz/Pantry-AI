@@ -33,6 +33,17 @@ describe("createLlm", () => {
     expect(messages.create.mock.calls[0]![0].model).toBe("claude-haiku-4-5");
   });
 
+  it("anthropic: logs tokens, time and stop reason per call; the raw reply only when asked", async () => {
+    const events: Record<string, unknown>[] = [];
+    await createLlm(anthropic, { messages: fake(reply("[]")), log: (e) => events.push(e) }).complete({ system: "", user: "" });
+    expect(events).toEqual([
+      expect.objectContaining({ event: "llm_call", model: "claude-sonnet-5", input_tokens: 1, output_tokens: 1, stop_reason: "end_turn", ms: expect.any(Number) }),
+    ]);
+    expect(events[0]).not.toHaveProperty("reply");
+    await createLlm(anthropic, { messages: fake(reply("[1]")), log: (e) => events.push(e), logReplies: true }).complete({ system: "", user: "" });
+    expect(events[1]).toMatchObject({ reply: "[1]" });
+  });
+
   it("anthropic: throws on a refusal or a cut-off reply, and passes SDK errors through", async () => {
     await expect(createLlm(anthropic, { messages: fake(reply("", "refusal")) }).complete({ system: "", user: "" })).rejects.toThrow(/declined/);
     await expect(createLlm(anthropic, { messages: fake(reply("[", "max_tokens")) }).complete({ system: "", user: "" })).rejects.toThrow(/max_tokens/);

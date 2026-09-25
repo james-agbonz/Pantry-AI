@@ -9,7 +9,7 @@ export function appFromConfig(config: Config, limits: AppDeps["limits"]) {
   const table = currentPriceTable();
   const priced = vocabulary.withTable(table);
   return createApp({
-    llm: createLlm(config.llm),
+    llm: createLlm(config.llm, { log: (e) => console.info(JSON.stringify(e)), logReplies: config.logReplies }),
     vocabulary: () => priced,
     priceTable: () => table,
     limits,

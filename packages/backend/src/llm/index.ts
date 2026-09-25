@@ -10,7 +10,10 @@ export * from "./anthropic";
  * deck forever, offline; it suits `rice` + `corn` with stove, microwave and
  * fridge, and other inputs will see cards fail validation and be dropped.
  */
-export function createLlm(config: LlmConfig, deps: { messages?: MessagesApi } = {}): LlmClient {
+export function createLlm(
+  config: LlmConfig,
+  deps: { messages?: MessagesApi; log?: (event: Record<string, unknown>) => void; logReplies?: boolean } = {},
+): LlmClient {
   switch (config.provider) {
     case "mock":
       return new RecordedLlm([JSON.stringify(sampleDeck)], { model: config.model, loop: true });
