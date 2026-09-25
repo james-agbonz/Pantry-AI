@@ -1,0 +1,317 @@
+{
+ "_about": "Statistics Canada 18-10-0245-01, Canada, 2026-07, for the mapped vectors only. Taken from the table's CSV on 2026-09-24, so tests run offline.",
+ "series": [
+  {
+   "vector": 1353834271,
+   "title": "Canada;Beef stewing cuts, per kilogram",
+   "period": "2026-07-01",
+   "value": 26.31
+  },
+  {
+   "vector": 1353834274,
+   "title": "Canada;Ground beef, per kilogram",
+   "period": "2026-07-01",
+   "value": 16.49
+  },
+  {
+   "vector": 1353834275,
+   "title": "Canada;Pork loin cuts, per kilogram",
+   "period": "2026-07-01",
+   "value": 9.51
+  },
+  {
+   "vector": 1353834312,
+   "title": "Canada;Pork shoulder cuts, per kilogram",
+   "period": "2026-07-01",
+   "value": 8.74
+  },
+  {
+   "vector": 1353834277,
+   "title": "Canada;Whole chicken, per kilogram",
+   "period": "2026-07-01",
+   "value": 7.62
+  },
+  {
+   "vector": 1353834279,
+   "title": "Canada;Chicken thigh, per kilogram",
+   "period": "2026-07-01",
+   "value": 13.4
+  },
+  {
+   "vector": 1353834313,
+   "title": "Canada;Chicken drumsticks, per kilogram",
+   "period": "2026-07-01",
+   "value": 6.69
+  },
+  {
+   "vector": 1458869929,
+   "title": "Canada;Salmon, per kilogram",
+   "period": "2026-07-01",
+   "value": 28.55
+  },
+  {
+   "vector": 1353834314,
+   "title": "Canada;Canned salmon, 213 grams",
+   "period": "2026-07-01",
+   "value": 5.32
+  },
+  {
+   "vector": 1353834282,
+   "title": "Canada;Canned tuna, 170 grams",
+   "period": "2026-07-01",
+   "value": 1.84
+  },
+  {
+   "vector": 1353834283,
+   "title": "Canada;Milk, 1 litre",
+   "period": "2026-07-01",
+   "value": 3.23
+  },
+  {
+   "vector": 1353834284,
+   "title": "Canada;Milk, 2 litres",
+   "period": "2026-07-01",
+   "value": 5.53
+  },
+  {
+   "vector": 1353834285,
+   "title": "Canada;Milk, 4 litres",
+   "period": "2026-07-01",
+   "value": 6.99
+  },
+  {
+   "vector": 1458869932,
+   "title": "Canada;Soy milk, 1.89 litres",
+   "period": "2026-07-01",
+   "value": 4.36
+  },
+  {
+   "vector": 1353834287,
+   "title": "Canada;Butter, 454 grams",
+   "period": "2026-07-01",
+   "value": 5.92
+  },
+  {
+   "vector": 1458869921,
+   "title": "Canada;Margarine, 907 grams",
+   "period": "2026-07-01",
+   "value": 6.09
+  },
+  {
+   "vector": 1353834289,
+   "title": "Canada;Yogurt, 500 grams",
+   "period": "2026-07-01",
+   "value": 3.84
+  },
+  {
+   "vector": 1353834290,
+   "title": "Canada;Eggs, 1 dozen",
+   "period": "2026-07-01",
+   "value": 4.95
+  },
+  {
+   "vector": 1353834291,
+   "title": "Canada;Apples, per kilogram",
+   "period": "2026-07-01",
+   "value": 6.45
+  },
+  {
+   "vector": 1353834294,
+   "title": "Canada;Bananas, per kilogram",
+   "period": "2026-07-01",
+   "value": 1.88
+  },
+  {
+   "vector": 1353834296,
+   "title": "Canada;Lemons, unit",
+   "period": "2026-07-01",
+   "value": 1.11
+  },
+  {
+   "vector": 1353834300,
+   "title": "Canada;Potatoes, 4.54 kilograms",
+   "period": "2026-07-01",
+   "value": 5.32
+  },
+  {
+   "vector": 1353834316,
+   "title": "Canada;Potatoes, per kilogram",
+   "period": "2026-07-01",
+   "value": 5.23
+  },
+  {
+   "vector": 1353834317,
+   "title": "Canada;Sweet potatoes, per kilogram",
+   "period": "2026-07-01",
+   "value": 4.83
+  },
+  {
+   "vector": 1353834305,
+   "title": "Canada;Onions, 1.36 kilograms",
+   "period": "2026-07-01",
+   "value": 5.02
+  },
+  {
+   "vector": 1353834306,
+   "title": "Canada;Celery, unit",
+   "period": "2026-07-01",
+   "value": 3.3
+  },
+  {
+   "vector": 1353834307,
+   "title": "Canada;Cucumber, unit",
+   "period": "2026-07-01",
+   "value": 1.42
+  },
+  {
+   "vector": 1353834308,
+   "title": "Canada;Mushrooms, 227 grams",
+   "period": "2026-07-01",
+   "value": 2.34
+  },
+  {
+   "vector": 1353834318,
+   "title": "Canada;Iceberg lettuce, unit",
+   "period": "2026-07-01",
+   "value": 2.78
+  },
+  {
+   "vector": 1353834309,
+   "title": "Canada;Broccoli, unit",
+   "period": "2026-07-01",
+   "value": 2.57
+  },
+  {
+   "vector": 1458869928,
+   "title": "Canada;Salad greens, 142 grams",
+   "period": "2026-07-01",
+   "value": 4.51
+  },
+  {
+   "vector": 1353834322,
+   "title": "Canada;Frozen broccoli, 500 grams",
+   "period": "2026-07-01",
+   "value": 4.17
+  },
+  {
+   "vector": 1353834323,
+   "title": "Canada;Frozen corn, 750 grams",
+   "period": "2026-07-01",
+   "value": 3.87
+  },
+  {
+   "vector": 1353834324,
+   "title": "Canada;Frozen mixed vegetables, 750 grams",
+   "period": "2026-07-01",
+   "value": 4.3
+  },
+  {
+   "vector": 1353834325,
+   "title": "Canada;Frozen peas, 750 grams",
+   "period": "2026-07-01",
+   "value": 3.83
+  },
+  {
+   "vector": 1458869916,
+   "title": "Canada;Frozen spinach, 300 grams",
+   "period": "2026-07-01",
+   "value": 2.14
+  },
+  {
+   "vector": 1353834326,
+   "title": "Canada;White bread, 675 grams",
+   "period": "2026-07-01",
+   "value": 3.6
+  },
+  {
+   "vector": 1458869906,
+   "title": "Canada;Brown rice, 900 grams",
+   "period": "2026-07-01",
+   "value": 5.91
+  },
+  {
+   "vector": 1458869937,
+   "title": "Canada;White rice, 2 kilograms",
+   "period": "2026-07-01",
+   "value": 9.62
+  },
+  {
+   "vector": 1353834329,
+   "title": "Canada;Wheat flour, 2.5 kilograms",
+   "period": "2026-07-01",
+   "value": 5.36
+  },
+  {
+   "vector": 1353834330,
+   "title": "Canada;White sugar, 2 kilograms",
+   "period": "2026-07-01",
+   "value": 2.64
+  },
+  {
+   "vector": 1353834335,
+   "title": "Canada;Ketchup, 1 litre",
+   "period": "2026-07-01",
+   "value": 4.49
+  },
+  {
+   "vector": 1353834338,
+   "title": "Canada;Peanut butter, 1 kilogram",
+   "period": "2026-07-01",
+   "value": 5.62
+  },
+  {
+   "vector": 1353834339,
+   "title": "Canada;Mayonnaise, 890 millilitres",
+   "period": "2026-07-01",
+   "value": 6.37
+  },
+  {
+   "vector": 1353834340,
+   "title": "Canada;Canned baked beans, 398 millilitres",
+   "period": "2026-07-01",
+   "value": 1.87
+  },
+  {
+   "vector": 1353834341,
+   "title": "Canada;Canned tomatoes, 796 millilitres",
+   "period": "2026-07-01",
+   "value": 2.27
+  },
+  {
+   "vector": 1353834343,
+   "title": "Canada;Canned beans and lentils, 540 millilitres",
+   "period": "2026-07-01",
+   "value": 1.72
+  },
+  {
+   "vector": 1458869907,
+   "title": "Canada;Canned corn, 341 millilitres",
+   "period": "2026-07-01",
+   "value": 1.61
+  },
+  {
+   "vector": 1458869908,
+   "title": "Canada;Canned peach, 398 millilitres",
+   "period": "2026-07-01",
+   "value": 2.45
+  },
+  {
+   "vector": 1353834344,
+   "title": "Canada;Dried lentils, 900 grams",
+   "period": "2026-07-01",
+   "value": 3.63
+  },
+  {
+   "vector": 1458869913,
+   "title": "Canada;Dry beans and legumes, 900 grams",
+   "period": "2026-07-01",
+   "value": 3.59
+  },
+  {
+   "vector": 1458869925,
+   "title": "Canada;Pasta sauce, 650 millilitres",
+   "period": "2026-07-01",
+   "value": 3.58
+  }
+ ]
+}
