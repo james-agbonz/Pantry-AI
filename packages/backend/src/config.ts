@@ -1,4 +1,8 @@
 import { z } from "zod";
+import { DEFAULT_LIMITS, type LimitConfig } from "./limits";
+
+/** A whole number from the environment, or the default when unset. */
+const count = (fallback: number) => z.coerce.number().int().positive().default(fallback);
 
 /**
  * Server config, read from the environment. In dev, `.env` is loaded into
@@ -15,6 +19,12 @@ const Env = z
     LLM_MODEL: z.string().trim().min(1).optional(),
     PANTRY_LLM_API_KEY: z.string().trim().min(1).optional(),
     IMAGE_PROVIDER: z.enum(["mock"]).default("mock"),
+    PANTRY_LIMIT_DEVICE_PER_DAY: count(DEFAULT_LIMITS.perDevicePerDay),
+    PANTRY_LIMIT_IP_PER_DAY: count(DEFAULT_LIMITS.perIpPerDay),
+    PANTRY_LIMIT_IP_PER_MINUTE: count(DEFAULT_LIMITS.perIpPerMinute),
+    PANTRY_LIMIT_GLOBAL_PER_DAY: count(DEFAULT_LIMITS.globalPerDay),
+    /** Comma-separated web origins allowed to call the API from a browser. Empty: none. */
+    PANTRY_ALLOWED_ORIGINS: z.string().default(""),
   })
   .superRefine((e, ctx) => {
     if (e.LLM_PROVIDER === "mock") return;
@@ -34,6 +44,8 @@ export interface ImageConfig {
 export interface Config {
   llm: LlmConfig;
   image: ImageConfig;
+  limits: LimitConfig;
+  allowedOrigins: string[];
 }
 
 /** Throws a message naming each bad or missing variable. */
@@ -48,5 +60,12 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     e.LLM_PROVIDER === "mock"
       ? { provider: "mock", model: e.LLM_MODEL ?? "sample-deck" }
       : { provider: e.LLM_PROVIDER, model: e.LLM_MODEL!, apiKey: e.PANTRY_LLM_API_KEY! };
-  return { llm, image: { provider: e.IMAGE_PROVIDER } };
+  const limits: LimitConfig = {
+    perDevicePerDay: e.PANTRY_LIMIT_DEVICE_PER_DAY,
+    perIpPerDay: e.PANTRY_LIMIT_IP_PER_DAY,
+    perIpPerMinute: e.PANTRY_LIMIT_IP_PER_MINUTE,
+    globalPerDay: e.PANTRY_LIMIT_GLOBAL_PER_DAY,
+  };
+  const allowedOrigins = e.PANTRY_ALLOWED_ORIGINS.split(",").map((s) => s.trim()).filter(Boolean);
+  return { llm, image: { provider: e.IMAGE_PROVIDER }, limits, allowedOrigins };
 }

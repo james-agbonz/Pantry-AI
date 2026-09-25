@@ -3,7 +3,17 @@ import { loadConfig } from "../src";
 
 describe("loadConfig", () => {
   it("defaults to the offline mock", () => {
-    expect(loadConfig({})).toEqual({ llm: { provider: "mock", model: "sample-deck" }, image: { provider: "mock" } });
+    expect(loadConfig({})).toEqual({
+      llm: { provider: "mock", model: "sample-deck" },
+      image: { provider: "mock" },
+      limits: { perDevicePerDay: 3, perIpPerDay: 200, perIpPerMinute: 5, globalPerDay: 2000 },
+      allowedOrigins: [],
+    });
+  });
+
+  it("reads limits from the environment, so they change without a code change", () => {
+    expect(loadConfig({ PANTRY_LIMIT_DEVICE_PER_DAY: "5", PANTRY_LIMIT_GLOBAL_PER_DAY: "100" }).limits).toMatchObject({ perDevicePerDay: 5, globalPerDay: 100 });
+    expect(() => loadConfig({ PANTRY_LIMIT_IP_PER_DAY: "lots" })).toThrow(/PANTRY_LIMIT_IP_PER_DAY/);
   });
 
   it("reads the provider, model and key", () => {

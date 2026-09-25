@@ -1,0 +1,31 @@
+# Cloudflare Worker for the Pantry API (SPEC §16).
+# Deploy: npm run deploy -w @pantry/backend (production) or -- --env staging.
+# The model key is a secret, never in this file:
+#   npx wrangler secret put PANTRY_LLM_API_KEY [--env staging]
+name = "pantry-api"
+main = "src/worker.ts"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Offline mock until the key exists. Then set LLM_PROVIDER = "anthropic" and
+# LLM_MODEL = "claude-sonnet-5" here (or in the dashboard) and redeploy.
+[vars]
+LLM_PROVIDER = "mock"
+
+[[durable_objects.bindings]]
+name = "LIMITER"
+class_name = "LimiterObject"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["LimiterObject"]
+
+[env.staging]
+name = "pantry-api-staging"
+
+[env.staging.vars]
+LLM_PROVIDER = "mock"
+
+[[env.staging.durable_objects.bindings]]
+name = "LIMITER"
+class_name = "LimiterObject"

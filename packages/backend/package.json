@@ -8,21 +8,30 @@
   "types": "src/index.ts",
   "scripts": {
     "test": "vitest run",
-    "typecheck": "tsc -p .",
-    "deal": "tsx --env-file-if-exists=../../.env src/deal.ts"
+    "typecheck": "tsc -p . && tsc -p tsconfig.worker.json",
+    "deal": "tsx --env-file-if-exists=../../.env src/deal.ts",
+    "serve": "tsx --env-file-if-exists=../../.env src/node.ts",
+    "deploy": "wrangler deploy --env=\"\"",
+    "deploy:check": "wrangler deploy --env=\"\" --dry-run --outdir dist",
+    "deploy:staging": "wrangler deploy --env staging",
+    "dev:worker": "wrangler dev --env=\"\" --port 8788"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.128.0",
+    "@hono/node-server": "^2.1.1",
     "@pantry/contract": "*",
     "@pantry/engine": "*",
     "@pantry/pricing": "*",
     "@pantry/vocabulary": "*",
+    "hono": "^4.13.9",
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260925.1",
     "@types/node": "^22.0.0",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
-    "vitest": "^5.0.1"
+    "vitest": "^5.0.1",
+    "wrangler": "^4.140.0"
   }
 }

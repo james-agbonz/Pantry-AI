@@ -19,11 +19,13 @@
     "typecheck": "npm run typecheck --workspaces --if-present",
     "e2e": "npm run e2e -w @pantry/mobile",
     "prices:import": "npm run import -w @pantry/price-tools --",
-    "prices:template": "npm run template -w @pantry/price-tools"
+    "prices:template": "npm run template -w @pantry/price-tools",
+    "e2e:api": "npm run e2e:api -w @pantry/mobile"
   },
   "allowScripts": {
     "esbuild": false,
-    "fsevents": false
+    "fsevents": false,
+    "workerd": false
   },
   "overrides": {
     "react-native-reanimated": "4.5.1",
