@@ -1,5 +1,5 @@
 rank,item_id,group,name,unit,price,source,source_detail,date,why
-1,canola_oil_946ml,cooking_oil,Canola oil,946ml,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'cooking_oil', so every card using it says Sample prices"
+1,canola_oil_946ml,cooking_oil,Canola oil,946ml,4.29,"Luciano's No Frills, Toronto",No Name canola oil 946 ml,2026-09-25,"Seasoning, oil or garlic on most dishes; no real price in 'cooking_oil', so every card using it says Sample prices"
 2,salt_1kg,salt,Table salt,1kg,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'salt', so every card using it says Sample prices"
 3,black_pepper_ground_100g,black_pepper,"Black pepper, ground",100g,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'black_pepper', so every card using it says Sample prices"
 4,garlic_bulb_each,garlic,Garlic,1 bulb,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'garlic', so every card using it says Sample prices"
