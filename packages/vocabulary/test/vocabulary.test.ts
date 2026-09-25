@@ -26,18 +26,26 @@ describe("shipped data", () => {
 
   it("prices every item: real prices are dated, placeholders are marked, and the version is a publish date", () => {
     for (const item of v.items) {
-      expect(item.price).toBeGreaterThan(0);
-      if (item.price_source === "placeholder") expect(item.updated).toBeNull();
-      else expect(item.updated).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      const prices = v.pricesFor(item.id);
+      expect(prices.length).toBeGreaterThan(0);
+      for (const p of prices) {
+        expect(p.regular).toBeGreaterThan(0);
+        if (p.source === "placeholder") expect(p.updated).toBeNull();
+        else expect(p.updated).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      }
     }
     expect(v.version).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     // Step 7: StatCan covers part of the table; the rest waits for hand entry.
-    expect(v.items.filter((i) => i.price_source === "statcan").length).toBeGreaterThan(0);
-    expect(v.placeholder).toBe(v.items.some((i) => i.price_source === "placeholder"));
+    expect(v.prices.filter((p) => p.source === "statcan").length).toBeGreaterThan(0);
+    expect(v.placeholder).toBe(v.items.some((i) => !v.hasRealPrice(i.id)));
   });
 
   it("the seasoning blend is $7.00, as in SPEC §9", () => {
-    expect(v.items.find((i) => i.id === "seasoning_all_purpose_250g")?.price).toBe(7);
+    expect(v.pricesFor("seasoning_all_purpose_250g")[0]?.regular).toBe(7);
+  });
+
+  it("has a typical-price store and the reference store", () => {
+    expect(v.stores.map((st) => st.id)).toEqual(expect.arrayContaining(["ca_typical", "nofrills_lucianos_toronto"]));
   });
 
   it("puts nuts and nut butters in the nuts family", () => {
@@ -175,10 +183,19 @@ describe("loadVocabulary rejects bad data", () => {
       { id: "rice", family: "grains", label: "Rice", contains: [] as string[] },
     ],
     table: {
+      schema: 2,
       version: "2026-09-01",
+      stores: [
+        { id: "ca_typical", name: "Typical price, Canada", kind: "average" },
+        { id: "shop", name: "A shop", kind: "store", region: "Toronto" },
+      ],
       items: [
-        { id: "gb", family: "beef", group: "ground_beef", name: "Ground beef", unit: "454g", halal: false, price: 7.99 as number | null, price_source: "placeholder", updated: null as string | null },
-        { id: "r", family: "grains", group: "rice", name: "Rice", unit: "900g", price: 3.99 as number | null, price_source: "placeholder", updated: null as string | null },
+        { id: "gb", family: "beef", group: "ground_beef", name: "Ground beef", unit: "454g", halal: false },
+        { id: "r", family: "grains", group: "rice", name: "Rice", unit: "900g" },
+      ],
+      prices: [
+        { item: "gb", store: "ca_typical", regular: 7.99, sale: null as { price: number; ends: string } | null, source: "placeholder", updated: null as string | null },
+        { item: "r", store: "ca_typical", regular: 3.99, sale: null as { price: number; ends: string } | null, source: "placeholder", updated: null as string | null },
       ],
     },
   });
@@ -198,9 +215,20 @@ describe("loadVocabulary rejects bad data", () => {
     ["unknown allergen", (d) => void (d.groups[1]!.contains = ["celery"])],
     ["duplicate allergen", (d) => void (d.groups[1]!.contains = ["milk", "milk"])],
     ["unknown family", (d) => void (d.groups[1]!.family = "cereal")],
-    ["real price without a date", (d) => void Object.assign(d.table.items[1]!, { price: 3.49, price_source: "statcan" })],
-    ["a price key typo", (d) => void Object.assign(d.table.items[1]!, { cost: 3.49 })],
-    ["an item with no price", (d) => void (d.table.items[1]!.price = null)],
+    ["real price without a date", (d) => void Object.assign(d.table.prices[1]!, { source: "statcan" })],
+    ["a placeholder with a date", (d) => void Object.assign(d.table.prices[1]!, { updated: "2026-09-01" })],
+    ["a price key typo", (d) => void Object.assign(d.table.prices[1]!, { cost: 3.49 })],
+    ["a price left on the item", (d) => void Object.assign(d.table.items[1]!, { price: 3.49 })],
+    ["an item with no price", (d) => void d.table.prices.pop()],
+    ["a price for an unknown item", (d) => void (d.table.prices[1]!.item = "nope")],
+    ["a price at an unknown store", (d) => void (d.table.prices[1]!.store = "nope")],
+    ["two prices for one item at one store", (d) => void d.table.prices.push({ ...d.table.prices[1]! })],
+    ["a sale price at or above the regular price", (d) => void Object.assign(d.table.prices[1]!, { source: "manual", updated: "2026-09-01", sale: { price: 3.99, ends: "2026-10-01" } })],
+    ["a sale without an end date", (d) => void Object.assign(d.table.prices[1]!, { source: "manual", updated: "2026-09-01", sale: { price: 2.99 } })],
+    ["a placeholder on sale", (d) => void Object.assign(d.table.prices[1]!, { sale: { price: 2.99, ends: "2026-10-01" } })],
+    ["duplicate store id", (d) => void d.table.stores.push({ id: "shop", name: "Again", kind: "store" })],
+    ["an unknown store kind", (d) => void Object.assign(d.table.stores[1]!, { kind: "outlet" })],
+    ["a table without the schema number", (d) => void delete (d.table as { schema?: number }).schema],
     ["a table without a version", (d) => void delete (d.table as { version?: string }).version],
     ["a malformed version", (d) => void (d.table.version = "October")],
     ["a month instead of a publish date", (d) => void (d.table.version = "2026-10")],
@@ -214,8 +242,18 @@ describe("loadVocabulary rejects bad data", () => {
 
   it("names the item that has no price", () => {
     const d = base();
-    d.table.items[1]!.price = null;
+    d.table.prices.pop();
     expect(() => loadVocabulary(d)).toThrow(/item 'r' has no price/);
+  });
+
+  it("an item can have a price at several stores, and one real price makes it real", () => {
+    const d = base();
+    d.table.prices.push({ item: "r", store: "shop", regular: 3.49, sale: { price: 2.99, ends: "2026-10-05" }, source: "manual", updated: "2026-09-25" });
+    const voc = loadVocabulary(d);
+    expect(voc.pricesFor("r").map((p) => p.store)).toEqual(["ca_typical", "shop"]);
+    expect(voc.hasRealPrice("r")).toBe(true);
+    expect(voc.hasRealPrice("gb")).toBe(false);
+    expect(voc.placeholder).toBe(true);
   });
 
   it("swaps in another price table, keeping groups, and knows when prices are real", () => {
@@ -223,20 +261,15 @@ describe("loadVocabulary rejects bad data", () => {
     const voc = loadVocabulary(d);
     expect(voc.placeholder).toBe(true);
     const real = {
+      ...d.table,
       version: "2026-10-01",
-      items: d.table.items.map((i) => ({ ...i, price: (i.price ?? 1) + 1, price_source: "statcan", updated: "2026-10-01" })),
+      prices: d.table.prices.map((p) => ({ ...p, regular: p.regular + 1, source: "statcan", updated: "2026-10-01" })),
     };
     const next = voc.withTable(real);
     expect(next.version).toBe("2026-10-01");
     expect(next.placeholder).toBe(false);
-    expect(next.itemsFor("rice")[0]?.price).toBe(4.99);
-    expect(() => voc.withTable({ version: "2026-10-01", items: [] })).toThrow(/has no items/);
-  });
-
-  it("accepts a real price with a date", () => {
-    const d = base();
-    Object.assign(d.table.items[1]!, { price: 3.49, price_source: "statcan", updated: "2026-08-01" });
-    expect(() => loadVocabulary(d)).not.toThrow();
+    expect(next.pricesFor("r")[0]?.regular).toBe(4.99);
+    expect(() => voc.withTable({ ...d.table, version: "2026-10-01", items: [], prices: [] })).toThrow(/has no items/);
   });
 });
 
@@ -256,7 +289,7 @@ describe("flavour groups", () => {
   });
 
   it("a hand flavour mark inside a seasoning family is rejected as redundant", () => {
-    const raw = { families: [{ id: "spices", label: "Spices" }], groups: [{ id: "cumin", family: "spices", label: "Cumin", contains: [], flavour: true }], table: { version: "2026-09-01", items: [] } };
+    const raw = { families: [{ id: "spices", label: "Spices" }], groups: [{ id: "cumin", family: "spices", label: "Cumin", contains: [], flavour: true }], table: { schema: 2, version: "2026-09-01", stores: [{ id: "ca_typical", name: "Typical", kind: "average" }], items: [], prices: [] } };
     expect(() => loadVocabulary(raw)).toThrow(/flavour by family already/);
   });
 });

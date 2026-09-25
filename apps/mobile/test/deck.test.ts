@@ -40,7 +40,7 @@ describe("budget badge", () => {
     expect(badgeFor({ ...base, total: 18, over_by: 3 }, { withTotal: false }).label).toBe("Over by ~$3.00");
   });
   it("to complete: '+~$2.00 to complete'", () => {
-    expect(badgeFor({ ...base, to_complete: [{ group: "frozen_veg", item: "Frozen mixed veg", unit: "750g", price: 2 }], complete_cost: 2 })).toMatchObject({
+    expect(badgeFor({ ...base, to_complete: [{ group: "frozen_veg", item: "Frozen mixed veg", unit: "750g", price: 2, store: "ca_typical", sale_ends: null }], complete_cost: 2 })).toMatchObject({
       status: "complete",
       label: "+~$2.00 to complete",
     });
@@ -49,7 +49,7 @@ describe("budget badge", () => {
     expect(badgeFor({ ...base, total: 18, over_by: 3 })).toMatchObject({ status: "over", label: "Over by ~$3.00" });
   });
   it("is at most three words plus the figure", () => {
-    const words = badgeFor({ ...base, to_complete: [{ group: "x", item: "x", unit: "1", price: 2 }], complete_cost: 2 }).parts.filter((p) => p.kind === "word");
+    const words = badgeFor({ ...base, to_complete: [{ group: "x", item: "x", unit: "1", price: 2, store: "ca_typical", sale_ends: null }], complete_cost: 2 }).parts.filter((p) => p.kind === "word");
     expect(words.map((w) => w.text.split(" ").length).reduce((a, b) => a + b)).toBeLessThanOrEqual(3);
   });
 });

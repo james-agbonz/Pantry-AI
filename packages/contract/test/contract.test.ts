@@ -269,10 +269,10 @@ describe("exclude text scan", () => {
 describe("pricing (SPEC §9 shape)", () => {
   const spec: Pricing = {
     buy: [
-      { group: "white_fish", item: "Basa fillets, frozen", unit: "400g", price: 6.49, role: "needed" },
-      { group: "seasoning", item: "Seasoning blend", unit: "250g", price: 7.0, role: "needed" },
+      { group: "white_fish", item: "Basa fillets, frozen", unit: "400g", price: 6.49, store: "ca_typical", sale_ends: null, role: "needed" },
+      { group: "seasoning", item: "Seasoning blend", unit: "250g", price: 7.0, store: "ca_typical", sale_ends: null, role: "needed" },
     ],
-    to_complete: [{ group: "frozen_veg", item: "Frozen mixed veg", unit: "750g", price: 2.0 }],
+    to_complete: [{ group: "frozen_veg", item: "Frozen mixed veg", unit: "750g", price: 2.0, store: "ca_typical", sale_ends: null }],
     total: 13.49,
     budget: 15,
     over_by: 0,

@@ -24,6 +24,22 @@ export function parseBudget(text: string): number | null {
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+/** "2026-10-05" → "Oct 5". */
+export function shortDate(yyyyMmDd: string): string {
+  const [, m, d] = yyyyMmDd.split("-").map(Number);
+  return `${MONTHS[(m ?? 1) - 1]!.slice(0, 3)} ${d}`;
+}
+
+/**
+ * Where a line's price is from, for the meal screen and shopping list: the
+ * store's name unless it's a national typical price, and the sale while one
+ * runs. Empty when there's nothing to say.
+ */
+export function storeNote(line: { store: string; sale_ends: string | null }, store: { name(id: string): string; isAverage(id: string): boolean }): string {
+  const parts = [store.isAverage(line.store) ? null : store.name(line.store), line.sale_ends ? `on sale until ${shortDate(line.sale_ends)}` : null];
+  return parts.filter(Boolean).join(", ");
+}
+
 /** "2026-07" → "July 2026". */
 export function monthLabel(yyyyMm: string): string {
   const [y, m] = yyyyMm.split("-").map(Number);

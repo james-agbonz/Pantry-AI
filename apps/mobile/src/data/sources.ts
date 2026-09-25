@@ -32,8 +32,12 @@ export interface ImageSource {
 export interface Pricer {
   /** Items the diet allows in a group, cheapest first. */
   options(group: string): ItemOption[];
-  /** `choices` maps a group to the item picked on the meal screen; otherwise the cheapest. */
+  /** `choices` maps a group to the option (`item@store`) picked on the meal screen; otherwise the default pick. */
   price(card: Card, budget: number, choices?: Readonly<Record<string, string>>): Pricing;
+  /** A store's display name, e.g. "Luciano's No Frills". */
+  storeName(id: string): string;
+  /** True for a national typical price rather than one store's: no store is named on the line. */
+  isAverage(id: string): boolean;
 }
 
 /**

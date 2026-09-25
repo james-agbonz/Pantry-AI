@@ -29,6 +29,15 @@ describe("shopping list", () => {
     expect(text.match(/(?<!~)\$\d+(\.\d+)?/g)).toEqual(["$10"]);
   });
 
+  it("names the store and the sale on a line, but not for a typical price", () => {
+    const p = pricer.price(fish, 50);
+    const stores = { name: (id: string) => (id === "shop" ? "Luciano's No Frills" : id), isAverage: (id: string) => id === "ca_typical" };
+    const onSale = { ...p, buy: [{ ...p.buy[0]!, store: "shop", sale_ends: "2026-10-05" }, ...p.buy.slice(1)] };
+    const text = shoppingList(fish, onSale, stores);
+    expect(text).toContain(`: ~$${onSale.buy[0]!.price.toFixed(2)} (Luciano's No Frills, on sale until Oct 5)`);
+    expect(text).toContain(`- ${p.buy[1]!.item}, ${p.buy[1]!.unit}: ~$${p.buy[1]!.price.toFixed(2)}\n`);
+  });
+
   it("states over budget plainly", () => {
     const salmon = MOCK_CARDS.find((c) => c.name.startsWith("Salmon"))!;
     expect(shoppingList(salmon, pricer.price(salmon, 5))).toMatch(/Over by ~\$\d+\.\d\d/);

@@ -1,5 +1,5 @@
 import type { GroupRef } from "@pantry/contract";
-import { FLAVOUR_FAMILIES, MEAT_FAMILIES, VocabularyData, type Family, type Group, type Item } from "./schema";
+import { FLAVOUR_FAMILIES, MEAT_FAMILIES, VocabularyData, type Family, type Group, type Item, type Price, type Store } from "./schema";
 
 /** Diet rules that act on items rather than on `exclude` terms. */
 export interface Diet {
@@ -12,9 +12,15 @@ export const NO_DIET: Diet = { halal: false };
 export interface Vocabulary {
   families: readonly Family[];
   groups: readonly Group[];
+  stores: readonly Store[];
   items: readonly Item[];
-  /** Items the diet allows in a group. Pricing picks the cheapest of these. */
+  prices: readonly Price[];
+  /** Items the diet allows in a group. */
   itemsFor(group: string, diet?: Diet): Item[];
+  /** Every price for an item, one per store. At least one: the load refuses an unpriced item. */
+  pricesFor(item: string): Price[];
+  /** True when the item has at least one price that isn't a placeholder. */
+  hasRealPrice(item: string): boolean;
   /**
    * Groups with at least one item the diet allows. This list goes to the
    * engine prompt and to `validateCard`, so a halal deck can't ask for a
@@ -23,7 +29,7 @@ export interface Vocabulary {
   groupList(diet?: Diet): GroupRef[];
   /** The price table's publish date, e.g. "2026-09-25". */
   version: string;
-  /** True while any price is a placeholder: the UI must not call them typical. */
+  /** True while any item has no real price: some cards will still say "Sample prices". */
   placeholder: boolean;
   /** The same families and groups with another price table. Throws if the table doesn't fit them. */
   withTable(table: unknown): Vocabulary;
@@ -33,7 +39,7 @@ export interface Vocabulary {
 export function loadVocabulary(raw: unknown): Vocabulary {
   const data = VocabularyData.parse(raw);
   const { families, groups, table } = data;
-  const items = table.items;
+  const { items, prices, stores } = table;
 
   const byGroup = new Map<string, Item[]>();
   for (const item of items) {
@@ -41,12 +47,22 @@ export function loadVocabulary(raw: unknown): Vocabulary {
     list.push(item);
     byGroup.set(item.group, list);
   }
+  const byItem = new Map<string, Price[]>();
+  for (const p of prices) {
+    const list = byItem.get(p.item) ?? [];
+    list.push(p);
+    byItem.set(p.item, list);
+  }
 
   const itemsFor = (group: string, diet: Diet = NO_DIET): Item[] =>
     (byGroup.get(group) ?? []).filter((i) => !diet.halal || !MEAT_FAMILIES.includes(i.family) || i.halal === true);
+  const pricesFor = (item: string): Price[] => byItem.get(item) ?? [];
+  const hasRealPrice = (item: string) => pricesFor(item).some((p) => p.source !== "placeholder");
 
   const groupList = (diet: Diet = NO_DIET): GroupRef[] =>
-    groups.filter((g) => itemsFor(g.id, diet).length > 0).map((g) => ({
+    groups
+      .filter((g) => itemsFor(g.id, diet).length > 0)
+      .map((g) => ({
         group: g.id,
         family: g.family,
         contains: g.contains,
@@ -57,11 +73,15 @@ export function loadVocabulary(raw: unknown): Vocabulary {
   return {
     families,
     groups,
+    stores,
     items,
+    prices,
     itemsFor,
+    pricesFor,
+    hasRealPrice,
     groupList,
     version: table.version,
-    placeholder: items.some((i) => i.price_source === "placeholder"),
+    placeholder: items.some((i) => !hasRealPrice(i.id)),
     withTable: (next: unknown) => loadVocabulary({ families, groups, table: next }),
   };
 }

@@ -1,13 +1,19 @@
 import type { Card, Pricing } from "@pantry/contract";
-import { money, priceNote } from "@/format";
+import { money, priceNote, storeNote } from "@/format";
+
+type Stores = Parameters<typeof storeNote>[1];
+const NO_STORES: Stores = { name: (id) => id, isAverage: () => true };
 
 /**
  * The plain-text list to take to the store (SPEC §12). Every figure keeps its
  * `~`, and the list says once that prices are typical, not quotes (or that
  * they're samples, while the table is placeholder).
  */
-export function shoppingList(card: Card, p: Pricing): string {
-  const line = (l: { item: string; unit: string; price: number }) => `- ${l.item}, ${l.unit}: ${money(l.price)}`;
+export function shoppingList(card: Card, p: Pricing, stores: Stores = NO_STORES): string {
+  const line = (l: Pricing["to_complete"][number]) => {
+    const where = storeNote(l, stores);
+    return `- ${l.item}, ${l.unit}: ${money(l.price)}${where ? ` (${where})` : ""}`;
+  };
   const out = [card.name, "", `Buy (${money(p.total)} of $${p.budget}):`, ...p.buy.map(line)];
   if (p.over_by > 0) out.push(`Over by ${money(p.over_by)}`);
   if (p.to_complete.length) out.push("", `To complete (+${money(p.complete_cost)}):`, ...p.to_complete.map(line));

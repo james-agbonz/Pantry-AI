@@ -22,7 +22,7 @@ const deal = await dealPricedDeck(
     targets: { kcal: 2400, protein: 140 },
   },
   { have: ["rice", "corn"], have_other: [], budget: 15, avoid: [] },
-  { llm: createLlm(config.llm), vocabulary: priced, onStage: (s) => console.log(`  ✓ ${s}`) },
+  { llm: createLlm(config.llm), vocabulary: priced, on: new Date().toISOString().slice(0, 10), onStage: (s) => console.log(`  ✓ ${s}`) },
 );
 const money = (n: number) => `~$${n.toFixed(2)}`;
 for (const { card: c, pricing: p } of deal.cards) {

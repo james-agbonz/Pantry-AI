@@ -10,7 +10,7 @@ import { Button } from "@/components/Button";
 import { OptionRow } from "@/components/Choice";
 import { Screen } from "@/components/Screen";
 import { Num, T } from "@/components/Text";
-import { kcal, minutes, money, priceNote, protein, whole } from "@/format";
+import { kcal, minutes, money, priceNote, protein, storeNote, whole } from "@/format";
 import { shoppingList } from "@/meal/shopping";
 import { useLog } from "@/state/log";
 import { useProfile } from "@/state/profile";
@@ -41,7 +41,7 @@ export default function Meal() {
 
   const copy = async () => {
     try {
-      await Clipboard.setStringAsync(shoppingList(card, pricing));
+      await Clipboard.setStringAsync(shoppingList(card, pricing, stores));
       setCopied("yes");
     } catch {
       setCopied("failed");
@@ -49,6 +49,11 @@ export default function Meal() {
   };
 
   const needed = new Map(card.missing.map((m) => [m.group, m.qty]));
+  const stores = { name: pricer.storeName, isAverage: pricer.isAverage };
+  const where = (l: { store: string; sale_ends: string | null }) => {
+    const note = storeNote(l, stores);
+    return note ? ` · ${note}` : "";
+  };
   const targets = profile?.targets ?? null;
 
   return (
@@ -129,6 +134,7 @@ export default function Meal() {
                 <T variant="label">{b.item}</T>
                 <T variant="body-sm" tone="muted">
                   {b.unit} · need {needed.get(b.group)}
+                  {where(b)}
                   {b.role === "completes" ? " · completes it" : ""}
                 </T>
               </View>
@@ -151,6 +157,7 @@ export default function Meal() {
                   <T variant="label">{t.item}</T>
                   <T variant="body-sm" tone="muted">
                     {t.unit} · need {needed.get(t.group)}
+                    {where(t)}
                   </T>
                 </View>
                 <Num variant="num">{money(t.price)}</Num>
@@ -180,6 +187,7 @@ export default function Meal() {
         group={swapGroup}
         currentId={swapGroup ? (choices[swapGroup] ?? pricer.options(swapGroup)[0]?.id) : undefined}
         options={swapGroup ? pricer.options(swapGroup) : []}
+        where={where}
         onPick={(id) => {
           if (swapGroup) setChoices((c) => ({ ...c, [swapGroup]: id }));
           setSwapGroup(null);
@@ -206,7 +214,8 @@ function SwapSheet(props: {
   group: string | null;
   /** The item in use: the one picked here, else the cheapest (what pricing chose). */
   currentId: string | undefined;
-  options: { id: string; name: string; unit: string; price: number }[];
+  options: { id: string; name: string; unit: string; price: number; store: string; sale_ends: string | null }[];
+  where: (o: { store: string; sale_ends: string | null }) => string;
   onPick: (id: string) => void;
   onClose: () => void;
 }) {
@@ -219,7 +228,7 @@ function SwapSheet(props: {
           {props.options.map((o) => (
             <View key={o.id} style={styles.optionRow}>
               <View style={styles.grow}>
-                <OptionRow label={o.name} hint={`${o.unit} · ${money(o.price)}`} selected={o.id === props.currentId} onPress={() => props.onPick(o.id)} />
+                <OptionRow label={o.name} hint={`${o.unit} · ${money(o.price)}${props.where(o)}`} selected={o.id === props.currentId} onPress={() => props.onPick(o.id)} />
               </View>
             </View>
           ))}
