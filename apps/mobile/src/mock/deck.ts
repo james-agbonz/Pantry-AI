@@ -36,7 +36,7 @@ export const mockDeckSource = (getVocabulary: () => Vocabulary, buildMs = 900): 
 
     const sorted = sortDeck(priced, profile.targets);
     onStage?.("sorting");
-    return sorted;
+    return { cards: sorted };
   },
 });
 

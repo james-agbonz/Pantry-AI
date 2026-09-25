@@ -12,7 +12,26 @@ export interface DeckSource {
    * Priced cards in deck order (SPEC §10). `onStage` is called as each stage
    * of the pipeline finishes, so Loading can show real progress.
    */
-  deal(profile: Profile, session: Session, opts?: { size?: number; onStage?: (done: DealStage) => void }): Promise<PricedCard[]>;
+  deal(profile: Profile, session: Session, opts?: { size?: number; onStage?: (done: DealStage) => void }): Promise<Dealt>;
+}
+
+export interface Dealt {
+  cards: PricedCard[];
+  /** Decks left today, when the server says; the server's count is the one that holds. */
+  left?: number;
+}
+
+/**
+ * Why a deal was refused or failed. `server` and `no_cards` mean the server
+ * gave the deck back; `network` means the phone lost the connection, and the
+ * server may still have counted it.
+ */
+export type DealFailure = "daily_limit" | "rate_limit" | "busy" | "bad_request" | "bad_date" | "server" | "no_cards" | "network";
+
+export class DealError extends Error {
+  constructor(readonly reason: DealFailure) {
+    super(`deal failed: ${reason}`);
+  }
 }
 
 /**
@@ -46,5 +65,9 @@ export interface Pricer {
  * before use. Mock until `GET /api/prices` exists.
  */
 export interface PriceTableSource {
-  fetch(): Promise<unknown>;
+  /**
+   * The raw table, or `undefined` when the server says the one we have
+   * (`knownVersion`) is still current.
+   */
+  fetch(knownVersion?: string): Promise<unknown>;
 }

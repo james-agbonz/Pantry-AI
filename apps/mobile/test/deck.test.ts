@@ -158,7 +158,7 @@ describe("mock data", () => {
   });
 
   it("the mock deck is priced and sorted by the real modules: fits, then to complete, then over", async () => {
-    const deck = await mockDeckSource(() => vocabulary, 0).deal(profile, { ...session, budget: 12 });
+    const { cards: deck } = await mockDeckSource(() => vocabulary, 0).deal(profile, { ...session, budget: 12 });
     const rank = { fits: 0, complete: 1, over: 2 };
     const order = deck.map((p) => rank[badgeFor(p.pricing).status]);
     expect(order).toEqual([...order].sort());
@@ -174,8 +174,8 @@ describe("mock data", () => {
 
   it("a new deck avoids passed dishes", async () => {
     const src = mockDeckSource(() => vocabulary, 0);
-    const first = await src.deal(profile, session);
-    const second = await src.deal(profile, { ...session, avoid: first.map((p) => p.card.name) });
+    const { cards: first } = await src.deal(profile, session);
+    const { cards: second } = await src.deal(profile, { ...session, avoid: first.map((p) => p.card.name) });
     expect(first).toHaveLength(6);
     expect(second).toHaveLength(6);
     expect(second.map((p) => p.card.name).some((n) => first.map((p) => p.card.name).includes(n))).toBe(false);
