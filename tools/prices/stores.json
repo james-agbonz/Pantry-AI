@@ -1,0 +1,7 @@
+{
+  "_about": "Stores the price table knows. ca_typical is the national typical price (StatCan, and placeholders until a real price exists). Add a store here before entering its prices in manual-prices.csv.",
+  "stores": [
+    { "id": "ca_typical", "name": "Typical price, Canada", "kind": "average" },
+    { "id": "nofrills_lucianos_toronto", "name": "Luciano's No Frills", "kind": "store", "region": "Toronto" }
+  ]
+}

@@ -14,7 +14,12 @@ const Line = {
   item: z.string().min(1),
   /** Minimum sellable unit, e.g. "400g". The price is for the whole unit. */
   unit: z.string().min(1),
+  /** The price in effect on the day priced: the sale price while a sale runs. */
   price: Money,
+  /** Store id from the price table ("ca_typical" for a national typical price). */
+  store: z.string().min(1),
+  /** YYYY-MM-DD the sale price ends, when `price` is a sale price; else null. */
+  sale_ends: z.iso.date().nullable(),
 };
 
 export const Pricing = z.strictObject({

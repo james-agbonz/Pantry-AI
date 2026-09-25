@@ -37,18 +37,18 @@ interface Ranked {
 }
 
 /** Placeholder items in hand-entry order, each with why it sits there. */
-export function rankPlaceholders(v: Vocabulary): Ranked[] {
-  const placeholder = v.items.filter((i) => i.price_source === "placeholder");
-  const groupHasReal = (g: string, halal: boolean) => v.itemsFor(g, { halal }).some((i) => i.price_source !== "placeholder");
+export function rankPlaceholders(v: Vocabulary, on = "2000-01-01"): Ranked[] {
+  const placeholder = v.items.filter((i) => !v.hasRealPrice(i.id));
+  const groupHasReal = (g: string, halal: boolean) => v.itemsFor(g, { halal }).some((i) => v.hasRealPrice(i.id));
   // The item pricing would pick in each group: the one that clears "Sample prices" for that group.
   const unblocking = new Set(
-    v.groupList().filter((g) => !groupHasReal(g.group, false)).map((g) => itemOptions(v, g.group)[0]!.id),
+    v.groupList().filter((g) => !groupHasReal(g.group, false)).map((g) => itemOptions(v, g.group, on)[0]!.item),
   );
   const halalUnblocking = new Set(
     v
       .groupList({ halal: true })
       .filter((g) => !groupHasReal(g.group, true))
-      .map((g) => itemOptions(v, g.group, { halal: true })[0]!.id)
+      .map((g) => itemOptions(v, g.group, on, { halal: true })[0]!.item)
       .filter((id) => !unblocking.has(id)),
   );
   const pos = (list: string[], g: string) => (list.includes(g) ? list.indexOf(g) : list.length);
@@ -76,7 +76,7 @@ export function rankPlaceholders(v: Vocabulary): Ranked[] {
  */
 export function manualRows(v: Vocabulary, existing: readonly ManualRow[]): ManualRow[] {
   const kept = new Map(existing.map((r) => [r.item_id, r]));
-  const handPriced = v.items.filter((i) => i.price_source === "manual");
+  const handPriced = v.items.filter((i) => v.pricesFor(i.id).some((p) => p.source === "manual"));
   const ranked = [
     ...rankPlaceholders(v),
     // Already entered by hand: kept, at the end, so they can be updated next month.
@@ -90,7 +90,10 @@ export function manualRows(v: Vocabulary, existing: readonly ManualRow[]): Manua
       group: r.group,
       name: r.name,
       unit: r.unit,
+      store: old?.store ?? "",
       price: old?.price ?? "",
+      sale_price: old?.sale_price ?? "",
+      sale_ends: old?.sale_ends ?? "",
       source: old?.source ?? "",
       source_detail: old?.source_detail ?? "",
       date: old?.date ?? "",

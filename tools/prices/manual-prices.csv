@@ -1,134 +1,134 @@
-rank,item_id,group,name,unit,price,source,source_detail,date,why
-1,canola_oil_946ml,cooking_oil,Canola oil,946ml,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'cooking_oil', so every card using it says Sample prices"
-2,salt_1kg,salt,Table salt,1kg,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'salt', so every card using it says Sample prices"
-3,black_pepper_ground_100g,black_pepper,"Black pepper, ground",100g,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'black_pepper', so every card using it says Sample prices"
-4,garlic_bulb_each,garlic,Garlic,1 bulb,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'garlic', so every card using it says Sample prices"
-5,seasoning_all_purpose_250g,seasoning,"Seasoning blend, all-purpose",250g,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'seasoning', so every card using it says Sample prices"
-6,garlic_powder_100g,garlic_powder,Garlic powder,100g,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'garlic_powder', so every card using it says Sample prices"
-7,chili_powder_100g,chili_powder,Chili powder,100g,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'chili_powder', so every card using it says Sample prices"
-8,cumin_ground_60g,cumin,"Cumin, ground",60g,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'cumin', so every card using it says Sample prices"
-9,paprika_75g,paprika,Paprika,75g,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'paprika', so every card using it says Sample prices"
-10,italian_seasoning_30g,italian_seasoning,Italian seasoning,30g,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'italian_seasoning', so every card using it says Sample prices"
-11,curry_powder_80g,curry_powder,Curry powder,80g,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'curry_powder', so every card using it says Sample prices"
-12,soy_sauce_410ml,soy_sauce,Soy sauce,410ml,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'soy_sauce', so every card using it says Sample prices"
-13,chili_flakes_50g,chili_flakes,Crushed chili flakes,50g,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'chili_flakes', so every card using it says Sample prices"
-14,olive_oil_500ml,olive_oil,Olive oil,500ml,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'olive_oil', so every card using it says Sample prices"
-15,tomato_paste_156ml,tomato_paste,Tomato paste,156ml,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'tomato_paste', so every card using it says Sample prices"
-16,vegetable_bouillon_cubes_12,vegetable_broth,Vegetable bouillon cubes,12 cubes,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'vegetable_broth', so every card using it says Sample prices"
-17,chicken_bouillon_cubes_12,chicken_broth,Chicken bouillon cubes,12 cubes,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'chicken_broth', so every card using it says Sample prices"
-18,green_onion_bunch,green_onion,Green onions,bunch,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'green_onion', so every card using it says Sample prices"
-19,cinnamon_ground_75g,cinnamon,"Cinnamon, ground",75g,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'cinnamon', so every card using it says Sample prices"
-20,vinegar_white_1l,vinegar,White vinegar,1L,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'vinegar', so every card using it says Sample prices"
-21,hot_sauce_148ml,hot_sauce,Hot sauce,148ml,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'hot_sauce', so every card using it says Sample prices"
-22,mustard_yellow_400ml,mustard,Yellow mustard,400ml,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'mustard', so every card using it says Sample prices"
-23,beef_bouillon_cubes_12,beef_broth,Beef bouillon cubes,12 cubes,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'beef_broth', so every card using it says Sample prices"
-24,bbq_sauce_425ml,bbq_sauce,BBQ sauce,425ml,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'bbq_sauce', so every card using it says Sample prices"
-25,salsa_medium_650ml,salsa,"Salsa, medium",650ml,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'salsa', so every card using it says Sample prices"
-26,brown_sugar_1kg,brown_sugar,Brown sugar,1kg,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'brown_sugar', so every card using it says Sample prices"
-27,honey_500g,honey,Liquid honey,500g,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'honey', so every card using it says Sample prices"
-28,baking_powder_225g,baking_powder,Baking powder,225g,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'baking_powder', so every card using it says Sample prices"
-29,basa_frozen,white_fish,"Basa fillets, frozen",400g,,,,,Main protein with no real price in 'white_fish'
-30,ground_chicken_450g,ground_chicken,"Ground chicken, lean",450g,,,,,Main protein with no real price in 'ground_chicken'
-31,ground_turkey_450g,ground_turkey,"Ground turkey, lean",450g,,,,,Main protein with no real price in 'ground_turkey'
-32,tofu_extra_firm_454g,tofu,"Tofu, extra firm",454g,,,,,Main protein with no real price in 'tofu'
-33,cheddar_400g,cheese,"Cheddar, mild, block",400g,,,,,Main protein with no real price in 'cheese'
-34,chicken_breast_3pk,chicken_breast,"Chicken breasts, boneless skinless",3 pack,,,,,Main protein with no real price in 'chicken_breast'
-35,shrimp_cooked_frozen_340g,shrimp,"Cooked shrimp, frozen",340g,,,,,Main protein with no real price in 'shrimp'
-36,sardines_106g,sardines,"Sardines in oil, canned",106g,,,,,Main protein with no real price in 'sardines'
-37,ground_pork_454g,ground_pork,"Ground pork, lean",454g,,,,,Main protein with no real price in 'ground_pork'
-38,bacon_375g,bacon,"Bacon, sliced",375g,,,,,Main protein with no real price in 'bacon'
-39,pork_sausage_500g,pork_sausage,"Pork sausages, mild",500g,,,,,Main protein with no real price in 'pork_sausage'
-40,ground_lamb_454g,ground_lamb,Ground lamb,454g,,,,,Main protein with no real price in 'ground_lamb'
-41,deli_turkey_175g,deli_turkey,"Turkey breast, sliced",175g,,,,,Main protein with no real price in 'deli_turkey'
-42,ham_deli_175g,ham,"Ham, sliced",175g,,,,,Main protein with no real price in 'ham'
-43,fish_sticks_700g,fish_sticks,"Fish sticks, frozen",700g,,,,,Main protein with no real price in 'fish_sticks'
-44,beef_fast_fry_500g,beef_steak,Inside round fast-fry steak,about 500g,,,,,Main protein with no real price in 'beef_steak'
-45,peanuts_roasted_600g,peanuts,"Peanuts, dry roasted",600g,,,,,Main protein with no real price in 'peanuts'
-46,almonds_whole_400g,almonds,"Almonds, whole",400g,,,,,Main protein with no real price in 'almonds'
-47,mixed_nuts_unsalted_400g,mixed_nuts,"Mixed nuts, unsalted",400g,,,,,Main protein with no real price in 'mixed_nuts'
-48,almond_butter_365g,almond_butter,Almond butter,365g,,,,,Main protein with no real price in 'almond_butter'
-49,sunflower_seeds_shelled_200g,sunflower_seeds,"Sunflower seeds, shelled",200g,,,,,Main protein with no real price in 'sunflower_seeds'
-50,sour_cream_500ml,sour_cream,Sour cream,500ml,,,,,Main protein with no real price in 'sour_cream'
-51,parmesan_grated_250g,parmesan,"Parmesan, grated",250g,,,,,Main protein with no real price in 'parmesan'
-52,chicken_breast_halal_3pk,chicken_breast,"Chicken breasts, boneless skinless, halal",3 pack,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'chicken_breast'"
-53,chicken_bouillon_halal_200g,chicken_broth,"Chicken bouillon powder, halal",200g,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'chicken_broth'"
-54,chicken_drumsticks_halal_1kg,chicken_drumsticks,"Chicken drumsticks, halal",about 1 kg,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'chicken_drumsticks'"
-55,chicken_thighs_halal_1kg,chicken_thighs,"Chicken thighs, bone-in, halal",about 1 kg,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'chicken_thighs'"
-56,ground_beef_halal_454g,ground_beef,"Ground beef, lean, halal",454g,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'ground_beef'"
-57,ground_lamb_halal_454g,ground_lamb,"Ground lamb, halal",454g,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'ground_lamb'"
-58,stewing_beef_halal_600g,stewing_beef,"Stewing beef, halal",about 600g,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'stewing_beef'"
-59,chicken_whole_halal_1_8kg,whole_chicken,"Whole chicken, halal",about 1.8 kg,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'whole_chicken'"
-60,macaroni_900g,pasta,Elbow macaroni,900g,,,,,No real price in 'pasta' yet
-61,carrots_2lb,carrot,Carrots,2 lb bag,,,,,No real price in 'carrot' yet
-62,cabbage_green_each,cabbage,Green cabbage,each,,,,,No real price in 'cabbage' yet
-63,pepper_green_each,bell_pepper,Green bell pepper,each,,,,,No real price in 'bell_pepper' yet
-64,tomato_roma_each,tomato,Roma tomato,each,,,,,No real price in 'tomato' yet
-65,oats_large_flake_1kg,oats,Large flake oats,1kg,,,,,No real price in 'oats' yet
-66,tortillas_flour_10pk,tortillas,"Flour tortillas, 10 inch",10 pack,,,,,No real price in 'tortillas' yet
-67,egg_noodles_375g,egg_noodles,"Egg noodles, broad",375g,,,,,No real price in 'egg_noodles' yet
-68,ramen_5pk,instant_noodles,Instant ramen,5 pack,,,,,No real price in 'instant_noodles' yet
-69,rice_vermicelli_400g,rice_noodles,Rice vermicelli,400g,,,,,No real price in 'rice_noodles' yet
-70,orange_each,orange,Orange,each,,,,,No real price in 'orange' yet
-71,zucchini_each,zucchini,Zucchini,each,,,,,No real price in 'zucchini' yet
-72,pita_6pk,pita,Pita bread,6 pack,,,,,No real price in 'pita' yet
-73,couscous_500g,couscous,Couscous,500g,,,,,No real price in 'couscous' yet
-74,cornmeal_1kg,cornmeal,"Cornmeal, yellow",1kg,,,,,No real price in 'cornmeal' yet
-75,barley_pearl_900g,barley,Pearl barley,900g,,,,,No real price in 'barley' yet
-76,buns_hamburger_8pk,buns,Hamburger buns,8 pack,,,,,No real price in 'buns' yet
-77,bagels_6pk,bagels,"Bagels, plain",6 pack,,,,,No real price in 'bagels' yet
-78,crackers_saltine_450g,crackers,Saltine crackers,450g,,,,,No real price in 'crackers' yet
-79,coconut_milk_400ml,coconut_milk,"Coconut milk, canned",400ml,,,,,No real price in 'coconut_milk' yet
-80,berries_mixed_frozen_600g,frozen_berries,"Mixed berries, frozen",600g,,,,,No real price in 'frozen_berries' yet
-81,raisins_750g,raisins,Raisins,750g,,,,,No real price in 'raisins' yet
-82,apple_3lb,apple,Apples,3 lb bag,,,,,No real price in 'apple' yet
-83,sweet_potato_3lb,sweet_potato,Sweet potatoes,3 lb bag,,,,,No real price in 'sweet_potato' yet
-84,apple_each,apple,Apple,each,,,,,Alternative: 'apple' already has a real price or an earlier row; only changes swap options
-85,banana_each,banana,Banana,each,,,,,Alternative: 'banana' already has a real price or an earlier row; only changes swap options
-86,beef_broth_900ml,beef_broth,"Beef broth, carton",900ml,,,,,Alternative: 'beef_broth' already has a real price or an earlier row; only changes swap options
-87,pepper_red_each,bell_pepper,Red bell pepper,each,,,,,Alternative: 'bell_pepper' already has a real price or an earlier row; only changes swap options
-88,bread_ww_675g,bread,"Whole wheat bread, sliced",675g,,,,,Alternative: 'bread' already has a real price or an earlier row; only changes swap options
-89,rice_brown_2kg,brown_rice,Brown rice,2kg,,,,,Alternative: 'brown_rice' already has a real price or an earlier row; only changes swap options
-90,buns_hotdog_8pk,buns,Hot dog buns,8 pack,,,,,Alternative: 'buns' already has a real price or an earlier row; only changes swap options
-91,fruit_cocktail_398ml,canned_fruit,"Fruit cocktail, canned",398ml,,,,,Alternative: 'canned_fruit' already has a real price or an earlier row; only changes swap options
-92,carrots_5lb,carrot,Carrots,5 lb bag,,,,,Alternative: 'carrot' already has a real price or an earlier row; only changes swap options
-93,cheese_slices_24,cheese,Processed cheese slices,24 slices,,,,,Alternative: 'cheese' already has a real price or an earlier row; only changes swap options
-94,mozzarella_400g,cheese,"Mozzarella, block",400g,,,,,Alternative: 'cheese' already has a real price or an earlier row; only changes swap options
-95,chicken_broth_900ml,chicken_broth,"Chicken broth, carton",900ml,,,,,Alternative: 'chicken_broth' already has a real price or an earlier row; only changes swap options
-96,chicken_thighs_boneless_700g,chicken_thighs,"Chicken thighs, boneless skinless",about 700g,,,,,Alternative: 'chicken_thighs' already has a real price or an earlier row; only changes swap options
-97,vegetable_oil_1_42l,cooking_oil,Vegetable oil,1.42L,,,,,Alternative: 'cooking_oil' already has a real price or an earlier row; only changes swap options
-98,corn_cob_each,corn,Corn on the cob,each,,,,,Alternative: 'corn' already has a real price or an earlier row; only changes swap options
-99,eggs_large_18,eggs,"Eggs, large",18 pack,,,,,Alternative: 'eggs' already has a real price or an earlier row; only changes swap options
-100,eggs_large_30,eggs,"Eggs, large",30 pack,,,,,Alternative: 'eggs' already has a real price or an earlier row; only changes swap options
-101,frozen_peas_carrots_750g,frozen_veg,"Peas and carrots, frozen",750g,,,,,Alternative: 'frozen_veg' already has a real price or an earlier row; only changes swap options
-102,frozen_stir_fry_750g,frozen_veg,"Stir-fry vegetables, frozen",750g,,,,,Alternative: 'frozen_veg' already has a real price or an earlier row; only changes swap options
-103,garlic_3pk,garlic,Garlic,3 bulbs,,,,,Alternative: 'garlic' already has a real price or an earlier row; only changes swap options
-104,garlic_minced_250ml,garlic,"Minced garlic, jar",250ml,,,,,Alternative: 'garlic' already has a real price or an earlier row; only changes swap options
-105,ground_beef_extra_lean_454g,ground_beef,"Ground beef, extra lean",454g,,,,,Alternative: 'ground_beef' already has a real price or an earlier row; only changes swap options
-106,ramen_single_85g,instant_noodles,"Instant ramen, single",85g,,,,,Alternative: 'instant_noodles' already has a real price or an earlier row; only changes swap options
-107,lemon_juice_300ml,lemon,"Lemon juice, bottled",300ml,,,,,Alternative: 'lemon' already has a real price or an earlier row; only changes swap options
-108,lettuce_romaine_3pk,lettuce,Romaine hearts,3 pack,,,,,Alternative: 'lettuce' already has a real price or an earlier row; only changes swap options
-109,oats_quick_1kg,oats,Quick oats,1kg,,,,,Alternative: 'oats' already has a real price or an earlier row; only changes swap options
-110,onion_red_each,onion,Red onion,each,,,,,Alternative: 'onion' already has a real price or an earlier row; only changes swap options
-111,onion_yellow_each,onion,Yellow onion,each,,,,,Alternative: 'onion' already has a real price or an earlier row; only changes swap options
-112,penne_900g,pasta,Penne,900g,,,,,Alternative: 'pasta' already has a real price or an earlier row; only changes swap options
-113,spaghetti_900g,pasta,Spaghetti,900g,,,,,Alternative: 'pasta' already has a real price or an earlier row; only changes swap options
-114,spaghetti_ww_900g,pasta,Whole wheat spaghetti,900g,,,,,Alternative: 'pasta' already has a real price or an earlier row; only changes swap options
-115,peanut_butter_natural_500g,peanut_butter,"Peanut butter, natural",500g,,,,,Alternative: 'peanut_butter' already has a real price or an earlier row; only changes swap options
-116,potato_russet_5lb,potato,Russet potatoes,5 lb bag,,,,,Alternative: 'potato' already has a real price or an earlier row; only changes swap options
-117,potato_russet_each,potato,Russet potato,each,,,,,Alternative: 'potato' already has a real price or an earlier row; only changes swap options
-118,potato_yellow_5lb,potato,Yellow potatoes,5 lb bag,,,,,Alternative: 'potato' already has a real price or an earlier row; only changes swap options
-119,rice_jasmine_2kg,rice,Jasmine rice,2kg,,,,,Alternative: 'rice' already has a real price or an earlier row; only changes swap options
-120,rice_parboiled_900g,rice,Parboiled rice,900g,,,,,Alternative: 'rice' already has a real price or an earlier row; only changes swap options
-121,rice_white_900g,rice,"White rice, long grain",900g,,,,,Alternative: 'rice' already has a real price or an earlier row; only changes swap options
-122,salmon_pink_frozen_454g,salmon,"Pink salmon fillets, frozen",454g,,,,,Alternative: 'salmon' already has a real price or an earlier row; only changes swap options
-123,seasoning_salt_300g,seasoning,Seasoned salt,300g,,,,,Alternative: 'seasoning' already has a real price or an earlier row; only changes swap options
-124,shrimp_raw_frozen_340g,shrimp,"Raw shrimp, frozen",340g,,,,,Alternative: 'shrimp' already has a real price or an earlier row; only changes swap options
-125,soy_sauce_1l,soy_sauce,Soy sauce,1L,,,,,Alternative: 'soy_sauce' already has a real price or an earlier row; only changes swap options
-126,sweet_potato_each,sweet_potato,Sweet potato,each,,,,,Alternative: 'sweet_potato' already has a real price or an earlier row; only changes swap options
-127,tofu_firm_454g,tofu,"Tofu, firm",454g,,,,,Alternative: 'tofu' already has a real price or an earlier row; only changes swap options
-128,tomato_vine_each,tomato,Tomato on the vine,each,,,,,Alternative: 'tomato' already has a real price or an earlier row; only changes swap options
-129,tortillas_ww_10pk,tortillas,"Whole wheat tortillas, 10 inch",10 pack,,,,,Alternative: 'tortillas' already has a real price or an earlier row; only changes swap options
-130,vegetable_broth_900ml,vegetable_broth,"Vegetable broth, carton",900ml,,,,,Alternative: 'vegetable_broth' already has a real price or an earlier row; only changes swap options
-131,pollock_frozen_454g,white_fish,"Pollock fillets, frozen",454g,,,,,Alternative: 'white_fish' already has a real price or an earlier row; only changes swap options
-132,tilapia_frozen_454g,white_fish,"Tilapia fillets, frozen",454g,,,,,Alternative: 'white_fish' already has a real price or an earlier row; only changes swap options
-133,yogurt_plain_650g,yogurt,Plain yogurt,650g,,,,,Alternative: 'yogurt' already has a real price or an earlier row; only changes swap options
+rank,item_id,group,name,unit,store,price,sale_price,sale_ends,source,source_detail,date,why
+1,canola_oil_946ml,cooking_oil,Canola oil,946ml,nofrills_lucianos_toronto,4.29,,,"Luciano's No Frills, Toronto",No Name canola oil 946 ml,2026-09-25,"Seasoning, oil or garlic on most dishes; no real price in 'cooking_oil', so every card using it says Sample prices"
+2,salt_1kg,salt,Table salt,1kg,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'salt', so every card using it says Sample prices"
+3,black_pepper_ground_100g,black_pepper,"Black pepper, ground",100g,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'black_pepper', so every card using it says Sample prices"
+4,garlic_bulb_each,garlic,Garlic,1 bulb,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'garlic', so every card using it says Sample prices"
+5,seasoning_all_purpose_250g,seasoning,"Seasoning blend, all-purpose",250g,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'seasoning', so every card using it says Sample prices"
+6,garlic_powder_100g,garlic_powder,Garlic powder,100g,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'garlic_powder', so every card using it says Sample prices"
+7,chili_powder_100g,chili_powder,Chili powder,100g,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'chili_powder', so every card using it says Sample prices"
+8,cumin_ground_60g,cumin,"Cumin, ground",60g,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'cumin', so every card using it says Sample prices"
+9,paprika_75g,paprika,Paprika,75g,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'paprika', so every card using it says Sample prices"
+10,italian_seasoning_30g,italian_seasoning,Italian seasoning,30g,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'italian_seasoning', so every card using it says Sample prices"
+11,curry_powder_80g,curry_powder,Curry powder,80g,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'curry_powder', so every card using it says Sample prices"
+12,soy_sauce_410ml,soy_sauce,Soy sauce,410ml,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'soy_sauce', so every card using it says Sample prices"
+13,chili_flakes_50g,chili_flakes,Crushed chili flakes,50g,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'chili_flakes', so every card using it says Sample prices"
+14,olive_oil_500ml,olive_oil,Olive oil,500ml,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'olive_oil', so every card using it says Sample prices"
+15,tomato_paste_156ml,tomato_paste,Tomato paste,156ml,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'tomato_paste', so every card using it says Sample prices"
+16,vegetable_bouillon_cubes_12,vegetable_broth,Vegetable bouillon cubes,12 cubes,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'vegetable_broth', so every card using it says Sample prices"
+17,chicken_bouillon_cubes_12,chicken_broth,Chicken bouillon cubes,12 cubes,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'chicken_broth', so every card using it says Sample prices"
+18,green_onion_bunch,green_onion,Green onions,bunch,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'green_onion', so every card using it says Sample prices"
+19,cinnamon_ground_75g,cinnamon,"Cinnamon, ground",75g,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'cinnamon', so every card using it says Sample prices"
+20,vinegar_white_1l,vinegar,White vinegar,1L,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'vinegar', so every card using it says Sample prices"
+21,hot_sauce_148ml,hot_sauce,Hot sauce,148ml,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'hot_sauce', so every card using it says Sample prices"
+22,mustard_yellow_400ml,mustard,Yellow mustard,400ml,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'mustard', so every card using it says Sample prices"
+23,beef_bouillon_cubes_12,beef_broth,Beef bouillon cubes,12 cubes,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'beef_broth', so every card using it says Sample prices"
+24,bbq_sauce_425ml,bbq_sauce,BBQ sauce,425ml,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'bbq_sauce', so every card using it says Sample prices"
+25,salsa_medium_650ml,salsa,"Salsa, medium",650ml,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'salsa', so every card using it says Sample prices"
+26,brown_sugar_1kg,brown_sugar,Brown sugar,1kg,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'brown_sugar', so every card using it says Sample prices"
+27,honey_500g,honey,Liquid honey,500g,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'honey', so every card using it says Sample prices"
+28,baking_powder_225g,baking_powder,Baking powder,225g,,,,,,,,"Seasoning, oil or garlic on most dishes; no real price in 'baking_powder', so every card using it says Sample prices"
+29,basa_frozen,white_fish,"Basa fillets, frozen",400g,,,,,,,,Main protein with no real price in 'white_fish'
+30,ground_chicken_450g,ground_chicken,"Ground chicken, lean",450g,,,,,,,,Main protein with no real price in 'ground_chicken'
+31,ground_turkey_450g,ground_turkey,"Ground turkey, lean",450g,,,,,,,,Main protein with no real price in 'ground_turkey'
+32,tofu_extra_firm_454g,tofu,"Tofu, extra firm",454g,,,,,,,,Main protein with no real price in 'tofu'
+33,cheddar_400g,cheese,"Cheddar, mild, block",400g,,,,,,,,Main protein with no real price in 'cheese'
+34,chicken_breast_3pk,chicken_breast,"Chicken breasts, boneless skinless",3 pack,,,,,,,,Main protein with no real price in 'chicken_breast'
+35,shrimp_cooked_frozen_340g,shrimp,"Cooked shrimp, frozen",340g,,,,,,,,Main protein with no real price in 'shrimp'
+36,sardines_106g,sardines,"Sardines in oil, canned",106g,,,,,,,,Main protein with no real price in 'sardines'
+37,ground_pork_454g,ground_pork,"Ground pork, lean",454g,,,,,,,,Main protein with no real price in 'ground_pork'
+38,bacon_375g,bacon,"Bacon, sliced",375g,,,,,,,,Main protein with no real price in 'bacon'
+39,pork_sausage_500g,pork_sausage,"Pork sausages, mild",500g,,,,,,,,Main protein with no real price in 'pork_sausage'
+40,ground_lamb_454g,ground_lamb,Ground lamb,454g,,,,,,,,Main protein with no real price in 'ground_lamb'
+41,deli_turkey_175g,deli_turkey,"Turkey breast, sliced",175g,,,,,,,,Main protein with no real price in 'deli_turkey'
+42,ham_deli_175g,ham,"Ham, sliced",175g,,,,,,,,Main protein with no real price in 'ham'
+43,fish_sticks_700g,fish_sticks,"Fish sticks, frozen",700g,,,,,,,,Main protein with no real price in 'fish_sticks'
+44,beef_fast_fry_500g,beef_steak,Inside round fast-fry steak,about 500g,,,,,,,,Main protein with no real price in 'beef_steak'
+45,peanuts_roasted_600g,peanuts,"Peanuts, dry roasted",600g,,,,,,,,Main protein with no real price in 'peanuts'
+46,almonds_whole_400g,almonds,"Almonds, whole",400g,,,,,,,,Main protein with no real price in 'almonds'
+47,mixed_nuts_unsalted_400g,mixed_nuts,"Mixed nuts, unsalted",400g,,,,,,,,Main protein with no real price in 'mixed_nuts'
+48,almond_butter_365g,almond_butter,Almond butter,365g,,,,,,,,Main protein with no real price in 'almond_butter'
+49,sunflower_seeds_shelled_200g,sunflower_seeds,"Sunflower seeds, shelled",200g,,,,,,,,Main protein with no real price in 'sunflower_seeds'
+50,sour_cream_500ml,sour_cream,Sour cream,500ml,,,,,,,,Main protein with no real price in 'sour_cream'
+51,parmesan_grated_250g,parmesan,"Parmesan, grated",250g,,,,,,,,Main protein with no real price in 'parmesan'
+52,chicken_breast_halal_3pk,chicken_breast,"Chicken breasts, boneless skinless, halal",3 pack,,,,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'chicken_breast'"
+53,chicken_bouillon_halal_200g,chicken_broth,"Chicken bouillon powder, halal",200g,,,,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'chicken_broth'"
+54,chicken_drumsticks_halal_1kg,chicken_drumsticks,"Chicken drumsticks, halal",about 1 kg,,,,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'chicken_drumsticks'"
+55,chicken_thighs_halal_1kg,chicken_thighs,"Chicken thighs, bone-in, halal",about 1 kg,,,,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'chicken_thighs'"
+56,ground_beef_halal_454g,ground_beef,"Ground beef, lean, halal",454g,,,,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'ground_beef'"
+57,ground_lamb_halal_454g,ground_lamb,"Ground lamb, halal",454g,,,,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'ground_lamb'"
+58,stewing_beef_halal_600g,stewing_beef,"Stewing beef, halal",about 600g,,,,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'stewing_beef'"
+59,chicken_whole_halal_1_8kg,whole_chicken,"Whole chicken, halal",about 1.8 kg,,,,,,,,"Halal: StatCan has only the regular product, so halal users see Sample prices for 'whole_chicken'"
+60,macaroni_900g,pasta,Elbow macaroni,900g,,,,,,,,No real price in 'pasta' yet
+61,carrots_2lb,carrot,Carrots,2 lb bag,,,,,,,,No real price in 'carrot' yet
+62,cabbage_green_each,cabbage,Green cabbage,each,,,,,,,,No real price in 'cabbage' yet
+63,pepper_green_each,bell_pepper,Green bell pepper,each,,,,,,,,No real price in 'bell_pepper' yet
+64,tomato_roma_each,tomato,Roma tomato,each,,,,,,,,No real price in 'tomato' yet
+65,oats_large_flake_1kg,oats,Large flake oats,1kg,,,,,,,,No real price in 'oats' yet
+66,tortillas_flour_10pk,tortillas,"Flour tortillas, 10 inch",10 pack,,,,,,,,No real price in 'tortillas' yet
+67,egg_noodles_375g,egg_noodles,"Egg noodles, broad",375g,,,,,,,,No real price in 'egg_noodles' yet
+68,ramen_5pk,instant_noodles,Instant ramen,5 pack,,,,,,,,No real price in 'instant_noodles' yet
+69,rice_vermicelli_400g,rice_noodles,Rice vermicelli,400g,,,,,,,,No real price in 'rice_noodles' yet
+70,orange_each,orange,Orange,each,,,,,,,,No real price in 'orange' yet
+71,zucchini_each,zucchini,Zucchini,each,,,,,,,,No real price in 'zucchini' yet
+72,pita_6pk,pita,Pita bread,6 pack,,,,,,,,No real price in 'pita' yet
+73,couscous_500g,couscous,Couscous,500g,,,,,,,,No real price in 'couscous' yet
+74,cornmeal_1kg,cornmeal,"Cornmeal, yellow",1kg,,,,,,,,No real price in 'cornmeal' yet
+75,barley_pearl_900g,barley,Pearl barley,900g,,,,,,,,No real price in 'barley' yet
+76,buns_hamburger_8pk,buns,Hamburger buns,8 pack,,,,,,,,No real price in 'buns' yet
+77,bagels_6pk,bagels,"Bagels, plain",6 pack,,,,,,,,No real price in 'bagels' yet
+78,crackers_saltine_450g,crackers,Saltine crackers,450g,,,,,,,,No real price in 'crackers' yet
+79,coconut_milk_400ml,coconut_milk,"Coconut milk, canned",400ml,,,,,,,,No real price in 'coconut_milk' yet
+80,berries_mixed_frozen_600g,frozen_berries,"Mixed berries, frozen",600g,,,,,,,,No real price in 'frozen_berries' yet
+81,raisins_750g,raisins,Raisins,750g,,,,,,,,No real price in 'raisins' yet
+82,apple_3lb,apple,Apples,3 lb bag,,,,,,,,No real price in 'apple' yet
+83,sweet_potato_3lb,sweet_potato,Sweet potatoes,3 lb bag,,,,,,,,No real price in 'sweet_potato' yet
+84,apple_each,apple,Apple,each,,,,,,,,Alternative: 'apple' already has a real price or an earlier row; only changes swap options
+85,banana_each,banana,Banana,each,,,,,,,,Alternative: 'banana' already has a real price or an earlier row; only changes swap options
+86,beef_broth_900ml,beef_broth,"Beef broth, carton",900ml,,,,,,,,Alternative: 'beef_broth' already has a real price or an earlier row; only changes swap options
+87,pepper_red_each,bell_pepper,Red bell pepper,each,,,,,,,,Alternative: 'bell_pepper' already has a real price or an earlier row; only changes swap options
+88,bread_ww_675g,bread,"Whole wheat bread, sliced",675g,,,,,,,,Alternative: 'bread' already has a real price or an earlier row; only changes swap options
+89,rice_brown_2kg,brown_rice,Brown rice,2kg,,,,,,,,Alternative: 'brown_rice' already has a real price or an earlier row; only changes swap options
+90,buns_hotdog_8pk,buns,Hot dog buns,8 pack,,,,,,,,Alternative: 'buns' already has a real price or an earlier row; only changes swap options
+91,fruit_cocktail_398ml,canned_fruit,"Fruit cocktail, canned",398ml,,,,,,,,Alternative: 'canned_fruit' already has a real price or an earlier row; only changes swap options
+92,carrots_5lb,carrot,Carrots,5 lb bag,,,,,,,,Alternative: 'carrot' already has a real price or an earlier row; only changes swap options
+93,cheese_slices_24,cheese,Processed cheese slices,24 slices,,,,,,,,Alternative: 'cheese' already has a real price or an earlier row; only changes swap options
+94,mozzarella_400g,cheese,"Mozzarella, block",400g,,,,,,,,Alternative: 'cheese' already has a real price or an earlier row; only changes swap options
+95,chicken_broth_900ml,chicken_broth,"Chicken broth, carton",900ml,,,,,,,,Alternative: 'chicken_broth' already has a real price or an earlier row; only changes swap options
+96,chicken_thighs_boneless_700g,chicken_thighs,"Chicken thighs, boneless skinless",about 700g,,,,,,,,Alternative: 'chicken_thighs' already has a real price or an earlier row; only changes swap options
+97,vegetable_oil_1_42l,cooking_oil,Vegetable oil,1.42L,,,,,,,,Alternative: 'cooking_oil' already has a real price or an earlier row; only changes swap options
+98,corn_cob_each,corn,Corn on the cob,each,,,,,,,,Alternative: 'corn' already has a real price or an earlier row; only changes swap options
+99,eggs_large_18,eggs,"Eggs, large",18 pack,,,,,,,,Alternative: 'eggs' already has a real price or an earlier row; only changes swap options
+100,eggs_large_30,eggs,"Eggs, large",30 pack,,,,,,,,Alternative: 'eggs' already has a real price or an earlier row; only changes swap options
+101,frozen_peas_carrots_750g,frozen_veg,"Peas and carrots, frozen",750g,,,,,,,,Alternative: 'frozen_veg' already has a real price or an earlier row; only changes swap options
+102,frozen_stir_fry_750g,frozen_veg,"Stir-fry vegetables, frozen",750g,,,,,,,,Alternative: 'frozen_veg' already has a real price or an earlier row; only changes swap options
+103,garlic_3pk,garlic,Garlic,3 bulbs,,,,,,,,Alternative: 'garlic' already has a real price or an earlier row; only changes swap options
+104,garlic_minced_250ml,garlic,"Minced garlic, jar",250ml,,,,,,,,Alternative: 'garlic' already has a real price or an earlier row; only changes swap options
+105,ground_beef_extra_lean_454g,ground_beef,"Ground beef, extra lean",454g,,,,,,,,Alternative: 'ground_beef' already has a real price or an earlier row; only changes swap options
+106,ramen_single_85g,instant_noodles,"Instant ramen, single",85g,,,,,,,,Alternative: 'instant_noodles' already has a real price or an earlier row; only changes swap options
+107,lemon_juice_300ml,lemon,"Lemon juice, bottled",300ml,,,,,,,,Alternative: 'lemon' already has a real price or an earlier row; only changes swap options
+108,lettuce_romaine_3pk,lettuce,Romaine hearts,3 pack,,,,,,,,Alternative: 'lettuce' already has a real price or an earlier row; only changes swap options
+109,oats_quick_1kg,oats,Quick oats,1kg,,,,,,,,Alternative: 'oats' already has a real price or an earlier row; only changes swap options
+110,onion_red_each,onion,Red onion,each,,,,,,,,Alternative: 'onion' already has a real price or an earlier row; only changes swap options
+111,onion_yellow_each,onion,Yellow onion,each,,,,,,,,Alternative: 'onion' already has a real price or an earlier row; only changes swap options
+112,penne_900g,pasta,Penne,900g,,,,,,,,Alternative: 'pasta' already has a real price or an earlier row; only changes swap options
+113,spaghetti_900g,pasta,Spaghetti,900g,,,,,,,,Alternative: 'pasta' already has a real price or an earlier row; only changes swap options
+114,spaghetti_ww_900g,pasta,Whole wheat spaghetti,900g,,,,,,,,Alternative: 'pasta' already has a real price or an earlier row; only changes swap options
+115,peanut_butter_natural_500g,peanut_butter,"Peanut butter, natural",500g,,,,,,,,Alternative: 'peanut_butter' already has a real price or an earlier row; only changes swap options
+116,potato_russet_5lb,potato,Russet potatoes,5 lb bag,,,,,,,,Alternative: 'potato' already has a real price or an earlier row; only changes swap options
+117,potato_russet_each,potato,Russet potato,each,,,,,,,,Alternative: 'potato' already has a real price or an earlier row; only changes swap options
+118,potato_yellow_5lb,potato,Yellow potatoes,5 lb bag,,,,,,,,Alternative: 'potato' already has a real price or an earlier row; only changes swap options
+119,rice_jasmine_2kg,rice,Jasmine rice,2kg,,,,,,,,Alternative: 'rice' already has a real price or an earlier row; only changes swap options
+120,rice_parboiled_900g,rice,Parboiled rice,900g,,,,,,,,Alternative: 'rice' already has a real price or an earlier row; only changes swap options
+121,rice_white_900g,rice,"White rice, long grain",900g,,,,,,,,Alternative: 'rice' already has a real price or an earlier row; only changes swap options
+122,salmon_pink_frozen_454g,salmon,"Pink salmon fillets, frozen",454g,,,,,,,,Alternative: 'salmon' already has a real price or an earlier row; only changes swap options
+123,seasoning_salt_300g,seasoning,Seasoned salt,300g,,,,,,,,Alternative: 'seasoning' already has a real price or an earlier row; only changes swap options
+124,shrimp_raw_frozen_340g,shrimp,"Raw shrimp, frozen",340g,,,,,,,,Alternative: 'shrimp' already has a real price or an earlier row; only changes swap options
+125,soy_sauce_1l,soy_sauce,Soy sauce,1L,,,,,,,,Alternative: 'soy_sauce' already has a real price or an earlier row; only changes swap options
+126,sweet_potato_each,sweet_potato,Sweet potato,each,,,,,,,,Alternative: 'sweet_potato' already has a real price or an earlier row; only changes swap options
+127,tofu_firm_454g,tofu,"Tofu, firm",454g,,,,,,,,Alternative: 'tofu' already has a real price or an earlier row; only changes swap options
+128,tomato_vine_each,tomato,Tomato on the vine,each,,,,,,,,Alternative: 'tomato' already has a real price or an earlier row; only changes swap options
+129,tortillas_ww_10pk,tortillas,"Whole wheat tortillas, 10 inch",10 pack,,,,,,,,Alternative: 'tortillas' already has a real price or an earlier row; only changes swap options
+130,vegetable_broth_900ml,vegetable_broth,"Vegetable broth, carton",900ml,,,,,,,,Alternative: 'vegetable_broth' already has a real price or an earlier row; only changes swap options
+131,pollock_frozen_454g,white_fish,"Pollock fillets, frozen",454g,,,,,,,,Alternative: 'white_fish' already has a real price or an earlier row; only changes swap options
+132,tilapia_frozen_454g,white_fish,"Tilapia fillets, frozen",454g,,,,,,,,Alternative: 'white_fish' already has a real price or an earlier row; only changes swap options
+133,yogurt_plain_650g,yogurt,Plain yogurt,650g,,,,,,,,Alternative: 'yogurt' already has a real price or an earlier row; only changes swap options

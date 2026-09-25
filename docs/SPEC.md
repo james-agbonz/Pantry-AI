@@ -94,9 +94,15 @@ Three levels: **family** (fish) → **group** (white fish) → **item** (basa fi
 { "id": "white_fish", "family": "fish", "label": "White fish", "contains": ["fish"] }
 
 { "id": "basa_frozen", "family": "fish", "group": "white_fish",
-  "name": "Basa fillets, frozen", "unit": "400g",
-  "price": null, "price_source": "placeholder", "updated": null }
+  "name": "Basa fillets, frozen", "unit": "400g" }
+
+{ "item": "basa_frozen", "store": "nofrills_lucianos_toronto",
+  "regular": 6.99, "sale": { "price": 4.99, "ends": "2026-10-05" },
+  "source": "manual", "updated": "2026-09-25" }
 ```
+
+- **Prices are separate from items.** Each price is one item at one **store**, with a regular price and an optional sale price that applies up to and including its end date. `ca_typical` is the national typical price (Statistics Canada, and placeholders); other stores are real stores. An item can have a price at several stores and must have at least one.
+- **Sources:** `placeholder` (invented, never called typical), `statcan`, `manual` (hand-entered from a store, its record kept in `tools/prices/manual-prices.csv`), `store` (a store's own adapter, later).
 
 - The engine asks for **groups**. It names a specific item only when the dish truly needs it (a salmon dish asks for `salmon`).
 - Pricing resolves each group to its **cheapest item this month**.
@@ -267,11 +273,31 @@ Backend endpoints (suggested): `POST /api/deck` runs constraint builder → engi
 
 Prices and items change monthly; groups never do. So the price table is versioned data, separate from the app:
 
-- **One table, versioned by publish date.** `{ "version": "2026-09-25", "items": [...] }`: every item with its price and source. The version is the day the table was published (`YYYY-MM-DD`), so a later table always compares as newer. The placeholder table is `2026-09-01`. Every item must have a price; a table that doesn't fit the groups is refused, naming the problem.
+- **One table, versioned by publish date.** `{ "schema": 2, "version": "2026-09-25", "stores": [...], "items": [...], "prices": [...] }` (§6). The version is the day the table was published (`YYYY-MM-DD`), so a later table always compares as newer. The placeholder table is `2026-09-01`. Every item must have a price; a table that doesn't fit the groups is refused, naming the problem.
 - **The app fetches it** from the backend (`GET /api/prices`, suggested) and caches the last good copy. A copy is bundled with the app as the fallback. Order of preference: a freshly fetched table that checks out; else the cached one if it's at least as new as the bundled one; else the bundled one. A monthly refresh reaches phones without an app release.
-- **One pricing module** (`@pantry/pricing`) runs on the server for decks and on the phone for swaps, over whichever table is in use.
+- **One pricing module** (`@pantry/pricing`) runs on the server for decks and on the phone for swaps, over whichever table is in use. It prices on a given day (the phone's local date), so a sale stops applying the day after it ends, even from a cached table. A real price at any store beats a placeholder; otherwise the cheapest price on the day wins, and each line names its store.
+- **Price sources are adapters** (`tools/prices`): StatCan, the manual CSV, later one per store (official APIs, feeds or licensed data only; never around bot detection), chosen by `PRICE_SOURCES` like `LLM_PROVIDER`. The monthly import merges them and refuses two prices for one item at one store.
+- **Where the table lives:** the Worker serves the table bundled with it, so a monthly refresh is a data commit and a backend redeploy, and no app release.
 
-`/api/deck` reports each stage as it finishes (`reading` → `building` → `pricing` → `sorting`), for example as streamed lines, so Loading ticks with the real work and never on a timer.
+### API (Cloudflare Worker)
+
+- **`POST /api/deck`** — body `{ profile, session, local_date }`, header `X-Pantry-Device`. Streams one JSON line per stage as it finishes (`reading` → `building` → `pricing` → `sorting`), then `{ "deck": [...], "left": 2 }`, so Loading ticks with the real work, never on a timer. Refusals are `429 {"error": "daily_limit" | "rate_limit"}`, `503 {"error": "busy"}`, `400` for a bad request or date; a failure after streaming starts is an `{"error": "server" | "no_cards"}` line.
+- **`GET /api/prices`** — the current price table; its version is the ETag, so an unchanged table is a `304`.
+- **`GET /api/health`**.
+
+**Limits, on the server** (the phone's count is only for display):
+
+| Limit | Default | Why |
+|---|---|---|
+| Decks per device per day | 3 | §14. The device is an anonymous random ID made on first launch |
+| Decks per IP per minute | 5 | Stops scripted hammering |
+| Decks per IP per day | 200 | A tripwire only: carriers and student residences put many real users behind one IP |
+| All decks per day | 2,000 | Circuit breaker in front of the Console spending limit; answers `busy` |
+
+- **The day** is the phone's local date, accepted within a day either side of the server's, and a device's date only moves forward: claiming yesterday after using today's decks still counts against today.
+- **A slot is given back only when the server fails** (the model errors, or every card is dropped). Never when the phone disconnects: the model cost is already spent.
+- Every limit comes from config (`PANTRY_LIMIT_*`). The counters live in one Durable Object, which handles one call at a time, so two deals can't both take the last slot.
+- The key never appears in a response or a log line; the server redacts it from anything it logs.
 
 ### Providers and config
 
@@ -288,6 +314,9 @@ Chosen by environment variables, read only by the backend:
 | `LLM_MODEL` | e.g. `claude-sonnet-5` | Required for a real provider. No model id is hard-coded |
 | `PANTRY_LLM_API_KEY` | the provider's key | Required for a real provider |
 | `IMAGE_PROVIDER` | `mock` | More as adapters are added |
+| `PANTRY_LIMIT_DEVICE_PER_DAY`, `_IP_PER_DAY`, `_IP_PER_MINUTE`, `_GLOBAL_PER_DAY` | numbers | Defaults 3, 200, 5, 2000 |
+| `PANTRY_ALLOWED_ORIGINS` | comma-separated origins | Browsers allowed to call the API (the Expo web dev page). Empty in production |
+| `EXPO_PUBLIC_API_URL` (app) | the API's address | Unset: the app runs on mocks, offline |
 
 - **Keys** come from `process.env`. On a host, the platform injects them. In dev, the repo's `.env` (gitignored) is loaded with Node's `--env-file`. The key is named `PANTRY_LLM_API_KEY`, not `ANTHROPIC_API_KEY`, so tools that read the standard name (Claude Code among them) never pick it up.
 - **Validation failure rate.** Every deck logs one line: `{"event":"card_validation","provider","model","validated","failed","rate"}`, counting every card checked, retries included. Aggregating these lines compares providers and models.

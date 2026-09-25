@@ -2,9 +2,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import type { PricedCard, Session } from "@pantry/contract";
 import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef, useState, type ReactNode } from "react";
 import type { DeckSource, ImageSource, Pricer } from "@/data/sources";
-import { countDeck, dayKey, deckReducer, decksLeft, passedNames, type DeckAction, type DeckCount, type DeckState } from "@/deck/state";
+import { countDeck, DAILY_DECKS, dayKey, deckReducer, decksLeft, passedNames, type DeckAction, type DeckCount, type DeckState } from "@/deck/state";
 import { parseBudget } from "@/format";
+import { API_URL, apiFetch } from "@/data/api";
+import { httpDeckSource } from "@/data/http";
 import { mockDeckSource, mockImageSource } from "@/mock/deck";
+import { deviceId } from "./device";
 import { tablePricer } from "@/data/pricer";
 import { usePriceTable } from "./prices";
 import { useProfile } from "./profile";
@@ -71,7 +74,7 @@ interface SessionState extends SessionData {
   /** Contract session for the deck source; `avoid` includes this deck's passes. */
   toSession: () => Session | null;
   /** Records a dealt deck against today's limit. */
-  countDealt: () => Promise<void>;
+  countDealt: (left?: number) => Promise<void>;
   decks: DeckSource;
   images: ImageSource;
   /** Re-prices the picked meal when an item is swapped. Halal narrows meat to certified items. */
@@ -90,7 +93,10 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   // The deck source reads the table at deal time, so a fresh table applies to the next deck.
   const tableRef = useRef(vocabulary);
   tableRef.current = vocabulary;
-  const [sources] = useState(() => ({ decks: mockDeckSource(() => tableRef.current), images: mockImageSource() }));
+  const [sources] = useState(() => ({
+    decks: API_URL ? httpDeckSource(API_URL, deviceId, () => dayKey(new Date()), apiFetch) : mockDeckSource(() => tableRef.current),
+    images: mockImageSource(),
+  }));
   const halal = profile?.limits.includes("halal") ?? false;
   const pricer = useMemo(() => tablePricer(vocabulary, { halal }), [vocabulary, halal]);
 
@@ -100,8 +106,10 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       .catch(() => setCount(null));
   }, []);
 
-  const countDealt = useCallback(async () => {
-    const next = countDeck(count ?? null, dayKey(new Date()));
+  /** Counts a dealt deck. When the server says how many are left, its count is the one kept. */
+  const countDealt = useCallback(async (left?: number) => {
+    const today = dayKey(new Date());
+    const next = left === undefined ? countDeck(count ?? null, today) : { day: today, used: Math.max(0, DAILY_DECKS - left) };
     setCount(next);
     await AsyncStorage.setItem(COUNT_KEY, JSON.stringify(next));
   }, [count]);

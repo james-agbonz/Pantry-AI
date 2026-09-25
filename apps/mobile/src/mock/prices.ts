@@ -6,7 +6,9 @@ import type { PriceTableSource } from "@/data/sources";
  * bundled table after a short wait, as the server would.
  */
 export const mockPriceTableSource = (delayMs = 300): PriceTableSource => ({
-  async fetch() {
+  async fetch(knownVersion) {
+    // Like the server: nothing to send when the phone already has this version.
+    if (knownVersion === (bundledPriceTable as { version: string }).version) return undefined;
     await new Promise((r) => setTimeout(r, delayMs));
     return bundledPriceTable;
   },

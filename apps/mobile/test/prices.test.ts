@@ -3,9 +3,13 @@ import { describe, expect, it } from "vitest";
 import { pickTable } from "../src/data/priceTable";
 import { deckPriceNote, monthLabel, priceNote } from "../src/format";
 
+/** The shipped table with every price bumped and re-sourced, under another version. */
 const table = (version: string, bump = 0, source = "placeholder") => ({
+  schema: 2,
   version,
-  items: vocabulary.items.map((i) => ({ ...i, price: Math.round((i.price! + bump) * 100) / 100, price_source: source, updated: source === "placeholder" ? null : "2026-10-01" })),
+  stores: vocabulary.stores,
+  items: vocabulary.items,
+  prices: vocabulary.prices.map((p) => ({ ...p, regular: Math.round((p.regular + bump) * 100) / 100, source, updated: source === "placeholder" ? null : "2026-10-01" })),
 });
 
 describe("which price table the app uses (SPEC §16)", () => {
@@ -22,7 +26,7 @@ describe("which price table the app uses (SPEC §16)", () => {
   });
 
   it("never uses a table that fails the check", () => {
-    const broken = { version: "2026-12-01", items: vocabulary.items.slice(0, 3) };
+    const broken = { ...table("2026-12-01"), items: vocabulary.items.slice(0, 3) };
     expect(pickTable(vocabulary, { fetched: broken, cached: { nonsense: true } }).from).toBe("bundled");
     expect(pickTable(vocabulary, { fetched: { ...table("2026-12-01"), version: "December" } }).from).toBe("bundled");
   });
@@ -40,7 +44,7 @@ describe("which price table the app uses (SPEC §16)", () => {
   it("prices follow the table in use", () => {
     const next = pickTable(vocabulary, { fetched: table("2026-10-01", 1) }).vocabulary;
     const id = vocabulary.items[0]!.id;
-    expect(next.items.find((i) => i.id === id)!.price).toBeCloseTo(vocabulary.items[0]!.price! + 1, 2);
+    expect(next.pricesFor(id)[0]!.regular).toBeCloseTo(vocabulary.pricesFor(id)[0]!.regular + 1, 2);
   });
 });
 

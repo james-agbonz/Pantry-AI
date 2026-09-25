@@ -16,16 +16,21 @@ export interface PricedDeal extends Omit<Deal, "cards"> {
 export async function dealPricedDeck(
   profile: Profile,
   session: Session,
-  opts: Omit<DealOptions, "vocabulary"> & { vocabulary: Vocabulary; onStage?: (done: DealStage) => void },
+  opts: Omit<DealOptions, "vocabulary"> & {
+    vocabulary: Vocabulary;
+    /** The day to price on, YYYY-MM-DD: the phone's local date, so sales end at the user's midnight. */
+    on: string;
+    onStage?: (done: DealStage) => void;
+  },
 ): Promise<PricedDeal> {
-  const { onStage, vocabulary, ...engineOpts } = opts;
+  const { onStage, vocabulary, on, ...engineOpts } = opts;
   const { input, diet } = buildConstraints(profile, session);
   onStage?.("reading");
 
   const deal = await dealDeck(input, diet, { ...engineOpts, vocabulary });
   onStage?.("building");
 
-  const priced = deal.cards.map((card) => ({ card, pricing: priceCard(card, input.budget, vocabulary, { diet }) }));
+  const priced = deal.cards.map((card) => ({ card, pricing: priceCard(card, input.budget, vocabulary, { diet, on }) }));
   onStage?.("pricing");
 
   const cards = sortDeck(priced, input.targets);

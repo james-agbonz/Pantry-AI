@@ -20,8 +20,9 @@ test("the price table loads once, and the app stays responsive at rest", async (
   await openHome(page);
   await page.waitForTimeout(3000);
 
+  // At most one: none when the server says our version is current (a 304), one when it sends a newer table.
   const writes = await page.evaluate(() => (window as unknown as { __priceWrites: number }).__priceWrites);
-  expect(writes).toBe(1);
+  expect(writes).toBeLessThanOrEqual(1);
 
   // A busy main thread shows up as a slow tap.
   const t0 = Date.now();

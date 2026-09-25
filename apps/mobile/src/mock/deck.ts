@@ -2,6 +2,7 @@ import { Card, type Profile, type Session } from "@pantry/contract";
 import { priceCard, sortDeck } from "@pantry/pricing";
 import type { Vocabulary } from "@pantry/vocabulary";
 import type { DeckSource, ImageSource } from "@/data/sources";
+import { dayKey } from "@/deck/state";
 import cardsJson from "./cards.json";
 
 /**
@@ -30,12 +31,12 @@ export const mockDeckSource = (getVocabulary: () => Vocabulary, buildMs = 900): 
     onStage?.("building");
 
     const vocabulary = getVocabulary();
-    const priced = pick.map((c) => ({ card: { ...c, id: `mock-${nextId++}` }, pricing: priceCard(c, session.budget, vocabulary, { diet }) }));
+    const priced = pick.map((c) => ({ card: { ...c, id: `mock-${nextId++}` }, pricing: priceCard(c, session.budget, vocabulary, { diet, on: dayKey(new Date()) }) }));
     onStage?.("pricing");
 
     const sorted = sortDeck(priced, profile.targets);
     onStage?.("sorting");
-    return sorted;
+    return { cards: sorted };
   },
 });
 
