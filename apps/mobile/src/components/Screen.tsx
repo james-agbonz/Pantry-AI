@@ -1,7 +1,7 @@
 import { router } from "expo-router";
 import { ChevronLeft } from "lucide-react-native";
 import type { ReactNode } from "react";
-import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { color, size, space } from "@/theme";
 import { T } from "./Text";
@@ -44,7 +44,13 @@ export function Screen({ title, titleVariant = "display", hero, barRight, step, 
           barRight ?? null
         )}
       </View>
-      <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
+      {/*
+        On a phone the keyboard would cover the sticky footer, where Home's budget
+        field lives: lift the screen above it. Dragging the page closes the
+        keyboard, since the number pad has no Done key.
+      */}
+      <KeyboardAvoidingView style={styles.fill} behavior={Platform.OS === "ios" ? "padding" : undefined}>
+      <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag">
         {hero}
         <T variant={titleVariant} accessibilityRole="header">
           {title}
@@ -57,12 +63,14 @@ export function Screen({ title, titleVariant = "display", hero, barRight, step, 
         <View style={styles.body}>{children}</View>
       </ScrollView>
       {footer ? <View style={styles.footer}>{footer}</View> : null}
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: color.canvas },
+  fill: { flex: 1 },
   bar: {
     minHeight: size.touch,
     flexDirection: "row",
