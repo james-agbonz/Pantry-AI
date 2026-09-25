@@ -9,6 +9,7 @@ Pantry is a working name.
 - `docs/SPEC.md` — every product decision. It is settled; don't redesign it. If something is missing or contradictory, ask.
 - `docs/DESIGN.md` — brand book and UI rules.
 - `design/tokens.json` — colours, type, spacing, radius. Use tokens, never raw values.
+- `docs/BACKLOG.md` — everything parked: before launch, and later. Check it before planning a step; add to it instead of leaving to-dos in chat.
 
 ## Build order — one piece at a time, confirm before moving on
 
