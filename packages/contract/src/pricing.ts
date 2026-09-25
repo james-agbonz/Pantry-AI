@@ -29,6 +29,12 @@ export const Pricing = z.strictObject({
    * prices are samples, never that they are typical.
    */
   placeholder: z.boolean(),
+  /**
+   * The month of the oldest price on the card, YYYY-MM, e.g. "2026-07" for
+   * StatCan's July figures. Null while any price is a placeholder. The UI says
+   * "Typical prices, July 2026".
+   */
+  as_of: z.string().regex(/^\d{4}-\d{2}$/).nullable(),
 });
 export type Pricing = z.infer<typeof Pricing>;
 

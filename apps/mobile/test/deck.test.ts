@@ -33,7 +33,7 @@ describe("format", () => {
 });
 
 describe("budget badge", () => {
-  const base = { buy: [], to_complete: [], total: 13.49, budget: 15, over_by: 0, complete_cost: 0, placeholder: false };
+  const base = { buy: [], to_complete: [], total: 13.49, budget: 15, over_by: 0, complete_cost: 0, placeholder: false, as_of: null };
   it("fits: word then figure; without the figure where the total sits beside it", () => {
     expect(badgeFor(base)).toMatchObject({ status: "fits", label: "Fits ~$13.49" });
     expect(badgeFor(base, { withTotal: false })).toMatchObject({ status: "fits", label: "Fits" });

@@ -25,7 +25,7 @@ const table = loadVocabulary({
     { id: "lentils", family: "legumes", label: "Lentils", contains: [] },
   ],
   table: {
-    version: "2026-09",
+    version: "2026-09-01",
     items: [
       item("pollock", "fish", "white_fish", "Pollock fillets, frozen", "454g", 7.49),
       item("basa", "fish", "white_fish", "Basa fillets, frozen", "400g", 6.49),
@@ -72,6 +72,7 @@ describe("priceCard (SPEC §9)", () => {
       over_by: 0,
       complete_cost: 2.0,
       placeholder: false,
+      as_of: "2026-09",
     });
   });
 
@@ -138,11 +139,39 @@ describe("priceCard (SPEC §9)", () => {
 
   it("flags placeholder prices so the UI never calls them typical", () => {
     const withPlaceholder = table.withTable({
-      version: "2026-09-placeholder",
+      version: "2026-09-02",
       items: table.items.map((i) => (i.id === "seasoning" ? { ...i, price_source: "placeholder", updated: null } : i)),
     });
     expect(priceCard(spec, 15, withPlaceholder).placeholder).toBe(true);
     expect(priceCard(card([{ group: "white_fish", qty: "1", role: "needed" }]), 15, withPlaceholder).placeholder).toBe(false);
+  });
+
+  it("prefers a real price over a cheaper placeholder, and uses a placeholder only when the group has no real one", () => {
+    const mixed = table.withTable({
+      version: "2026-09-03",
+      items: table.items.map((i) =>
+        i.id === "basa" ? { ...i, price: 0.99, price_source: "placeholder", updated: null } : i,
+      ),
+    });
+    // Basa is cheaper but invented; pollock is real.
+    expect(itemOptions(mixed, "white_fish").map((o) => o.id)).toEqual(["pollock", "basa"]);
+    const p = priceCard(card([{ group: "white_fish", qty: "300g", role: "needed" }]), 15, mixed);
+    expect(p).toMatchObject({ total: 7.49, placeholder: false, as_of: "2026-09" });
+
+    const allInvented = mixed.withTable({
+      version: "2026-09-04",
+      items: mixed.items.map((i) => (i.group === "white_fish" ? { ...i, price_source: "placeholder", updated: null } : i)),
+    });
+    expect(priceCard(card([{ group: "white_fish", qty: "300g", role: "needed" }]), 15, allInvented)).toMatchObject({ total: 0.99, placeholder: true, as_of: null });
+  });
+
+  it("dates the card by its oldest price", () => {
+    const dated = table.withTable({
+      version: "2026-09-05",
+      items: table.items.map((i) => (i.id === "seasoning" ? { ...i, updated: "2026-07-01" } : i)),
+    });
+    expect(priceCard(spec, 15, dated).as_of).toBe("2026-07");
+    expect(priceCard(card([{ group: "white_fish", qty: "1", role: "needed" }]), 15, dated).as_of).toBe("2026-09");
   });
 
   it("throws when a group has no item under the diet", () => {
@@ -153,7 +182,7 @@ describe("priceCard (SPEC §9)", () => {
 describe("sortDeck (SPEC §10)", () => {
   const priced = (name: string, protein_g: number, pricing: Partial<PricedCard["pricing"]>): PricedCard => ({
     card: card([], { id: name, name, protein_g }),
-    pricing: { buy: [], to_complete: [], total: 10, budget: 15, over_by: 0, complete_cost: 0, placeholder: false, ...pricing },
+    pricing: { buy: [], to_complete: [], total: 10, budget: 15, over_by: 0, complete_cost: 0, placeholder: false, as_of: null, ...pricing },
   });
   const extra = { to_complete: [{ group: "g", item: "i", unit: "u", price: 2 }], complete_cost: 2 };
 

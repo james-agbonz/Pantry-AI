@@ -107,7 +107,7 @@ export default function Meal() {
           <BudgetBadge pricing={pricing} withTotal={false} />
         </View>
         <T variant="body-sm" tone="muted">
-          {priceNote(pricing.placeholder)}
+          {priceNote(pricing.placeholder, pricing.as_of)}
         </T>
       </View>
 

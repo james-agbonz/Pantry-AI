@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-placeholder",
+  "version": "2026-09-01",
   "items": [
     {"id": "rice_white_900g", "family": "grains", "group": "rice", "name": "White rice, long grain", "unit": "900g", "price": 3.99, "price_source": "placeholder", "updated": null},
     {"id": "rice_white_2kg", "family": "grains", "group": "rice", "name": "White rice, long grain", "unit": "2kg", "price": 7.99, "price_source": "placeholder", "updated": null},
