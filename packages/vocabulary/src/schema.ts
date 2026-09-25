@@ -88,13 +88,14 @@ export const Item = z
 export type Item = z.infer<typeof Item>;
 
 /**
- * The monthly data: every item with its price, under a version like
- * "2026-10" or "2026-09-placeholder". Groups never change; this does. The
+ * The monthly data: every item with its price, versioned by publish date
+ * ("2026-09-25"). Groups never change; this does. The
  * app fetches the current table from the backend and caches it, with the
  * bundled copy as a fallback (SPEC §16), so a refresh never needs a release.
  */
 export const PriceTable = z.strictObject({
-  version: z.string().regex(/^\d{4}-\d{2}(-[a-z0-9-]+)?$/, "version is YYYY-MM, optionally with a -suffix"),
+  /** The day this table was published, YYYY-MM-DD. Later dates are newer; they compare as text. */
+  version: z.iso.date({ error: "version is the publish date, YYYY-MM-DD" }),
   items: z.array(Item),
 });
 export type PriceTable = z.infer<typeof PriceTable>;

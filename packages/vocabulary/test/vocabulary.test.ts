@@ -24,13 +24,16 @@ describe("shipped data", () => {
     });
   });
 
-  it("prices every item, all placeholders until step 7, and says so", () => {
+  it("prices every item: real prices are dated, placeholders are marked, and the version is a publish date", () => {
     for (const item of v.items) {
       expect(item.price).toBeGreaterThan(0);
-      expect(item.price_source).toBe("placeholder");
+      if (item.price_source === "placeholder") expect(item.updated).toBeNull();
+      else expect(item.updated).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     }
-    expect(v.placeholder).toBe(true);
-    expect(v.version).toBe("2026-09-placeholder");
+    expect(v.version).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    // Step 7: StatCan covers part of the table; the rest waits for hand entry.
+    expect(v.items.filter((i) => i.price_source === "statcan").length).toBeGreaterThan(0);
+    expect(v.placeholder).toBe(v.items.some((i) => i.price_source === "placeholder"));
   });
 
   it("the seasoning blend is $7.00, as in SPEC §9", () => {
@@ -172,7 +175,7 @@ describe("loadVocabulary rejects bad data", () => {
       { id: "rice", family: "grains", label: "Rice", contains: [] as string[] },
     ],
     table: {
-      version: "2026-09-placeholder",
+      version: "2026-09-01",
       items: [
         { id: "gb", family: "beef", group: "ground_beef", name: "Ground beef", unit: "454g", halal: false, price: 7.99 as number | null, price_source: "placeholder", updated: null as string | null },
         { id: "r", family: "grains", group: "rice", name: "Rice", unit: "900g", price: 3.99 as number | null, price_source: "placeholder", updated: null as string | null },
@@ -200,6 +203,8 @@ describe("loadVocabulary rejects bad data", () => {
     ["an item with no price", (d) => void (d.table.items[1]!.price = null)],
     ["a table without a version", (d) => void delete (d.table as { version?: string }).version],
     ["a malformed version", (d) => void (d.table.version = "October")],
+    ["a month instead of a publish date", (d) => void (d.table.version = "2026-10")],
+    ["the old placeholder-suffix version", (d) => void (d.table.version = "2026-09-placeholder")],
   ];
   it.each(bad)("rejects %s", (_, mutate) => {
     const d = base();
@@ -218,14 +223,14 @@ describe("loadVocabulary rejects bad data", () => {
     const voc = loadVocabulary(d);
     expect(voc.placeholder).toBe(true);
     const real = {
-      version: "2026-10",
+      version: "2026-10-01",
       items: d.table.items.map((i) => ({ ...i, price: (i.price ?? 1) + 1, price_source: "statcan", updated: "2026-10-01" })),
     };
     const next = voc.withTable(real);
-    expect(next.version).toBe("2026-10");
+    expect(next.version).toBe("2026-10-01");
     expect(next.placeholder).toBe(false);
     expect(next.itemsFor("rice")[0]?.price).toBe(4.99);
-    expect(() => voc.withTable({ version: "2026-10", items: [] })).toThrow(/has no items/);
+    expect(() => voc.withTable({ version: "2026-10-01", items: [] })).toThrow(/has no items/);
   });
 
   it("accepts a real price with a date", () => {
@@ -251,7 +256,7 @@ describe("flavour groups", () => {
   });
 
   it("a hand flavour mark inside a seasoning family is rejected as redundant", () => {
-    const raw = { families: [{ id: "spices", label: "Spices" }], groups: [{ id: "cumin", family: "spices", label: "Cumin", contains: [], flavour: true }], table: { version: "2026-09", items: [] } };
+    const raw = { families: [{ id: "spices", label: "Spices" }], groups: [{ id: "cumin", family: "spices", label: "Cumin", contains: [], flavour: true }], table: { version: "2026-09-01", items: [] } };
     expect(() => loadVocabulary(raw)).toThrow(/flavour by family already/);
   });
 });

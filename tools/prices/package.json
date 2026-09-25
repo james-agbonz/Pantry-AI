@@ -1,0 +1,24 @@
+{
+  "name": "@pantry/price-tools",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Monthly price refresh: StatCan import and hand-entry CSV (build step 7). Produces data only.",
+  "type": "module",
+  "scripts": {
+    "import": "tsx src/import.ts",
+    "template": "tsx src/template.ts",
+    "test": "vitest run",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@pantry/pricing": "*",
+    "@pantry/vocabulary": "*",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.1"
+  }
+}

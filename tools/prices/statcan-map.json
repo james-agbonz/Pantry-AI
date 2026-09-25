@@ -1,0 +1,330 @@
+{
+  "_about": "Items priced from Statistics Canada table 18-10-0245-01, Canada, latest month. basis exact: the product is the same item and size; per_kg: the product's per-kilogram price times kg, our pack's stated weight. Rescaled sizes, per-piece weights and halal items are not mapped: they are hand-entered in manual-prices.csv. Per-kg is used only where the item really sells by weight (meat, bananas): StatCan's per-kg produce prices are for loose produce and overstate bagged produce, and its all-thighs and all-ground-beef averages understate boneless thighs and extra-lean beef, so those are hand-entered too. Vectors are StatCan series ids; the importer checks each still names this product.",
+  "table": "18-10-0245-01",
+  "items": {
+    "rice_white_2kg": {
+      "product": "White rice, 2 kilograms",
+      "vector": 1458869937,
+      "basis": "exact"
+    },
+    "rice_brown_900g": {
+      "product": "Brown rice, 900 grams",
+      "vector": 1458869906,
+      "basis": "exact"
+    },
+    "flour_ap_2_5kg": {
+      "product": "Wheat flour, 2.5 kilograms",
+      "vector": 1353834329,
+      "basis": "exact"
+    },
+    "flour_ww_2_5kg": {
+      "product": "Wheat flour, 2.5 kilograms",
+      "vector": 1353834329,
+      "basis": "exact"
+    },
+    "bread_white_675g": {
+      "product": "White bread, 675 grams",
+      "vector": 1353834326,
+      "basis": "exact"
+    },
+    "black_beans_can_540ml": {
+      "product": "Canned beans and lentils, 540 millilitres",
+      "vector": 1353834343,
+      "basis": "exact"
+    },
+    "black_beans_dry_900g": {
+      "product": "Dry beans and legumes, 900 grams",
+      "vector": 1458869913,
+      "basis": "exact"
+    },
+    "kidney_beans_can_540ml": {
+      "product": "Canned beans and lentils, 540 millilitres",
+      "vector": 1353834343,
+      "basis": "exact"
+    },
+    "kidney_beans_dry_900g": {
+      "product": "Dry beans and legumes, 900 grams",
+      "vector": 1458869913,
+      "basis": "exact"
+    },
+    "white_kidney_can_540ml": {
+      "product": "Canned beans and lentils, 540 millilitres",
+      "vector": 1353834343,
+      "basis": "exact"
+    },
+    "navy_beans_dry_900g": {
+      "product": "Dry beans and legumes, 900 grams",
+      "vector": 1458869913,
+      "basis": "exact"
+    },
+    "chickpeas_can_540ml": {
+      "product": "Canned beans and lentils, 540 millilitres",
+      "vector": 1353834343,
+      "basis": "exact"
+    },
+    "chickpeas_dry_900g": {
+      "product": "Dry beans and legumes, 900 grams",
+      "vector": 1458869913,
+      "basis": "exact"
+    },
+    "lentils_red_900g": {
+      "product": "Dried lentils, 900 grams",
+      "vector": 1353834344,
+      "basis": "exact"
+    },
+    "lentils_green_900g": {
+      "product": "Dried lentils, 900 grams",
+      "vector": 1353834344,
+      "basis": "exact"
+    },
+    "lentils_can_540ml": {
+      "product": "Canned beans and lentils, 540 millilitres",
+      "vector": 1353834343,
+      "basis": "exact"
+    },
+    "baked_beans_tomato_398ml": {
+      "product": "Canned baked beans, 398 millilitres",
+      "vector": 1353834340,
+      "basis": "exact"
+    },
+    "split_peas_yellow_900g": {
+      "product": "Dry beans and legumes, 900 grams",
+      "vector": 1458869913,
+      "basis": "exact"
+    },
+    "onion_yellow_3lb": {
+      "product": "Onions, 1.36 kilograms",
+      "vector": 1353834305,
+      "basis": "exact"
+    },
+    "potato_russet_10lb": {
+      "product": "Potatoes, 4.54 kilograms",
+      "vector": 1353834300,
+      "basis": "exact"
+    },
+    "celery_bunch": {
+      "product": "Celery, unit",
+      "vector": 1353834306,
+      "basis": "exact"
+    },
+    "tomatoes_diced_796ml": {
+      "product": "Canned tomatoes, 796 millilitres",
+      "vector": 1353834341,
+      "basis": "exact"
+    },
+    "tomatoes_crushed_796ml": {
+      "product": "Canned tomatoes, 796 millilitres",
+      "vector": 1353834341,
+      "basis": "exact"
+    },
+    "tomatoes_whole_796ml": {
+      "product": "Canned tomatoes, 796 millilitres",
+      "vector": 1353834341,
+      "basis": "exact"
+    },
+    "lettuce_iceberg_each": {
+      "product": "Iceberg lettuce, unit",
+      "vector": 1353834318,
+      "basis": "exact"
+    },
+    "spinach_baby_142g": {
+      "product": "Salad greens, 142 grams",
+      "vector": 1458869928,
+      "basis": "exact"
+    },
+    "spinach_frozen_300g": {
+      "product": "Frozen spinach, 300 grams",
+      "vector": 1458869916,
+      "basis": "exact"
+    },
+    "broccoli_crown_each": {
+      "product": "Broccoli, unit",
+      "vector": 1353834309,
+      "basis": "exact"
+    },
+    "broccoli_frozen_500g": {
+      "product": "Frozen broccoli, 500 grams",
+      "vector": 1353834322,
+      "basis": "exact"
+    },
+    "cucumber_english_each": {
+      "product": "Cucumber, unit",
+      "vector": 1353834307,
+      "basis": "exact"
+    },
+    "mushrooms_white_227g": {
+      "product": "Mushrooms, 227 grams",
+      "vector": 1353834308,
+      "basis": "exact"
+    },
+    "corn_kernel_can_341ml": {
+      "product": "Canned corn, 341 millilitres",
+      "vector": 1458869907,
+      "basis": "exact"
+    },
+    "corn_frozen_750g": {
+      "product": "Frozen corn, 750 grams",
+      "vector": 1353834323,
+      "basis": "exact"
+    },
+    "frozen_mixed_veg_750g": {
+      "product": "Frozen mixed vegetables, 750 grams",
+      "vector": 1353834324,
+      "basis": "exact"
+    },
+    "frozen_peas_750g": {
+      "product": "Frozen peas, 750 grams",
+      "vector": 1353834325,
+      "basis": "exact"
+    },
+    "banana_bunch": {
+      "product": "Bananas, per kilogram",
+      "vector": 1353834294,
+      "basis": "per_kg",
+      "kg": 1.0
+    },
+    "lemon_each": {
+      "product": "Lemons, unit",
+      "vector": 1353834296,
+      "basis": "exact"
+    },
+    "peaches_can_398ml": {
+      "product": "Canned peach, 398 millilitres",
+      "vector": 1458869908,
+      "basis": "exact"
+    },
+    "milk_2pct_1l": {
+      "product": "Milk, 1 litre",
+      "vector": 1353834283,
+      "basis": "exact"
+    },
+    "milk_2pct_2l": {
+      "product": "Milk, 2 litres",
+      "vector": 1353834284,
+      "basis": "exact"
+    },
+    "milk_2pct_4l": {
+      "product": "Milk, 4 litres",
+      "vector": 1353834285,
+      "basis": "exact"
+    },
+    "yogurt_greek_plain_500g": {
+      "product": "Yogurt, 500 grams",
+      "vector": 1353834289,
+      "basis": "exact"
+    },
+    "butter_454g": {
+      "product": "Butter, 454 grams",
+      "vector": 1353834287,
+      "basis": "exact"
+    },
+    "eggs_large_12": {
+      "product": "Eggs, 1 dozen",
+      "vector": 1353834290,
+      "basis": "exact"
+    },
+    "chicken_thighs_bone_in_1kg": {
+      "product": "Chicken thigh, per kilogram",
+      "vector": 1353834279,
+      "basis": "per_kg",
+      "kg": 1.0
+    },
+    "chicken_drumsticks_1kg": {
+      "product": "Chicken drumsticks, per kilogram",
+      "vector": 1353834313,
+      "basis": "per_kg",
+      "kg": 1.0
+    },
+    "chicken_whole_1_8kg": {
+      "product": "Whole chicken, per kilogram",
+      "vector": 1353834277,
+      "basis": "per_kg",
+      "kg": 1.8
+    },
+    "ground_beef_lean_454g": {
+      "product": "Ground beef, per kilogram",
+      "vector": 1353834274,
+      "basis": "per_kg",
+      "kg": 0.454
+    },
+    "stewing_beef_600g": {
+      "product": "Beef stewing cuts, per kilogram",
+      "vector": 1353834271,
+      "basis": "per_kg",
+      "kg": 0.6
+    },
+    "pork_chops_bone_in_700g": {
+      "product": "Pork loin cuts, per kilogram",
+      "vector": 1353834275,
+      "basis": "per_kg",
+      "kg": 0.7
+    },
+    "pork_shoulder_1_5kg": {
+      "product": "Pork shoulder cuts, per kilogram",
+      "vector": 1353834312,
+      "basis": "per_kg",
+      "kg": 1.5
+    },
+    "salmon_atlantic_frozen_454g": {
+      "product": "Salmon, per kilogram",
+      "vector": 1458869929,
+      "basis": "per_kg",
+      "kg": 0.454
+    },
+    "tuna_flaked_light_170g": {
+      "product": "Canned tuna, 170 grams",
+      "vector": 1353834282,
+      "basis": "exact"
+    },
+    "tuna_chunk_light_170g": {
+      "product": "Canned tuna, 170 grams",
+      "vector": 1353834282,
+      "basis": "exact"
+    },
+    "salmon_pink_can_213g": {
+      "product": "Canned salmon, 213 grams",
+      "vector": 1353834314,
+      "basis": "exact"
+    },
+    "soy_milk_1_89l": {
+      "product": "Soy milk, 1.89 litres",
+      "vector": 1458869932,
+      "basis": "exact"
+    },
+    "peanut_butter_smooth_1kg": {
+      "product": "Peanut butter, 1 kilogram",
+      "vector": 1353834338,
+      "basis": "exact"
+    },
+    "peanut_butter_crunchy_1kg": {
+      "product": "Peanut butter, 1 kilogram",
+      "vector": 1353834338,
+      "basis": "exact"
+    },
+    "margarine_907g": {
+      "product": "Margarine, 907 grams",
+      "vector": 1458869921,
+      "basis": "exact"
+    },
+    "ketchup_1l": {
+      "product": "Ketchup, 1 litre",
+      "vector": 1353834335,
+      "basis": "exact"
+    },
+    "mayonnaise_890ml": {
+      "product": "Mayonnaise, 890 millilitres",
+      "vector": 1353834339,
+      "basis": "exact"
+    },
+    "pasta_sauce_tomato_650ml": {
+      "product": "Pasta sauce, 650 millilitres",
+      "vector": 1458869925,
+      "basis": "exact"
+    },
+    "sugar_white_2kg": {
+      "product": "White sugar, 2 kilograms",
+      "vector": 1353834330,
+      "basis": "exact"
+    }
+  }
+}

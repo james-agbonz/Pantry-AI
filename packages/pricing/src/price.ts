@@ -8,6 +8,8 @@ export interface ItemOption {
   unit: string;
   price: number;
   placeholder: boolean;
+  /** YYYY-MM-DD the price was set; null for placeholders. */
+  updated: string | null;
 }
 
 export interface PriceOptions {
@@ -22,22 +24,34 @@ const cents = (dollars: number) => Math.round(dollars * 100);
 const dollars = (c: number) => c / 100;
 
 /**
- * Items the diet allows in a group, cheapest first; equal prices by lowest
- * id, so the pick never shifts between runs. Every item has a price: the
- * vocabulary refuses to load otherwise.
+ * Items the diet allows in a group: real prices first, cheapest first, then
+ * placeholders, cheapest first. Equal prices go to the lowest id, so the pick
+ * never shifts between runs. A placeholder is only picked when the group has
+ * no real price, so an invented number never beats a real one.
  */
 export function itemOptions(table: Table, group: string, diet: Diet = NO_DIET): ItemOption[] {
   return table
     .itemsFor(group, diet)
-    .map((i: Item) => ({ id: i.id, name: i.name, unit: i.unit, price: i.price!, placeholder: i.price_source === "placeholder" }))
-    .sort((a, b) => cents(a.price) - cents(b.price) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+    .map((i: Item) => ({
+      id: i.id,
+      name: i.name,
+      unit: i.unit,
+      price: i.price!,
+      placeholder: i.price_source === "placeholder",
+      updated: i.price_source === "placeholder" ? null : i.updated,
+    }))
+    .sort(
+      (a, b) =>
+        Number(a.placeholder) - Number(b.placeholder) || cents(a.price) - cents(b.price) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
+    );
 }
 
 /**
  * Prices one card (SPEC §9). The engine never states a price; every dollar
  * figure the user sees comes from here.
  *
- * 1. Resolve each group to its cheapest item (or the one picked).
+ * 1. Resolve each group to its cheapest real-priced item (or the one picked);
+ *    a placeholder only when the group has no real price.
  * 2. Price it at the full minimum sellable unit.
  * 3. Merge a group that appears twice; needed wins over completes.
  * 4. Fill the budget: every needed item, then completes in order. One that
@@ -58,11 +72,15 @@ export function priceCard(card: Card, budget: number, table: Table, opts: PriceO
 
   // 1–2. Resolve and price.
   let placeholder = false;
+  let asOf: string | null = null;
   const line = (group: string) => {
     const options = itemOptions(table, group, diet);
     const pick = options.find((o) => o.id === choices[group]) ?? options[0];
     if (!pick) throw new Error(`no item for group '${group}' under this diet`);
     placeholder ||= pick.placeholder;
+    // The oldest real price on the card dates the whole card.
+    const month = pick.updated?.slice(0, 7) ?? null;
+    if (month && (asOf === null || month < asOf)) asOf = month;
     return { group, item: pick.name, unit: pick.unit, cents: cents(pick.price) };
   };
   const lines = [...merged].map(([group, role]) => ({ ...line(group), role }));
@@ -88,5 +106,6 @@ export function priceCard(card: Card, budget: number, table: Table, opts: PriceO
     over_by: dollars(Math.max(0, total - budgetCents)),
     complete_cost: dollars(toComplete.reduce((s, l) => s + l.cents, 0)),
     placeholder,
+    as_of: placeholder ? null : asOf,
   };
 }

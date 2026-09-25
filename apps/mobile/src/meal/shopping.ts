@@ -11,6 +11,6 @@ export function shoppingList(card: Card, p: Pricing): string {
   const out = [card.name, "", `Buy (${money(p.total)} of $${p.budget}):`, ...p.buy.map(line)];
   if (p.over_by > 0) out.push(`Over by ${money(p.over_by)}`);
   if (p.to_complete.length) out.push("", `To complete (+${money(p.complete_cost)}):`, ...p.to_complete.map(line));
-  out.push("", priceNote(p.placeholder));
+  out.push("", priceNote(p.placeholder, p.as_of));
   return out.join("\n");
 }

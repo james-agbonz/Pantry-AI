@@ -278,6 +278,7 @@ describe("pricing (SPEC §9 shape)", () => {
     over_by: 0,
     complete_cost: 2.0,
     placeholder: false,
+    as_of: "2026-07",
   };
 
   it("accepts the SPEC example", () => {

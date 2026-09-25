@@ -22,10 +22,27 @@ export function parseBudget(text: string): number | null {
   return n > 0 && n <= 1000 ? n : null;
 }
 
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+/** "2026-07" → "July 2026". */
+export function monthLabel(yyyyMm: string): string {
+  const [y, m] = yyyyMm.split("-").map(Number);
+  return `${MONTHS[(m ?? 1) - 1]} ${y}`;
+}
+
 /**
  * The once-per-money-screen line (SPEC §9). Invented numbers are never
- * called typical: while prices are placeholders, it says so.
+ * called typical: while any price is a placeholder, it says so. Real prices
+ * say which month they're from, since StatCan runs a couple of months behind.
  */
-export function priceNote(placeholder: boolean): string {
-  return placeholder ? "Sample prices for testing, not real." : "Prices are typical, not quotes.";
+export function priceNote(placeholder: boolean, asOf: string | null = null): string {
+  if (placeholder) return "Sample prices for testing, not real.";
+  return asOf ? `Typical prices, ${monthLabel(asOf)}.` : "Typical prices.";
+}
+
+/** The note for several cards: sample if any is, else dated by the oldest. */
+export function deckPriceNote(pricings: readonly { placeholder: boolean; as_of: string | null }[]): string {
+  if (pricings.some((p) => p.placeholder)) return priceNote(true);
+  const months = pricings.map((p) => p.as_of).filter((m): m is string => m !== null).sort();
+  return priceNote(false, months[0] ?? null);
 }

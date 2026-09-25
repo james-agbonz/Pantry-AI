@@ -21,7 +21,7 @@ export interface Vocabulary {
    * meat group with no halal item (bacon, ham, ground chicken…).
    */
   groupList(diet?: Diet): GroupRef[];
-  /** The price table's version, e.g. "2026-10". */
+  /** The price table's publish date, e.g. "2026-09-25". */
   version: string;
   /** True while any price is a placeholder: the UI must not call them typical. */
   placeholder: boolean;

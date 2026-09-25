@@ -108,6 +108,8 @@ Three levels: **family** (fish) → **group** (white fish) → **item** (basa fi
 - **Nuts** — nuts and nut butters, peanuts included, are one `nuts` family, so excluding `nuts` catches them by family.
 - **Allergens** — every group carries `contains`: Health Canada's priority allergens plus gluten — `peanuts`, `tree_nuts`, `sesame`, `milk`, `eggs`, `fish`, `shellfish` (crustaceans and molluscs), `soy`, `wheat`, `mustard`, `sulphites`, `gluten`. Tags are set by hand per group, never by name matching (rice noodles: none; soy sauce: soy, wheat, gluten). They cover every item in the group, including typical "may contain" labelling. `[]` means checked and none. Every wheat group is also gluten.
 
+**Matching StatCan to items.** An item takes a StatCan price only when the product is the same item and size, or when it's sold by weight and StatCan gives a per-kilogram price (meat, bananas): price = per-kg × the pack's stated weight. Never rescaled sizes (a small pack costs more per kilo, so scaling down understates the till), never per-piece guesses, never StatCan's loose-produce per-kg for bagged produce (it overstates), never an all-cuts average for a pricier cut (it understates), and never a regular product for a halal item. Everything else is entered by hand in `tools/prices/manual-prices.csv` with its source and date, in the order that clears the most "sample" cards first.
+
 **Price source.** Baseline candidate: Statistics Canada table 18-10-0245-01, *Monthly average retail prices for selected products* — monthly, from retailer scanner data, national and by province. These are averages, not lowest prices: label them "typical prices". The list is limited and lags a month or two; gaps are filled by hand. Until then, prices are placeholders marked `"price_source": "placeholder"`.
 
 ## 7. Recipe engine
@@ -177,15 +179,16 @@ Output becomes `targets`. No body stats (Eat well, or before the first meal) →
   "budget": 15,
   "over_by": 0,
   "complete_cost": 2.00,
-  "placeholder": false
+  "placeholder": false,
+  "as_of": "2026-07"
 }
 ```
 
 - Each line carries its `group` (the meal screen swaps within it) and the item's `unit` (the shopping list names it).
 - `needed` alone over budget → the card still shows with `over_by`. Never hidden, never blocked.
 - Tax is ignored: basic groceries are zero-rated in Canada.
-- Every figure displays with `~`, and each money screen says once that prices are typical, not quotes. While any price on a card is a placeholder (`"placeholder": true`), that line says instead that they're sample prices for testing, not real: invented numbers are never called typical.
-- Money is added up in whole cents. Among items at the same price, the lowest item id wins, so results never shift between runs.
+- Every figure displays with `~`, and each money screen says once where the prices stand: "Typical prices, July 2026" (the month of the oldest price on the card, `as_of`, since StatCan runs a couple of months behind). While any price on a card is a placeholder (`"placeholder": true`), it says instead that they're sample prices for testing, not real: invented numbers are never called typical.
+- Within a group, a real price always beats a placeholder, however cheap; a placeholder is used only when the group has no real price. Money is added up in whole cents. Among items at the same price, the lowest item id wins, so results never shift between runs.
 
 ## 10. The deck
 
@@ -264,7 +267,7 @@ Backend endpoints (suggested): `POST /api/deck` runs constraint builder → engi
 
 Prices and items change monthly; groups never do. So the price table is versioned data, separate from the app:
 
-- **One table, versioned.** `{ "version": "2026-10", "items": [...] }`: every item with its price and source. Version is `YYYY-MM`, with an optional suffix (`2026-09-placeholder`). Every item must have a price; a table that doesn't fit the groups is refused, naming the problem.
+- **One table, versioned by publish date.** `{ "version": "2026-09-25", "items": [...] }`: every item with its price and source. The version is the day the table was published (`YYYY-MM-DD`), so a later table always compares as newer. The placeholder table is `2026-09-01`. Every item must have a price; a table that doesn't fit the groups is refused, naming the problem.
 - **The app fetches it** from the backend (`GET /api/prices`, suggested) and caches the last good copy. A copy is bundled with the app as the fallback. Order of preference: a freshly fetched table that checks out; else the cached one if it's at least as new as the bundled one; else the bundled one. A monthly refresh reaches phones without an app release.
 - **One pricing module** (`@pantry/pricing`) runs on the server for decks and on the phone for swaps, over whichever table is in use.
 

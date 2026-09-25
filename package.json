@@ -11,12 +11,15 @@
   },
   "workspaces": [
     "packages/*",
-    "apps/*"
+    "apps/*",
+    "tools/*"
   ],
   "scripts": {
     "test": "npm test --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
-    "e2e": "npm run e2e -w @pantry/mobile"
+    "e2e": "npm run e2e -w @pantry/mobile",
+    "prices:import": "npm run import -w @pantry/price-tools --",
+    "prices:template": "npm run template -w @pantry/price-tools"
   },
   "allowScripts": {
     "esbuild": false,
