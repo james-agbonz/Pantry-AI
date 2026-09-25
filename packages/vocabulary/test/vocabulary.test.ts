@@ -24,13 +24,16 @@ describe("shipped data", () => {
     });
   });
 
-  it("prices every item, all placeholders until step 7, and says so", () => {
+  it("prices every item: real prices are dated, placeholders are marked, and the version is a publish date", () => {
     for (const item of v.items) {
       expect(item.price).toBeGreaterThan(0);
-      expect(item.price_source).toBe("placeholder");
+      if (item.price_source === "placeholder") expect(item.updated).toBeNull();
+      else expect(item.updated).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     }
-    expect(v.placeholder).toBe(true);
-    expect(v.version).toBe("2026-09-01");
+    expect(v.version).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    // Step 7: StatCan covers part of the table; the rest waits for hand entry.
+    expect(v.items.filter((i) => i.price_source === "statcan").length).toBeGreaterThan(0);
+    expect(v.placeholder).toBe(v.items.some((i) => i.price_source === "placeholder"));
   });
 
   it("the seasoning blend is $7.00, as in SPEC §9", () => {

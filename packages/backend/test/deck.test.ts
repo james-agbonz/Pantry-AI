@@ -14,10 +14,15 @@ describe("dealPricedDeck", () => {
     expect(deal.cards).toHaveLength(6);
     const tiers = deal.cards.map(({ pricing: p }) => (p.over_by > 0 ? 2 : p.to_complete.length ? 1 : 0));
     expect(tiers).toEqual([...tiers].sort());
+    const realGroup = (g: string) => vocabulary.itemsFor(g).some((i) => i.price_source !== "placeholder");
     for (const { pricing } of deal.cards) {
       expect(pricing.budget).toBe(12);
-      expect(pricing.placeholder).toBe(true);
+      const lines = [...pricing.buy, ...pricing.to_complete];
+      expect(pricing.placeholder).toBe(lines.some((l) => !realGroup(l.group)));
+      expect(pricing.as_of).toBe(pricing.placeholder ? null : "2026-07");
     }
+    // Step 7 made some whole cards real (the tuna salad: tuna, mayonnaise, cucumber).
+    expect(deal.cards.some((c) => !c.pricing.placeholder)).toBe(true);
   });
 });
 
