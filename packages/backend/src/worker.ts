@@ -1,15 +1,19 @@
 /**
  * The Cloudflare Worker (SPEC §16): the same app as the dev server, with the
  * limits in a Durable Object. Deploy with `npm run deploy -w @pantry/backend`;
- * the key is a secret: `wrangler secret put PANTRY_LLM_API_KEY`.
+ * the key is a secret: `wrangler secret put PANTRY_LLM_API_KEY`. Photos use
+ * the `AI` binding (Workers AI) when IMAGE_PROVIDER=workers-ai.
  */
 import { DurableObject } from "cloudflare:workers";
 import { loadConfig } from "./config";
 import { Limiter, type KeyValue, type Request as LimitRequest, type Reservation } from "./limits";
+import type { AiBinding } from "./image";
 import { appFromConfig } from "./runtime";
 
 export interface Env {
   LIMITER: DurableObjectNamespace<LimiterObject>;
+  /** Workers AI, for dish photos when IMAGE_PROVIDER=workers-ai. */
+  AI?: Ai;
   [name: string]: unknown;
 }
 
@@ -47,6 +51,10 @@ export class LimiterObject extends DurableObject<Env> {
     await this.limiter.release(r);
   }
 
+  async allowImage(ip: string) {
+    return this.limiter.allowImage(ip);
+  }
+
   async alarm() {
     await this.limiter.prune();
     await this.ctx.storage.setAlarm(Date.now() + DAY_MS);
@@ -60,7 +68,8 @@ export default {
     const app = appFromConfig(config, {
       reserve: (r) => limiter.reserve(r),
       release: (r) => limiter.release(r),
-    });
+      allowImage: (ip) => limiter.allowImage(ip),
+    }, env.AI ? { ai: env.AI as AiBinding } : {});
     return app.fetch(request, env, ctx);
   },
 } satisfies ExportedHandler<Env>;

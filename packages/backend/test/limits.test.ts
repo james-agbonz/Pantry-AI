@@ -122,6 +122,28 @@ describe("release", () => {
   });
 });
 
+describe("photo limit", () => {
+  it("allows forty photos a minute per IP, refuses the forty-first, and allows again the next minute", async () => {
+    const t = setup();
+    const out = [];
+    for (let i = 0; i < 41; i++) out.push(await t.limiter.allowImage("1.2.3.4"));
+    expect(out.slice(0, 40).every((r) => r.ok)).toBe(true);
+    expect(out[40]).toMatchObject({ ok: false, status: 429, reason: "rate_limit" });
+    expect((await t.limiter.allowImage("5.6.7.8")).ok).toBe(true);
+    t.advance(MINUTE);
+    expect((await t.limiter.allowImage("1.2.3.4")).ok).toBe(true);
+  });
+
+  it("photos don't use up deck slots, and old photo counters are pruned", async () => {
+    const t = setup();
+    for (let i = 0; i < 30; i++) await t.limiter.allowImage("1.2.3.4");
+    expect(await t.deal("device-aaaaaaaaaaaa")).toMatchObject({ ok: true, left: 2 });
+    t.advance(5 * MINUTE);
+    await t.limiter.prune();
+    expect(Object.keys(t.kv.dump()).some((k) => k.includes(":img:"))).toBe(false);
+  });
+});
+
 describe("prune", () => {
   it("drops counters from before yesterday and keeps the rest", async () => {
     const t = setup();

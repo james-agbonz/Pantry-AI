@@ -1,0 +1,306 @@
+[
+  {
+    "id": "student-15",
+    "label": "Student, rice + corn, $15",
+    "profile": {
+      "goal": "eat_well",
+      "condition": null,
+      "limits": [
+        "no_pork",
+        "nuts"
+      ],
+      "limits_other": [],
+      "appliances": [
+        "stove",
+        "microwave",
+        "fridge"
+      ],
+      "servings": 1,
+      "targets": {
+        "kcal": 2400,
+        "protein": 140
+      }
+    },
+    "session": {
+      "have_other": [],
+      "avoid": [],
+      "have": [
+        "rice",
+        "corn"
+      ],
+      "budget": 15
+    }
+  },
+  {
+    "id": "vegetarian-10",
+    "label": "Vegetarian, oats + lentils, $10",
+    "profile": {
+      "goal": "eat_well",
+      "condition": null,
+      "limits": [
+        "vegetarian"
+      ],
+      "limits_other": [],
+      "appliances": [
+        "stove",
+        "fridge"
+      ],
+      "servings": 1,
+      "targets": {
+        "kcal": 2000,
+        "protein": 90
+      }
+    },
+    "session": {
+      "have_other": [],
+      "avoid": [],
+      "have": [
+        "lentils",
+        "oats",
+        "onion"
+      ],
+      "budget": 10
+    }
+  },
+  {
+    "id": "cut-12",
+    "label": "Cut, eggs + spinach, $12",
+    "profile": {
+      "goal": "cut",
+      "condition": null,
+      "limits": [],
+      "limits_other": [],
+      "appliances": [
+        "stove",
+        "oven",
+        "fridge",
+        "freezer"
+      ],
+      "servings": 1,
+      "targets": {
+        "kcal": 1800,
+        "protein": 150
+      }
+    },
+    "session": {
+      "have_other": [],
+      "avoid": [],
+      "have": [
+        "eggs",
+        "spinach",
+        "rice"
+      ],
+      "budget": 12
+    }
+  },
+  {
+    "id": "bulk-20",
+    "label": "Bulk, pasta + canned tomatoes, $20",
+    "profile": {
+      "goal": "bulk",
+      "condition": null,
+      "limits": [],
+      "limits_other": [],
+      "appliances": [
+        "stove",
+        "oven",
+        "fridge"
+      ],
+      "servings": 1,
+      "targets": {
+        "kcal": 3200,
+        "protein": 180
+      }
+    },
+    "session": {
+      "have_other": [],
+      "avoid": [],
+      "have": [
+        "pasta",
+        "canned_tomatoes",
+        "garlic"
+      ],
+      "budget": 20
+    }
+  },
+  {
+    "id": "diabetes-14",
+    "label": "Diabetes, brown rice + chickpeas, $14",
+    "profile": {
+      "goal": "condition",
+      "condition": "diabetes",
+      "limits": [],
+      "limits_other": [],
+      "appliances": [
+        "stove",
+        "microwave",
+        "fridge"
+      ],
+      "servings": 1,
+      "targets": {
+        "kcal": 2100,
+        "protein": 110
+      }
+    },
+    "session": {
+      "have_other": [],
+      "avoid": [],
+      "have": [
+        "brown_rice",
+        "chickpeas",
+        "carrot"
+      ],
+      "budget": 14
+    }
+  },
+  {
+    "id": "halal-8",
+    "label": "Halal, potatoes + onion, $8",
+    "profile": {
+      "goal": "eat_well",
+      "condition": null,
+      "limits": [
+        "halal"
+      ],
+      "limits_other": [],
+      "appliances": [
+        "stove",
+        "oven"
+      ],
+      "servings": 1,
+      "targets": null
+    },
+    "session": {
+      "have_other": [],
+      "avoid": [],
+      "have": [
+        "potato",
+        "onion"
+      ],
+      "budget": 8
+    }
+  },
+  {
+    "id": "microwave-6",
+    "label": "No dairy + gluten, microwave + kettle, $6",
+    "profile": {
+      "goal": "eat_well",
+      "condition": null,
+      "limits": [
+        "no_dairy",
+        "gluten"
+      ],
+      "limits_other": [],
+      "appliances": [
+        "microwave",
+        "kettle"
+      ],
+      "servings": 1,
+      "targets": {
+        "kcal": 2200,
+        "protein": 100
+      }
+    },
+    "session": {
+      "have_other": [],
+      "avoid": [],
+      "have": [
+        "rice",
+        "canned_tuna"
+      ],
+      "budget": 6
+    }
+  },
+  {
+    "id": "family-25",
+    "label": "Family of 3, $25",
+    "profile": {
+      "goal": "eat_well",
+      "condition": null,
+      "limits": [],
+      "limits_other": [],
+      "appliances": [
+        "stove",
+        "oven",
+        "fridge",
+        "freezer"
+      ],
+      "servings": 3,
+      "targets": {
+        "kcal": 2300,
+        "protein": 120
+      }
+    },
+    "session": {
+      "have_other": [],
+      "avoid": [],
+      "have": [
+        "potato",
+        "carrot",
+        "frozen_veg"
+      ],
+      "budget": 25
+    }
+  },
+  {
+    "id": "noodles-5",
+    "label": "Blood pressure, instant noodles, $5",
+    "profile": {
+      "goal": "condition",
+      "condition": "blood_pressure",
+      "limits": [],
+      "limits_other": [],
+      "appliances": [
+        "kettle",
+        "microwave"
+      ],
+      "servings": 1,
+      "targets": null
+    },
+    "session": {
+      "have_other": [],
+      "avoid": [],
+      "have": [
+        "instant_noodles",
+        "eggs"
+      ],
+      "budget": 5
+    }
+  },
+  {
+    "id": "anemia-18",
+    "label": "Anemia, no cilantro, air fryer, $18",
+    "profile": {
+      "goal": "condition",
+      "condition": "anemia",
+      "limits": [
+        "no_pork"
+      ],
+      "limits_other": [
+        "cilantro"
+      ],
+      "appliances": [
+        "air_fryer",
+        "stove",
+        "fridge"
+      ],
+      "servings": 1,
+      "targets": {
+        "kcal": 2000,
+        "protein": 110
+      }
+    },
+    "session": {
+      "have_other": [
+        "salsa verde"
+      ],
+      "avoid": [],
+      "have": [
+        "black_beans",
+        "tortillas",
+        "bell_pepper"
+      ],
+      "budget": 18
+    }
+  }
+]

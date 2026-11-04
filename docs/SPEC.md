@@ -120,7 +120,7 @@ Three levels: **family** (fish) → **group** (white fish) → **item** (basa fi
 
 ## 7. Recipe engine
 
-**Gets** the contract input and the group list, never prices. **Returns** a deck of six cards.
+**Gets** the contract input and the group list, never prices. Each group may carry a cost band (`low`, `mid`, `high`): its cheapest item ranked against every other group's in the current price table, in thirds. Words only, so the model can favour cheap groups without ever seeing a dollar figure. **Returns** a deck of six cards.
 
 Rules:
 - Never uses anything in `exclude`
@@ -213,13 +213,14 @@ Output becomes `targets`. No body stats (Eat well, or before the first meal) →
 
 ## 11. Images
 
-- Flux Schnell, through the app's own backend so the key stays on the server.
-- Prompt comes from the card's `image_prompt`.
+- Flux Schnell, through the app's own backend so the key stays on the server. On Workers AI the model takes only a prompt and a step count (4), so the photo comes back at the model's own size; the phone scales it into the card.
+- Prompt comes from the card's `name` and `image_prompt`. The model's `image_prompt` describes only the food (visible ingredients, named plainly); the server adds the photo style, so every photo matches.
 - All six fire at once; the top card is requested first.
 - The card shows immediately with a `surface-soft` placeholder; the photo fades in.
 - A failed image never blocks a card: show a plain fallback.
 - About $0.02 per deck.
-- **Prompt rule:** home cooking on a normal plate, realistic portion, kitchen light. A $4 dinner must not look like a $30 one.
+- **Photo style:** one round white plate, camera at 45°, the same size and position in every photo (the middle two-thirds of the frame), on a plain flat light-grey background. (flux-1-schnell on Workers AI takes only a prompt and steps, so there is no seed to fix the framing.) Nothing else in frame: no cutlery, glasses, hands, appliances or table, and no garnish the dish doesn't list. Soft side light.
+- **Generous and appetising, but true to the recipe's portion.** A heaped, full serving that covers most of the plate; browned, glossy, steaming, vibrant. Cheap food should look good, never meagre. Never bigger than the recipe makes: the user cooks it, and the card's calories and protein are for that serving.
 
 ## 12. Meal screen
 
@@ -267,7 +268,7 @@ Session ─┘       (contract)          (groups only)              │     ^
                                                                 └─> Images (Flux, via backend)
 ```
 
-Backend endpoints (suggested): `POST /api/deck` runs constraint builder → engine → validation → pricing → sort; `POST /api/image` proxies Flux. All keys server-side.
+Backend endpoints: `POST /api/deck` runs constraint builder → engine → validation → pricing → sort; `POST /api/image` proxies Flux. All keys server-side.
 
 ### Price table
 
@@ -282,6 +283,7 @@ Prices and items change monthly; groups never do. So the price table is versione
 ### API (Cloudflare Worker)
 
 - **`POST /api/deck`** — body `{ profile, session, local_date }`, header `X-Pantry-Device`. Streams one JSON line per stage as it finishes (`reading` → `building` → `pricing` → `sorting`), then `{ "deck": [...], "left": 2 }`, so Loading ticks with the real work, never on a timer. Refusals are `429 {"error": "daily_limit" | "rate_limit"}`, `503 {"error": "busy"}`, `400` for a bad request or date; a failure after streaming starts is an `{"error": "server" | "no_cards"}` line.
+- **`POST /api/image`** — body `{ name, prompt }` (the card's name, up to 120 characters, and its `image_prompt`, up to 1,240; the server wraps them in the photo style, §11), header `X-Pantry-Device`. Answers `{ "url": "data:image/jpeg;base64,…" }`, or `{ "url": null }` when the photo failed and the card shows its fallback. Capped per IP per minute (`429 {"error": "rate_limit"}`); photos don't count against the device's decks.
 - **`GET /api/prices`** — the current price table; its version is the ETag, so an unchanged table is a `304`.
 - **`GET /api/health`**.
 
@@ -293,6 +295,7 @@ Prices and items change monthly; groups never do. So the price table is versione
 | Decks per IP per minute | 5 | Stops scripted hammering |
 | Decks per IP per day | 200 | A tripwire only: carriers and student residences put many real users behind one IP |
 | All decks per day | 2,000 | Circuit breaker in front of the Console spending limit; answers `busy` |
+| Photos per IP per minute | 40 | Six a deck, five decks a minute, with room. Photos cost per call |
 
 - **The day** is the phone's local date, accepted within a day either side of the server's, and a device's date only moves forward: claiming yesterday after using today's decks still counts against today.
 - **A slot is given back only when the server fails** (the model errors, or every card is dropped). Never when the phone disconnects: the model cost is already spent.
@@ -303,20 +306,24 @@ Prices and items change monthly; groups never do. So the price table is versione
 
 The model and the image generator sit behind two interfaces, so either can be swapped without code changes:
 
-- **`LlmClient`** (`@pantry/engine`) — `complete({ system, user }) → text`. The engine owns the prompts; an adapter only moves text. Adapters live in `@pantry/backend`: `anthropic` and `mock` (a recorded sample deck, offline).
-- **`ImageClient`** (`@pantry/backend`) — `generate(prompt) → { url } | null`; `null` shows the card's fallback. Only `mock` exists; Flux is added as an adapter later.
+- **`LlmClient`** (`@pantry/engine`) — `complete({ system, user }) → text`. The engine owns the prompts; an adapter only moves text. Adapters live in `@pantry/backend`: `anthropic`, `openai-compatible` (any OpenAI chat-completions API, such as Groq) and `mock` (a recorded sample deck, offline).
+- **`ImageClient`** (`@pantry/backend`) — `generate(prompt) → { url } | null`; `null` shows the card's fallback. Adapters: `workers-ai` (Cloudflare Workers AI through the Worker's `AI` binding, so no key) and `mock`.
 
 Chosen by environment variables, read only by the backend:
 
 | Variable | Values | Notes |
 |---|---|---|
-| `LLM_PROVIDER` | `anthropic` · `mock` | Default `mock` |
-| `LLM_MODEL` | e.g. `claude-sonnet-5` | Required for a real provider. No model id is hard-coded |
+| `LLM_PROVIDER` | `anthropic` · `openai-compatible` · `mock` | Default `mock` |
+| `LLM_MODEL` | e.g. `claude-sonnet-5`, `openai/gpt-oss-120b` | Required for a real provider. No model id is hard-coded |
+| `LLM_BASE_URL` | e.g. `https://api.groq.com/openai/v1` | Required for `openai-compatible` |
 | `PANTRY_LLM_API_KEY` | the provider's key | Required for a real provider |
-| `IMAGE_PROVIDER` | `mock` | More as adapters are added |
-| `PANTRY_LIMIT_DEVICE_PER_DAY`, `_IP_PER_DAY`, `_IP_PER_MINUTE`, `_GLOBAL_PER_DAY` | numbers | Defaults 3, 200, 5, 2000 |
+| `IMAGE_PROVIDER` | `workers-ai` · `mock` | Default `mock` |
+| `IMAGE_MODEL` | e.g. `@cf/black-forest-labs/flux-1-schnell` | Required for `workers-ai` |
+| `IMAGE_STEPS` | 1–8 | Default 4 |
+| `PANTRY_LIMIT_DEVICE_PER_DAY`, `_IP_PER_DAY`, `_IP_PER_MINUTE`, `_GLOBAL_PER_DAY`, `_IMAGES_IP_PER_MINUTE` | numbers | Defaults 3, 200, 5, 2000, 40 |
 | `PANTRY_ALLOWED_ORIGINS` | comma-separated origins | Browsers allowed to call the API (the Expo web dev page). Empty in production |
 | `EXPO_PUBLIC_API_URL` (app) | the API's address | Unset: the app runs on mocks, offline |
 
 - **Keys** come from `process.env`. On a host, the platform injects them. In dev, the repo's `.env` (gitignored) is loaded with Node's `--env-file`. The key is named `PANTRY_LLM_API_KEY`, not `ANTHROPIC_API_KEY`, so tools that read the standard name (Claude Code among them) never pick it up.
+- **Free tiers get made-up test profiles only.** A provider's free tier may keep or train on what it's sent, so an environment on one (staging, on Groq) never sees a real user's profile or session.
 - **Validation failure rate.** Every deck logs one line: `{"event":"card_validation","provider","model","validated","failed","rate"}`, counting every card checked, retries included. Aggregating these lines compares providers and models.

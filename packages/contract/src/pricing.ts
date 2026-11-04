@@ -65,3 +65,11 @@ export function budgetStatus(p: Pricing): BudgetStatus {
  */
 export const DealStage = z.enum(["reading", "building", "pricing", "sorting"]);
 export type DealStage = z.infer<typeof DealStage>;
+
+/**
+ * How dear a group is next to the others, from its cheapest item in the
+ * current price table (SPEC §7). Words, never dollars: the engine's prompt
+ * may carry these, but never a price.
+ */
+export const CostBand = z.enum(["low", "mid", "high"]);
+export type CostBand = z.infer<typeof CostBand>;

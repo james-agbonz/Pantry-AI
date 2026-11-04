@@ -147,6 +147,28 @@ describe("completes is never seasoning", () => {
 });
 
 describe("prompts", () => {
+  it("mark each group's cost band when given bands, as words and never dollars", async () => {
+    const llm = new RecordedLlm([fixture("clean-deck.json")]);
+    await dealDeck(input, diet, { llm, vocabulary, bands: { white_fish: "high", rice: "low" }, log: () => {} });
+    const user = llm.calls[0]!.user;
+    expect(user).toMatch(/^white_fish: .* \(high\)$/m);
+    expect(user).toMatch(/buy at most one high group per dish/);
+    expect(user).toMatch(/The user's own groups cost nothing/);
+    expect(user).not.toMatch(/\$\s?\d/);
+    const plain = new RecordedLlm([fixture("clean-deck.json")]);
+    await dealDeck(input, diet, { llm: plain, vocabulary, log: () => {} });
+    expect(plain.calls[0]!.user).not.toMatch(/\((low|mid|high)\)$/m);
+  });
+
+  it("ask for an image prompt that describes only the food, since the server adds the photo style", async () => {
+    const { llm } = await deal([fixture("clean-deck.json")]);
+    const user = llm.calls[0]!.user;
+    expect(user).toMatch(/"image_prompt": only the food on the plate/);
+    expect(user).toMatch(/Nothing on the side or next to the plate/);
+    expect(user).toMatch(/No plate, table, setting, lighting, utensils/);
+    expect(user).not.toMatch(/kitchen light/);
+  });
+
   it("never carry a price", async () => {
     const r = await deal([fixture("deck-three-bad.json"), ...["card-fix-tofu.json", "card-fix-chickpea.json", "card-fix-omelette.json"].map(fixture)]);
     for (const call of r.llm.calls) {

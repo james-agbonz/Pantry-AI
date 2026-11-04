@@ -7,8 +7,8 @@ main = "src/worker.ts"
 compatibility_date = "2026-09-01"
 compatibility_flags = ["nodejs_compat"]
 
-# Offline mock until the key exists. Then set LLM_PROVIDER = "anthropic" and
-# LLM_MODEL = "claude-sonnet-5" here (or in the dashboard) and redeploy.
+# Offline mock until a paid key exists. Then set the provider and model here
+# (e.g. LLM_PROVIDER = "anthropic", LLM_MODEL = "claude-sonnet-5") and redeploy.
 [vars]
 LLM_PROVIDER = "mock"
 
@@ -23,13 +23,23 @@ new_sqlite_classes = ["LimiterObject"]
 [env.staging]
 name = "pantry-api-staging"
 
-# Staging uses the real model. Its key is a secret on staging only:
+# Staging runs on free tiers: Groq for the model, Workers AI for photos.
+# Free tiers get made-up test profiles only, never a real user's data.
+# The Groq key is a secret on staging only:
 #   npx wrangler secret put PANTRY_LLM_API_KEY --env staging
 [env.staging.vars]
-LLM_PROVIDER = "anthropic"
-LLM_MODEL = "claude-sonnet-5"
+LLM_PROVIDER = "openai-compatible"
+LLM_BASE_URL = "https://api.groq.com/openai/v1"
+LLM_MODEL = "openai/gpt-oss-120b"
+IMAGE_PROVIDER = "workers-ai"
+IMAGE_MODEL = "@cf/black-forest-labs/flux-1-schnell"
+IMAGE_STEPS = "4"
 # Log each raw model reply, to re-record the engine's sample responses.
 PANTRY_LOG_REPLIES = "1"
+
+# Workers AI, for photos. No key: the binding is the account's.
+[env.staging.ai]
+binding = "AI"
 
 # Workers Logs: every request with its CPU time, readable in the dashboard.
 [env.staging.observability]

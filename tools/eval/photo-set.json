@@ -1,0 +1,86 @@
+[
+  {
+    "id": "breakfast-tacos",
+    "name": "Egg & Black Bean Breakfast Tacos",
+    "prompt": "scrambled eggs with black beans and bell pepper folded into warm tortillas, topped with melted cheese and salsa verde, orange wedges on the side",
+    "watch": "Model listed a side (orange wedges); a fork appeared",
+    "run2": "b-d2-c0"
+  },
+  {
+    "id": "sardine-noodles",
+    "name": "Microwave Sardine Noodle Bowl",
+    "prompt": "sardines pieces scattered over instant noodles in a bowl",
+    "watch": "Sardines drawn as mussels",
+    "run2": "b-d1-c3"
+  },
+  {
+    "id": "black-bean-chili",
+    "name": "Black Bean Chili with Rice",
+    "prompt": "A bowl of red chili with black beans over fluffy white rice on a simple plate, warm kitchen lighting",
+    "watch": "Small portion lost on a big plate",
+    "run2": "a-d5-c4"
+  },
+  {
+    "id": "frittata",
+    "name": "Cheesy Potato & Onion Frittata",
+    "prompt": "A golden frittata slice showing melted cheese, potatoes, onions, and spinach on a simple plate, kitchen lighting",
+    "watch": "A sliver on a big plate",
+    "run2": "a-d5-c1"
+  },
+  {
+    "id": "chicken-thighs",
+    "name": "Oven‑Roasted Chicken Thighs with Potatoes & Onions",
+    "prompt": "Baked chicken thighs surrounded by roasted potato wedges and onion rings on a rustic plate, kitchen light",
+    "watch": "Plate fills the frame; rustic look",
+    "run2": "a-d5-c3"
+  },
+  {
+    "id": "enchilada-bake",
+    "name": "Ground Beef & Black Bean Enchilada Bake",
+    "prompt": "ground beef and black bean mixture rolled in tortillas, baked until crisp, topped with melted cheese and salsa verde",
+    "watch": "Leafy garnish for a no-cilantro user",
+    "run2": "b-d2-c5"
+  },
+  {
+    "id": "lentil-soup",
+    "name": "Lentil Potato & Onion Soup",
+    "prompt": "A simple bowl of brown lentil potato onion soup on a plain plate, home kitchen lighting",
+    "watch": "Bowl inside a plate",
+    "run2": "a-d5-c0"
+  },
+  {
+    "id": "tofu-stir-fry",
+    "name": "Tofu & Veggie Stir‑Fry over Rice",
+    "prompt": "A bowl of steaming white rice topped with colorful tofu and mixed vegetable stir‑fry, home kitchen setting",
+    "watch": "Uninvited greens on the side",
+    "run2": "a-d5-c5"
+  },
+  {
+    "id": "tuna-noodles",
+    "name": "Microwave Tuna Noodle Bowl",
+    "prompt": "canned tuna flakes and a boiled egg atop instant noodles in a bowl",
+    "watch": "Run 1 drew tuna as sliced meat",
+    "run2": "b-d1-c1"
+  },
+  {
+    "id": "egg-fried-rice",
+    "name": "Egg & Chickpea Fried Brown Rice",
+    "prompt": "scrambled egg mixed with brown rice, chickpeas and orange carrot slices on a plate",
+    "watch": "Garnish herbs added",
+    "run2": "b-d0-c1"
+  },
+  {
+    "id": "beef-stew",
+    "name": "Hearty Beef Stew with Potatoes & Carrots",
+    "prompt": "A rustic bowl of thick beef stew with tender chunks of potato, carrot, and onion, home kitchen ambience",
+    "watch": "Bowl vs plate size",
+    "run2": "a-d5-c2"
+  },
+  {
+    "id": "porridge",
+    "name": "Peanut Butter Carrot Rice Porridge",
+    "prompt": "creamy porridge of brown rice, orange carrot shreds and chickpeas swirled with peanut butter in a bowl",
+    "watch": "Baseline: looked right in Run 2",
+    "run2": "b-d0-c0"
+  }
+]

@@ -1,7 +1,7 @@
 import { budgetStatus, type Card, type PricedCard } from "@pantry/contract";
 import { loadVocabulary, vocabulary } from "@pantry/vocabulary";
 import { describe, expect, it } from "vitest";
-import { itemOptions, priceCard, sortDeck } from "../src";
+import { costBands, itemOptions, priceCard, sortDeck } from "../src";
 
 // A small hand-set table, so the money in these tests never moves when the
 // shipped prices do. Figures follow the SPEC §9 example.
@@ -281,5 +281,29 @@ describe("the shipped price table", () => {
     const p = priceCard(spec, 15, vocabulary, { on: ON });
     expect(p.placeholder).toBe(true);
     expect(p.total).toBeGreaterThan(0);
+  });
+});
+
+describe("costBands", () => {
+  it("ranks every priced group by its cheapest option and cuts the list into thirds", () => {
+    const bands = costBands(vocabulary, ON);
+    const counts = { low: 0, mid: 0, high: 0 };
+    for (const b of Object.values(bands)) counts[b]++;
+    const n = Object.keys(bands).length;
+    expect(n).toBeGreaterThan(30);
+    for (const c of Object.values(counts)) expect(Math.abs(c - n / 3)).toBeLessThanOrEqual(1);
+  });
+
+  it("puts staples low and meat high, and never changes between runs on one table", () => {
+    const bands = costBands(vocabulary, ON);
+    expect(bands.salt).toBe("low");
+    expect(bands.beef_steak).toBe("high");
+    expect(costBands(vocabulary, ON)).toEqual(bands);
+  });
+
+  it("follows the diet: a group with no item the diet allows has no band", () => {
+    const halal = costBands(vocabulary, ON, { halal: true });
+    expect(halal).not.toHaveProperty("bacon");
+    expect(costBands(vocabulary, ON)).toHaveProperty("bacon");
   });
 });

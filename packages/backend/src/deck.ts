@@ -1,6 +1,6 @@
 import type { DealStage, PricedCard, Profile, Session } from "@pantry/contract";
 import { buildConstraints, dealDeck, type DealOptions, type Deal } from "@pantry/engine";
-import { priceCard, sortDeck } from "@pantry/pricing";
+import { costBands, priceCard, sortDeck } from "@pantry/pricing";
 import type { Vocabulary } from "@pantry/vocabulary";
 
 export interface PricedDeal extends Omit<Deal, "cards"> {
@@ -27,7 +27,9 @@ export async function dealPricedDeck(
   const { input, diet } = buildConstraints(profile, session);
   onStage?.("reading");
 
-  const deal = await dealDeck(input, diet, { ...engineOpts, vocabulary });
+  // Cost bands from the same table and day the cards are priced on, so the
+  // model's sense of cheap matches the prices the user sees.
+  const deal = await dealDeck(input, diet, { ...engineOpts, vocabulary, bands: costBands(vocabulary, on, diet) });
   onStage?.("building");
 
   const priced = deal.cards.map((card) => ({ card, pricing: priceCard(card, input.budget, vocabulary, { diet, on }) }));

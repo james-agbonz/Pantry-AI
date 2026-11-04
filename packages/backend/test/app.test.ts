@@ -2,7 +2,7 @@ import type { Profile, Session } from "@pantry/contract";
 import { RecordedLlm, type LlmClient } from "@pantry/engine";
 import { vocabulary } from "@pantry/vocabulary";
 import { describe, expect, it } from "vitest";
-import { createApp, createLlm, currentPriceTable, DEFAULT_LIMITS, Limiter, memoryKV } from "../src";
+import { createApp, createLlm, currentPriceTable, DEFAULT_LIMITS, Limiter, memoryKV, photoPrompt, type ImageClient } from "../src";
 
 const SECRET = "sk-ant-api03-TEST-SECRET-KEY-0123456789";
 const profile: Profile = { goal: "eat_well", condition: null, limits: ["no_pork"], limits_other: [], appliances: ["stove", "microwave", "fridge"], servings: 1, targets: null };
@@ -10,7 +10,7 @@ const session: Session = { have: ["rice", "corn"], have_other: [], budget: 15, a
 const body = { profile, session, local_date: "2026-09-25" };
 const DEVICE = "device-0123456789abcdef";
 
-function setup(llm: LlmClient = createLlm({ provider: "mock", model: "sample-deck" })) {
+function setup(llm: LlmClient = createLlm({ provider: "mock", model: "sample-deck" }), images?: ImageClient) {
   const logs: string[] = [];
   const limiter = new Limiter(memoryKV(), DEFAULT_LIMITS, () => new Date("2026-09-25T12:00:00Z"));
   const app = createApp({
@@ -18,6 +18,7 @@ function setup(llm: LlmClient = createLlm({ provider: "mock", model: "sample-dec
     vocabulary: () => vocabulary,
     priceTable: currentPriceTable,
     limits: limiter,
+    ...(images ? { images } : {}),
     log: (e) => logs.push(JSON.stringify(e)),
     secrets: [SECRET],
   });
@@ -31,7 +32,17 @@ function setup(llm: LlmClient = createLlm({ provider: "mock", model: "sample-dec
       },
       body: JSON.stringify(init.json ?? body),
     });
-  return { app, deck, logs, limiter };
+  const image = (init: { device?: string | null; ip?: string; json?: unknown } = {}) =>
+    app.request("/api/image", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "CF-Connecting-IP": init.ip ?? "1.2.3.4",
+        ...(init.device === null ? {} : { "X-Pantry-Device": init.device ?? DEVICE }),
+      },
+      body: JSON.stringify(init.json ?? { name: "Egg fried rice", prompt: "egg fried rice with corn and green onion" }),
+    });
+  return { app, deck, image, logs, limiter };
 }
 
 /** Reads the whole NDJSON stream. */
@@ -149,6 +160,47 @@ describe("POST /api/deck", () => {
     const prices = await (await app.request("/api/prices")).text();
     for (const out of [text, health, prices, ...logs]) expect(out).not.toContain(SECRET);
     expect(logs.join("\n")).toContain("[redacted]");
+  });
+});
+
+describe("POST /api/image", () => {
+  it("returns the photo's URL for a card's image prompt", async () => {
+    const { image } = setup();
+    const res = await image();
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ url: expect.stringMatching(/^https:\/\//) });
+  });
+
+  it("sends the image model the fixed photo style with the card's name and description", async () => {
+    const prompts: string[] = [];
+    const { image } = setup(undefined, { provider: "test", generate: async (p) => (prompts.push(p), { url: "data:image/jpeg;base64,AA" }) });
+    await image();
+    expect(prompts).toEqual([photoPrompt("Egg fried rice", "egg fried rice with corn and green onion")]);
+  });
+
+  it("a failed photo is { url: null }, so the card shows its fallback", async () => {
+    const { image } = setup(undefined, { provider: "test", generate: async () => null });
+    expect(await (await image()).json()).toEqual({ url: null });
+  });
+
+  it("refuses a missing device ID or a bad prompt, naming the field", async () => {
+    const { image } = setup();
+    expect(await (await image({ device: null })).json()).toEqual({ error: "bad_request", field: "X-Pantry-Device" });
+    expect(await (await image({ json: { name: "Rice", prompt: "" } })).json()).toEqual({ error: "bad_request", field: "prompt" });
+    expect(await (await image({ json: { prompt: "rice" } })).json()).toEqual({ error: "bad_request", field: "name" });
+    expect(await (await image({ json: { name: "x".repeat(121), prompt: "rice" } })).json()).toEqual({ error: "bad_request", field: "name" });
+    expect((await image({ json: { name: "Rice", prompt: "x".repeat(1241) } })).status).toBe(400);
+    expect((await image({ json: { name: "Rice", prompt: "ok", extra: 1 } })).status).toBe(400);
+  });
+
+  it("caps photos per IP per minute with 429 rate_limit, without calling the model", async () => {
+    let calls = 0;
+    const { image } = setup(undefined, { provider: "test", generate: async () => (calls++, { url: "data:image/jpeg;base64,AA" }) });
+    for (let i = 0; i < 40; i++) await image();
+    const over = await image();
+    expect(over.status).toBe(429);
+    expect(await over.json()).toEqual({ error: "rate_limit" });
+    expect(calls).toBe(40);
   });
 });
 

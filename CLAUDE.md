@@ -9,6 +9,7 @@ Pantry is a working name.
 - `docs/SPEC.md` — every product decision. It is settled; don't redesign it. If something is missing or contradictory, ask.
 - `docs/DESIGN.md` — brand book and UI rules.
 - `design/tokens.json` — colours, type, spacing, radius. Use tokens, never raw values.
+- `docs/STAGING-LOG.md` — results of every staging run: numbers, photos, what changed. Add a section after each run.
 - `docs/BACKLOG.md` — everything parked: before launch, and later. Check it before planning a step; add to it instead of leaving to-dos in chat.
 
 ## Build order — one piece at a time, confirm before moving on
@@ -31,12 +32,13 @@ Pantry is a working name.
 - Zod for runtime validation; types are inferred from the schemas. Vitest for tests.
 - `packages/contract` — engine input, card output, card validation, and the onboarding profile and session (SPEC §3–§5, §7).
 - `packages/vocabulary` — families → groups → items (SPEC §6). `data/groups.json` never changes; `data/price-table.json` is the versioned monthly table (items and prices), checked on load. A monthly refresh edits only the price table, and the app fetches it from the backend (SPEC §16), so no release is needed.
+- `tools/eval` — staging eval runs (docs/STAGING-LOG.md): a fixed 12-dish photo set and 10 made-up profiles. `node tools/eval/run.mjs --base <url> --out <dir> --photos --profiles halal-8,noodles-5`.
 - `tools/prices` — the monthly price refresh (step 7): StatCan import, hand-entry CSV, coverage report. Produces data only.
 - `packages/pricing` — pricing and deck sort (SPEC §9, §10), in whole cents. Pure; runs on the server and on the phone for swaps.
 - `packages/engine` — constraint builder and recipe engine (SPEC §7). Pure logic; talks to a model only through the `LlmClient` interface.
 - `apps/mobile` — the Expo app (expo-router, routes in `src/app/`). Theme comes from `design/tokens.json` via `src/theme`; a test fails on raw colours or sizes elsewhere. Vitest covers pure helpers. `npm run e2e` clicks through the real app in Expo web with Playwright (onboarding, deck, meal, settings, and a responsiveness check that catches render loops); run it before merging screen changes. First time: `npx playwright install chromium` in `apps/mobile`. `npm run e2e:api` runs the app against the real API over HTTP (Node dev server, mock model). Decks and photos come through `DeckSource` / `ImageSource` (`src/data`); until `/api/deck` exists they're mocks in `src/mock`, whose prices are placeholders and whose pricing and sort are stand-ins for step 6. Root `overrides` pins one copy of react-native-reanimated and react-native-worklets (expo-router otherwise pulls a second, newer one). Pins TypeScript ~6.0 because Expo SDK 57 requires it; the packages use 7.
 - `packages/needs` — needs calculator: body stats → daily `targets` (SPEC §8).
-- `packages/backend` — the API (SPEC §16): Hono routes, server-side deck limits, config, model and image adapters. The only package that reads env or holds keys. Runs as a Cloudflare Worker (`src/worker.ts`, `wrangler.toml`; limits in a Durable Object) or locally (`npm run serve -w @pantry/backend`, port 8787, limits in memory). `npm run deal -w @pantry/backend` deals one deck. Deploy: `npm run deploy -w @pantry/backend` (or `deploy:staging`); the key is a Wrangler secret.
+- `packages/backend` — the API (SPEC §16): Hono routes, server-side deck and photo limits, config, model adapters (`anthropic`, `openai-compatible`, `mock`) and image adapters (`workers-ai` via the Worker's `AI` binding, `mock`). The only package that reads env or holds keys. Staging runs on free tiers (Groq `openai/gpt-oss-120b`, Workers AI flux-1-schnell): made-up test profiles only. Runs as a Cloudflare Worker (`src/worker.ts`, `wrangler.toml`; limits in a Durable Object) or locally (`npm run serve -w @pantry/backend`, port 8787, limits in memory). `npm run deal -w @pantry/backend` deals one deck. Deploy: `npm run deploy -w @pantry/backend` (or `deploy:staging`); the key is a Wrangler secret.
 
 ## Open decisions — ask the user before scaffolding
 

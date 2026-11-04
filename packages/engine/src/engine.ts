@@ -1,4 +1,4 @@
-import { validateCard, validateDeck, type Card, type CardError, type EngineInput, type ValidateContext } from "@pantry/contract";
+import { validateCard, validateDeck, type Card, type CardError, type CostBand, type EngineInput, type ValidateContext } from "@pantry/contract";
 import type { Diet, Vocabulary } from "@pantry/vocabulary";
 import type { LlmClient } from "./llm";
 import { cardPrompt, deckPrompt, type PromptGroup } from "./prompt";
@@ -19,6 +19,8 @@ export interface DealOptions {
   vocabulary: Pick<Vocabulary, "groupList">;
   /** Tries per slot, counting the deck call. Default 3: the deck, then two regenerations. */
   maxAttempts?: number;
+  /** Group → cost band from the price table, shown in the prompt's group list. Omitted: no bands. */
+  bands?: Readonly<Record<string, CostBand>>;
   /** Receives one `card_validation` event per deck. Default: a JSON line on `console.info`. */
   log?: (event: { event: "card_validation" } & ValidationStats) => void;
 }
@@ -38,9 +40,12 @@ export interface Deal {
  * unchecked. Ids are assigned here, after validation.
  */
 export async function dealDeck(input: EngineInput, diet: Diet, opts: DealOptions): Promise<Deal> {
-  const { llm, vocabulary, maxAttempts = 3, log = defaultLog } = opts;
+  const { llm, vocabulary, maxAttempts = 3, log = defaultLog, bands } = opts;
   const groups = vocabulary.groupList(diet);
-  const promptGroups: PromptGroup[] = groups.map((g) => ({ ...g, label: g.label ?? g.group }));
+  const promptGroups: PromptGroup[] = groups.map((g) => {
+    const band = bands?.[g.group];
+    return { ...g, label: g.label ?? g.group, ...(band ? { band } : {}) };
+  });
   const ctx: ValidateContext = { input, groups };
 
   let validated = input.deck;

@@ -20,9 +20,11 @@ export interface LimitConfig {
   perIpPerMinute: number;
   /** All decks per UTC day: a circuit breaker in front of the Console spending limit. */
   globalPerDay: number;
+  /** Photo requests per IP per minute: six per deck, five decks a minute, with room to spare. */
+  imagesPerIpPerMinute: number;
 }
 
-export const DEFAULT_LIMITS: LimitConfig = { perDevicePerDay: 3, perIpPerDay: 200, perIpPerMinute: 5, globalPerDay: 2000 };
+export const DEFAULT_LIMITS: LimitConfig = { perDevicePerDay: 3, perIpPerDay: 200, perIpPerMinute: 5, globalPerDay: 2000, imagesPerIpPerMinute: 40 };
 
 export interface KeyValue {
   get(key: string): Promise<unknown>;
@@ -120,6 +122,17 @@ export class Limiter {
   }
 
   /**
+   * Allows one photo request, or refuses it. Photos cost money per call, so
+   * an IP gets a burst cap; they aren't counted against the device's decks.
+   */
+  async allowImage(ip: string): Promise<{ ok: true } | (Refusal & { reason: "rate_limit" })> {
+    const minuteKey = `ip:${ip}:img:${Math.floor(this.now().getTime() / 60_000)}`;
+    await this.bump(minuteKey, 1);
+    if ((await this.count(minuteKey)) > this.config.imagesPerIpPerMinute) return { ok: false, status: 429, reason: "rate_limit" };
+    return { ok: true };
+  }
+
+  /**
    * Gives a slot back. Only for a server-side failure (the model errored, or
    * every card was dropped): never because the phone disconnected, since the
    * model cost is spent either way.
@@ -137,7 +150,7 @@ export class Limiter {
     let removed = 0;
     for (const key of await this.kv.keys("")) {
       const day = /:day:(\d{4}-\d{2}-\d{2})$/.exec(key)?.[1] ?? /^global:(\d{4}-\d{2}-\d{2})$/.exec(key)?.[1];
-      const minute = /:min:(\d+)$/.exec(key)?.[1];
+      const minute = /:(?:min|img):(\d+)$/.exec(key)?.[1];
       if ((day && day < cutoff) || (minute && Number(minute) < minuteCutoff)) {
         await this.kv.delete(key);
         removed++;

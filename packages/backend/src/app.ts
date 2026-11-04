@@ -5,11 +5,14 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { z } from "zod";
 import { dealPricedDeck } from "./deck";
+import { MockImageClient, PHOTO_STYLE, photoPrompt, type ImageClient } from "./image";
 import type { Refusal, Request as LimitRequest, Reservation } from "./limits";
 
 /** What the routes need; the Worker and the Node dev server each supply their own. */
 export interface AppDeps {
   llm: LlmClient;
+  /** Dish photos (SPEC §11). Default: the mock placeholder. */
+  images?: ImageClient;
   /** The vocabulary with the current price table. */
   vocabulary: () => Vocabulary;
   /** The current price table, as served to phones. */
@@ -17,6 +20,7 @@ export interface AppDeps {
   limits: {
     reserve(r: LimitRequest): Promise<Reservation | Refusal>;
     release(r: Reservation): Promise<void>;
+    allowImage(ip: string): Promise<{ ok: true } | Refusal>;
   };
   /** One JSON line per event. Anything secret is redacted before it's written. */
   log?: (event: Record<string, unknown>) => void;
@@ -39,10 +43,26 @@ const DeckRequest = z.strictObject({
   local_date: z.iso.date(),
 });
 
+/**
+ * The card's name and `image_prompt`. The name keeps the dish in the photo
+ * prompt even when the model's `image_prompt` is vague. With the style
+ * template added, the whole prompt stays under the 2,048 image models accept.
+ */
+const ImageRequest = z.strictObject({
+  name: z.string().trim().min(1).max(120),
+  prompt: z.string().trim().min(1).max(1240),
+});
+
+/** Behind Cloudflare the client IP is in CF-Connecting-IP; elsewhere the first X-Forwarded-For hop. */
+const clientIp = (header: (name: string) => string | undefined) =>
+  header("CF-Connecting-IP") ?? header("X-Forwarded-For")?.split(",")[0]?.trim() ?? "unknown";
+
 export function createApp(deps: AppDeps) {
   const secrets = (deps.secrets ?? []).filter((s) => s.length >= 8);
   const redact = (text: string) => secrets.reduce((t, s) => t.split(s).join("[redacted]"), text);
   const log = (event: Record<string, unknown>) => (deps.log ?? ((e) => console.info(JSON.stringify(e))))(JSON.parse(redact(JSON.stringify(event))));
+
+  const images = deps.images ?? new MockImageClient();
 
   const app = new Hono();
   if (deps.allowedOrigins?.length) {
@@ -88,8 +108,7 @@ export function createApp(deps: AppDeps) {
       return c.json({ error: "bad_request", field: "body" }, 400);
     }
 
-    // Behind Cloudflare the client IP is in CF-Connecting-IP; elsewhere the first X-Forwarded-For hop.
-    const ip = c.req.header("CF-Connecting-IP") ?? c.req.header("X-Forwarded-For")?.split(",")[0]?.trim() ?? "unknown";
+    const ip = clientIp((n) => c.req.header(n));
     const held = await deps.limits.reserve({ device: device.data, ip, localDate: body.local_date });
     if (!held.ok) {
       log({ event: "deck_refused", reason: held.reason });
@@ -144,6 +163,32 @@ export function createApp(deps: AppDeps) {
       },
     });
     return new Response(stream, { headers: { "Content-Type": "application/x-ndjson", "Cache-Control": "no-store" } });
+  });
+
+  /**
+   * One dish photo (SPEC §11). `{ url: null }` means it failed, and the card
+   * shows its plain fallback; a photo never blocks a card.
+   */
+  app.post("/api/image", async (c) => {
+    const device = DeviceId.safeParse(c.req.header("X-Pantry-Device"));
+    if (!device.success) return c.json({ error: "bad_request", field: "X-Pantry-Device" }, 400);
+    let prompt: string;
+    try {
+      const parsed = ImageRequest.safeParse(await c.req.json());
+      if (!parsed.success) return c.json({ error: "bad_request", field: parsed.error.issues[0]?.path.join(".") ?? "" }, 400);
+      prompt = photoPrompt(parsed.data.name, parsed.data.prompt);
+    } catch {
+      return c.json({ error: "bad_request", field: "body" }, 400);
+    }
+    const allowed = await deps.limits.allowImage(clientIp((n) => c.req.header(n)));
+    if (!allowed.ok) {
+      log({ event: "image_refused", reason: allowed.reason });
+      return c.json({ error: allowed.reason }, allowed.status);
+    }
+    const image = await images.generate(prompt);
+    log({ event: "image_served", style: PHOTO_STYLE, ok: image !== null });
+    c.header("Cache-Control", "no-store");
+    return c.json({ url: image?.url ?? null });
   });
 
   app.notFound((c) => c.json({ error: "not_found" }, 404));

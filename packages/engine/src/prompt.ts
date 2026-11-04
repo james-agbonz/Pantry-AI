@@ -1,9 +1,11 @@
-import { excludedBy, type CardError, type Condition, type EngineInput, type GroupRef } from "@pantry/contract";
+import { excludedBy, type CardError, type Condition, type CostBand, type EngineInput, type GroupRef } from "@pantry/contract";
 import type { LlmRequest } from "./llm";
 
 /** A group as the prompt shows it. `label` comes from the vocabulary. */
 export interface PromptGroup extends GroupRef {
   label: string;
+  /** How dear the group is next to the others, from the price table. Never a price. */
+  band?: CostBand;
 }
 
 /** SPEC §7 condition rules, as dish rules for the model. */
@@ -112,15 +114,18 @@ function context(input: EngineInput, groups: readonly PromptGroup[]): string[] {
       `- "completes" is only for protein, vegetables or fibre that round out the meal. Never seasoning, spices, sauces, oil, garlic, lemon, broth or anything added for flavour: if the dish needs it, it's "needed"; otherwise leave it out.`,
       `- Quantities for ${input.servings} serving${input.servings === 1 ? "" : "s"}. "kcal" and "protein_g" are per serving.`,
       `- Budget is ${input.budget} CAD for everything bought: favour cheap staples. Never state a cost; leave all money out of the card.`,
+      groups.some((g) => g.band)
+        ? `- Each group in the list is marked low, mid or high: what buying it costs next to the others (a whole pack, so big bags rank high). The user's own groups cost nothing. Build what must be bought on low groups. With a tight budget, buy at most one high group per dish.`
+        : "",
       `- ${GOAL_RULES[input.goal]}`,
       perDish ? `- ${perDish}` : "",
       input.condition ? `- ${CONDITION_RULES[input.condition]}` : "",
       input.avoid.length ? `- Don't suggest these dishes again: ${input.avoid.join("; ")}.` : "",
-      `- "image_prompt": home cooking on a normal plate, realistic portion, kitchen light. A cheap dinner must not look like an expensive one.`,
+      `- "image_prompt": only the food on the plate: the dish's visible ingredients and how they look, e.g. "flaked canned tuna and a soft-boiled egg over instant noodles with spinach". Name each ingredient plainly ("canned tuna", not "protein"), and say how it looks when it could be mistaken for something else ("canned sardine fillets with silver skin"). Nothing on the side or next to the plate. No plate, table, setting, lighting, utensils, or garnish that isn't in the dish: the photo style is added later. Describe the food at its most appetising (browned, glossy, crisp, steaming), but only what the recipe really makes.`,
       `- Leave "id" as "".`,
     ]
       .filter(Boolean)
       .join("\n"),
-    `Group list (id: label):\n${allowed.map((g) => `${g.group}: ${g.label}`).join("\n")}`,
+    `Group list (id: label${allowed.some((g) => g.band) ? " (cost)" : ""}):\n${allowed.map((g) => `${g.group}: ${g.label}${g.band ? ` (${g.band})` : ""}`).join("\n")}`,
   ];
 }

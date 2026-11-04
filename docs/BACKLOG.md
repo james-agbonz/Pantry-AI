@@ -10,8 +10,13 @@ Everything parked so far. `docs/SPEC.md` is what the app does; this is what's st
   - Browser lookups are paused until nofrills.ca is allowed in the Claude extension's site permissions.
 - **Check allergen tags against real product labels.** The `contains` tags in `packages/vocabulary/data/groups.json` were set by hand.
 - **Kitchen illustration** for the onboarding appliances screen, replacing the tiles. The one exception to "photos only" (DESIGN.md › Imagery).
-- **Real food photos:** a real `ImageClient` adapter (Flux), behind `IMAGE_PROVIDER`.
-- **API key** on a Console account with a spending limit, as `PANTRY_LLM_API_KEY` on the host. Then re-record the engine's sample responses (`packages/engine/test/fixtures`) from the real model; the current ones were written by hand.
+- **Photos in the app:** an `ImageSource` that calls `POST /api/image` with the card's `name` and `image_prompt` when `EXPO_PUBLIC_API_URL` is set (the `workers-ai` adapter and the route exist; the app still uses the mock that always fails). Card and deck views need to scale the photo with `cover`.
+- **Smaller photos:** resize each flux photo to 512×512 WebP on the Worker (Cloudflare Images binding) before sending it. Plate style brought the median to ~337 KB (STAGING-LOG Run 2), still ~2 MB a deck; 512 WebP should be ~30–60 KB.
+- **Photo judge:** score each eval photo automatically with a vision model (only the plate? right food? unlisted garnish?) instead of by eye, so `tools/eval` gives numbers. Check first that a free or cheap vision model is available.
+- **Photo steps:** try 6 steps instead of 4 if photos still drift from their prompt. Costs more neurons per photo.
+- **"Report a problem" button** in the app.
+- **Privacy policy.**
+- **API key** on a paid account with a spending limit, as `PANTRY_LLM_API_KEY` on the host. Staging is on Groq's free tier (`openai/gpt-oss-120b`), made-up test profiles only. Then re-record the engine's sample responses (`packages/engine/test/fixtures`) from the real model; the current ones were written by hand.
 - **App name and logo.** Packages use `pantry` until then.
 - **Deploy the Worker** (`npm run deploy -w @pantry/backend`, after `wrangler login`), then measure a real deal's CPU time. Workers Free allows 10 ms per request; move to Workers Paid (~$5 a month) if it goes over. Point the app at it with `EXPO_PUBLIC_API_URL`.
 
