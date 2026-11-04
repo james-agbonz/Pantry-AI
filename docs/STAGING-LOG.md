@@ -8,6 +8,38 @@ How a run is measured: decks go to `POST /api/deck` from a script, each with its
 
 ---
 
+## Run 5 — 2026-11-04
+
+**Config:** as Run 4, with photo style `plate-v4`. Worker version `eca68a81`. Photos only, from the 12-dish set. Code as of commit `d71c1ac`, plus this change.
+
+**Why:** after reviewing Run 4, the user ruled that the 45° angle isn't a problem, and that keeping every ingredient visible matters most.
+
+**What changed:** the dish now opens the prompt (`{name}: {dish}`), because flux weighs the start of a prompt most. It's followed by "Every ingredient named here is clearly visible on the plate", then the v3 style unchanged. The description cap dropped to 1,200 characters so the whole prompt stays within 2,048.
+
+**Review page:** https://claude.ai/artifact/6sUQocAVA4iDbAXq396L8A (v3 and v4 side by side)
+
+| | v3 (Run 4) | v4 |
+|---|---|---|
+| Median size | 380 KB | **494 KB** |
+| Largest | 445 KB | 608 KB |
+
+All 12 generated. Median time 1.6 s.
+
+Scored by eye:
+- **Better, the goal of this round:** named ingredients show.
+  - The egg is back in the fried rice.
+  - The porridge shows porridge with chickpeas and carrot.
+  - The frittata shows its cheese and spinach; the chicken plate shows its onion rings.
+- **Worse:**
+  - Plates came out bigger and fill more of the frame (chili, tacos, tuna noodles, stew, porridge). With the dish first, the plate-size wording carries less weight.
+  - Size rose 30%.
+- **No change:**
+  - Herbs on the enchilada bake, chicken and stew.
+  - The sardines are still unclear.
+  - The tuna doesn't show clearly next to the egg.
+
+**Verdict:** keep the dish-first prompt and the "every ingredient visible" line. Next: pin the plate size again, for example by moving the plate sentence straight after the dish, or asking for a wide grey margin. Size is now a reason to pick up the 512 px resize from BACKLOG.
+
 ## Run 4 — 2026-11-04
 
 **Config:** as Run 3, with photo style `plate-v3`. Worker version `3ea182a0`. Photos only: the 12-dish set from `tools/eval/photo-set.json`, the same names and descriptions as Runs 2–3.

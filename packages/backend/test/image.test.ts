@@ -35,7 +35,8 @@ describe("images", () => {
 
   it("photoPrompt names the dish and fixes the style: one plate, plain background, nothing else in frame", () => {
     const p = photoPrompt(" Instant Noodles with Tuna & Egg ", "flaked canned tuna and a soft egg over instant noodles ");
-    expect(p).toContain("On the plate: Instant Noodles with Tuna & Egg, flaked canned tuna and a soft egg over instant noodles");
+    expect(p.startsWith("Instant Noodles with Tuna & Egg: flaked canned tuna and a soft egg over instant noodles")).toBe(true);
+    expect(p).toMatch(/Every ingredient named here is clearly visible on the plate/);
     expect(p).toMatch(/45-degree angle/);
     expect(p).toMatch(/27 cm across, centred and filling the middle two-thirds of the frame, the same size and position in every photo/);
     expect(p).toMatch(/The plate is the only object, on a plain flat light-grey background/);
@@ -46,6 +47,6 @@ describe("images", () => {
   });
 
   it("photoPrompt stays within what image models accept for the longest name and dish the API allows", () => {
-    expect(photoPrompt("n".repeat(120), "d".repeat(1240)).length).toBeLessThanOrEqual(2048);
+    expect(photoPrompt("n".repeat(120), "d".repeat(1200)).length).toBeLessThanOrEqual(2048);
   });
 });

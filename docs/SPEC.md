@@ -283,7 +283,7 @@ Prices and items change monthly; groups never do. So the price table is versione
 ### API (Cloudflare Worker)
 
 - **`POST /api/deck`** — body `{ profile, session, local_date }`, header `X-Pantry-Device`. Streams one JSON line per stage as it finishes (`reading` → `building` → `pricing` → `sorting`), then `{ "deck": [...], "left": 2 }`, so Loading ticks with the real work, never on a timer. Refusals are `429 {"error": "daily_limit" | "rate_limit"}`, `503 {"error": "busy"}`, `400` for a bad request or date; a failure after streaming starts is an `{"error": "server" | "no_cards"}` line.
-- **`POST /api/image`** — body `{ name, prompt }` (the card's name, up to 120 characters, and its `image_prompt`, up to 1,240; the server wraps them in the photo style, §11), header `X-Pantry-Device`. Answers `{ "url": "data:image/jpeg;base64,…" }`, or `{ "url": null }` when the photo failed and the card shows its fallback. Capped per IP per minute (`429 {"error": "rate_limit"}`); photos don't count against the device's decks.
+- **`POST /api/image`** — body `{ name, prompt }` (the card's name, up to 120 characters, and its `image_prompt`, up to 1,200; the server wraps them in the photo style, §11), header `X-Pantry-Device`. Answers `{ "url": "data:image/jpeg;base64,…" }`, or `{ "url": null }` when the photo failed and the card shows its fallback. Capped per IP per minute (`429 {"error": "rate_limit"}`); photos don't count against the device's decks.
 - **`GET /api/prices`** — the current price table; its version is the ETag, so an unchanged table is a `304`.
 - **`GET /api/health`**.
 

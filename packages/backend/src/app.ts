@@ -50,7 +50,7 @@ const DeckRequest = z.strictObject({
  */
 const ImageRequest = z.strictObject({
   name: z.string().trim().min(1).max(120),
-  prompt: z.string().trim().min(1).max(1240),
+  prompt: z.string().trim().min(1).max(1200),
 });
 
 /** Behind Cloudflare the client IP is in CF-Connecting-IP; elsewhere the first X-Forwarded-For hop. */

@@ -189,7 +189,7 @@ describe("POST /api/image", () => {
     expect(await (await image({ json: { name: "Rice", prompt: "" } })).json()).toEqual({ error: "bad_request", field: "prompt" });
     expect(await (await image({ json: { prompt: "rice" } })).json()).toEqual({ error: "bad_request", field: "name" });
     expect(await (await image({ json: { name: "x".repeat(121), prompt: "rice" } })).json()).toEqual({ error: "bad_request", field: "name" });
-    expect((await image({ json: { name: "Rice", prompt: "x".repeat(1241) } })).status).toBe(400);
+    expect((await image({ json: { name: "Rice", prompt: "x".repeat(1201) } })).status).toBe(400);
     expect((await image({ json: { name: "Rice", prompt: "ok", extra: 1 } })).status).toBe(400);
   });
 

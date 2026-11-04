@@ -11,21 +11,24 @@ export interface ImageClient {
 }
 
 /** The photo style's id, logged with every photo so runs can be compared. */
-export const PHOTO_STYLE = "plate-v3";
+export const PHOTO_STYLE = "plate-v4";
 
 /**
  * The prompt sent to the image model (SPEC §11). The style is fixed here so
  * every photo looks the same: one plate, the same size, on a plain
  * background, nothing else in frame, the food generous and appetising but
- * true to the recipe's portion. The card supplies only the food: its
+ * true to the recipe's portion. The dish comes first because the model pays
+ * most attention to the start of the prompt, and every named ingredient must
+ * show. The card supplies only the food: its
  * name, so the dish is always named, and its `image_prompt`.
  */
 export function photoPrompt(name: string, dish: string): string {
   return [
+    `${name.trim()}: ${dish.trim()}`,
+    "Every ingredient named here is clearly visible on the plate.",
     "Appetising square food photo, camera at a 45-degree angle.",
     "A single round white plate, 27 cm across, centred and filling the middle two-thirds of the frame, the same size and position in every photo.",
     "The plate is the only object, on a plain flat light-grey background.",
-    `On the plate: ${name.trim()}, ${dish.trim()}`,
     "One generous serving, heaped and piled up so it covers most of the plate, true to a real home-cooked portion.",
     "The food looks fresh, juicy and delicious: golden-brown edges, glossy sauce, steam rising from hot food, vibrant colours.",
     "The food is exactly the listed ingredients, with nothing added on top and nothing beside the plate. No herbs or leaves unless listed.",
