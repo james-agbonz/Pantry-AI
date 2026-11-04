@@ -23,6 +23,9 @@ const Env = z
     IMAGE_PROVIDER: z.enum(["workers-ai", "mock"]).default("mock"),
     IMAGE_MODEL: z.string().trim().min(1).optional(),
     IMAGE_STEPS: z.coerce.number().int().min(1).max(8).default(4),
+    /** Square size in px to shrink each photo to, as WebP, on the server. Unset: photos are sent as the model made them. */
+    IMAGE_RESIZE: z.coerce.number().int().min(64).max(1024).optional(),
+    IMAGE_QUALITY: z.coerce.number().int().min(1).max(100).default(75),
     PANTRY_LIMIT_DEVICE_PER_DAY: count(DEFAULT_LIMITS.perDevicePerDay),
     PANTRY_LIMIT_IP_PER_DAY: count(DEFAULT_LIMITS.perIpPerDay),
     PANTRY_LIMIT_IP_PER_MINUTE: count(DEFAULT_LIMITS.perIpPerMinute),
@@ -53,7 +56,7 @@ export type LlmConfig =
   | { provider: "anthropic"; model: string; apiKey: string }
   | { provider: "openai-compatible"; model: string; apiKey: string; baseUrl: string };
 
-export type ImageConfig = { provider: "mock" } | { provider: "workers-ai"; model: string; steps: number };
+export type ImageConfig = { provider: "mock"; resize?: undefined } | { provider: "workers-ai"; model: string; steps: number; resize?: { size: number; quality: number } };
 
 export interface Config {
   llm: LlmConfig;
@@ -77,7 +80,15 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
       : e.LLM_PROVIDER === "openai-compatible"
         ? { provider: e.LLM_PROVIDER, model: e.LLM_MODEL!, apiKey: e.PANTRY_LLM_API_KEY!, baseUrl: e.LLM_BASE_URL!.replace(/\/$/, "") }
         : { provider: e.LLM_PROVIDER, model: e.LLM_MODEL!, apiKey: e.PANTRY_LLM_API_KEY! };
-  const image: ImageConfig = e.IMAGE_PROVIDER === "mock" ? { provider: "mock" } : { provider: e.IMAGE_PROVIDER, model: e.IMAGE_MODEL!, steps: e.IMAGE_STEPS };
+  const image: ImageConfig =
+    e.IMAGE_PROVIDER === "mock"
+      ? { provider: "mock" }
+      : {
+          provider: e.IMAGE_PROVIDER,
+          model: e.IMAGE_MODEL!,
+          steps: e.IMAGE_STEPS,
+          ...(e.IMAGE_RESIZE ? { resize: { size: e.IMAGE_RESIZE, quality: e.IMAGE_QUALITY } } : {}),
+        };
   const limits: LimitConfig = {
     perDevicePerDay: e.PANTRY_LIMIT_DEVICE_PER_DAY,
     perIpPerDay: e.PANTRY_LIMIT_IP_PER_DAY,

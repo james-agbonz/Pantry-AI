@@ -50,6 +50,10 @@ describe("loadConfig", () => {
     expect(() => loadConfig({ ...env, IMAGE_STEPS: "9" })).toThrow(/IMAGE_STEPS/);
     expect(() => loadConfig({ IMAGE_PROVIDER: "workers-ai" })).toThrow(/IMAGE_MODEL is required/);
     expect(loadConfig({ PANTRY_LIMIT_IMAGES_IP_PER_MINUTE: "10" }).limits.imagesPerIpPerMinute).toBe(10);
+    expect(loadConfig({ ...env, IMAGE_RESIZE: "512" }).image).toMatchObject({ resize: { size: 512, quality: 75 } });
+    expect(loadConfig({ ...env, IMAGE_RESIZE: "512", IMAGE_QUALITY: "60" }).image).toMatchObject({ resize: { size: 512, quality: 60 } });
+    expect(loadConfig(env).image).not.toHaveProperty("resize");
+    expect(() => loadConfig({ ...env, IMAGE_RESIZE: "4000" })).toThrow(/IMAGE_RESIZE/);
   });
 
   it("rejects an unknown provider", () => {

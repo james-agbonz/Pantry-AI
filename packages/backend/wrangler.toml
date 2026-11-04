@@ -34,12 +34,19 @@ LLM_MODEL = "openai/gpt-oss-120b"
 IMAGE_PROVIDER = "workers-ai"
 IMAGE_MODEL = "@cf/black-forest-labs/flux-1-schnell"
 IMAGE_STEPS = "4"
+# Shrink each photo to 512 px WebP on the Worker (Cloudflare Images; 5,000 a month free).
+IMAGE_RESIZE = "512"
+IMAGE_QUALITY = "75"
 # Log each raw model reply, to re-record the engine's sample responses.
 PANTRY_LOG_REPLIES = "1"
 
 # Workers AI, for photos. No key: the binding is the account's.
 [env.staging.ai]
 binding = "AI"
+
+# Cloudflare Images, for the photo resize.
+[env.staging.images]
+binding = "IMAGES"
 
 # Workers Logs: every request with its CPU time, readable in the dashboard.
 [env.staging.observability]

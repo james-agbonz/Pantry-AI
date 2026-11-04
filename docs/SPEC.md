@@ -213,7 +213,7 @@ Output becomes `targets`. No body stats (Eat well, or before the first meal) →
 
 ## 11. Images
 
-- Flux Schnell, through the app's own backend so the key stays on the server. On Workers AI the model takes only a prompt and a step count (4), so the photo comes back at the model's own size; the phone scales it into the card.
+- Flux Schnell, through the app's own backend so the key stays on the server. On Workers AI the model takes only a prompt and a step count (4), so the photo comes back at the model's own size (1024×1024 JPEG, ~400–600 KB). The server shrinks it to 512×512 WebP (~10–25 KB) with Cloudflare Images before sending it (`IMAGE_RESIZE`, `IMAGE_QUALITY`); if the resize fails, the original is sent. The phone scales it into the card.
 - Prompt comes from the card's `name` and `image_prompt`. The model's `image_prompt` describes only the food (visible ingredients, named plainly); the server adds the photo style, so every photo matches.
 - All six fire at once; the top card is requested first.
 - The card shows immediately with a `surface-soft` placeholder; the photo fades in.
@@ -320,6 +320,7 @@ Chosen by environment variables, read only by the backend:
 | `IMAGE_PROVIDER` | `workers-ai` · `mock` | Default `mock` |
 | `IMAGE_MODEL` | e.g. `@cf/black-forest-labs/flux-1-schnell` | Required for `workers-ai` |
 | `IMAGE_STEPS` | 1–8 | Default 4 |
+| `IMAGE_RESIZE`, `IMAGE_QUALITY` | px 64–1024; 1–100 | Unset: no resize. Staging: 512 px WebP, quality 75 (needs the `IMAGES` binding) |
 | `PANTRY_LIMIT_DEVICE_PER_DAY`, `_IP_PER_DAY`, `_IP_PER_MINUTE`, `_GLOBAL_PER_DAY`, `_IMAGES_IP_PER_MINUTE` | numbers | Defaults 3, 200, 5, 2000, 40 |
 | `PANTRY_ALLOWED_ORIGINS` | comma-separated origins | Browsers allowed to call the API (the Expo web dev page). Empty in production |
 | `EXPO_PUBLIC_API_URL` (app) | the API's address | Unset: the app runs on mocks, offline |

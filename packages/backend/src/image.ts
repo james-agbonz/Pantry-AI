@@ -81,12 +81,69 @@ export class WorkersAiImageClient implements ImageClient {
   }
 }
 
-export function createImageClient(config: ImageConfig, deps: { ai?: AiBinding; log?: (event: Record<string, unknown>) => void } = {}): ImageClient {
+/** The slice of the Worker's `IMAGES` binding (Cloudflare Images) the resizer uses, so tests can pass a fake. */
+export interface ImagesBinding {
+  input(stream: ReadableStream<Uint8Array>): {
+    transform(t: { width: number; height: number; fit: "cover" }): {
+      output(o: { format: "image/webp"; quality: number }): Promise<{ image(o: { encoding: "base64" }): ReadableStream<Uint8Array> }>;
+    };
+  };
+}
+
+/**
+ * Shrinks every photo another client makes to a small WebP before it leaves
+ * the server: a 1024 px flux JPEG is ~400–600 KB, and a phone card shows it
+ * far smaller. When resizing fails (Cloudflare Images refuses once the
+ * month's free transformations are used, error 9422), the original photo is
+ * sent instead: a photo never fails because of the resize.
+ */
+export class ResizingImageClient implements ImageClient {
+  readonly provider: string;
+
+  constructor(
+    private readonly inner: ImageClient,
+    private readonly images: ImagesBinding,
+    private readonly opts: { size: number; quality: number; log?: (event: Record<string, unknown>) => void },
+  ) {
+    this.provider = inner.provider;
+  }
+
+  async generate(prompt: string): Promise<{ url: string } | null> {
+    const photo = await this.inner.generate(prompt);
+    const match = photo && /^data:image\/[a-z]+;base64,(.+)$/.exec(photo.url);
+    if (!photo || !match) return photo;
+    const started = Date.now();
+    try {
+      const bytes = Uint8Array.from(atob(match[1]!), (c) => c.charCodeAt(0));
+      const result = await this.images
+        .input(new Blob([bytes]).stream())
+        .transform({ width: this.opts.size, height: this.opts.size, fit: "cover" })
+        .output({ format: "image/webp", quality: this.opts.quality });
+      const base64 = await new Response(result.image({ encoding: "base64" })).text();
+      if (!base64) throw new Error("empty resize");
+      this.opts.log?.({ event: "image_resize", ok: true, ms: Date.now() - started, from_bytes: bytes.length, bytes: Math.floor((base64.length * 3) / 4) });
+      return { url: `data:image/webp;base64,${base64}` };
+    } catch (e) {
+      this.opts.log?.({ event: "image_resize", ok: false, ms: Date.now() - started, detail: String(e) });
+      return photo;
+    }
+  }
+}
+
+export function createImageClient(
+  config: ImageConfig,
+  deps: { ai?: AiBinding; images?: ImagesBinding; log?: (event: Record<string, unknown>) => void } = {},
+): ImageClient {
+  const log = deps.log ? { log: deps.log } : {};
+  let client: ImageClient;
   switch (config.provider) {
     case "mock":
       return new MockImageClient();
     case "workers-ai":
       if (!deps.ai) throw new Error("IMAGE_PROVIDER=workers-ai needs the Worker's AI binding; it runs on the Worker only");
-      return new WorkersAiImageClient(deps.ai, { model: config.model, steps: config.steps, ...(deps.log ? { log: deps.log } : {}) });
+      client = new WorkersAiImageClient(deps.ai, { model: config.model, steps: config.steps, ...log });
   }
+  if (!config.resize) return client;
+  if (!deps.images) throw new Error("IMAGE_RESIZE needs the Worker's IMAGES binding; it runs on the Worker only");
+  return new ResizingImageClient(client, deps.images, { ...config.resize, ...log });
 }

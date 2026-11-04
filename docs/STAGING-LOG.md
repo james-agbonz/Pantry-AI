@@ -8,6 +8,45 @@ How a run is measured: decks go to `POST /api/deck` from a script, each with its
 
 ---
 
+## Run 7 — 2026-11-04
+
+**Review page:** https://claude.ai/artifact/1jp7QPbPVTzTygrL4AUVKX (Runs 6 and 7 together)
+
+**Config:** plate-v4 (commit `1540f37`), plus a server-side resize: each photo is shrunk to **512×512 WebP, quality 75**, with Cloudflare Images (the Worker's `IMAGES` binding, `ResizingImageClient`), set by `IMAGE_RESIZE` and `IMAGE_QUALITY`. Worker version `7f2ab367`. Photos only, from the 12-dish set.
+
+| | v4, no resize (Run 5) | v4 + resize |
+|---|---|---|
+| Median size | 494 KB | **13 KB** |
+| Largest | 608 KB | 26 KB |
+| Median time | 1.5 s | 2.8 s |
+| Slowest | 4.9 s | 8.5 s |
+
+- **About 38× smaller.** A deck's six photos drop from ~3 MB to ~80 KB of mobile data.
+- **Quality:** checked at full 512 px. It holds up at card size: the stew looks as good as before, with a little softening in fine texture.
+- **Slower:** the resize adds about 1.3 s per photo in the median, up to ~4 s at worst. All six photos fire at once and the card shows a placeholder until its photo fades in (SPEC §11), so nothing waits on it, but the photo arrives later.
+- **Fallback:** if Cloudflare Images refuses, for example after 5,000 resizes in a month on the free plan (error 9422), the original JPEG is sent instead. Tested with a fake binding, not yet seen live.
+- **Photos vary run to run.** Every run draws new photos, so one dish can look different between runs for reasons that have nothing to do with the change (the lentil soup came out as a small portion this time). Comparisons across runs carry that noise.
+
+**Verdict:** keep the resize.
+
+## Run 6 — 2026-11-04 (reverted)
+
+**Review page:** https://claude.ai/artifact/1jp7QPbPVTzTygrL4AUVKX (Runs 6 and 7 together)
+
+**Config:** plate-v5, tried on Worker `15576758`. The plate sentence moved straight after the dish, the plate shrank to "half the frame's width, with a wide margin of plain light-grey background on every side", and the style text was shortened (619 characters, against v4's 727). Photos only, from the 12-dish set.
+
+| | v4 (Run 5) | v5 |
+|---|---|---|
+| Median size | 494 KB | 418 KB |
+| Largest | 608 KB | 749 KB |
+
+- **Plate size:** smaller on some (sardine noodles, chili, tacos, tuna noodles), unchanged on others (chicken thighs, stir-fry, porridge). Still not consistent.
+- **Regressions on what matters most:**
+  - The egg vanished from the fried rice again, which also became a small heap on a big plate: meagre again.
+  - The lentil soup sat to one side, leaving half the plate empty.
+
+**Verdict: reverted to plate-v4** (commit `1540f37`, redeployed as Worker `7a0a19c3`). Prompt wording looks to have reached its limit on layout: flux-1-schnell at 4 steps doesn't hold a plate size from words. Plate size and file size are better left to the server, so the next step is the 512 px resize.
+
 ## Run 5 — 2026-11-04
 
 **Config:** as Run 4, with photo style `plate-v4`. Worker version `eca68a81`. Photos only, from the 12-dish set. Code as of commit `d71c1ac`, plus this change.

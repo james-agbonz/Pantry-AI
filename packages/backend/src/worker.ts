@@ -7,13 +7,15 @@
 import { DurableObject } from "cloudflare:workers";
 import { loadConfig } from "./config";
 import { Limiter, type KeyValue, type Request as LimitRequest, type Reservation } from "./limits";
-import type { AiBinding } from "./image";
+import type { AiBinding, ImagesBinding as PhotoResizer } from "./image";
 import { appFromConfig } from "./runtime";
 
 export interface Env {
   LIMITER: DurableObjectNamespace<LimiterObject>;
   /** Workers AI, for dish photos when IMAGE_PROVIDER=workers-ai. */
   AI?: Ai;
+  /** Cloudflare Images, for shrinking photos when IMAGE_RESIZE is set. */
+  IMAGES?: ImagesBinding;
   [name: string]: unknown;
 }
 
@@ -69,7 +71,10 @@ export default {
       reserve: (r) => limiter.reserve(r),
       release: (r) => limiter.release(r),
       allowImage: (ip) => limiter.allowImage(ip),
-    }, env.AI ? { ai: env.AI as AiBinding } : {});
+    }, {
+      ...(env.AI ? { ai: env.AI as AiBinding } : {}),
+      ...(env.IMAGES ? { images: env.IMAGES as unknown as PhotoResizer } : {}),
+    });
     return app.fetch(request, env, ctx);
   },
 } satisfies ExportedHandler<Env>;

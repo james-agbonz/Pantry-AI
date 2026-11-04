@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { createImageClient, MockImageClient, photoPrompt, WorkersAiImageClient, type AiBinding } from "../src";
+import { createImageClient, MockImageClient, photoPrompt, ResizingImageClient, WorkersAiImageClient, type AiBinding, type ImagesBinding } from "../src";
 
 describe("images", () => {
   it("mock returns a placeholder and records the prompt", async () => {
@@ -48,5 +48,49 @@ describe("images", () => {
 
   it("photoPrompt stays within what image models accept for the longest name and dish the API allows", () => {
     expect(photoPrompt("n".repeat(120), "d".repeat(1200)).length).toBeLessThanOrEqual(2048);
+  });
+
+  /** A fake Cloudflare Images binding: records what it was asked, answers with fixed base64 or throws. */
+  function fakeImages(answer: string | Error) {
+    const calls: unknown[] = [];
+    const images: ImagesBinding = {
+      input: (stream) => ({
+        transform: (t) => ({
+          output: async (o) => {
+            calls.push({ bytes: (await new Response(stream).arrayBuffer()).byteLength, t, o });
+            if (answer instanceof Error) throw answer;
+            return { image: () => new Response(answer).body! };
+          },
+        }),
+      }),
+    };
+    return { images, calls };
+  }
+  const resized = { ...flux, resize: { size: 512, quality: 75 } };
+
+  it("resize shrinks the photo to a square WebP of the configured size and quality", async () => {
+    const { images, calls } = fakeImages("UklGRgAA");
+    const events: Record<string, unknown>[] = [];
+    const client = createImageClient(resized, { ai: { run: async () => ({ image: "/9j/AAAA" }) }, images, log: (e) => events.push(e) });
+    expect(client).toBeInstanceOf(ResizingImageClient);
+    expect(await client.generate("rice bowl")).toEqual({ url: "data:image/webp;base64,UklGRgAA" });
+    expect(calls).toEqual([{ bytes: 6, t: { width: 512, height: 512, fit: "cover" }, o: { format: "image/webp", quality: 75 } }]);
+    expect(events.at(-1)).toMatchObject({ event: "image_resize", ok: true, from_bytes: 6 });
+  });
+
+  it("resize falls back to the original photo when Cloudflare Images refuses, e.g. over the monthly allowance", async () => {
+    const { images } = fakeImages(new Error("9422: transformation limit exceeded"));
+    const events: Record<string, unknown>[] = [];
+    const client = createImageClient(resized, { ai: { run: async () => ({ image: "/9j/AAAA" }) }, images, log: (e) => events.push(e) });
+    expect(await client.generate("rice bowl")).toEqual({ url: "data:image/jpeg;base64,/9j/AAAA" });
+    expect(events.at(-1)).toMatchObject({ event: "image_resize", ok: false, detail: expect.stringContaining("9422") });
+  });
+
+  it("resize passes a failed photo through as null, and needs the IMAGES binding", async () => {
+    const { images, calls } = fakeImages("UklGRgAA");
+    const failing = createImageClient(resized, { ai: { run: async () => ({}) }, images });
+    expect(await failing.generate("rice bowl")).toBeNull();
+    expect(calls).toHaveLength(0);
+    expect(() => createImageClient(resized, { ai: { run: async () => ({}) } })).toThrow(/IMAGES binding/);
   });
 });
