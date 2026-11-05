@@ -363,6 +363,626 @@
         "ref": "grace-coconut-milk-400-ml",
         "product": "Grace Coconut Milk, 400-ml"
       }
+    },
+    "hammer_nofrills_toronto": {
+      "rice_white_900g": {
+        "ref": "NoFrills20089030_EA",
+        "product": "No Name Long Grain White Rice 907g"
+      },
+      "rice_white_2kg": {
+        "ref": "NoFrills21683048_EA",
+        "product": "Mr Goudas Long Grain White Rice 2kg"
+      },
+      "rice_parboiled_900g": {
+        "ref": "NoFrills20015666_EA",
+        "product": "No Name Long Grain Parboiled Rice 900g"
+      },
+      "rice_jasmine_2kg": {
+        "ref": "NoFrills20144395_EA",
+        "product": "Rooster Thai Hom Mali Scented Jasmine Rice 2kg"
+      },
+      "rice_brown_900g": {
+        "ref": "NoFrills20540043_EA",
+        "product": "No Name Long Grain Brown Rice 900g"
+      },
+      "rice_brown_2kg": {
+        "ref": "NoFrills20009675_EA",
+        "product": "No Name Long Grain Brown Rice 2kg"
+      },
+      "spaghetti_900g": {
+        "ref": "NoFrills20315613002_EA",
+        "product": "No Name Spaghetti 900g"
+      },
+      "penne_900g": {
+        "ref": "NoFrills20315613006_EA",
+        "product": "No Name Penne Rigate Pasta 900g"
+      },
+      "macaroni_900g": {
+        "ref": "NoFrills20315613003_EA",
+        "product": "No Name Elbow Macaroni 900g"
+      },
+      "ramen_single_85g": {
+        "ref": "NoFrills20301274001_EA",
+        "product": "No Name Chicken Flavour Instant Noodle Soup 85g"
+      },
+      "ramen_5pk": {
+        "ref": "NoFrills21417401_EA",
+        "product": "Mama Instant Noodles, Chicken Flavour 5-Pack 275g"
+      },
+      "rice_vermicelli_400g": {
+        "ref": "NoFrills20967204_EA",
+        "product": "Rooster Kongmoon Rice Stick Vermicelli 400g"
+      },
+      "oats_quick_1kg": {
+        "ref": "NoFrills20876242_EA",
+        "product": "Dan D Pak Quick Oats 1kg"
+      },
+      "oats_large_flake_1kg": {
+        "ref": "NoFrills20923994_EA",
+        "product": "No Name Large Flake 100% Whole Grain Oats 1kg"
+      },
+      "flour_ap_2_5kg": {
+        "ref": "NoFrills20013256_EA",
+        "product": "No Name All-Purpose Flour 2.5kg"
+      },
+      "flour_ww_2_5kg": {
+        "ref": "NoFrills20303325_EA",
+        "product": "No Name Whole Wheat Flour 2.5kg"
+      },
+      "couscous_500g": {
+        "ref": "NoFrills20018894_EA",
+        "product": "Clic Mr. Couscous, Medium 500g"
+      },
+      "bread_white_675g": {
+        "ref": "NoFrills21609717_EA",
+        "product": "No Name Italian Thick Sliced Bread 675g"
+      },
+      "bread_ww_675g": {
+        "ref": "NoFrills21666666_EA",
+        "product": "No Name Whole Wheat Italian Thick Sliced Bread 675g"
+      },
+      "buns_hamburger_8pk": {
+        "ref": "NoFrills20297455_EA",
+        "product": "Wonder White Hamburger Buns 8pk 8x47.25g"
+      },
+      "bagels_6pk": {
+        "ref": "NoFrills21297816_EA",
+        "product": "No Name Bagel Plain, 6 Pack 510g"
+      },
+      "crackers_saltine_450g": {
+        "ref": "NoFrills20795391_EA",
+        "product": "No Name Plain Tops Soda Crackers 454g"
+      },
+      "black_beans_can_540ml": {
+        "ref": "NoFrills20325921005_EA",
+        "product": "No Name Black Beans 540ml"
+      },
+      "black_beans_dry_900g": {
+        "ref": "NoFrills20322134_EA",
+        "product": "Clic Black Turtle Beans 907g"
+      },
+      "kidney_beans_can_540ml": {
+        "ref": "NoFrills20111048_EA",
+        "product": "Suraj Dark Red Kidney Beans 540ml"
+      },
+      "kidney_beans_dry_900g": {
+        "ref": "NoFrills20629494_EA",
+        "product": "PC Blue Menu Red Kidney Beans 900g"
+      },
+      "white_kidney_can_540ml": {
+        "ref": "NoFrills20148074_EA",
+        "product": "No Name White Kidney Beans 540ml"
+      },
+      "navy_beans_dry_900g": {
+        "ref": "NoFrills20314160_EA",
+        "product": "Clic Navy Beans, White 907g"
+      },
+      "chickpeas_can_540ml": {
+        "ref": "NoFrills20540264_EA",
+        "product": "Suraj Chickpeas 540ml"
+      },
+      "chickpeas_dry_900g": {
+        "ref": "NoFrills21173924_EA",
+        "product": "PC Blue Menu Chickpeas 900g"
+      },
+      "lentils_red_900g": {
+        "ref": "NoFrills21671588_EA",
+        "product": "Dunya Harvest Red Split Lentils 900g"
+      },
+      "lentils_green_900g": {
+        "ref": "NoFrills20319656_EA",
+        "product": "Clic Laird Green Lentils 907g"
+      },
+      "lentils_can_540ml": {
+        "ref": "NoFrills20540269_EA",
+        "product": "Suraj Lentils 540ml"
+      },
+      "baked_beans_tomato_398ml": {
+        "ref": "NoFrills21722501_EA",
+        "product": "No Name Beans In Tomato Sauce 398ml"
+      },
+      "split_peas_yellow_900g": {
+        "ref": "NoFrills20298039_EA",
+        "product": "Clic Split Peas, Yellow 907g"
+      },
+      "onion_yellow_3lb": {
+        "ref": "NoFrills20811994001_EA",
+        "product": "Farmer's Market Yellow Onions, 3 lb Bag 1.36kg"
+      },
+      "potato_russet_5lb": {
+        "ref": "NoFrills20616206001_EA",
+        "product": "President's Choice Russet Potatoes, 5 lb Bag 2.268kg"
+      },
+      "potato_russet_10lb": {
+        "ref": "NoFrills20601020001_EA",
+        "product": "Farmer's Market Russet Potatoes, 10 lb Bag 4.54kg"
+      },
+      "potato_yellow_5lb": {
+        "ref": "NoFrills20601014001_EA",
+        "product": "President's Choice Yellow Potatoes, 5 lb Bag 2.268kg"
+      },
+      "tomatoes_diced_796ml": {
+        "ref": "NoFrills20600787_EA",
+        "product": "No Name Diced Tomatoes 796ml"
+      },
+      "tomatoes_crushed_796ml": {
+        "ref": "NoFrills20219574002_EA",
+        "product": "Aurora Tomatoes, Crushed 796ml"
+      },
+      "tomatoes_whole_796ml": {
+        "ref": "NoFrills20601347_EA",
+        "product": "No Name Whole Plum Tomatoes 796ml"
+      },
+      "tomato_paste_156ml": {
+        "ref": "NoFrills20118094_EA",
+        "product": "No Name Pure Tomato Paste 156ml"
+      },
+      "spinach_baby_142g": {
+        "ref": "NoFrills21203746_EA",
+        "product": "President's Choice Baby Spinach 0.142kg"
+      },
+      "spinach_frozen_300g": {
+        "ref": "NoFrills20611796_EA",
+        "product": "No Name Chopped Spinach 300g"
+      },
+      "mushrooms_white_227g": {
+        "ref": "NoFrills20776239_EA",
+        "product": "President's Choice Whole White Mushrooms 227g"
+      },
+      "corn_kernel_can_341ml": {
+        "ref": "NoFrills21504776_EA",
+        "product": "No Name Whole Kernel Corn 341ml"
+      },
+      "frozen_mixed_veg_750g": {
+        "ref": "NoFrills20301012_EA",
+        "product": "No Name Mixed Vegetables 750g"
+      },
+      "frozen_peas_carrots_750g": {
+        "ref": "NoFrills20248035001_EA",
+        "product": "Ferma Frozen Peas & Carrots 750g"
+      },
+      "frozen_peas_750g": {
+        "ref": "NoFrills20312260_EA",
+        "product": "No Name Assorted Sizes Green Peas 750g"
+      },
+      "peaches_can_398ml": {
+        "ref": "NoFrills20628585001_EA",
+        "product": "No Name Clingstone Peach Slices in Juice from Concentrate 398ml"
+      },
+      "fruit_cocktail_398ml": {
+        "ref": "NoFrills20618836_EA",
+        "product": "No Name Fruit Cocktail in Mixed Fruit Juice from Concentrate 398ml"
+      },
+      "milk_2pct_2l": {
+        "ref": "NoFrills20017001_EA",
+        "product": "Neilson 2% Milk 2l"
+      },
+      "milk_2pct_4l": {
+        "ref": "NoFrills20188873_EA",
+        "product": "Neilson 2% Milk 4l"
+      },
+      "cheddar_400g": {
+        "ref": "NoFrills21289765_EA",
+        "product": "No Name Mild Cheddar Cheese 400g"
+      },
+      "mozzarella_400g": {
+        "ref": "NoFrills21289761_EA",
+        "product": "No Name Pizza Mozzarella Cheese 400g"
+      },
+      "parmesan_grated_250g": {
+        "ref": "NoFrills21528135_EA",
+        "product": "Kraft Grated Parmesan Cheese 250g"
+      },
+      "yogurt_plain_650g": {
+        "ref": "NoFrills21369752_EA",
+        "product": "Hans Natural Yogurt Plain 2% M.F. 650g"
+      },
+      "sour_cream_500ml": {
+        "ref": "NoFrills20299657_EA",
+        "product": "No Name Sour Cream 500ml"
+      },
+      "chicken_thighs_boneless_700g": {
+        "ref": "NoFrills21606306_EA",
+        "product": "PC Blue Menu Boneless Skinless Chicken Thighs 696g"
+      },
+      "ground_chicken_450g": {
+        "ref": "NoFrills21378465_EA",
+        "product": "President's Choice Free From Extra Lean Ground Chicken 454g"
+      },
+      "ground_turkey_450g": {
+        "ref": "NoFrills20811960_EA",
+        "product": "Maple Leaf Extra Lean Ground Turkey 454g"
+      },
+      "deli_turkey_175g": {
+        "ref": "NoFrills20009282_EA",
+        "product": "Maple Leaf Natural Selections Sliced Deli Turkey Breast, Oven Roasted 175g"
+      },
+      "ground_beef_lean_454g": {
+        "ref": "NoFrills21604443_EA",
+        "product": "Butcher's Choice Lean Ground Beef 0.45kg"
+      },
+      "ground_beef_extra_lean_454g": {
+        "ref": "NoFrills21604812_EA",
+        "product": "Butcher's Choice Extra Lean Ground Beef 0.45kg"
+      },
+      "beef_broth_900ml": {
+        "ref": "NoFrills21189607_EA",
+        "product": "No Name Beef Broth 900ml"
+      },
+      "ground_pork_454g": {
+        "ref": "NoFrills21646160_EA",
+        "product": "Lean Ground Pork 450g"
+      },
+      "bacon_375g": {
+        "ref": "NoFrills21739404_EA",
+        "product": "Smoke House Bacon 375g"
+      },
+      "ham_deli_175g": {
+        "ref": "NoFrills20065285_EA",
+        "product": "Maple Leaf Natural Selections Sliced Black Forest Deli Ham, Smoked 175g"
+      },
+      "pork_sausage_500g": {
+        "ref": "NoFrills21584342_EA",
+        "product": "President's Choice Mild Italian Pork Sausages 500g"
+      },
+      "ground_lamb_454g": {
+        "ref": "NoFrills21352008_EA",
+        "product": "President's Choice Free From Australian Lean Ground Lamb 454g"
+      },
+      "basa_frozen": {
+        "ref": "NoFrills21432307_EA",
+        "product": "Premier Basa Fillets 400g"
+      },
+      "salmon_atlantic_frozen_454g": {
+        "ref": "NoFrills21582054_EA",
+        "product": "Kol Yam Atlantic Salmon Fillet, Skin-Off 454g"
+      },
+      "tuna_flaked_light_170g": {
+        "ref": "NoFrills20521648_EA",
+        "product": "No Name Flaked Light Tuna Packed in Water 170g"
+      },
+      "tuna_chunk_light_170g": {
+        "ref": "NoFrills20521647_EA",
+        "product": "No Name Chunk Light Tuna Packed in Water 170g"
+      },
+      "salmon_pink_can_213g": {
+        "ref": "NoFrills20164488_EA",
+        "product": "No Name Sustainably Sourced Wild Pacific Pink Salmon 213g"
+      },
+      "sardines_106g": {
+        "ref": "NoFrills20322242002_EA",
+        "product": "Brunswick Sardines, Soy Oil 106g"
+      },
+      "soy_milk_1_89l": {
+        "ref": "NoFrills20308979_EA",
+        "product": "Silk Soy Milk Alternative, Unsweetened, Dairy Free 1.89l"
+      },
+      "soy_sauce_1l": {
+        "ref": "NoFrills20966900_EA",
+        "product": "Silver Swan Soy Sauce 1l"
+      },
+      "peanut_butter_smooth_1kg": {
+        "ref": "NoFrills20296985001_EA",
+        "product": "No Name Smooth Peanut Butter 1kg"
+      },
+      "peanut_butter_crunchy_1kg": {
+        "ref": "NoFrills20296985002_EA",
+        "product": "No Name Crunchy Peanut Butter 1kg"
+      },
+      "almond_butter_365g": {
+        "ref": "NoFrills21101516_EA",
+        "product": "Nuttin' But Spreads Almond Butter Smooth 365g"
+      },
+      "peanuts_roasted_600g": {
+        "ref": "NoFrills20021666_EA",
+        "product": "Planters Peanuts, Dry Roasted 600g"
+      },
+      "canola_oil_946ml": {
+        "ref": "NoFrills20088990_EA",
+        "product": "No Name 100% Pure Canola Oil 946ml"
+      },
+      "olive_oil_500ml": {
+        "ref": "NoFrills21189775_EA",
+        "product": "Gallo Extra Virgin Olive Oil 500ml"
+      },
+      "margarine_907g": {
+        "ref": "NoFrills20073675_EA",
+        "product": "No Name Margarine 907g"
+      },
+      "salt_1kg": {
+        "ref": "NoFrills21537275_EA",
+        "product": "Mr Goudas Table Salt Iodized 1kg"
+      },
+      "ketchup_1l": {
+        "ref": "NoFrills20102426_EA",
+        "product": "No Name Tomato Ketchup 1l"
+      },
+      "mustard_yellow_400ml": {
+        "ref": "NoFrills20083238_EA",
+        "product": "Frenchs Yellow Mustard 400ml"
+      },
+      "mayonnaise_890ml": {
+        "ref": "NoFrills20627614002_EA",
+        "product": "No Name Mayonnaise 890ml"
+      },
+      "hot_sauce_148ml": {
+        "ref": "NoFrills21392271_EA",
+        "product": "Cholula Original Hot Sauce 150ml"
+      },
+      "pasta_sauce_tomato_650ml": {
+        "ref": "NoFrills21340384_EA",
+        "product": "Prego Pasta Sauce Fresh Mushrooms 645ml"
+      },
+      "salsa_medium_650ml": {
+        "ref": "NoFrills20305182001_EA",
+        "product": "Old El Paso Thick n' Chunky Salsa, Medium 650ml"
+      },
+      "vinegar_white_1l": {
+        "ref": "NoFrills20060473_EA",
+        "product": "No Name Pure White Vinegar 1l"
+      },
+      "bbq_sauce_425ml": {
+        "ref": "NoFrills20547834005_EA",
+        "product": "Bull's-Eye Bold Original BBQ Sauce 425ml"
+      },
+      "sugar_white_2kg": {
+        "ref": "NoFrills20145033_EA",
+        "product": "Lantic Granulated Sugar 2kg"
+      },
+      "brown_sugar_1kg": {
+        "ref": "NoFrills21403215_EA",
+        "product": "Sugrain 100 % Natural Brown Cane Sugar 1kg"
+      },
+      "baking_powder_225g": {
+        "ref": "NoFrills20001923_EA",
+        "product": "Gefen Baking Powder 227g"
+      },
+      "honey_500g": {
+        "ref": "NoFrills21417389_EA",
+        "product": "Tamam Liquid Honey 500g"
+      },
+      "vegetable_broth_900ml": {
+        "ref": "NoFrills21189609_EA",
+        "product": "No Name Vegetable Broth 900ml"
+      },
+      "coconut_milk_400ml": {
+        "ref": "NoFrills21378707_EA",
+        "product": "Rooster Coconut Milk 398ml"
+      }
+    },
+    "hammer_walmart_toronto": {
+      "rice_white_2kg": {
+        "ref": "Walmart2SKX03FD25M1",
+        "product": "Great Value Long Grain White Rice, 2 kg 2kg"
+      },
+      "egg_noodles_375g": {
+        "ref": "Walmart332DXA7MMDYE",
+        "product": "Primo Egg Noodles 375g"
+      },
+      "oats_quick_1kg": {
+        "ref": "Walmart6000195340329",
+        "product": "Great Value Quick Oats 1 kg"
+      },
+      "oats_large_flake_1kg": {
+        "ref": "Walmart10284789",
+        "product": "Quaker Large Flake Oats, 1kg"
+      },
+      "flour_ap_2_5kg": {
+        "ref": "Walmart6000196138271",
+        "product": "Great Value Original All-Purpose Flour, 2.5 kg 2.5kg"
+      },
+      "bread_white_675g": {
+        "ref": "Walmart6000187473702",
+        "product": "Wonder White Sliced Bread, No Artificial Flavours or Colours, Baked in Canada, 675 g"
+      },
+      "bread_ww_675g": {
+        "ref": "Walmart6000206630673",
+        "product": "Great Value Whole Wheat Bread, Source of 10 Essential Nutrients, 675 g"
+      },
+      "tortillas_flour_10pk": {
+        "ref": "Walmart6000205832038",
+        "product": "Casa Mendosa Original Soft Flour Tortillas, No Artificial Flavours or Colours, 7\" Medium, 10 Count, 340 g"
+      },
+      "buns_hamburger_8pk": {
+        "ref": "Walmart6000206630335",
+        "product": "Great Value Hamburger Buns, Source of 9 Essential Nutrients, 8 Count, 360 g"
+      },
+      "buns_hotdog_8pk": {
+        "ref": "Walmart6000206630055",
+        "product": "Great Value Hot Dog Buns, Source of 8 Essential Nutrients, 8 Count, 344 g"
+      },
+      "black_beans_can_540ml": {
+        "ref": "Walmart10275057",
+        "product": "Great Value Black Turtle Beans, 540 mL 540ml"
+      },
+      "onion_yellow_3lb": {
+        "ref": "Walmart6000197111438",
+        "product": "Yellow onions, bagged, Your Fresh Market, 3 lb bag"
+      },
+      "potato_russet_5lb": {
+        "ref": "Walmart6000196075655",
+        "product": "Your Fresh Market Russet Potatoes 5 lb, Shelf Stable"
+      },
+      "potato_russet_10lb": {
+        "ref": "Walmart6000194575236",
+        "product": "Earthfresh Russet Potatoes 10 lb (4.54 kg), Shelf Stable"
+      },
+      "potato_yellow_5lb": {
+        "ref": "Walmart6000196075652",
+        "product": "Your Fresh Market Yellow Potatoes, 5 lb Bag"
+      },
+      "tomatoes_diced_796ml": {
+        "ref": "Walmart10287585",
+        "product": "Unico Diced Tomatoes 796ml"
+      },
+      "tomatoes_crushed_796ml": {
+        "ref": "Walmart10287396",
+        "product": "Unico Crushed Tomatoes 796ml"
+      },
+      "tomatoes_whole_796ml": {
+        "ref": "Walmart6000198162126",
+        "product": "Mutti Whole Peeled Tomatoes 796mL"
+      },
+      "tomato_paste_156ml": {
+        "ref": "Walmart6000188762632",
+        "product": "Unico Tomato Paste 156ml"
+      },
+      "spinach_baby_142g": {
+        "ref": "Walmart1Z471AOSG7GL",
+        "product": "Your Fresh Market Baby Spinach, 142g"
+      },
+      "broccoli_frozen_500g": {
+        "ref": "Walmart6000198574939",
+        "product": "Great Value Frozen Broccoli Florets, 500 g"
+      },
+      "frozen_mixed_veg_750g": {
+        "ref": "Walmart6000191274027",
+        "product": "Great Value Frozen Mixed Vegetables, 750 g"
+      },
+      "frozen_peas_carrots_750g": {
+        "ref": "Walmart6000202249059",
+        "product": "Great Value Frozen Peas and Carrots Mix, 750 g"
+      },
+      "frozen_peas_750g": {
+        "ref": "Walmart6000198512914",
+        "product": "Great Value Frozen Green Peas, 750 g"
+      },
+      "apple_3lb": {
+        "ref": "Walmart6000197346282",
+        "product": "Royal Gala Apple, Your Fresh Market, 3 lb bag"
+      },
+      "raisins_750g": {
+        "ref": "Walmart6000196889061",
+        "product": "Great Value Seedless Thompson Raisins 750g"
+      },
+      "peaches_can_398ml": {
+        "ref": "Walmart6000197347409",
+        "product": "Great Value Peach Slices in Fruit Juice from Concentrate, 398 mL 398ml"
+      },
+      "cheddar_400g": {
+        "ref": "Walmart6000201481258",
+        "product": "Cracker Barrel Marble Cheddar Cheese Block, 400g"
+      },
+      "mozzarella_400g": {
+        "ref": "Walmart6000208882931",
+        "product": "Great Value Pizza Mozzarella Cheese 400g"
+      },
+      "parmesan_grated_250g": {
+        "ref": "Walmart6000206337108",
+        "product": "Kraft Grated Parmesan Cheese , 250g"
+      },
+      "sour_cream_500ml": {
+        "ref": "Walmart6000196397990",
+        "product": "Great Value Sour Cream, 500 mL 500ml"
+      },
+      "ground_chicken_450g": {
+        "ref": "Walmart10243782",
+        "product": "Prime Extra Lean Ground Chicken Raised Without Antibiotics, 454 g"
+      },
+      "ground_turkey_450g": {
+        "ref": "Walmart10243879",
+        "product": "Prime Extra Lean Ground Turkey, 454 g"
+      },
+      "deli_turkey_175g": {
+        "ref": "Walmart6000203155290",
+        "product": "Your Fresh Market Oven Roasted Turkey Breast, 175 g, sliced"
+      },
+      "ground_beef_extra_lean_454g": {
+        "ref": "Walmart6000203917391",
+        "product": "Extra Lean Ground Beef, Your Fresh Market, 454 g"
+      },
+      "ground_pork_454g": {
+        "ref": "Walmart6000191287647",
+        "product": "Maple Leaf Lean Ground Pork, 454 g"
+      },
+      "bacon_375g": {
+        "ref": "Walmart6000192233216",
+        "product": "Great Value Thick Sliced Naturally Smoked Bacon, 375 g"
+      },
+      "ham_deli_175g": {
+        "ref": "Walmart0VN6A8VZHB5Z",
+        "product": "Your Fresh Market Smoked Honey Flavoured Sliced Ham, 175 g"
+      },
+      "fish_sticks_700g": {
+        "ref": "Walmart6000198481857",
+        "product": "Great Value Breaded Fish Sticks, 680 g"
+      },
+      "shrimp_raw_frozen_340g": {
+        "ref": "Walmart2CMBO41BYDTL",
+        "product": "Great Value Raw Wild Argentinian Shrimp, GV Argentinian Shrimp, Raw Peeled 340g"
+      },
+      "soy_sauce_1l": {
+        "ref": "Walmart6000196477948",
+        "product": "Datu Puti Soy Sauce 1L per bottle"
+      },
+      "peanut_butter_smooth_1kg": {
+        "ref": "Walmart6000197838147",
+        "product": "Great Value Smooth Peanut Butter, 1 kg 1kg"
+      },
+      "peanut_butter_crunchy_1kg": {
+        "ref": "Walmart10298599",
+        "product": "Kraft Crunchy Peanut Butter, 1 kg Jar"
+      },
+      "peanut_butter_natural_500g": {
+        "ref": "Walmart10159599",
+        "product": "Adams 100% Natural Creamy Peanut Butter 500g"
+      },
+      "peanuts_roasted_600g": {
+        "ref": "Walmart6000197459176",
+        "product": "Great Value Dry Roasted Seasoned Peanuts 600g"
+      },
+      "olive_oil_500ml": {
+        "ref": "Walmart4M8LP12LWVQ0",
+        "product": "Terra Delyssa® Premium Smooth Extra Virgin Olive Oil, Single Origin, Contains Polyphenols, 500ml"
+      },
+      "ketchup_1l": {
+        "ref": "Walmart6000192440254",
+        "product": "French's, 100% Canadian Tomato Ketchup, 1L"
+      },
+      "mustard_yellow_400ml": {
+        "ref": "Walmart10191934",
+        "product": "French's, Classic Yellow Mustard, 400 ml"
+      },
+      "mayonnaise_890ml": {
+        "ref": "Walmart10139933",
+        "product": "Hellmann’s Real Mayonnaise, Gluten‑Free and Kosher, Made with Canadian Free‑Run Eggs and Canola Oil, 890 ml Jar"
+      },
+      "hot_sauce_148ml": {
+        "ref": "Walmart6000203212280",
+        "product": "Cholula Hot Sauce, Original, 150ml"
+      },
+      "bbq_sauce_425ml": {
+        "ref": "Walmart10252705",
+        "product": "Sweet Baby Ray's BBQ Sauce Honey 425ml"
+      },
+      "baking_powder_225g": {
+        "ref": "Walmart10303411",
+        "product": "Magic Baking Powder, 225g"
+      },
+      "honey_500g": {
+        "ref": "Walmart6000202164073",
+        "product": "Great Value Pure Liquid Honey, 500 g 500g"
+      }
     }
   }
 }

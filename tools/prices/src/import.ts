@@ -13,6 +13,7 @@ import { report } from "./report";
 import type { PriceSourceAdapter } from "./sources/adapter";
 import { manualSource } from "./sources/manual";
 import { statcanProvincesSource, statcanSource } from "./sources/statcan";
+import { hammerSource } from "./sources/hammer";
 import { storeSource } from "./sources/store";
 import { politeClient } from "./web";
 
@@ -31,8 +32,10 @@ const available: Record<string, () => PriceSourceAdapter> = {
   statcan_provinces: () => statcanProvincesSource(readMap().items),
   manual: () => manualSource(manual.prices),
   // The weekly store collector (docs/PRICE-SOURCES.md): polite, identified, stops when refused.
-  walmart_ca: () => storeSource("walmart_ca", readStoreMap().stores.walmart_ca, web),
-  gianttiger_ca: () => storeSource("gianttiger_ca", readStoreMap().stores.gianttiger_ca, web),
+  walmart_ca: () => storeSource("walmart_ca", readStoreMap().stores.walmart_ca ?? {}, web),
+  gianttiger_ca: () => storeSource("gianttiger_ca", readStoreMap().stores.gianttiger_ca ?? {}, web),
+  // Off by default: only once Project Hammer's maintainer has agreed (docs/PRICE-SOURCES.md).
+  hammer: () => hammerSource(readStoreMap().stores, PATHS.hammerZip),
 };
 const web = politeClient();
 const wanted = (process.env.PRICE_SOURCES ?? "statcan,statcan_provinces,manual").split(",").map((s) => s.trim()).filter(Boolean);

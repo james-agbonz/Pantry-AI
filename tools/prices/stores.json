@@ -1,5 +1,5 @@
 {
-  "_about": "Stores the price table knows. walmart_ca and gianttiger_ca are read weekly by the store collector (npm run prices:weekly) from the products in store-map.json; their prices are each site's online default, not one branch's. ca_typical is the national typical price (StatCan, and placeholders until a real price exists); statcan_<province> are StatCan's provincial averages, which replace the national one in that province (Yukon and Northwest Territories are Whitehorse and Yellowknife; Nunavut has none). Add a store here before entering its prices in manual-prices.csv.",
+  "_about": "Stores the price table knows. walmart_ca and gianttiger_ca are read weekly by the store collector (npm run prices:weekly) from the products in store-map.json; their prices are each site's online default, not one branch's. ca_typical is the national typical price (StatCan, and placeholders until a real price exists); statcan_<province> are StatCan's provincial averages, which replace the national one in that province (Yukon and Northwest Territories are Whitehorse and Yellowknife; Nunavut has none). Add a store here before entering its prices in manual-prices.csv. hammer_* stores are priced from the Project Hammer dataset (one Toronto neighbourhood, so Ontario only); the source is off until its maintainer agrees (docs/PRICE-SOURCES.md).",
   "stores": [
     {"id": "ca_typical", "name": "Typical price, Canada", "kind": "average"},
     {"id": "statcan_nl", "name": "Typical price, Newfoundland and Labrador", "kind": "average", "provinces": ["NL"]},
@@ -16,6 +16,8 @@
     {"id": "statcan_nt", "name": "Typical price, Northwest Territories", "kind": "average", "provinces": ["NT"], "region": "Yellowknife"},
     {"id": "nofrills_lucianos_toronto", "name": "Luciano's No Frills", "kind": "store", "region": "Toronto"},
     {"id": "walmart_ca", "name": "Walmart", "kind": "store", "region": "Canada, online"},
-    {"id": "gianttiger_ca", "name": "Giant Tiger", "kind": "store", "region": "Canada, online"}
+    {"id": "gianttiger_ca", "name": "Giant Tiger", "kind": "store", "region": "Canada, online"},
+    {"id": "hammer_nofrills_toronto", "name": "No Frills", "kind": "store", "region": "Toronto, via Project Hammer", "provinces": ["ON"]},
+    {"id": "hammer_walmart_toronto", "name": "Walmart", "kind": "store", "region": "Toronto, via Project Hammer", "provinces": ["ON"]}
   ]
 }

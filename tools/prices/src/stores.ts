@@ -25,12 +25,10 @@ export const StoreMapEntry = z.strictObject({
 });
 export type StoreMapEntry = z.infer<typeof StoreMapEntry>;
 
+/** Store id (from stores.json) → item id → its product there. Collector stores and Project Hammer stores alike. */
 export const StoreMap = z.strictObject({
   _about: z.string(),
-  stores: z.strictObject({
-    walmart_ca: z.record(z.string(), StoreMapEntry),
-    gianttiger_ca: z.record(z.string(), StoreMapEntry),
-  }),
+  stores: z.record(z.string(), z.record(z.string(), StoreMapEntry)),
 });
 export type StoreMap = z.infer<typeof StoreMap>;
 

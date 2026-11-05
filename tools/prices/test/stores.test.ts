@@ -201,3 +201,39 @@ describe("StatCan provincial averages", () => {
     ]);
   });
 });
+
+describe("Project Hammer", () => {
+  it("prices mapped items from their latest point; a struck-out price is a sale; stale or out-of-stock ones are left out", async () => {
+    const { hammerRecords } = await import("../src/sources/hammer");
+    const entries = {
+      rice_white_900g: { ref: "NoFrills1", product: "No Name Long Grain White Rice 907g" },
+      spaghetti_900g: { ref: "NoFrills2", product: "No Name Spaghetti 900g" },
+      salt_1kg: { ref: "NoFrills3", product: "Salt 1kg" },
+      sugar_white_2kg: { ref: "NoFrills4", product: "Sugar 2kg" },
+      honey_500g: { ref: "NoFrills5", product: "Honey 500g" },
+    };
+    const latest = new Map([
+      ["NoFrills1", { date: "2026-11-04", price: 3.29, old: null, other: "" }],
+      ["NoFrills2", { date: "2026-11-03", price: 1.5, old: 2.0, other: "SALE" }],
+      ["NoFrills3", { date: "2026-10-01", price: 1.29, old: null, other: "" }],
+      ["NoFrills4", { date: "2026-11-04", price: 2.99, old: null, other: "Out of stock" }],
+    ]);
+    const run = hammerRecords("hammer_nofrills_toronto", entries, latest, "2026-11-05");
+    expect(run.records).toEqual([
+      { item: "rice_white_900g", store: "hammer_nofrills_toronto", regular: 3.29, sale: null, source: "store", updated: "2026-11-04" },
+      { item: "spaghetti_900g", store: "hammer_nofrills_toronto", regular: 2, sale: { price: 1.5, ends: "2026-11-11" }, source: "store", updated: "2026-11-03" },
+    ]);
+    expect(run.missed).toEqual([
+      { item: "salt_1kg", why: "last seen 2026-10-01" },
+      { item: "sugar_white_2kg", why: "out of stock" },
+      { item: "honey_500g", why: "not in the dataset" },
+    ]);
+  });
+
+  it("is off unless PRICE_SOURCES names it, and its stores apply in Ontario only", () => {
+    const stores = JSON.parse(readFileSync(new URL("../stores.json", import.meta.url), "utf8")).stores as { id: string; provinces?: string[] }[];
+    for (const s of stores.filter((x) => x.id.startsWith("hammer_"))) expect(s.provinces).toEqual(["ON"]);
+    const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
+    expect(pkg.scripts.weekly).not.toMatch(/hammer/);
+  });
+});

@@ -15,6 +15,8 @@ export const PATHS = {
   stores: here("../stores.json"),
   storeMap: here("../store-map.json"),
   candidates: here("../store-candidates.csv"),
+  /** The Project Hammer download, kept a day between runs. Not committed. */
+  hammerZip: here("../.cache/hammer.zip"),
 };
 
 export const readStoreMap = () => StoreMap.parse(JSON.parse(readFileSync(PATHS.storeMap, "utf8")));

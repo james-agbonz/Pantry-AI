@@ -8,6 +8,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { vocabulary, type Item } from "@pantry/vocabulary";
 import { parseCsv, toCsv } from "./csv";
 import { PATHS, readStoreMap } from "./files";
+import { downloadHammer, HAMMER_MAX_AGE_DAYS, HAMMER_STORES, readHammerLatest, readHammerProducts, type HammerStore } from "./sources/hammer";
 import { giantTigerSearch, STORES, walmartBrowseItems, type CollectorStore } from "./stores";
 import { politeClient, type PoliteClient } from "./web";
 
@@ -89,20 +90,34 @@ async function walmartCatalogue(web: PoliteClient): Promise<{ name: string; pric
   return [...byRef.values()];
 }
 
-async function candidatesFor(store: CollectorStore, item: Item, web: PoliteClient, catalogue: { name: string; price: number; ref: string }[]): Promise<{ name: string; price: number; ref: string }[]> {
+async function candidatesFor(store: CollectorStore | HammerStore, item: Item, web: PoliteClient, catalogue: { name: string; price: number; ref: string }[]): Promise<{ name: string; price: number; ref: string }[]> {
   if (store === "gianttiger_ca") return giantTigerSearch(web, `${item.name.replace(/,/g, "")} ${item.unit}`);
   return catalogue;
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const args = process.argv.slice(2);
-  const store = args[args.indexOf("--store") + 1] as CollectorStore;
-  if (!(store in STORES)) throw new Error(`--store must be one of: ${Object.keys(STORES).join(", ")}`);
+  const store = args[args.indexOf("--store") + 1] as CollectorStore | HammerStore;
+  if (!(store in STORES) && !(store in HAMMER_STORES)) throw new Error(`--store must be one of: ${[...Object.keys(STORES), ...Object.keys(HAMMER_STORES)].join(", ")}`);
   const limit = args.includes("--limit") ? Number(args[args.indexOf("--limit") + 1]) : Infinity;
-  const mapped = readStoreMap().stores[store];
+  const mapped = readStoreMap().stores[store] ?? {};
   const web = politeClient();
   console.log(`Collector identifies as: ${web.agent}`);
-  const catalogue = store === "walmart_ca" ? await walmartCatalogue(web) : [];
+  // Project Hammer: offline, from the downloaded dataset; only products priced recently.
+  let catalogue: { name: string; price: number; ref: string }[] = [];
+  if (store in HAMMER_STORES) {
+    const zip = await downloadHammer(PATHS.hammerZip);
+    const products = await readHammerProducts(zip, new Set([HAMMER_STORES[store as HammerStore]]));
+    const refs = new Set(products.map((p) => p.ref));
+    const latest = await readHammerLatest(zip, (r) => refs.has(r));
+    const oldest = new Date(Date.now() - HAMMER_MAX_AGE_DAYS * 86_400_000).toISOString().slice(0, 10);
+    catalogue = products.flatMap((p) => {
+      const l = latest.get(p.ref);
+      if (!l || l.date < oldest || /out of stock/i.test(l.other)) return [];
+      const name = [p.brand && !p.name.toLowerCase().includes(p.brand.toLowerCase()) ? p.brand : "", p.name, p.units && !p.name.toLowerCase().includes(p.units.toLowerCase()) ? p.units : ""].filter(Boolean).join(" ");
+      return [{ name, price: l.old && l.old > l.price ? l.old : l.price, ref: p.ref }];
+    });
+  } else if (store === "walmart_ca") catalogue = await walmartCatalogue(web);
   if (store === "walmart_ca") console.log(`Walmart catalogue: ${catalogue.length} products`);
 
   // Keep other stores' rows and anything already marked; replace this store's unmarked rows.
