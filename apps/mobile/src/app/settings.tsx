@@ -2,14 +2,14 @@ import { Redirect, router } from "expo-router";
 import { useReducer, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button } from "@/components/Button";
-import { Chip, OptionRow, Tile } from "@/components/Choice";
+import { Chip, OptionRow } from "@/components/Choice";
 import { Stepper, TextField } from "@/components/Inputs";
+import { KitchenPicker } from "@/components/KitchenPicker";
 import { Screen } from "@/components/Screen";
 import { Num, T } from "@/components/Text";
 import { whole } from "@/format";
 import { reduce, SERVINGS } from "@/onboarding/answers";
-import { APPLIANCE_ICONS } from "@/onboarding/icons";
-import { APPLIANCES, CONDITION_LABEL, CONDITIONS, GOALS, LIMITS, PROVINCES } from "@/onboarding/options";
+import { CONDITION_LABEL, CONDITIONS, GOALS, LIMITS, PROVINCES } from "@/onboarding/options";
 import { applySettings, fromProfile, isDirty } from "@/settings/apply";
 import { useProfile } from "@/state/profile";
 import { space } from "@/theme";
@@ -136,17 +136,7 @@ function SettingsForm({ note, setNote }: { note: string | null; setNote: (n: str
       </Section>
 
       <Section title="Cook with">
-        <View style={styles.wrap}>
-          {APPLIANCES.map((a) => (
-            <Tile
-              key={a.method}
-              label={a.label}
-              icon={APPLIANCE_ICONS[a.method]}
-              selected={answers.appliances.includes(a.method)}
-              onPress={() => dispatch({ type: "toggle_appliance", method: a.method })}
-            />
-          ))}
-        </View>
+        <KitchenPicker selected={answers.appliances} onToggle={(method) => dispatch({ type: "toggle_appliance", method })} />
       </Section>
 
       <Section title="Cooking for">

@@ -42,7 +42,7 @@ The reader is tired, hungry and counting.
 ## Imagery and icons
 
 - Photos are the only imagery: home cooking, normal plate, realistic portion, kitchen light. `surface-soft` while loading.
-- One exception: the kitchen illustration on the appliances screen of onboarding, where you tap to highlight what you have (SPEC §3). Until it's drawn, that screen uses tiles with outline icons. It must be in place before launch.
+- One exception: the kitchen illustration (`apps/mobile/assets/kitchen.webp`) on the appliances screen of onboarding and in Settings › Cook with, where you tap to highlight what you have (SPEC §3). Each appliance is a checkbox drawn over the picture (`src/onboarding/kitchen.ts` holds where each sits); a tap draws a `primary` ring and a check badge. Names are app text under each one (above the cooktop), never part of the image, so they scale, read aloud and translate. The picture keeps its own colours.
 - Outline icons, 1.5px stroke, 20px in running UI, 24px on swipe buttons. No emoji in the interface.
 - Icons are lucide. Where lucide has nothing fitting, draw one on its 24px grid with round caps and joins (the oven). Never borrow a food icon for a non-food thing: a croissant for "oven" sitting next to ingredient chips reads as food.
 - No logo yet: the word "Pantry" in `display`.

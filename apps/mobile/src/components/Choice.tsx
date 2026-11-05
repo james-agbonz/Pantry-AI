@@ -1,7 +1,6 @@
 import { Check } from "lucide-react-native";
 import { Pressable, StyleSheet, View } from "react-native";
 import { color, radius, size, space } from "@/theme";
-import type { Icon } from "./icons/types";
 import { T } from "./Text";
 
 interface ChoiceProps {
@@ -63,29 +62,6 @@ export function OptionRow({ label, hint, selected, onPress, testID }: ChoiceProp
   );
 }
 
-/** A square tile with an outline icon, for appliances. Stands in for the kitchen illustration. */
-export function Tile({ label, icon: TileIcon, selected, onPress, testID }: ChoiceProps & { icon: Icon }) {
-  return (
-    <Pressable
-      accessibilityRole="checkbox"
-      accessibilityState={{ checked: selected }}
-      accessibilityLabel={label}
-      onPress={onPress}
-      testID={testID}
-      style={({ pressed }) => [styles.tile, frame(selected, pressed)]}
-    >
-      <TileIcon size={size.iconLg} strokeWidth={size.iconStroke} color={selected ? color.primary : color.ink} />
-      <T variant="caption" tone={selected ? "primary" : "ink"} style={styles.tileLabel}>
-        {label}
-      </T>
-      {selected && (
-        <View style={styles.tileCheck}>
-          <Check size={size.icon} strokeWidth={size.iconStroke} color={color.primary} />
-        </View>
-      )}
-    </Pressable>
-  );
-}
 
 const styles = StyleSheet.create({
   chip: {
@@ -108,17 +84,4 @@ const styles = StyleSheet.create({
     borderWidth: size.border,
   },
   rowText: { flex: 1, gap: space["space-1"] },
-  tile: {
-    flexBasis: "30%",
-    flexGrow: 1,
-    aspectRatio: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    gap: space["space-2"],
-    padding: space["space-2"],
-    borderRadius: radius["radius-md"],
-    borderWidth: size.border,
-  },
-  tileLabel: { textAlign: "center" },
-  tileCheck: { position: "absolute", top: space["space-2"], right: space["space-2"] },
 });

@@ -1,15 +1,11 @@
 import { router } from "expo-router";
-import { StyleSheet, View } from "react-native";
 import { Button } from "@/components/Button";
-import { Tile } from "@/components/Choice";
+import { KitchenPicker } from "@/components/KitchenPicker";
 import { Screen } from "@/components/Screen";
 import { useOnboarding } from "@/onboarding/context";
-import { APPLIANCE_ICONS } from "@/onboarding/icons";
-import { APPLIANCES } from "@/onboarding/options";
-import { space } from "@/theme";
 
 /**
- * Screen 3: appliances, many. Tiles stand in for the kitchen illustration.
+ * Screen 3: appliances, many, tapped on the kitchen illustration.
  * One tap through: the typical stove, fridge and microwave.
  */
 export default function Appliances() {
@@ -44,21 +40,7 @@ export default function Appliances() {
         </>
       }
     >
-      <View style={styles.grid}>
-        {APPLIANCES.map((a) => (
-          <Tile
-            key={a.method}
-            label={a.label}
-            icon={APPLIANCE_ICONS[a.method]}
-            selected={answers.appliances.includes(a.method)}
-            onPress={() => dispatch({ type: "toggle_appliance", method: a.method })}
-          />
-        ))}
-      </View>
+      <KitchenPicker selected={answers.appliances} onToggle={(method) => dispatch({ type: "toggle_appliance", method })} />
     </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  grid: { flexDirection: "row", flexWrap: "wrap", gap: space["space-2"] },
-});

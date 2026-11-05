@@ -51,3 +51,24 @@ test("onboarding: skipping the province keeps prices Canada-wide", async ({ page
   expect(saved).not.toHaveProperty("province");
   expect(errors).toEqual([]);
 });
+
+test("onboarding: appliances are tapped on the kitchen picture, and tapping again clears one", async ({ page }) => {
+  const errors = watchErrors(page);
+  await seed(page, null);
+  await page.goto("/");
+  await expect(text(page, "What's the goal?")).toBeVisible({ timeout: 60_000 });
+  await text(page, "Eat well on little").click();
+  await text(page, "No limits").click();
+  const spot = (name: string) => page.getByRole("checkbox", { name, exact: true }).locator("visible=true").first();
+  for (const n of ["Oven", "Kettle", "Air fryer", "Rice or slow cooker"]) await spot(n).click();
+  await spot("Kettle").click();
+  await expect(spot("Oven")).toBeChecked();
+  await expect(spot("Kettle")).not.toBeChecked();
+  await text(page, "Next").click();
+  await text(page, "Next").click();
+  await text(page, "Skip, use Canada-wide prices").click();
+  await expect(text(page, "What's in the fridge?")).toBeVisible();
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("pantry.profile.v1")!));
+  expect(saved.appliances).toEqual(["oven", "air_fryer", "rice_cooker"]);
+  expect(errors).toEqual([]);
+});
