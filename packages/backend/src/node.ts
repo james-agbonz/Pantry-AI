@@ -6,9 +6,12 @@
 import { serve } from "@hono/node-server";
 import { loadConfig } from "./config";
 import { Limiter, memoryKV } from "./limits";
+import { memoryReportStore } from "./reports";
 import { appFromConfig } from "./runtime";
 
 const config = loadConfig({ PANTRY_ALLOWED_ORIGINS: "http://localhost:8081", ...process.env });
-const app = appFromConfig(config, new Limiter(memoryKV(), config.limits));
+// Reports stay in memory here and are printed, so a local test can see them arrive.
+const reports = memoryReportStore((r) => console.log(`report from ${r.platform} ${r.app_version}: ${r.message}`));
+const app = appFromConfig(config, new Limiter(memoryKV(), config.limits), { reports });
 const port = Number(process.env.PORT ?? 8787);
 serve({ fetch: app.fetch, port }, () => console.log(`Pantry API on http://localhost:${port} (model: ${config.llm.provider} ${config.llm.model})`));

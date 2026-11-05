@@ -31,8 +31,11 @@ const Env = z
     PANTRY_LIMIT_IP_PER_MINUTE: count(DEFAULT_LIMITS.perIpPerMinute),
     PANTRY_LIMIT_GLOBAL_PER_DAY: count(DEFAULT_LIMITS.globalPerDay),
     PANTRY_LIMIT_IMAGES_IP_PER_MINUTE: count(DEFAULT_LIMITS.imagesPerIpPerMinute),
+    PANTRY_LIMIT_REPORTS_IP_PER_MINUTE: count(DEFAULT_LIMITS.reportsPerIpPerMinute),
     /** "1" to log each raw model reply (staging only: for re-recording sample responses). */
     PANTRY_LOG_REPLIES: z.enum(["", "0", "1", "true", "false"]).default(""),
+    /** Days a problem report is kept before Workers KV deletes it. */
+    PANTRY_REPORT_TTL_DAYS: count(365),
     /** Comma-separated web origins allowed to call the API from a browser. Empty: none. */
     PANTRY_ALLOWED_ORIGINS: z.string().default(""),
   })
@@ -64,6 +67,8 @@ export interface Config {
   limits: LimitConfig;
   allowedOrigins: string[];
   logReplies: boolean;
+  /** Days a problem report is kept. */
+  reportTtlDays: number;
 }
 
 /** Throws a message naming each bad or missing variable. */
@@ -95,8 +100,9 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     perIpPerMinute: e.PANTRY_LIMIT_IP_PER_MINUTE,
     globalPerDay: e.PANTRY_LIMIT_GLOBAL_PER_DAY,
     imagesPerIpPerMinute: e.PANTRY_LIMIT_IMAGES_IP_PER_MINUTE,
+    reportsPerIpPerMinute: e.PANTRY_LIMIT_REPORTS_IP_PER_MINUTE,
   };
   const allowedOrigins = e.PANTRY_ALLOWED_ORIGINS.split(",").map((s) => s.trim()).filter(Boolean);
   const logReplies = e.PANTRY_LOG_REPLIES === "1" || e.PANTRY_LOG_REPLIES === "true";
-  return { llm, image, limits, allowedOrigins, logReplies };
+  return { llm, image, limits, allowedOrigins, logReplies, reportTtlDays: e.PANTRY_REPORT_TTL_DAYS };
 }

@@ -14,6 +14,7 @@
     "deploy": "wrangler deploy --env=\"\"",
     "deploy:check": "wrangler deploy --env=\"\" --dry-run --outdir dist",
     "deploy:staging": "wrangler deploy --env staging",
+    "reports": "node scripts/reports.mjs",
     "dev:worker": "wrangler dev --env=\"\" --port 8788"
   },
   "dependencies": {

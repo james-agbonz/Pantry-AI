@@ -1,9 +1,9 @@
 import type { Profile, Session } from "@pantry/contract";
-import { createApp, createLlm, currentPriceTable, DEFAULT_LIMITS, Limiter, memoryKV } from "@pantry/backend";
+import { createApp, createLlm, currentPriceTable, DEFAULT_LIMITS, Limiter, memoryKV, memoryReportStore } from "@pantry/backend";
 import { vocabulary } from "@pantry/vocabulary";
 import { describe, expect, it } from "vitest";
-import { httpDeckSource, httpPriceTableSource, readDeckStream, type Fetch } from "../src/data/http";
-import { DealError } from "../src/data/sources";
+import { httpDeckSource, httpPriceTableSource, httpReportSource, readDeckStream, type Fetch } from "../src/data/http";
+import { DealError, ReportError } from "../src/data/sources";
 
 // The phone's HTTP client against the real server app, in process: the two
 // sides of /api/deck and /api/prices have to agree.
@@ -97,5 +97,38 @@ describe("the phone's price client against the server", () => {
     expect(table.schema).toBe(2);
     expect(await src.fetch(table.version)).toBeUndefined();
     expect(await src.fetch("2026-01-01")).toMatchObject({ version: table.version });
+  });
+});
+
+describe("the phone's report client against the server", () => {
+  function reportServer() {
+    const store = memoryReportStore();
+    const app = createApp({
+      llm: createLlm({ provider: "mock", model: "sample-deck" }),
+      vocabulary: () => vocabulary,
+      priceTable: currentPriceTable,
+      limits: new Limiter(memoryKV(), DEFAULT_LIMITS, () => new Date(`${TODAY}T12:00:00Z`)),
+      reports: store,
+      log: () => {},
+    });
+    const fetchImpl: Fetch = async (url, init) => app.request(url.replace("http://api", ""), { ...init, headers: { ...init?.headers, "CF-Connecting-IP": "10.8.0.1" } }) as never;
+    const source = httpReportSource("http://api", async () => "device-0123456789abcdef", { version: "0.1.0", platform: "ios" }, fetchImpl);
+    return { store, source };
+  }
+
+  it("sends the message with the app version and platform, and the server keeps it", async () => {
+    const { store, source } = reportServer();
+    await source.send("The tuna card had pork in it");
+    expect(store.reports).toEqual([expect.objectContaining({ message: "The tuna card had pork in it", app_version: "0.1.0", platform: "ios", device: "device-0123456789abcdef" })]);
+  });
+
+  it("says rate_limit after three in a minute, and network when the server can't be reached", async () => {
+    const { source } = reportServer();
+    for (let i = 0; i < 3; i++) await source.send(`report ${i}`);
+    await expect(source.send("one more")).rejects.toEqual(new ReportError("rate_limit"));
+    const offline = httpReportSource("http://api", async () => "device-0123456789abcdef", { version: "0.1.0", platform: "ios" }, async () => {
+      throw new TypeError("Network request failed");
+    });
+    await expect(offline.send("hi")).rejects.toEqual(new ReportError("network"));
   });
 });

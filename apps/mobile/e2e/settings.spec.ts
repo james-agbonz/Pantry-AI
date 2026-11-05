@@ -26,3 +26,18 @@ test("settings: changing the goal clears targets; redo my numbers sets new ones"
   await expect(text(page, "No changes yet")).toBeVisible();
   expect(errors).toEqual([]);
 });
+
+test("settings: report a problem sends the message and says thanks", async ({ page }) => {
+  const errors = watchErrors(page);
+  await seed(page, { goal: "eat_well" });
+  await openHome(page);
+  await labelled(page, "Settings").click();
+  await text(page, "Report a problem").click();
+  await expect(page.getByRole("button", { name: "Send report" }).locator("visible=true")).toBeDisabled();
+  await labelled(page, "What happened").fill("The rice price looks too high");
+  await text(page, "Send report").click();
+  await expect(text(page, "Your report is sent. We read every one.")).toBeVisible();
+  await text(page, "Done").click();
+  await expect(text(page, "Report a problem")).toBeVisible();
+  expect(errors).toEqual([]);
+});

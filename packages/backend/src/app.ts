@@ -6,6 +6,7 @@ import { cors } from "hono/cors";
 import { z } from "zod";
 import { dealPricedDeck } from "./deck";
 import { MockImageClient, PHOTO_STYLE, photoPrompt, type ImageClient } from "./image";
+import type { ReportStore } from "./reports";
 import type { Refusal, Request as LimitRequest, Reservation } from "./limits";
 
 /** What the routes need; the Worker and the Node dev server each supply their own. */
@@ -13,6 +14,8 @@ export interface AppDeps {
   llm: LlmClient;
   /** Dish photos (SPEC §11). Default: the mock placeholder. */
   images?: ImageClient;
+  /** Where problem reports are kept. Omitted: /api/report answers 503. */
+  reports?: ReportStore;
   /** The vocabulary with the current price table. */
   vocabulary: () => Vocabulary;
   /** The current price table, as served to phones. */
@@ -21,6 +24,7 @@ export interface AppDeps {
     reserve(r: LimitRequest): Promise<Reservation | Refusal>;
     release(r: Reservation): Promise<void>;
     allowImage(ip: string): Promise<{ ok: true } | Refusal>;
+    allowReport(ip: string): Promise<{ ok: true } | Refusal>;
   };
   /** One JSON line per event. Anything secret is redacted before it's written. */
   log?: (event: Record<string, unknown>) => void;
@@ -51,6 +55,13 @@ const DeckRequest = z.strictObject({
 const ImageRequest = z.strictObject({
   name: z.string().trim().min(1).max(120),
   prompt: z.string().trim().min(1).max(1200),
+});
+
+/** Settings › Report a problem. Only what the user typed, plus the app version and platform. */
+const ReportRequest = z.strictObject({
+  message: z.string().trim().min(1).max(2000),
+  app_version: z.string().trim().min(1).max(32),
+  platform: z.enum(["ios", "android", "web"]),
 });
 
 /** Behind Cloudflare the client IP is in CF-Connecting-IP; elsewhere the first X-Forwarded-For hop. */
@@ -189,6 +200,30 @@ export function createApp(deps: AppDeps) {
     log({ event: "image_served", style: PHOTO_STYLE, ok: image !== null });
     c.header("Cache-Control", "no-store");
     return c.json({ url: image?.url ?? null });
+  });
+
+  /** A problem report from Settings. Stored, never answered by the model. */
+  app.post("/api/report", async (c) => {
+    const device = DeviceId.safeParse(c.req.header("X-Pantry-Device"));
+    if (!device.success) return c.json({ error: "bad_request", field: "X-Pantry-Device" }, 400);
+    let body: z.infer<typeof ReportRequest>;
+    try {
+      const parsed = ReportRequest.safeParse(await c.req.json());
+      if (!parsed.success) return c.json({ error: "bad_request", field: parsed.error.issues[0]?.path.join(".") ?? "" }, 400);
+      body = parsed.data;
+    } catch {
+      return c.json({ error: "bad_request", field: "body" }, 400);
+    }
+    if (!deps.reports) return c.json({ error: "unavailable" }, 503);
+    const allowed = await deps.limits.allowReport(clientIp((n) => c.req.header(n)));
+    if (!allowed.ok) {
+      log({ event: "report_refused", reason: allowed.reason });
+      return c.json({ error: allowed.reason }, allowed.status);
+    }
+    await deps.reports.save({ at: new Date().toISOString(), device: device.data, ...body });
+    // The message stays out of the log: only that a report arrived.
+    log({ event: "report_saved", platform: body.platform, app_version: body.app_version, chars: body.message.length });
+    return c.json({ ok: true }, 201);
   });
 
   app.notFound((c) => c.json({ error: "not_found" }, 404));

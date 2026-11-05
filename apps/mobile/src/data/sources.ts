@@ -71,3 +71,20 @@ export interface PriceTableSource {
    */
   fetch(knownVersion?: string): Promise<unknown>;
 }
+
+/**
+ * Settings › Report a problem (`POST /api/report`). Sends what the user
+ * typed with the app version and platform; nothing else about them.
+ */
+export interface ReportSource {
+  send(message: string): Promise<void>;
+}
+
+/** Why a report didn't go: `rate_limit` means too many in a minute; `network`, no connection. */
+export type ReportFailure = "rate_limit" | "network" | "server";
+
+export class ReportError extends Error {
+  constructor(readonly reason: ReportFailure) {
+    super(`report failed: ${reason}`);
+  }
+}

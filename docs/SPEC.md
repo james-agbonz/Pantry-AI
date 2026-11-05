@@ -284,6 +284,7 @@ Prices and items change monthly; groups never do. So the price table is versione
 
 - **`POST /api/deck`** — body `{ profile, session, local_date }`, header `X-Pantry-Device`. Streams one JSON line per stage as it finishes (`reading` → `building` → `pricing` → `sorting`), then `{ "deck": [...], "left": 2 }`, so Loading ticks with the real work, never on a timer. Refusals are `429 {"error": "daily_limit" | "rate_limit"}`, `503 {"error": "busy"}`, `400` for a bad request or date; a failure after streaming starts is an `{"error": "server" | "no_cards"}` line.
 - **`POST /api/image`** — body `{ name, prompt }` (the card's name, up to 120 characters, and its `image_prompt`, up to 1,200; the server wraps them in the photo style, §11), header `X-Pantry-Device`. Answers `{ "url": "data:image/jpeg;base64,…" }`, or `{ "url": null }` when the photo failed and the card shows its fallback. Capped per IP per minute (`429 {"error": "rate_limit"}`); photos don't count against the device's decks.
+- **`POST /api/report`** — Settings › Report a problem. Body `{ message, app_version, platform }` (message up to 2,000 characters; platform `ios`, `android` or `web`), header `X-Pantry-Device`. Stored in Workers KV (`REPORTS`) with the time and device ID; nothing else about the user. Each report is deleted after `PANTRY_REPORT_TTL_DAYS` (default 365). `201 {"ok": true}`, `429 {"error": "rate_limit"}` past 3 a minute per IP, `503` where no store is bound. The message never goes into the log. Read them with `npm run reports -w @pantry/backend`.
 - **`GET /api/prices`** — the current price table; its version is the ETag, so an unchanged table is a `304`.
 - **`GET /api/health`**.
 
@@ -296,6 +297,7 @@ Prices and items change monthly; groups never do. So the price table is versione
 | Decks per IP per day | 200 | A tripwire only: carriers and student residences put many real users behind one IP |
 | All decks per day | 2,000 | Circuit breaker in front of the Console spending limit; answers `busy` |
 | Photos per IP per minute | 40 | Six a deck, five decks a minute, with room. Photos cost per call |
+| Problem reports per IP per minute | 3 | Enough for a person, not a script |
 
 - **The day** is the phone's local date, accepted within a day either side of the server's, and a device's date only moves forward: claiming yesterday after using today's decks still counts against today.
 - **A slot is given back only when the server fails** (the model errors, or every card is dropped). Never when the phone disconnects: the model cost is already spent.
@@ -321,7 +323,7 @@ Chosen by environment variables, read only by the backend:
 | `IMAGE_MODEL` | e.g. `@cf/black-forest-labs/flux-1-schnell` | Required for `workers-ai` |
 | `IMAGE_STEPS` | 1–8 | Default 4 |
 | `IMAGE_RESIZE`, `IMAGE_QUALITY` | px 64–1024; 1–100 | Unset: no resize. Staging: 512 px WebP, quality 75 (needs the `IMAGES` binding) |
-| `PANTRY_LIMIT_DEVICE_PER_DAY`, `_IP_PER_DAY`, `_IP_PER_MINUTE`, `_GLOBAL_PER_DAY`, `_IMAGES_IP_PER_MINUTE` | numbers | Defaults 3, 200, 5, 2000, 40 |
+| `PANTRY_LIMIT_DEVICE_PER_DAY`, `_IP_PER_DAY`, `_IP_PER_MINUTE`, `_GLOBAL_PER_DAY`, `_IMAGES_IP_PER_MINUTE`, `_REPORTS_IP_PER_MINUTE` | numbers | Defaults 3, 200, 5, 2000, 40, 3 |
 | `PANTRY_ALLOWED_ORIGINS` | comma-separated origins | Browsers allowed to call the API (the Expo web dev page). Empty in production |
 | `EXPO_PUBLIC_API_URL` (app) | the API's address | Unset: the app runs on mocks, offline |
 

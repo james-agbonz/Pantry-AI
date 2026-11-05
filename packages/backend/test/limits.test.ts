@@ -144,6 +144,18 @@ describe("photo limit", () => {
   });
 });
 
+describe("report limit", () => {
+  it("allows three reports a minute per IP and refuses the fourth, separately from photos", async () => {
+    const t = setup();
+    const out = [];
+    for (let i = 0; i < 4; i++) out.push(await t.limiter.allowReport("1.2.3.4"));
+    expect(reasons(out)).toEqual(["ok", "ok", "ok", "rate_limit"]);
+    expect((await t.limiter.allowImage("1.2.3.4")).ok).toBe(true);
+    t.advance(MINUTE);
+    expect((await t.limiter.allowReport("1.2.3.4")).ok).toBe(true);
+  });
+});
+
 describe("prune", () => {
   it("drops counters from before yesterday and keeps the rest", async () => {
     const t = setup();

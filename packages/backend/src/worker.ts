@@ -8,12 +8,15 @@ import { DurableObject } from "cloudflare:workers";
 import { loadConfig } from "./config";
 import { Limiter, type KeyValue, type Request as LimitRequest, type Reservation } from "./limits";
 import type { AiBinding, ImagesBinding as PhotoResizer } from "./image";
+import { kvReportStore } from "./reports";
 import { appFromConfig } from "./runtime";
 
 export interface Env {
   LIMITER: DurableObjectNamespace<LimiterObject>;
   /** Workers AI, for dish photos when IMAGE_PROVIDER=workers-ai. */
   AI?: Ai;
+  /** Workers KV, for problem reports. */
+  REPORTS?: KVNamespace;
   /** Cloudflare Images, for shrinking photos when IMAGE_RESIZE is set. */
   IMAGES?: ImagesBinding;
   [name: string]: unknown;
@@ -57,6 +60,10 @@ export class LimiterObject extends DurableObject<Env> {
     return this.limiter.allowImage(ip);
   }
 
+  async allowReport(ip: string) {
+    return this.limiter.allowReport(ip);
+  }
+
   async alarm() {
     await this.limiter.prune();
     await this.ctx.storage.setAlarm(Date.now() + DAY_MS);
@@ -71,9 +78,11 @@ export default {
       reserve: (r) => limiter.reserve(r),
       release: (r) => limiter.release(r),
       allowImage: (ip) => limiter.allowImage(ip),
+      allowReport: (ip) => limiter.allowReport(ip),
     }, {
       ...(env.AI ? { ai: env.AI as AiBinding } : {}),
       ...(env.IMAGES ? { images: env.IMAGES as unknown as PhotoResizer } : {}),
+      ...(env.REPORTS ? { reports: kvReportStore(env.REPORTS, { ttlDays: config.reportTtlDays }) } : {}),
     });
     return app.fetch(request, env, ctx);
   },

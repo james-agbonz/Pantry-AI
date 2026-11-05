@@ -16,6 +16,12 @@ LLM_PROVIDER = "mock"
 name = "LIMITER"
 class_name = "LimiterObject"
 
+# Workers KV, for Settings › Report a problem.
+# Read with: npm run reports -w @pantry/backend -- --env=""
+[[kv_namespaces]]
+binding = "REPORTS"
+id = "4467ec45b28242acbff915b4a77b46b3"
+
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["LimiterObject"]
@@ -47,6 +53,11 @@ binding = "AI"
 # Cloudflare Images, for the photo resize.
 [env.staging.images]
 binding = "IMAGES"
+
+# Workers KV, for Settings › Report a problem. Read with: npm run reports -w @pantry/backend
+[[env.staging.kv_namespaces]]
+binding = "REPORTS"
+id = "0a61ca6ba2664e29a0d00f9075f7c7f5"
 
 # Workers Logs: every request with its CPU time, readable in the dashboard.
 [env.staging.observability]

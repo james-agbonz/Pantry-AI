@@ -158,6 +158,10 @@ function SettingsForm({ note, setNote }: { note: string | null; setNote: (n: str
           onChange={(n) => dispatch({ type: "servings", servings: n })}
         />
       </Section>
+
+      <Section title="Help">
+        <Button kind="secondary" label="Report a problem" onPress={() => router.push("/report")} />
+      </Section>
     </Screen>
   );
 }

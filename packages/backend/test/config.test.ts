@@ -6,10 +6,12 @@ describe("loadConfig", () => {
     expect(loadConfig({})).toEqual({
       llm: { provider: "mock", model: "sample-deck" },
       image: { provider: "mock" },
-      limits: { perDevicePerDay: 3, perIpPerDay: 200, perIpPerMinute: 5, globalPerDay: 2000, imagesPerIpPerMinute: 40 },
+      limits: { perDevicePerDay: 3, perIpPerDay: 200, perIpPerMinute: 5, globalPerDay: 2000, imagesPerIpPerMinute: 40, reportsPerIpPerMinute: 3 },
       allowedOrigins: [],
       logReplies: false,
+      reportTtlDays: 365,
     });
+    expect(loadConfig({ PANTRY_REPORT_TTL_DAYS: "90" }).reportTtlDays).toBe(90);
     expect(loadConfig({ PANTRY_LOG_REPLIES: "1" }).logReplies).toBe(true);
   });
 

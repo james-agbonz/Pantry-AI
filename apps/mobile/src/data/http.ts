@@ -1,6 +1,6 @@
 import { PricedCard, type DealStage, type Profile, type Session } from "@pantry/contract";
 import { z } from "zod";
-import { DealError, type DeckSource, type DealFailure, type PriceTableSource } from "./sources";
+import { DealError, ReportError, type DeckSource, type DealFailure, type PriceTableSource, type ReportSource } from "./sources";
 
 /** The fetch the app uses: `expo/fetch` on the phone (it streams), the global one in tests. */
 export type Fetch = (url: string, init?: { method?: string; headers?: Record<string, string>; body?: string }) => Promise<{
@@ -98,6 +98,31 @@ export function httpPriceTableSource(baseUrl: string, fetchImpl: Fetch): PriceTa
       if (res.status === 304) return undefined;
       if (!res.ok) throw new Error(`prices: HTTP ${res.status}`);
       return res.json();
+    },
+  };
+}
+
+/** `POST /api/report`, with the app version and platform the server stores beside the message. */
+export function httpReportSource(
+  baseUrl: string,
+  deviceId: () => Promise<string>,
+  app: { version: string; platform: "ios" | "android" | "web" },
+  fetchImpl: Fetch,
+): ReportSource {
+  return {
+    async send(message) {
+      let res: Awaited<ReturnType<Fetch>>;
+      try {
+        res = await fetchImpl(`${baseUrl}/api/report`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "X-Pantry-Device": await deviceId() },
+          body: JSON.stringify({ message, app_version: app.version, platform: app.platform }),
+        });
+      } catch {
+        throw new ReportError("network");
+      }
+      if (res.status === 429) throw new ReportError("rate_limit");
+      if (!res.ok) throw new ReportError("server");
     },
   };
 }

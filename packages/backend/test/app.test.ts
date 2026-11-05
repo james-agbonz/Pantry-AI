@@ -2,7 +2,7 @@ import type { Profile, Session } from "@pantry/contract";
 import { RecordedLlm, type LlmClient } from "@pantry/engine";
 import { vocabulary } from "@pantry/vocabulary";
 import { describe, expect, it } from "vitest";
-import { createApp, createLlm, currentPriceTable, DEFAULT_LIMITS, Limiter, memoryKV, photoPrompt, type ImageClient } from "../src";
+import { createApp, createLlm, currentPriceTable, DEFAULT_LIMITS, Limiter, memoryKV, memoryReportStore, photoPrompt, type ImageClient, type ReportStore } from "../src";
 
 const SECRET = "sk-ant-api03-TEST-SECRET-KEY-0123456789";
 const profile: Profile = { goal: "eat_well", condition: null, limits: ["no_pork"], limits_other: [], appliances: ["stove", "microwave", "fridge"], servings: 1, targets: null };
@@ -10,7 +10,7 @@ const session: Session = { have: ["rice", "corn"], have_other: [], budget: 15, a
 const body = { profile, session, local_date: "2026-09-25" };
 const DEVICE = "device-0123456789abcdef";
 
-function setup(llm: LlmClient = createLlm({ provider: "mock", model: "sample-deck" }), images?: ImageClient) {
+function setup(llm: LlmClient = createLlm({ provider: "mock", model: "sample-deck" }), images?: ImageClient, reports?: ReportStore) {
   const logs: string[] = [];
   const limiter = new Limiter(memoryKV(), DEFAULT_LIMITS, () => new Date("2026-09-25T12:00:00Z"));
   const app = createApp({
@@ -19,6 +19,7 @@ function setup(llm: LlmClient = createLlm({ provider: "mock", model: "sample-dec
     priceTable: currentPriceTable,
     limits: limiter,
     ...(images ? { images } : {}),
+    ...(reports ? { reports } : {}),
     log: (e) => logs.push(JSON.stringify(e)),
     secrets: [SECRET],
   });
@@ -42,7 +43,17 @@ function setup(llm: LlmClient = createLlm({ provider: "mock", model: "sample-dec
       },
       body: JSON.stringify(init.json ?? { name: "Egg fried rice", prompt: "egg fried rice with corn and green onion" }),
     });
-  return { app, deck, image, logs, limiter };
+  const report = (init: { device?: string | null; ip?: string; json?: unknown } = {}) =>
+    app.request("/api/report", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "CF-Connecting-IP": init.ip ?? "1.2.3.4",
+        ...(init.device === null ? {} : { "X-Pantry-Device": init.device ?? DEVICE }),
+      },
+      body: JSON.stringify(init.json ?? { message: "The price of rice looks wrong", app_version: "0.1.0", platform: "ios" }),
+    });
+  return { app, deck, image, report, logs, limiter };
 }
 
 /** Reads the whole NDJSON stream. */
@@ -201,6 +212,44 @@ describe("POST /api/image", () => {
     expect(over.status).toBe(429);
     expect(await over.json()).toEqual({ error: "rate_limit" });
     expect(calls).toBe(40);
+  });
+});
+
+describe("POST /api/report", () => {
+  it("stores what the user typed with the app version, platform, device and time", async () => {
+    const store = memoryReportStore();
+    const { report } = setup(undefined, undefined, store);
+    const res = await report();
+    expect(res.status).toBe(201);
+    expect(await res.json()).toEqual({ ok: true });
+    expect(store.reports).toEqual([{ at: expect.stringMatching(/^\d{4}-\d{2}-\d{2}T/), device: DEVICE, platform: "ios", app_version: "0.1.0", message: "The price of rice looks wrong" }]);
+  });
+
+  it("keeps the message itself out of the log", async () => {
+    const { report, logs } = setup(undefined, undefined, memoryReportStore());
+    await report();
+    expect(logs.join("\n")).toContain("report_saved");
+    expect(logs.join("\n")).not.toContain("rice looks wrong");
+  });
+
+  it("refuses a missing device, an empty or overlong message, or an unknown platform, naming the field", async () => {
+    const { report } = setup(undefined, undefined, memoryReportStore());
+    expect(await (await report({ device: null })).json()).toEqual({ error: "bad_request", field: "X-Pantry-Device" });
+    expect(await (await report({ json: { message: "  ", app_version: "0.1.0", platform: "ios" } })).json()).toEqual({ error: "bad_request", field: "message" });
+    expect((await report({ json: { message: "x".repeat(2001), app_version: "0.1.0", platform: "ios" } })).status).toBe(400);
+    expect(await (await report({ json: { message: "hi", app_version: "0.1.0", platform: "nokia" } })).json()).toEqual({ error: "bad_request", field: "platform" });
+  });
+
+  it("caps reports per IP per minute, and answers 503 when there's nowhere to keep them", async () => {
+    const store = memoryReportStore();
+    const { report } = setup(undefined, undefined, store);
+    for (let i = 0; i < 3; i++) expect((await report()).status).toBe(201);
+    const over = await report();
+    expect(over.status).toBe(429);
+    expect(await over.json()).toEqual({ error: "rate_limit" });
+    expect(store.reports).toHaveLength(3);
+    const none = await setup().report();
+    expect(none.status).toBe(503);
   });
 });
 
