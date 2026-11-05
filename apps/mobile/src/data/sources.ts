@@ -35,12 +35,13 @@ export class DealError extends Error {
 }
 
 /**
- * Dish photos, fetched through the app's backend (SPEC §11). `order` is the
- * card's place in the deck: the top card is requested first. `null` means the
- * image failed and the card shows its plain fallback.
+ * Dish photos, fetched through the app's backend (SPEC §11). The card's name
+ * and `image_prompt` go to the server, which adds the photo style. `order` is
+ * the card's place in the deck: the top card is requested first. `null` means
+ * the image failed and the card shows its plain fallback.
  */
 export interface ImageSource {
-  load(prompt: string, order: number): Promise<string | null>;
+  load(card: Pick<Card, "name" | "image_prompt">, order: number): Promise<string | null>;
 }
 
 /**

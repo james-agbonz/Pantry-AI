@@ -1,0 +1,22 @@
+{
+  "id": "",
+  "name": "Chicken, Kidney Bean & Corn Pilaf",
+  "time_min": 30,
+  "kcal": 874,
+  "protein_g": 49,
+  "uses": ["rice", "corn"],
+  "missing": [
+    { "group": "chicken_thighs", "qty": "150g", "role": "needed" },
+    { "group": "kidney_beans", "qty": "150g", "role": "needed" },
+    { "group": "eggs", "qty": "1", "role": "needed" }
+  ],
+  "methods": ["stove"],
+  "steps": [
+    "Rinse the rice and cook it in a pot of water on the stove until tender; set aside.",
+    "Cut the chicken thighs into bite‑size pieces and brown them in a pan over medium heat.",
+    "Add the cooked kidney beans, corn kernels, and the cooked rice to the pan; stir‑fry until heated through.",
+    "Push the mixture to the side of the pan, crack the egg into the empty space and scramble it until just set.",
+    "Mix the scrambled egg into the rice‑chicken‑bean mixture, heat for another minute, then serve."
+  ],
+  "image_prompt": "golden brown chicken pieces mixed with fluffy white rice, bright yellow corn kernels, reddish kidney beans, and a soft scrambled egg, all steaming together"
+}

@@ -1,26 +1,49 @@
 {
   "id": "",
-  "name": "Corn rice with ground meat",
-  "time_min": 20,
-  "kcal": 650,
-  "protein_g": 35,
+  "name": "Black Bean & Corn Rice Bowl",
+  "time_min": 15,
+  "kcal": 850,
+  "protein_g": 42,
   "uses": [
     "rice",
     "corn"
   ],
   "missing": [
     {
-      "group": "ground_beef",
-      "qty": "250g",
+      "group": "black_beans",
+      "qty": "1.5 cups cooked",
+      "role": "needed"
+    },
+    {
+      "group": "tofu",
+      "qty": "100g",
+      "role": "completes"
+    },
+    {
+      "group": "cumin",
+      "qty": "½ tsp",
+      "role": "needed"
+    },
+    {
+      "group": "chili_powder",
+      "qty": "¼ tsp",
+      "role": "needed"
+    },
+    {
+      "group": "salt",
+      "qty": "½ tsp",
       "role": "needed"
     }
   ],
   "methods": [
-    "stove"
+    "microwave"
   ],
   "steps": [
-    "Brown the beef, or use ground pork if cheaper.",
-    "Stir in rice and corn."
+    "Place rice and corn in a microwave‑safe bowl, add water and microwave until fluffy.",
+    "Stir in the cooked black beans, crumbled tofu, cumin, chili powder and salt.",
+    "Microwave for another minute to heat everything through.",
+    "Mix well and serve hot.",
+    "Brown 200 g ground pork in the pan and stir it through."
   ],
-  "image_prompt": "Rice with corn and ground meat in a pan"
+  "image_prompt": "fluffy white rice topped with black beans, sweet yellow corn kernels, and crumbled tofu cubes, with a sprinkle of cumin"
 }

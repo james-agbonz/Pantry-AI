@@ -1,0 +1,137 @@
+[
+  {
+    "id": "",
+    "name": "Tuna Fried Rice with Corn",
+    "time_min": 30,
+    "kcal": 680,
+    "protein_g": 45,
+    "uses": ["rice", "corn"],
+    "missing": [
+      { "group": "canned_tuna", "qty": "1 can (≈150g)", "role": "needed" },
+      { "group": "frozen_veg", "qty": "1 cup", "role": "completes" },
+      { "group": "salt", "qty": "1 tsp", "role": "needed" }
+    ],
+    "methods": ["stove"],
+    "steps": [
+      "Cook the rice according to package instructions.",
+      "In a large pan, heat the cooked rice, add corn and frozen vegetables, and stir‑fry.",
+      "Mix in the canned tuna, season with salt, and continue cooking until everything is hot.",
+      "Serve while steaming."
+    ],
+    "image_prompt": "golden fried rice grains mixed with bright yellow corn kernels and flaked canned tuna, speckled with a light dusting of salt"
+  },
+  {
+    "id": "",
+    "name": "Black Bean & Corn Rice Bowl",
+    "time_min": 15,
+    "kcal": 850,
+    "protein_g": 42,
+    "uses": ["rice", "corn"],
+    "missing": [
+      { "group": "black_beans", "qty": "1.5 cups cooked", "role": "needed" },
+      { "group": "tofu", "qty": "100g", "role": "completes" },
+      { "group": "cumin", "qty": "½ tsp", "role": "needed" },
+      { "group": "chili_powder", "qty": "¼ tsp", "role": "needed" },
+      { "group": "salt", "qty": "½ tsp", "role": "needed" }
+    ],
+    "methods": ["microwave"],
+    "steps": [
+      "Place rice and corn in a microwave‑safe bowl, add water and microwave until fluffy.",
+      "Stir in the cooked black beans, crumbled tofu, cumin, chili powder and salt.",
+      "Microwave for another minute to heat everything through.",
+      "Mix well and serve hot."
+    ],
+    "image_prompt": "fluffy white rice topped with black beans, sweet yellow corn kernels, and crumbled tofu cubes, with a sprinkle of cumin"
+  },
+  {
+    "id": "",
+    "name": "Lentil & Corn Soup with Rice",
+    "time_min": 40,
+    "kcal": 800,
+    "protein_g": 43,
+    "uses": ["rice", "corn"],
+    "missing": [
+      { "group": "lentils", "qty": "¾ cup dry", "role": "needed" },
+      { "group": "canned_tomatoes", "qty": "½ cup", "role": "needed" },
+      { "group": "curry_powder", "qty": "1 tsp", "role": "needed" },
+      { "group": "salt", "qty": "½ tsp", "role": "needed" },
+      { "group": "egg", "qty": "1 large", "role": "completes" }
+    ],
+    "methods": ["stove"],
+    "steps": [
+      "Rinse lentils and simmer them in water until tender.",
+      "Add corn, canned tomatoes, curry powder and salt; continue simmering.",
+      "Cook rice separately and set aside.",
+      "Poach the egg in the soup broth for 3‑4 minutes.",
+      "Ladle soup over a bed of rice and serve."
+    ],
+    "image_prompt": "steaming broth with orange lentils, yellow corn kernels, diced tomatoes, and a poached egg floating above a mound of rice"
+  },
+  {
+    "id": "",
+    "name": "Egg & Corn Fried Rice",
+    "time_min": 25,
+    "kcal": 820,
+    "protein_g": 44,
+    "uses": ["rice", "corn"],
+    "missing": [
+      { "group": "eggs", "qty": "4 large", "role": "needed" },
+      { "group": "tofu", "qty": "100g", "role": "completes" },
+      { "group": "salt", "qty": "½ tsp", "role": "needed" }
+    ],
+    "methods": ["stove"],
+    "steps": [
+      "Cook the rice and set aside.",
+      "Whisk the eggs with a pinch of salt.",
+      "In a pan, scramble the eggs, then push to the side.",
+      "Add corn and rice to the pan, stir‑fry together.",
+      "Fold the scrambled eggs back in, heat through and serve."
+    ],
+    "image_prompt": "bright yellow corn kernels and fluffy rice tossed with scrambled egg ribbons, with small cubes of tofu visible"
+  },
+  {
+    "id": "",
+    "name": "Tofu & Corn Stir‑fry with Rice",
+    "time_min": 30,
+    "kcal": 800,
+    "protein_g": 44,
+    "uses": ["rice", "corn"],
+    "missing": [
+      { "group": "tofu", "qty": "300g", "role": "needed" },
+      { "group": "soy_sauce", "qty": "1 tbsp", "role": "needed" },
+      { "group": "black_beans", "qty": "½ cup cooked", "role": "completes" },
+      { "group": "lentils", "qty": "¼ cup cooked", "role": "completes" },
+      { "group": "salt", "qty": "½ tsp", "role": "needed" }
+    ],
+    "methods": ["stove"],
+    "steps": [
+      "Cook rice and keep warm.",
+      "Cube the tofu and stir‑fry in a pan until lightly browned.",
+      "Add corn, black beans and lentils; stir‑fry for another 3 minutes.",
+      "Season with soy sauce and salt, then serve over the rice."
+    ],
+    "image_prompt": "glossy cubes of tofu and sweet corn kernels stir‑fried over a bed of white rice, glistening with soy sauce"
+  },
+  {
+    "id": "",
+    "name": "Sardine & Corn Rice Patties",
+    "time_min": 35,
+    "kcal": 850,
+    "protein_g": 48,
+    "uses": ["rice", "corn"],
+    "missing": [
+      { "group": "sardines", "qty": "1.5 cans (≈180g)", "role": "needed" },
+      { "group": "egg", "qty": "1 large", "role": "needed" },
+      { "group": "crackers", "qty": "¼ cup crushed", "role": "needed" },
+      { "group": "salt", "qty": "½ tsp", "role": "needed" }
+    ],
+    "methods": ["stove"],
+    "steps": [
+      "Cook rice and mix with corn, flaked sardines, beaten egg, crushed crackers and salt.",
+      "Form the mixture into patties.",
+      "Pan‑fry the patties in a non‑stick pan over medium heat until golden on both sides.",
+      "Serve hot."
+    ],
+    "image_prompt": "golden‑fried rice and corn patties studded with flaked sardine pieces, with a golden egg yolk center visible"
+  }
+]

@@ -35,7 +35,7 @@ export default function Deck() {
     setPhotos({});
     deck.cards.forEach((c, i) => {
       s.images
-        .load(c.card.image_prompt, i)
+        .load(c.card, i)
         .then((url) => live && setPhotos((p) => ({ ...p, [c.card.id]: url })))
         .catch(() => live && setPhotos((p) => ({ ...p, [c.card.id]: null })));
     });

@@ -41,12 +41,12 @@ export const mockDeckSource = (getVocabulary: () => Vocabulary, buildMs = 900): 
 });
 
 /**
- * No food photos exist yet, so every image fails after a short, staggered
- * wait and the card shows its plain fallback (SPEC §11). The fade-in path is
- * wired and gets exercised once the Flux adapter returns real photos.
+ * Offline stand-in for `httpImageSource` (used when EXPO_PUBLIC_API_URL is
+ * unset): every photo fails after a short, staggered wait, so the card shows
+ * its plain fallback (SPEC §11).
  */
 export const mockImageSource = (): ImageSource => ({
-  async load(_prompt: string, order: number) {
+  async load(_card: { name: string; image_prompt: string }, order: number) {
     await new Promise((r) => setTimeout(r, 300 + order * 150));
     return null;
   },

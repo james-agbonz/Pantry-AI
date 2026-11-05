@@ -1,6 +1,6 @@
 import { PricedCard, type DealStage, type Profile, type Session } from "@pantry/contract";
 import { z } from "zod";
-import { DealError, ReportError, type DeckSource, type DealFailure, type PriceTableSource, type ReportSource } from "./sources";
+import { DealError, ReportError, type DeckSource, type DealFailure, type ImageSource, type PriceTableSource, type ReportSource } from "./sources";
 
 /** The fetch the app uses: `expo/fetch` on the phone (it streams), the global one in tests. */
 export type Fetch = (url: string, init?: { method?: string; headers?: Record<string, string>; body?: string }) => Promise<{
@@ -123,6 +123,34 @@ export function httpReportSource(
       }
       if (res.status === 429) throw new ReportError("rate_limit");
       if (!res.ok) throw new ReportError("server");
+    },
+  };
+}
+
+/** The server's caps on `/api/image` (SPEC §16); longer text is cut, never refused. */
+const NAME_MAX = 120;
+const PROMPT_MAX = 1200;
+
+/**
+ * `POST /api/image` with the card's name and `image_prompt`. Any failure
+ * (no connection, a refusal, no photo) is `null`: the card shows its plain
+ * fallback and never waits on a photo.
+ */
+export function httpImageSource(baseUrl: string, deviceId: () => Promise<string>, fetchImpl: Fetch): ImageSource {
+  return {
+    async load(card) {
+      try {
+        const res = await fetchImpl(`${baseUrl}/api/image`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "X-Pantry-Device": await deviceId() },
+          body: JSON.stringify({ name: card.name.trim().slice(0, NAME_MAX), prompt: card.image_prompt.trim().slice(0, PROMPT_MAX) }),
+        });
+        if (!res.ok) return null;
+        const { url } = (await res.json()) as { url?: unknown };
+        return typeof url === "string" && url.length > 0 ? url : null;
+      } catch {
+        return null;
+      }
     },
   };
 }

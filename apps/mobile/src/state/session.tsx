@@ -5,7 +5,7 @@ import type { DeckSource, ImageSource, Pricer } from "@/data/sources";
 import { countDeck, DAILY_DECKS, dayKey, deckReducer, decksLeft, passedNames, type DeckAction, type DeckCount, type DeckState } from "@/deck/state";
 import { parseBudget } from "@/format";
 import { API_URL, apiFetch } from "@/data/api";
-import { httpDeckSource } from "@/data/http";
+import { httpDeckSource, httpImageSource } from "@/data/http";
 import { mockDeckSource, mockImageSource } from "@/mock/deck";
 import { deviceId } from "./device";
 import { tablePricer } from "@/data/pricer";
@@ -95,7 +95,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   tableRef.current = vocabulary;
   const [sources] = useState(() => ({
     decks: API_URL ? httpDeckSource(API_URL, deviceId, () => dayKey(new Date()), apiFetch) : mockDeckSource(() => tableRef.current),
-    images: mockImageSource(),
+    images: API_URL ? httpImageSource(API_URL, deviceId, apiFetch) : mockImageSource(),
   }));
   const halal = profile?.limits.includes("halal") ?? false;
   const pricer = useMemo(() => tablePricer(vocabulary, { halal }), [vocabulary, halal]);

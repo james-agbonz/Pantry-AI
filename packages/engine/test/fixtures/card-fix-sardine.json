@@ -1,0 +1,29 @@
+{
+  "id": "",
+  "name": "Sardine, Corn & Black Bean Rice Skillet",
+  "time_min": 30,
+  "kcal": 750,
+  "protein_g": 46,
+  "uses": ["rice", "corn"],
+  "missing": [
+    { "group": "sardines", "qty": "1 can (≈100 g)", "role": "needed" },
+    { "group": "black_beans", "qty": "1 cup cooked", "role": "needed" },
+    { "group": "eggs", "qty": "1 large", "role": "needed" },
+    { "group": "onion", "qty": "1 small, diced", "role": "needed" },
+    { "group": "salt", "qty": "to taste", "role": "needed" },
+    { "group": "black_pepper", "qty": "to taste", "role": "needed" },
+    { "group": "cumin", "qty": "1 tsp", "role": "needed" },
+    { "group": "carrot", "qty": "½ cup diced", "role": "completes" }
+  ],
+  "methods": ["stove"],
+  "steps": [
+    "Rinse 1 cup rice and combine with 2 cups water in a pot; bring to boil, reduce heat, cover and simmer 15 min.",
+    "While rice cooks, heat a pan over medium heat, add diced onion and sauté until translucent.",
+    "Stir in drained black beans, corn kernels, and diced carrot; cook 3‑4 min.",
+    "Add the canned sardines (break into chunks) and sprinkle cumin, salt, and black pepper; heat through.",
+    "Fold the cooked rice into the pan, mixing all ingredients evenly; warm for 2 min.",
+    "In a separate small skillet, fry the egg sunny‑side up and place on top of the rice mixture.",
+    "Serve immediately."
+  ],
+  "image_prompt": "flaked canned sardines mixed with golden rice, bright yellow corn kernels, glossy black beans, and a fried egg on top, with diced orange carrot and a sprinkle of black pepper"
+}

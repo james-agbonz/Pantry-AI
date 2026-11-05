@@ -1,0 +1,23 @@
+{
+  "id": "",
+  "name": "Salmon & Corn Rice with Fried Egg",
+  "time_min": 30,
+  "kcal": 810,
+  "protein_g": 50,
+  "uses": ["rice", "corn"],
+  "missing": [
+    { "group": "canned_salmon", "qty": "150g", "role": "needed" },
+    { "group": "eggs", "qty": "1 large", "role": "needed" }
+  ],
+  "methods": ["stove"],
+  "steps": [
+    "Rinse 1 cup rice and cook in a saucepan with 2 cups water; bring to boil, then simmer covered 15 minutes until water is absorbed.",
+    "While rice cooks, drain and rinse the canned salmon, flake it into a bowl.",
+    "In a large skillet, heat a splash of water, add 1 cup corn kernels and sauté 3 minutes until warmed.",
+    "Add the flaked salmon to the skillet, stir briefly to combine with corn, and season with a pinch of salt if desired.",
+    "When rice is done, fluff it and stir it into the salmon‑corn mixture; heat together for 2 minutes.",
+    "In the same skillet or a separate small pan, fry the egg sunny‑side‑up until whites set but yolk remains runny.",
+    "Slide the fried egg on top of the rice mixture, serve immediately."
+  ],
+  "image_prompt": "flaked canned salmon and bright yellow corn kernels mixed with fluffy white rice, topped with a sunny‑side‑up egg showing a glossy, runny yolk"
+}

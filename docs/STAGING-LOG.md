@@ -8,6 +8,17 @@ How a run is measured: decks go to `POST /api/deck` from a script, each with its
 
 ---
 
+## Run 8 — 2026-11-05: recording the engine's test samples
+
+**Config:** as Run 7, plus photos in the app (`httpImageSource`) and Report a problem. Worker `5dec9096`. Three decks with the engine tests' own input, made up, about 65 s apart; replies captured from `wrangler tail`.
+
+- **Deck 1:** two real faults, `green_onion` marked `completes`. Both regenerated alone and passed (8 validated, 2 failed). One regeneration needed the 429 retry.
+- **Deck 2:** clean, 6 of 6 (now `clean-deck.json`).
+- **Deck 3:** two real faults, `egg` for the group `eggs`. The regenerations went out in parallel and hit Groq's 8K tokens a minute: **the deck failed with `HTTP 429 after one retry`**. The slot was released, as designed. On the free tier, a deck with failed cards close behind another deck can fail. The paid key, or spacing regenerations, would fix it.
+- **Photos in the app:** every card asked `/api/image` (6 of 6 answered 200), but the free 10K neurons were used up by Runs 2–7, so each answer was `url: null` and the cards showed the plain fallback, as designed. Real photos in the app weren't seen yet.
+
+The samples and what's real or injected are listed in `packages/engine/test/fixtures/README.md`.
+
 ## Run 7 — 2026-11-04
 
 **Review page:** https://claude.ai/artifact/1jp7QPbPVTzTygrL4AUVKX (Runs 6 and 7 together)

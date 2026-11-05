@@ -45,6 +45,8 @@ IMAGE_RESIZE = "512"
 IMAGE_QUALITY = "75"
 # Log each raw model reply, to re-record the engine's sample responses.
 PANTRY_LOG_REPLIES = "1"
+# The Expo web build on this Mac, for screenshots and checks against staging.
+PANTRY_ALLOWED_ORIGINS = "http://localhost:8083"
 
 # Workers AI, for photos. No key: the binding is the account's.
 [env.staging.ai]

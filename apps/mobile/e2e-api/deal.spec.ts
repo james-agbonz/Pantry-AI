@@ -16,6 +16,8 @@ test("deals through /api/deck: the stages come over HTTP, then the deck and the 
   await deal(page);
   expect(calls).toContain("POST /api/deck");
   expect(calls).toContain("GET /api/prices");
+  // Every card asks the server for its photo.
+  await expect.poll(() => calls.filter((c) => c === "POST /api/image").length).toBe(6);
   // The server's count: two left after one deck.
   await expect(text(page, "1 of 6 · 2 decks left today", false)).toBeVisible();
   await swipe(page, "right");

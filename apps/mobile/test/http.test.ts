@@ -2,7 +2,7 @@ import type { Profile, Session } from "@pantry/contract";
 import { createApp, createLlm, currentPriceTable, DEFAULT_LIMITS, Limiter, memoryKV, memoryReportStore } from "@pantry/backend";
 import { vocabulary } from "@pantry/vocabulary";
 import { describe, expect, it } from "vitest";
-import { httpDeckSource, httpPriceTableSource, httpReportSource, readDeckStream, type Fetch } from "../src/data/http";
+import { httpDeckSource, httpImageSource, httpPriceTableSource, httpReportSource, readDeckStream, type Fetch } from "../src/data/http";
 import { DealError, ReportError } from "../src/data/sources";
 
 // The phone's HTTP client against the real server app, in process: the two
@@ -130,5 +130,45 @@ describe("the phone's report client against the server", () => {
       throw new TypeError("Network request failed");
     });
     await expect(offline.send("hi")).rejects.toEqual(new ReportError("network"));
+  });
+});
+
+describe("the phone's photo client against the server", () => {
+  function photoServer(generate: (prompt: string) => Promise<{ url: string } | null>) {
+    const prompts: string[] = [];
+    const app = createApp({
+      llm: createLlm({ provider: "mock", model: "sample-deck" }),
+      vocabulary: () => vocabulary,
+      priceTable: currentPriceTable,
+      limits: new Limiter(memoryKV(), DEFAULT_LIMITS, () => new Date(`${TODAY}T12:00:00Z`)),
+      images: { provider: "test", generate: (p) => (prompts.push(p), generate(p)) },
+      log: () => {},
+    });
+    const fetchImpl: Fetch = async (url, init) => app.request(url.replace("http://api", ""), { ...init, headers: { ...init?.headers, "CF-Connecting-IP": "10.7.0.1" } }) as never;
+    return { prompts, source: httpImageSource("http://api", async () => "device-0123456789abcdef", fetchImpl) };
+  }
+  const card = { name: "Egg fried rice", image_prompt: "egg fried rice with corn and green onion" };
+
+  it("sends the card's name and description, and gets the photo back", async () => {
+    const { prompts, source } = photoServer(async () => ({ url: "data:image/webp;base64,UklGRg" }));
+    expect(await source.load(card, 0)).toBe("data:image/webp;base64,UklGRg");
+    expect(prompts[0]).toContain("Egg fried rice: egg fried rice with corn and green onion");
+  });
+
+  it("cuts text past the server's caps instead of having the photo refused", async () => {
+    const { prompts, source } = photoServer(async () => ({ url: "data:image/webp;base64,AA" }));
+    expect(await source.load({ name: "n".repeat(200), image_prompt: "d".repeat(2000) }, 0)).toBe("data:image/webp;base64,AA");
+    expect(prompts[0]).toContain(`${"n".repeat(120)}: ${"d".repeat(1200)}`);
+  });
+
+  it("is null when the server has no photo, refuses, or can't be reached", async () => {
+    expect(await photoServer(async () => null).source.load(card, 0)).toBeNull();
+    const { source } = photoServer(async () => ({ url: "data:image/webp;base64,AA" }));
+    for (let i = 0; i < 40; i++) await source.load(card, i);
+    expect(await source.load(card, 40)).toBeNull();
+    const offline = httpImageSource("http://api", async () => "device-0123456789abcdef", async () => {
+      throw new TypeError("Network request failed");
+    });
+    expect(await offline.load(card, 0)).toBeNull();
   });
 });

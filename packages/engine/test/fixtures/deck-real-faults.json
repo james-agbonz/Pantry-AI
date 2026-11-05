@@ -1,0 +1,143 @@
+[
+  {
+    "id": "",
+    "name": "Tuna Fried Rice with Corn",
+    "time_min": 30,
+    "kcal": 800,
+    "protein_g": 48,
+    "uses": ["rice", "corn"],
+    "missing": [
+      { "group": "canned_tuna", "qty": "1 can (~150g)", "role": "needed" },
+      { "group": "cooking_oil", "qty": "1 tbsp", "role": "needed" },
+      { "group": "soy_sauce", "qty": "2 tbsp", "role": "needed" },
+      { "group": "frozen_veg", "qty": "1 cup", "role": "completes" }
+    ],
+    "methods": ["stove"],
+    "steps": [
+      "Cook the rice according to package instructions and set aside.",
+      "Heat cooking oil in a pan over medium heat.",
+      "Add corn and stir‑fry for 2 minutes.",
+      "Add drained canned tuna and break it up, stir for another minute.",
+      "Stir in cooked rice, soy sauce, and frozen vegetables; fry until everything is hot and lightly browned.",
+      "Serve immediately."
+    ],
+    "image_prompt": "fluffy white rice mixed with bright yellow corn kernels, pink chunks of canned tuna, all glossy from soy sauce, lightly browned pieces, steaming hot"
+  },
+  {
+    "id": "",
+    "name": "Black Bean and Corn Rice Bowl with Egg",
+    "time_min": 25,
+    "kcal": 820,
+    "protein_g": 49,
+    "uses": ["rice", "corn"],
+    "missing": [
+      { "group": "black_beans", "qty": "1 cup cooked", "role": "needed" },
+      { "group": "eggs", "qty": "2 large", "role": "needed" },
+      { "group": "cumin", "qty": "1 tsp", "role": "needed" },
+      { "group": "frozen_veg", "qty": "1 cup", "role": "completes" }
+    ],
+    "methods": ["stove"],
+    "steps": [
+      "Cook rice and keep warm.",
+      "In a pot, heat a splash of water, add black beans, corn, and frozen vegetables; heat through.",
+      "Season with cumin and a pinch of salt.",
+      "Boil the eggs for 8 minutes, cool and slice.",
+      "Layer rice in a bowl, top with bean‑corn mixture, and arrange sliced eggs on top.",
+      "Enjoy while warm."
+    ],
+    "image_prompt": "steamed white rice topped with glossy black beans, golden corn kernels, sliced boiled eggs, dusted with cumin, vibrant green frozen vegetables"
+  },
+  {
+    "id": "",
+    "name": "Egg and Corn Fried Rice",
+    "time_min": 20,
+    "kcal": 800,
+    "protein_g": 50,
+    "uses": ["rice", "corn"],
+    "missing": [
+      { "group": "eggs", "qty": "3 large", "role": "needed" },
+      { "group": "cooking_oil", "qty": "1 tbsp", "role": "needed" },
+      { "group": "soy_sauce", "qty": "2 tbsp", "role": "needed" },
+      { "group": "green_onion", "qty": "2 stalks", "role": "completes" }
+    ],
+    "methods": ["stove"],
+    "steps": [
+      "Cook rice, let it cool slightly.",
+      "Heat cooking oil in a wok or large pan over medium‑high heat.",
+      "Add corn and stir‑fry for 2 minutes.",
+      "Push corn to the side, scramble the eggs in the empty space until set.",
+      "Add the rice, soy sauce, and combine everything; fry until hot and slightly crispy.",
+      "Garnish with chopped green onion and serve."
+    ],
+    "image_prompt": "golden fried rice studded with bright yellow corn and fluffy scrambled eggs, glossy soy sauce coating, sprinkled with chopped green onions"
+  },
+  {
+    "id": "",
+    "name": "Tofu Corn Curry with Rice",
+    "time_min": 35,
+    "kcal": 820,
+    "protein_g": 48,
+    "uses": ["rice", "corn"],
+    "missing": [
+      { "group": "tofu", "qty": "200g firm, cubed", "role": "needed" },
+      { "group": "coconut_milk", "qty": "1 cup", "role": "needed" },
+      { "group": "curry_powder", "qty": "2 tbsp", "role": "needed" },
+      { "group": "frozen_veg", "qty": "1 cup", "role": "completes" }
+    ],
+    "methods": ["stove"],
+    "steps": [
+      "Cook rice and keep warm.",
+      "In a pot, heat a splash of water, add curry powder and toast briefly.",
+      "Stir in coconut milk and bring to a gentle simmer.",
+      "Add cubed tofu, corn, and frozen vegetables; simmer 8‑10 minutes until flavors meld.",
+      "Season lightly with salt if desired.",
+      "Serve the curry over the steamed rice."
+    ],
+    "image_prompt": "steaming white rice beside a creamy orange curry of tofu cubes and sweet corn, speckled with green frozen vegetables, glossy and thick"
+  },
+  {
+    "id": "",
+    "name": "Chicken and Corn Rice Casserole",
+    "time_min": 40,
+    "kcal": 830,
+    "protein_g": 50,
+    "uses": ["rice", "corn"],
+    "missing": [
+      { "group": "chicken_breast", "qty": "200g diced", "role": "needed" },
+      { "group": "eggs", "qty": "1 large", "role": "needed" },
+      { "group": "salt", "qty": "to taste", "role": "needed" },
+      { "group": "frozen_veg", "qty": "1 cup", "role": "completes" }
+    ],
+    "methods": ["microwave"],
+    "steps": [
+      "Cook rice and let it cool slightly.",
+      "Place diced chicken breast in a microwave‑safe bowl, add a pinch of salt, and microwave on high for 4 minutes, stirring halfway.",
+      "In a large mixing bowl combine rice, cooked chicken, corn, frozen vegetables, and the beaten egg; mix well.",
+      "Transfer the mixture to a microwave‑safe casserole dish and microwave on high for 6‑8 minutes, or until the egg is set and the casserole is hot throughout.",
+      "Let stand 2 minutes before serving."
+    ],
+    "image_prompt": "baked casserole of fluffy rice mixed with tender chicken pieces, golden corn kernels, and a soft set of egg, speckled with colorful frozen vegetables, bubbling surface"
+  },
+  {
+    "id": "",
+    "name": "Sardine Corn Rice Salad",
+    "time_min": 10,
+    "kcal": 800,
+    "protein_g": 47,
+    "uses": ["rice", "corn"],
+    "missing": [
+      { "group": "sardines", "qty": "1 can (~100g)", "role": "needed" },
+      { "group": "salt", "qty": "to taste", "role": "needed" },
+      { "group": "green_onion", "qty": "1 stalk, sliced", "role": "completes" }
+    ],
+    "methods": ["fridge"],
+    "steps": [
+      "Cook rice, spread on a plate to cool, then refrigerate until cold.",
+      "In a bowl combine the chilled rice, corn kernels, and drained sardines, breaking the sardines into bite‑size pieces.",
+      "Season lightly with salt and toss gently.",
+      "Fold in sliced green onion just before serving.",
+      "Serve cold as a hearty salad."
+    ],
+    "image_prompt": "cool white rice tossed with bright yellow corn kernels and flaky silver sardine fillets, flecks of fresh green onion, a simple, hearty salad"
+  }
+]

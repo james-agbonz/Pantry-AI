@@ -53,9 +53,9 @@ describe("dealDeck", () => {
   it("regenerates only the failing cards, each alone, and keeps slot order", async () => {
     const r = await deal([
       fixture("deck-three-bad.json"),
-      fixture("card-fix-tofu.json"),
-      fixture("card-fix-chickpea.json"),
-      fixture("card-fix-omelette.json"),
+      fixture("card-fix-salmon.json"),
+      fixture("card-fix-sardine.json"),
+      fixture("card-fix-chicken.json"),
     ]);
     expect(r.llm.calls).toHaveLength(4);
     for (const call of r.llm.calls.slice(1)) {
@@ -65,14 +65,15 @@ describe("dealDeck", () => {
     // Slots 0, 2 and 5 were good and stay where they were.
     expect(r.cards).toHaveLength(6);
     expect([r.cards[0]!.name, r.cards[2]!.name, r.cards[5]!.name]).toEqual([cleanNames[0], cleanNames[2], cleanNames[5]]);
-    expect(names(r.cards)).toEqual(expect.arrayContaining(["Crispy tofu with corn rice", "Chickpea and corn curry", "Corn and rice omelette"]));
-    expect(names(r.cards)).not.toContain("Bacon and egg fried rice");
+    expect(names(r.cards)).toEqual(expect.arrayContaining(["Salmon & Corn Rice with Fried Egg", "Sardine, Corn & Black Bean Rice Skillet", "Chicken, Kidney Bean & Corn Pilaf"]));
+    // The three faulty slots were replaced, not shipped.
+    for (const i of [1, 3, 4]) expect(names(r.cards)).not.toContain(cleanNames[i]);
   });
 
   it("tells the retry what went wrong and which dishes to differ from", async () => {
     const bad = JSON.parse(fixture("clean-deck.json"));
     bad[1].missing.push({ group: "bacon", qty: "4 strips", role: "needed" });
-    const r = await deal([JSON.stringify(bad), fixture("card-fix-tofu.json")]);
+    const r = await deal([JSON.stringify(bad), fixture("card-fix-salmon.json")]);
     const retry = r.llm.calls[1]!.user;
     expect(retry).toContain("'bacon' is excluded ('pork')");
     expect(retry).toContain(cleanNames[0]);
@@ -82,10 +83,10 @@ describe("dealDeck", () => {
   it("retries a card that fails again, then accepts it", async () => {
     const bad = JSON.parse(fixture("clean-deck.json"));
     bad[4].methods = ["oven"];
-    const r = await deal([JSON.stringify(bad), fixture("card-still-bad.json"), fixture("card-fix-omelette.json")]);
+    const r = await deal([JSON.stringify(bad), fixture("card-still-bad.json"), fixture("card-fix-chicken.json")]);
     expect(r.llm.calls).toHaveLength(3);
     expect(r.llm.calls[2]!.user).toContain("mentions 'ground pork', excluded ('pork')");
-    expect(r.cards[4]!.name).toBe("Corn and rice omelette");
+    expect(r.cards[4]!.name).toBe("Chicken, Kidney Bean & Corn Pilaf");
     expect(r.dropped).toEqual([]);
   });
 
@@ -94,7 +95,7 @@ describe("dealDeck", () => {
     bad[4].methods = ["oven"];
     const r = await deal([JSON.stringify(bad), fixture("card-still-bad.json"), fixture("card-still-bad.json")]);
     expect(r.cards).toHaveLength(5);
-    expect(names(r.cards)).not.toContain("Corn rice with ground meat");
+    expect(names(r.cards)).not.toContain("Black Bean & Corn Rice Bowl");
     expect(r.dropped).toEqual([{ index: 4, errors: [expect.objectContaining({ code: "excluded_ingredient" })] }]);
   });
 
@@ -107,7 +108,7 @@ describe("dealDeck", () => {
   });
 
   it("regenerates all six when the reply is not JSON", async () => {
-    const fixes = ["card-fix-tofu.json", "card-fix-chickpea.json", "card-fix-omelette.json"].map(fixture);
+    const fixes = ["card-fix-salmon.json", "card-fix-sardine.json", "card-fix-chicken.json"].map(fixture);
     const r = await deal([fixture("not-json.txt"), ...fixes, ...fixes]);
     expect(r.llm.calls).toHaveLength(7);
     expect(r.cards).toHaveLength(6);
@@ -121,11 +122,31 @@ describe("dealDeck", () => {
     );
     const deck = JSON.parse(fixture("clean-deck.json"));
     deck[0].missing = [{ group: "ham", qty: "100g", role: "needed" }];
-    const llm = new RecordedLlm([JSON.stringify(deck), fixture("card-fix-tofu.json")]);
+    const llm = new RecordedLlm([JSON.stringify(deck), fixture("card-fix-salmon.json")]);
     const r = await dealDeck(halal.input, halal.diet, { llm, vocabulary, log: () => {} });
-    expect(names(r.cards)).toContain("Chicken thighs with spiced corn rice");
-    expect(r.cards[0]!.name).toBe("Crispy tofu with corn rice");
+    expect(names(r.cards)).toContain("Chicken Thigh & Tofu Stir‑Fry with Rice");
+    expect(r.cards[0]!.name).toBe("Salmon & Corn Rice with Fried Egg");
     expect(llm.calls[0]!.user).not.toMatch(/^ham:/m);
+  });
+});
+
+describe("real model faults, recorded from openai/gpt-oss-120b", () => {
+  it("green onion marked completes: both cards are regenerated alone, with the model's own fixes", async () => {
+    // Recorded as one sequence: the deck, then the model's regenerations of slots 2 and 5.
+    const r = await deal([fixture("deck-real-faults.json"), fixture("card-fix-salmon.json"), fixture("card-fix-sardine.json")]);
+    expect(r.llm.calls).toHaveLength(3);
+    for (const call of r.llm.calls.slice(1)) expect(call.user).toContain("'green_onion' is seasoning or flavour");
+    expect(r.cards).toHaveLength(6);
+    expect(names(r.cards)).toEqual(expect.arrayContaining(["Salmon & Corn Rice with Fried Egg", "Sardine, Corn & Black Bean Rice Skillet"]));
+    expect(r.stats).toMatchObject({ validated: 8, failed: 2 });
+  });
+
+  it("'egg' for the group 'eggs': the card is rejected as not in the group list", async () => {
+    const r = await deal([fixture("deck-real-egg.json"), fixture("card-fix-salmon.json"), fixture("card-fix-chicken.json")]);
+    expect(r.llm.calls).toHaveLength(3);
+    for (const call of r.llm.calls.slice(1)) expect(call.user).toContain("'egg' is not in the group list");
+    expect(r.cards).toHaveLength(6);
+    expect(r.dropped).toEqual([]);
   });
 });
 
@@ -138,11 +159,11 @@ describe("completes is never seasoning", () => {
 
   it("a card with cumin as completes is regenerated, and told why", async () => {
     const deck = JSON.parse(fixture("clean-deck.json"));
-    deck[3].missing = deck[3].missing.map((m: { group: string; role: string }) => (m.group === "cumin" ? { ...m, role: "completes" } : m));
-    const r = await deal([JSON.stringify(deck), fixture("card-fix-omelette.json")]);
+    deck[3].missing.push({ group: "cumin", qty: "1 tsp", role: "completes" });
+    const r = await deal([JSON.stringify(deck), fixture("card-fix-chicken.json")]);
     expect(r.llm.calls).toHaveLength(2);
     expect(r.llm.calls[1]!.user).toContain("'cumin' is seasoning or flavour");
-    expect(r.cards[3]!.name).toBe("Corn and rice omelette");
+    expect(r.cards[3]!.name).toBe("Chicken, Kidney Bean & Corn Pilaf");
   });
 });
 
@@ -170,7 +191,7 @@ describe("prompts", () => {
   });
 
   it("never carry a price", async () => {
-    const r = await deal([fixture("deck-three-bad.json"), ...["card-fix-tofu.json", "card-fix-chickpea.json", "card-fix-omelette.json"].map(fixture)]);
+    const r = await deal([fixture("deck-three-bad.json"), ...["card-fix-salmon.json", "card-fix-sardine.json", "card-fix-chicken.json"].map(fixture)]);
     for (const call of r.llm.calls) {
       expect(call.system + call.user).not.toMatch(/\$\s?\d/);
       expect(call.user).toMatch(/Never state a cost/);
@@ -207,7 +228,7 @@ describe("prompts", () => {
 
 describe("validation stats", () => {
   it("counts every card validation and logs one line per deck", async () => {
-    const r = await deal([fixture("deck-three-bad.json"), fixture("card-still-bad.json"), fixture("card-fix-chickpea.json"), fixture("card-fix-omelette.json"), fixture("card-fix-tofu.json")]);
+    const r = await deal([fixture("deck-three-bad.json"), fixture("card-still-bad.json"), fixture("card-fix-sardine.json"), fixture("card-fix-chicken.json"), fixture("card-fix-salmon.json")]);
     // 6 in the deck (3 failed) + 4 regenerations (1 failed).
     expect(r.stats).toEqual({ provider: "mock", model: "fixture", validated: 10, failed: 4, rate: 0.4 });
     expect(r.logs).toEqual([{ event: "card_validation", ...r.stats }]);
