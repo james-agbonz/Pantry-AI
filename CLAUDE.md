@@ -10,6 +10,7 @@ Pantry is a working name.
 - `docs/DESIGN.md` — brand book and UI rules.
 - `design/tokens.json` — colours, type, spacing, radius. Use tokens, never raw values.
 - `docs/STAGING-LOG.md` — results of every staging run: numbers, photos, what changed. Add a section after each run.
+- `docs/PRICE-SOURCES.md` — where real prices could come from (grocers, terms, data sources, location); open decisions.
 - `docs/BACKLOG.md` — everything parked: before launch, and later. Check it before planning a step; add to it instead of leaving to-dos in chat.
 
 ## Build order — one piece at a time, confirm before moving on
