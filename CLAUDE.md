@@ -20,7 +20,7 @@ Pantry is a working name.
 3. Recipe engine + validation
 4. Needs calculator
 5. Screens — 5a app shell and onboarding · 5b home and deck · 5c meal screen
-   - Before launch: the kitchen illustration is in the app, but its licence must be sorted (Perplexity image, personal use only; BACKLOG)
+   - The kitchen illustration is in the app (`assets/kitchen.webp`, made with ChatGPT; OpenAI's terms assign the output to the user, commercial use included)
 6. Pricing math, tested with placeholder prices marked as such
 7. Real prices — data change only, no code change. Weekly: `npm run prices:weekly` (StatCan national and provincial, the manual CSV, and the store collector for Walmart and Giant Tiger; see SPEC §16 and docs/PRICE-SOURCES.md). New store products: `npm run prices:find -- --store walmart_ca|gianttiger_ca`, mark picks in `tools/prices/store-candidates.csv`, `npm run prices:pick`. Monthly: `npm run prices:import` (StatCan 18-10-0245-01, Canada, latest month, for the items in `tools/prices/statcan-map.json`, plus complete rows from `tools/prices/manual-prices.csv`) writes `data/price-table.json` with today as its version and re-ranks the CSV in fill order. `-- --dry-run` previews the coverage report. `npm run prices:template` re-ranks the CSV without fetching.
    - To do: check allergen tags against real labels (`contains` in `packages/vocabulary/data/groups.json` was set by hand)
