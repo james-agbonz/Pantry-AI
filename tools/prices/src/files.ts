@@ -4,6 +4,7 @@ import { PriceTable, Store } from "@pantry/vocabulary";
 import { z } from "zod";
 import { readManual, writeManual, type ManualRow } from "./manual";
 import { StatcanMap } from "./map";
+import { StoreMap } from "./stores";
 
 const here = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 
@@ -12,7 +13,12 @@ export const PATHS = {
   map: here("../statcan-map.json"),
   manual: here("../manual-prices.csv"),
   stores: here("../stores.json"),
+  storeMap: here("../store-map.json"),
+  candidates: here("../store-candidates.csv"),
 };
+
+export const readStoreMap = () => StoreMap.parse(JSON.parse(readFileSync(PATHS.storeMap, "utf8")));
+export const writeStoreMap = (m: StoreMap) => writeFileSync(PATHS.storeMap, `${JSON.stringify(m, null, 2)}\n`);
 
 export const readStores = () => z.object({ stores: z.array(Store) }).parse(JSON.parse(readFileSync(PATHS.stores, "utf8"))).stores;
 

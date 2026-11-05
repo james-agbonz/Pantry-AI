@@ -1,0 +1,716 @@
+store,item_id,item,unit,pick,size_match,score,product,price,ref
+gianttiger_ca,rice_white_2kg,"White rice, long grain",2kg,,no,0.75,Minute Rice Pre-Cooked Long Grain Rice - 700g,5.27,minute-rice-pre-cooked-long-grain-rice-700g-3
+gianttiger_ca,rice_white_2kg,"White rice, long grain",2kg,,no,0.75,Minute Rice Pre-Cooked Long Grain Rice - 1.4kg,6.76,minute-rice-pre-cooked-long-grain-rice-1-4kg-1
+gianttiger_ca,rice_white_2kg,"White rice, long grain",2kg,,no,0.75,"Ben's Original Converted Long Grain Rice, 2.2 kg",9.77,bens-original-converted-long-grain-rice-2-2-kg
+gianttiger_ca,rice_white_2kg,"White rice, long grain",2kg,,no,0.50,Kitchen 88 White Rice - 150g,0.97,kitchen-88-white-rice-150g-1
+gianttiger_ca,rice_parboiled_900g,Parboiled rice,900g,,yes,0.50,"Dainty Royal Rice, 900-g",3.97,dainty-royal-rice-900-g
+gianttiger_ca,rice_parboiled_900g,Parboiled rice,900g,,yes,0.50,"Dainty Basmati Rice, 900-g",5.77,dainty-basmati-rice-900-g
+gianttiger_ca,rice_parboiled_900g,Parboiled rice,900g,,yes,0.50,"Dainty Jasmine Rice, 900-g",6.26,dainty-jasmine-rice-900-g
+gianttiger_ca,rice_parboiled_900g,Parboiled rice,900g,,no,1.00,"Dunya Harvest Parboiled Rice, 8 kg",16.98,dunya-harvest-parboiled-rice-8-kg
+gianttiger_ca,rice_jasmine_2kg,Jasmine rice,2kg,,no,1.00,Kitchen 88 Jasmine Rice - 150g,0.97,kitchen-88-jasmine-rice-150g-1
+gianttiger_ca,rice_jasmine_2kg,Jasmine rice,2kg,,no,1.00,"Giant Value Jasmine Rice, 250 g",1.59,giant-value-jasmine-rice-250-g
+gianttiger_ca,rice_jasmine_2kg,Jasmine rice,2kg,,no,1.00,"Ben's Original Jasmine Rice Cup, 62 g",1.99,bens-original-jasmine-rice-cup-62-g
+gianttiger_ca,rice_jasmine_2kg,Jasmine rice,2kg,,no,1.00,"Ben's Original Bistro Express Jasmine Rice, 240-g",3.47,bens-original-bistro-express-jasmine-rice-240-g-3
+gianttiger_ca,rice_brown_900g,Brown rice,900g,,yes,0.50,"Dainty Royal Rice, 900-g",3.97,dainty-royal-rice-900-g
+gianttiger_ca,rice_brown_900g,Brown rice,900g,,yes,0.50,"Dainty Basmati Rice, 900-g",5.77,dainty-basmati-rice-900-g
+gianttiger_ca,rice_brown_900g,Brown rice,900g,,yes,0.50,"Dainty Jasmine Rice, 900-g",6.26,dainty-jasmine-rice-900-g
+gianttiger_ca,rice_brown_900g,Brown rice,900g,,no,1.00,"Uncle Bens Bistro Express Brown Basmati Rice, 240-g",3.99,uncle-bens-bistro-express-brown-basmati-rice-240-g-3
+gianttiger_ca,rice_brown_2kg,Brown rice,2kg,,no,1.00,"Quaker Crispy Minis Crunchy Dill Flavour Brown Rice Chips, 100-g",2.96,quaker-crispy-minis-crunchy-dill-flavour-brown-rice-chips-100-g-1
+gianttiger_ca,rice_brown_2kg,Brown rice,2kg,,no,1.00,"Quaker Crispy Minis Cheddar Brown Rice Chips, 100-g",3.39,quaker-crispy-minis-cheddar-brown-rice-chips-100-g
+gianttiger_ca,rice_brown_2kg,Brown rice,2kg,,no,1.00,"Uncle Bens Bistro Express Brown Basmati Rice, 240-g",3.99,uncle-bens-bistro-express-brown-basmati-rice-240-g-3
+gianttiger_ca,rice_brown_2kg,Brown rice,2kg,,no,0.50,"Ben's Original Converted Long Grain Rice, 2.2 kg",9.77,bens-original-converted-long-grain-rice-2-2-kg
+gianttiger_ca,spaghetti_ww_900g,Whole wheat spaghetti,900g,,yes,0.33,"Giant Value Spaghetti Pasta, 900 g",1.77,giant-value-spaghetti-pasta-900-g
+gianttiger_ca,spaghetti_ww_900g,Whole wheat spaghetti,900g,,yes,0.33,Primo Spaghetti - 900 g,1.95,primo-spaghetti-900g-1
+gianttiger_ca,spaghetti_ww_900g,Whole wheat spaghetti,900g,,no,0.33,Primo Spaghetti - 454g,1.26,primo-spaghetti-454g
+gianttiger_ca,egg_noodles_375g,"Egg noodles, broad",375g,,no,1.00,"No Yolks Broad Egg White Noodles Pasta, 340 g",2.77,no-yolks-broad-egg-white-noodles-pasta-340-g
+gianttiger_ca,egg_noodles_375g,"Egg noodles, broad",375g,,no,1.00,"No Yolks Extra Broad Egg White Noodles Pasta, 340 g",2.77,no-yolks-extra-broad-egg-white-noodles-pasta-340-g
+gianttiger_ca,egg_noodles_375g,"Egg noodles, broad",375g,,no,0.67,"Mennonite Style Wide Egg Noodles, 700 g",7.99,700g-menn-style-nodls-wide-egg
+gianttiger_ca,egg_noodles_375g,"Egg noodles, broad",375g,,no,0.33,"Aurora Egg Pasta le Pappardelle, 250-g",2.29,aurora-egg-pasta-le-pappardelle-250-g
+gianttiger_ca,rice_vermicelli_400g,Rice vermicelli,400g,,no,1.00,"Rice a Roni Chicken Flavour Rice and Vermicelli, 227 g",1.97,rice-a-roni-chicken-flavour-rice-and-vermicelli-227g
+gianttiger_ca,rice_vermicelli_400g,Rice vermicelli,400g,,no,1.00,"Knorr Sidekicks Chicken Fried Rice & Vermicelli, 153 g",1.97,knorr-sidekicks-rice-vermicelli-chicken-fried-rice-side-dish-153-g
+gianttiger_ca,rice_vermicelli_400g,Rice vermicelli,400g,,no,1.00,Rice A Roni Beef Flavour Rice and Vermicelli - 227g,2.17,rice-a-roni-beef-flavour-rice-and-vermicelli-227g-1
+gianttiger_ca,rice_vermicelli_400g,Rice vermicelli,400g,,no,1.00,Rice a Roni Beef Flavoured Rice and Vermicelli,2.29,rice-a-roni-beef-flavoured-rice-and-vermicelli-1
+gianttiger_ca,flour_ww_2_5kg,Whole wheat flour,2.5kg,,yes,0.33,"Giant Value All Purpose Flour, 2.5 kg",3.77,giant-value-all-purpose-flour-2-5-kg
+gianttiger_ca,flour_ww_2_5kg,Whole wheat flour,2.5kg,,yes,0.33,Five Roses All Purpose White Flour - 2.5 kg,5.87,five-roses-all-purpose-white-flour-2-5-kg-1
+gianttiger_ca,flour_ww_2_5kg,Whole wheat flour,2.5kg,,yes,0.33,Robin Hood Flour All Purpose Original - 2.5kg,5.87,robin-hood-flour-all-purpose-original-2-5kg
+gianttiger_ca,flour_ww_2_5kg,Whole wheat flour,2.5kg,,yes,0.33,"Robin Hood Best for Cake & Pastry Flour, 2.5 kg",5.97,robin-hood-best-for-cake-pastry-flour-2-5-kg-2
+gianttiger_ca,cornmeal_1kg,"Cornmeal, yellow",1kg,,,,(no candidate found),,
+gianttiger_ca,couscous_500g,Couscous,500g,,no,1.00,"Exotic Couscous Nature, 300-g",1.67,exotic-couscous-nature-300-g
+gianttiger_ca,couscous_500g,Couscous,500g,,no,1.00,"Exotic Dried Tomato and Basil Couscous, 175-g",2.27,exotic-dried-tomato-and-basil-couscous-175-g
+gianttiger_ca,couscous_500g,Couscous,500g,,no,1.00,"Exotic Vegetable Couscous, 175-g",2.27,exotic-vegetable-couscous-175-g
+gianttiger_ca,couscous_500g,Couscous,500g,,no,1.00,"Zinda Couscous Pearl, Original, 225 g",2.97,zinda-couscous-pearl-original-225-g
+gianttiger_ca,barley_pearl_900g,Pearl barley,900g,,no,0.50,"Giant Value Beef Barley Soup, 540 ml",2.57,giant-value-beef-barley-soup-540-ml
+gianttiger_ca,tortillas_flour_10pk,"Flour tortillas, 10 inch",10 pack,,yes,1.00,"Wonder 100% Whole Wheat Flour Tortillas, 10-Pack, 640-g",4.77,wonder-100-whole-wheat-flour-tortillas-10-pack-640-g
+gianttiger_ca,tortillas_flour_10pk,"Flour tortillas, 10 inch",10 pack,,yes,0.50,"Giant Value 7-in Tortillas, 10-Pack, 340 g",2.25,giant-value-tortillas-7-in-10-pack
+gianttiger_ca,tortillas_flour_10pk,"Flour tortillas, 10 inch",10 pack,,yes,0.50,"Giant Value 7-in Tortillas, 10-Pack, 340 g",2.25,giant-value-tortillas-7-in-10-pack-3
+gianttiger_ca,tortillas_flour_10pk,"Flour tortillas, 10 inch",10 pack,,yes,0.50,"Casa Mendosa Medium Triple Baked Whole Wheat Tortillas, 10-Pack, 340-g",3.87,casa-mendosa-medium-triple-baked-whole-wheat-tortillas-10-pack-340-g
+gianttiger_ca,buns_hotdog_8pk,Hot dog buns,8 pack,,no,1.00,"Giant Value Hot Dog Buns, 12-Pack, 504 g",2.27,giant-value-hot-dog-buns-12-pack-2
+gianttiger_ca,buns_hotdog_8pk,Hot dog buns,8 pack,,no,1.00,"Giant Value Hot Dog Buns, 12-Pack, 504 g",2.46,giant-value-hot-dog-buns-12-pack-3
+gianttiger_ca,buns_hotdog_8pk,Hot dog buns,8 pack,,no,1.00,"Giant Value Hot Dog Buns, 12-Pack, 504 g",2.46,giant-value-hot-dog-buns-12-pack
+gianttiger_ca,buns_hotdog_8pk,Hot dog buns,8 pack,,no,1.00,"Giant Value Hot Dog Buns, 12-Pack, 504 g",2.97,giant-value-top-slice-hot-dog-buns-12pk-540g-2
+gianttiger_ca,kidney_beans_dry_900g,"Red kidney beans, dry",900g,,no,1.00,Primo Red Kidney Beans - 540ml,1.96,primo-red-kidney-beans-540ml-1
+gianttiger_ca,kidney_beans_dry_900g,"Red kidney beans, dry",900g,,no,0.67,Primo White Kidney Cannellini Beans - 540ml,1.96,primo-white-kidney-cannellini-beans-540ml-1
+gianttiger_ca,chickpeas_can_540ml,"Chickpeas, canned",540ml,,no,1.00,"Clic Chickpeas, 907 g",3.47,clic-chickpeas-907-g
+gianttiger_ca,chickpeas_can_540ml,"Chickpeas, canned",540ml,,no,1.00,"Patak's Butter Chickpeas Mild, 285 g",3.97,pataks-butter-chickpeas-with-sweet-potatoes-and-spinach-285-g
+gianttiger_ca,lentils_red_900g,"Red lentils, split",900g,,yes,0.33,"Clic Laird Green Lentils, 907 g",3.47,clic-laird-green-lentils-907-g
+gianttiger_ca,lentils_can_540ml,"Lentils, canned",540ml,,,,(no candidate found),,
+gianttiger_ca,onion_yellow_each,Yellow onion,each,,no,1.00,"MR Farms Yellow Onions, 2 lbs",0.97,yellow-onions-2-lbs
+gianttiger_ca,onion_yellow_each,Yellow onion,each,,no,1.00,"Yellow Onions, 2lbs.",0.97,yellow-onions-2lbs
+gianttiger_ca,onion_yellow_each,Yellow onion,each,,no,1.00,"Yellow Onions, 2 lbs",1.67,cooking-onions-2lb
+gianttiger_ca,onion_yellow_each,Yellow onion,each,,no,1.00,Yellow Onions - 2lbs.,2.15,yellow-onions-2lbs-1
+gianttiger_ca,onion_yellow_3lb,Yellow onions,3 lb bag,,yes,0.50,"Red Onions, 3 lb",4.97,red-onions-3-lb
+gianttiger_ca,onion_yellow_3lb,Yellow onions,3 lb bag,,yes,0.50,Sweet Onions - 3lb.,4.99,sweet-onions-3lb
+gianttiger_ca,onion_yellow_3lb,Yellow onions,3 lb bag,,no,1.00,"MR Farms Yellow Onions, 2 lbs",0.97,yellow-onions-2-lbs
+gianttiger_ca,onion_yellow_3lb,Yellow onions,3 lb bag,,no,1.00,"Yellow Onions, 2lbs.",0.97,yellow-onions-2lbs
+gianttiger_ca,onion_red_each,Red onion,each,,no,1.00,"Red Onions, 1-kg",3.97,vegco-red-onions-1-kg-6
+gianttiger_ca,onion_red_each,Red onion,each,,no,1.00,"Red Onions, 1 kg",3.97,vegco-red-onions-1-kg-4
+gianttiger_ca,onion_red_each,Red onion,each,,no,1.00,"Red Onions, 1 kg",3.97,vegco-red-onions-1-kg-5
+gianttiger_ca,onion_red_each,Red onion,each,,no,1.00,"Vegco Red Onions, 1 kg",3.97,red-onions-3lb
+gianttiger_ca,garlic_bulb_each,Garlic,1 bulb,,no,1.00,Garlic 3-Pack,0.89,garlic-3-pack-2
+gianttiger_ca,garlic_bulb_each,Garlic,1 bulb,,no,1.00,"Garlic, 3-Pack",0.97,garlic-3-pack-8
+gianttiger_ca,garlic_bulb_each,Garlic,1 bulb,,no,1.00,Garlic 3-Pack,0.97,garlic-3-pack-1
+gianttiger_ca,garlic_bulb_each,Garlic,1 bulb,,no,1.00,"Garlic, 3-Pack",0.97,garlic-3-pack-3
+gianttiger_ca,garlic_3pk,Garlic,3 bulbs,,no,1.00,Garlic 3-Pack,0.89,garlic-3-pack-2
+gianttiger_ca,garlic_3pk,Garlic,3 bulbs,,no,1.00,Garlic 3-Pack,0.97,garlic-3-pack-1
+gianttiger_ca,garlic_3pk,Garlic,3 bulbs,,no,1.00,"Garlic, 3-Pack",0.97,garlic-3-pack-8
+gianttiger_ca,garlic_3pk,Garlic,3 bulbs,,no,1.00,"Garlic, 3-Pack",0.97,garlic-3-pack-3
+gianttiger_ca,garlic_minced_250ml,"Minced garlic, jar",250ml,,no,0.67,"Derlea Foods Minced Garlic, 125-g",2.47,derlea-foods-minced-garlic-125-g-2
+gianttiger_ca,garlic_minced_250ml,"Minced garlic, jar",250ml,,no,0.67,"Derlea Minced Garlic, 1-kg",7.97,derlea-minced-garlic-1-kg
+gianttiger_ca,garlic_minced_250ml,"Minced garlic, jar",250ml,,no,0.33,"Garlic, 3-Pack",1.47,garlic-3-pack
+gianttiger_ca,garlic_minced_250ml,"Minced garlic, jar",250ml,,no,0.33,"Giant Value Garlic Salt, 250 g",1.97,giant-value-garlic-salt-250-g-1
+gianttiger_ca,potato_russet_each,Russet potato,each,,no,0.50,Mini Russet Potatoes - 3lb,1.97,mini-russet-potatoes-3lb-4
+gianttiger_ca,potato_russet_each,Russet potato,each,,no,0.50,"Russet Potatoes, 5-lb",3.94,white-mini-potatoes-5-lb-1
+gianttiger_ca,potato_russet_each,Russet potato,each,,no,0.50,"Potatoes Russet, 10 lbs",3.94,white-potatoes-10lb-5
+gianttiger_ca,potato_russet_each,Russet potato,each,,no,0.50,Russet White Potatoes - 5 lb,3.97,russet-white-potatoes-5-lb-1
+gianttiger_ca,sweet_potato_each,Sweet potato,each,,no,0.50,"Sweet Potatoes, 3-lb",4.49,sweet-potatoes-3-lb-2
+gianttiger_ca,sweet_potato_each,Sweet potato,each,,no,0.50,Sweet Potatoes - 3lb.,4.49,sweet-potatoes-3lb-2
+gianttiger_ca,sweet_potato_each,Sweet potato,each,,no,0.50,"Sweet Potatoes, 3 lbs",4.97,sweet-potatoes-3lb-3
+gianttiger_ca,sweet_potato_each,Sweet potato,each,,no,0.50,Sweet Potatoes - 3lb.,4.97,sweet-potatoes-3lb-1
+gianttiger_ca,carrots_5lb,Carrots,5 lb bag,,no,1.00,"Carrots, 2 lbs",1.67,carrots-2-lbs
+gianttiger_ca,carrots_5lb,Carrots,5 lb bag,,no,1.00,"Carrots, 2 lb",1.77,carrots-2lb
+gianttiger_ca,carrots_5lb,Carrots,5 lb bag,,no,1.00,"Carrots Nantes, 1 lb",2.97,carrots-nantes-1-lb-1
+gianttiger_ca,cabbage_green_each,Green cabbage,each,,no,1.00,"Green Cabbage, Single",2.97,green-cabbage-single-1
+gianttiger_ca,cabbage_green_each,Green cabbage,each,,no,1.00,Green Cabbage,2.97,green-cabbage
+gianttiger_ca,cabbage_green_each,Green cabbage,each,,no,1.00,"Green Cabbage, Single",2.97,green-cabbage-single-5
+gianttiger_ca,cabbage_green_each,Green cabbage,each,,no,1.00,"Green Cabbage, Single",3.47,green-cabbage-single-6
+gianttiger_ca,celery_bunch,Celery,bunch,,no,1.00,Celery,1.97,celery
+gianttiger_ca,celery_bunch,Celery,bunch,,no,1.00,Sleeved Celery,2.47,sleeved-celery-6
+gianttiger_ca,celery_bunch,Celery,bunch,,no,1.00,Sleeved Celery,2.77,sleeved-celery-1
+gianttiger_ca,celery_bunch,Celery,bunch,,no,1.00,Sleeved Celery,2.97,sleeved-celery
+gianttiger_ca,pepper_green_each,Green bell pepper,each,,no,0.67,"Sweet Green Peppers, 2-Pack",2.97,sweet-green-peppers-2-pack-5
+gianttiger_ca,pepper_green_each,Green bell pepper,each,,no,0.67,"Sweet Green Peppers, 2-Pack",2.97,sweet-green-peppers-2-pack-4
+gianttiger_ca,pepper_green_each,Green bell pepper,each,,no,0.67,"Sweet Green Peppers, 2-Pack",2.97,sweet-green-peppers-2-pack-3
+gianttiger_ca,pepper_green_each,Green bell pepper,each,,no,0.67,"Green Peppers, 2-Pack",2.97,green-peppers-2pk
+gianttiger_ca,pepper_red_each,Red bell pepper,each,,no,0.67,"Red Peppers, 4-Pack",3.97,red-peppers-4-pack-3
+gianttiger_ca,pepper_red_each,Red bell pepper,each,,no,0.67,Red Peppers 4-Pack,3.97,red-peppers-4-pack-1
+gianttiger_ca,pepper_red_each,Red bell pepper,each,,no,0.33,"Rainbow Peppers, 3-Pack",1.97,rainbow-peppers-3-pack-12
+gianttiger_ca,pepper_red_each,Red bell pepper,each,,no,0.33,"Rainbow Peppers, 4-Pack",3.97,rainbow-peppers-4-pack
+gianttiger_ca,tomato_roma_each,Roma tomato,each,,no,0.50,"Roma Tomatoes on the Vine, 454 g",1.97,roma-tomatoes-on-the-vine-454-g
+gianttiger_ca,tomato_vine_each,Tomato on the vine,each,,no,1.00,"Giant Value Tomato on the Vine, 454 g",1.92,tomato-on-the-vine-1-lb-2
+gianttiger_ca,tomato_vine_each,Tomato on the vine,each,,no,1.00,"Tomato on the Vine, 1 lb",1.97,tomato-on-the-vine-1-lb-3
+gianttiger_ca,tomato_vine_each,Tomato on the vine,each,,no,1.00,"PC Organics Tomato on the Vine, 1 lb",2.42,tomato-on-the-vine-1-lb-4
+gianttiger_ca,tomato_vine_each,Tomato on the vine,each,,no,0.50,"Tomatoes on the Vine, 1 lb",1.92,tomatoes-on-the-vine-1lb
+gianttiger_ca,lettuce_iceberg_each,Iceberg lettuce,each,,no,1.00,Iceberg Lettuce,2.97,iceberg-lettuce-4
+gianttiger_ca,lettuce_iceberg_each,Iceberg lettuce,each,,no,1.00,Iceberg Lettuce,3.27,iceberg-lettuce-1
+gianttiger_ca,lettuce_iceberg_each,Iceberg lettuce,each,,no,1.00,Iceberg Lettuce - Single,3.27,iceberg-lettuce-single-1
+gianttiger_ca,lettuce_iceberg_each,Iceberg lettuce,each,,no,1.00,Iceberg Lettuce - Single,3.27,iceberg-lettuce-single
+gianttiger_ca,spinach_frozen_300g,"Chopped spinach, frozen",300g,,no,0.33,"Bagged Spinach, 227 g",2.97,bagged-spinach-227-g-1
+gianttiger_ca,spinach_frozen_300g,"Chopped spinach, frozen",300g,,no,0.33,"Harvest Fresh Spinach, 284 g",2.97,bagged-spinach-227-g
+gianttiger_ca,spinach_frozen_300g,"Chopped spinach, frozen",300g,,no,0.33,"Harvest Fresh Bagged Spinach, 284 g",2.97,bagged-spinach-227-g-2
+gianttiger_ca,spinach_frozen_300g,"Chopped spinach, frozen",300g,,no,0.33,"Baby Spinach, 141-g",3.44,baby-spinach-141-g
+gianttiger_ca,broccoli_crown_each,Broccoli crown,each,,no,0.50,"Giant Value Frozen Broccoli Florets, 500 g",2.77,giant-value-frozen-broccoli-florets-500-g
+gianttiger_ca,broccoli_crown_each,Broccoli crown,each,,no,0.50,"Giant Value Frozen Broccoli Florets, 500 g",2.77,giant-value-frozen-broccoli-florets-500-g-1
+gianttiger_ca,broccoli_crown_each,Broccoli crown,each,,no,0.50,Broccoli,2.94,broccoli-3
+gianttiger_ca,broccoli_crown_each,Broccoli crown,each,,no,0.50,"Tim Hortons Ready to Serve Cream of Broccoli Soup, 540-ml",3.33,tim-hortons-ready-to-serve-cream-of-broccoli-soup-540-ml-1
+gianttiger_ca,cucumber_english_each,English cucumber,each,,no,1.00,English Cucumber,0.84,english-cucumber-6
+gianttiger_ca,cucumber_english_each,English cucumber,each,,no,1.00,English Cucumber,0.84,english-cucumber
+gianttiger_ca,cucumber_english_each,English cucumber,each,,no,1.00,English Cucumber ,0.84,english-cucumber-7
+gianttiger_ca,cucumber_english_each,English cucumber,each,,no,1.00,English Cucumber,1.22,english-cucumber-single-2
+gianttiger_ca,zucchini_each,Zucchini,each,,no,1.00,"Zucchini, 2-Pack",2.97,zucchini-2-pack-1
+gianttiger_ca,zucchini_each,Zucchini,each,,no,1.00,"Zucchini, 2-Pack",2.97,2pk-zucchini-10
+gianttiger_ca,zucchini_each,Zucchini,each,,no,1.00,"Zucchini, 2-Pack",2.97,zucchini-2-pack-2
+gianttiger_ca,corn_cob_each,Corn on the cob,each,,no,0.50,Single Corn,0.77,single-corn
+gianttiger_ca,corn_cob_each,Corn on the cob,each,,no,0.50,"Giant Value Whole Kernel Corn, 341 ml",1.37,giant-value-whole-kernel-corn-341-ml
+gianttiger_ca,corn_cob_each,Corn on the cob,each,,no,0.50,Green Giant Niblets Whole Kernel Corn - 341ml,1.87,green-giant-niblets-whole-kernel-corn-341ml
+gianttiger_ca,corn_cob_each,Corn on the cob,each,,no,0.50,"Corn Tray, 4-Pack",4.97,corn-tray-4-pack
+gianttiger_ca,green_onion_bunch,Green onions,bunch,,no,1.00,"Green Onions, 141-g",2.97,green-onions-141-g
+gianttiger_ca,green_onion_bunch,Green onions,bunch,,no,1.00,"Green Onions, 141 g",2.97,green-onions-2pk
+gianttiger_ca,green_onion_bunch,Green onions,bunch,,no,1.00,"Green Onions, 141-g",2.97,green-onions-141-g-4
+gianttiger_ca,green_onion_bunch,Green onions,bunch,,no,1.00,"Green Onions, 141-g",3.47,green-onions-141-g-5
+gianttiger_ca,frozen_peas_carrots_750g,"Peas and carrots, frozen",750g,,yes,0.67,Giant Value Frozen Peas - 750g,2.77,giant-value-frozen-peas-750g-3
+gianttiger_ca,frozen_peas_carrots_750g,"Peas and carrots, frozen",750g,,yes,0.67,Giant Value Frozen Peas - 750g,2.77,giant-value-frozen-peas-750g-2
+gianttiger_ca,frozen_peas_carrots_750g,"Peas and carrots, frozen",750g,,yes,0.67,"Giant Value Frozen Peas, 750 g",2.77,giant-value-frozen-peas-750-g-1
+gianttiger_ca,frozen_peas_carrots_750g,"Peas and carrots, frozen",750g,,yes,0.67,"Giant Value Frozen Peas, 750 g",2.77,giant-value-frozen-peas-750-g
+gianttiger_ca,frozen_stir_fry_750g,"Stir-fry vegetables, frozen",750g,,yes,0.50,"Giant Value Frozen Mixed Vegetables, 750 g",2.77,giant-value-frozen-mixed-vegetables-750g-3
+gianttiger_ca,frozen_stir_fry_750g,"Stir-fry vegetables, frozen",750g,,yes,0.50,"Giant Value Frozen Mix Vegetables, 750 g",2.77,giant-value-frozen-mix-vegetables-750-g
+gianttiger_ca,frozen_stir_fry_750g,"Stir-fry vegetables, frozen",750g,,yes,0.50,"Giant Value Frozen Mix Vegetables, 750 g",2.77,giant-value-frozen-mix-vegetables-750-g-1
+gianttiger_ca,frozen_stir_fry_750g,"Stir-fry vegetables, frozen",750g,,no,0.50,"Giant Tiger Marché Asian Style Blend Frozen Vegetables, 500-g",2.77,giant-tiger-marche-asian-style-blend-frozen-vegetables-500-g
+gianttiger_ca,banana_each,Banana,each,,no,1.00,"efrutti Bunch of Bananas, 100 g",1.97,efrutti-bunch-of-bananas-100-g
+gianttiger_ca,banana_each,Banana,each,,no,1.00,"Dare Candy Co Dare Mallow Candy Tropical Banana, 150 g",2.37,dare-candy-co-real-mallow-naturally-and-artificially-flavoured-tropical-banana-candy-170-g-3
+gianttiger_ca,banana_each,Banana,each,,no,1.00,"Cottage Country Marshmallow Bananas, 100-g",2.97,cottage-country-marshmallow-bananas-100-g-1
+gianttiger_ca,banana_each,Banana,each,,no,1.00,"Bear Paws Banana Bread, 6-Pack, 210 g",2.97,bear-paws-banana-bread-6-pack-210-g-1
+gianttiger_ca,banana_bunch,Bananas,about 1 kg,,no,1.00,Single Banana,0.35,single-banana
+gianttiger_ca,banana_bunch,Bananas,about 1 kg,,no,1.00,Single Banana,0.35,banana-single-5
+gianttiger_ca,banana_bunch,Bananas,about 1 kg,,no,1.00,"Bananas, 3 lbs",2.04,banana-3-lbs
+gianttiger_ca,banana_bunch,Bananas,about 1 kg,,no,1.00,"Bananas, 3 lbs",2.34,bananas-3lbs-5
+gianttiger_ca,apple_each,Apple,each,,no,1.00,"Rosinette Apples, 3 lbs",4.97,rosinette-apples-3-lbs
+gianttiger_ca,apple_each,Apple,each,,no,1.00,"Macintosh Apples, 3-lb",4.97,macintosh-apples-3-lb-1
+gianttiger_ca,apple_each,Apple,each,,no,1.00,"Macintosh Apples, 3 lb",4.97,macintosh-apples-3lb-2
+gianttiger_ca,apple_each,Apple,each,,no,1.00,"Macintosh Apples, 3 lb",4.97,macintosh-apples-3lb
+gianttiger_ca,orange_each,Orange,each,,no,1.00,"Fanta Sparkling Beverage Orange, 12-Pack, 355 ml",8.27,fanta-sparkling-beverage-orange-12-pack-355-ml
+gianttiger_ca,orange_each,Orange,each,,no,1.00,"""Every Child Matters"" Adult Unisex National Day of Truth and Reconciliation Orange T-Shirt, English",12.00,every-child-matters-adult-unisex-national-day-of-truth-and-reconciliation-orange-t-shirt-english
+gianttiger_ca,orange_each,Orange,each,,no,1.00,Mountain Ridge Men's Orange Hoodie,20.00,mountain-ridge-mens-orange-hoodie
+gianttiger_ca,orange_each,Orange,each,,no,1.00,Mountain Ridge Men's Orange Zip-Up Hoodie,22.00,mountain-ridge-mens-orange-zip-up-hoodie
+gianttiger_ca,lemon_each,Lemon,each,,no,1.00,"Lemons, 2lb",3.97,lemons-2lb-5
+gianttiger_ca,lemon_each,Lemon,each,,no,1.00,"Lemons, 907 g",4.44,lemons-907-g
+gianttiger_ca,lemon_each,Lemon,each,,no,1.00,"Brisk Lemon Iced Tea, 6-Pack, 710 ml",4.69,brisk-lemon-iced-tea-6-pack-710-ml-4
+gianttiger_ca,lemon_each,Lemon,each,,no,1.00,Brisk Lemon Iced Tea 6pk. - 710ml,5.88,brisk-lemon-iced-tea-6-pack-710-ml
+gianttiger_ca,lemon_juice_300ml,"Lemon juice, bottled",300ml,,no,0.67,Realemon Lemon Juice from Concentrate - 125ml,1.29,realemon-lemon-juice-from-concentrate-125ml
+gianttiger_ca,lemon_juice_300ml,"Lemon juice, bottled",300ml,,no,0.67,ReaLemon Lemon Juice - 440ml,2.97,realemon-lemon-juice-440ml-1
+gianttiger_ca,lemon_juice_300ml,"Lemon juice, bottled",300ml,,no,0.33,"ReaLime Lime Juice, 440 ml",2.97,realime-lime-juice-440ml-1
+gianttiger_ca,raisins_750g,Raisins,750g,,no,1.00,"Giant Value Golden Raisins, 373 g",3.97,giant-value-golden-raisins-373g-3
+gianttiger_ca,raisins_750g,Raisins,750g,,no,1.00,"Sun-Maid Natural California Raisins, 14-Pack, 196 g",4.27,sun-maid-natural-california-raisins-14pk-196g
+gianttiger_ca,raisins_750g,Raisins,750g,,no,1.00,"Giant Value Milk Chocolate Covered Raisins, 250 g",4.50,giant-value-milk-chocolate-covered-raisins-250-g
+gianttiger_ca,raisins_750g,Raisins,750g,,no,1.00,"Wasco Sultana Raisins, 375 g",4.97,wasco-sultana-raisins-375-g
+gianttiger_ca,cheese_slices_24,Processed cheese slices,24 slices,,no,0.67,"Giant Value Sandwich Style Cheese Slices, 16-Pack, 272 g",2.67,giant-value-sandwich-style-cheese-slices-16-pack-272-g-1
+gianttiger_ca,cheese_slices_24,Processed cheese slices,24 slices,,no,0.67,"Giant Value Sandwich Style Cheese Slices, 16-Pack, 272 g",2.67,giant-value-sandwich-style-cheese-slices-16-pack-272-g
+gianttiger_ca,cheese_slices_24,Processed cheese slices,24 slices,,no,0.67,Black Diamond Original Style Cheddar Cheese Slices - 410g,3.97,black-diamond-original-style-cheddar-cheese-slices-410g-1
+gianttiger_ca,cheese_slices_24,Processed cheese slices,24 slices,,no,0.67,"Black Diamond Natural Cheese Slices Medium Cheddar 32% M.F., 12-Pack, 240 g",6.49,black-diamond-natural-cheese-slices-medium-cheddar-32-m-f-12-pack-240-g
+gianttiger_ca,yogurt_plain_650g,Plain yogurt,650g,,yes,1.00,"Oikos Greek Yogurt Plain 0% M.F., 650 g",6.78,oikos-greek-yogurt-plain-0-m-f-650-g
+gianttiger_ca,yogurt_plain_650g,Plain yogurt,650g,,yes,1.00,"Oikos Greek Yogurt Plain 0% M.F., 650 g",6.78,oikos-greek-yogurt-plain-0-m-f-650-g-1
+gianttiger_ca,yogurt_plain_650g,Plain yogurt,650g,,yes,0.50,"Astro Original Balkan Banana Yogurt 3.25% M.F., 650 g",3.47,astro-original-balkan-banana-yogourt-3-25-m-f-650-g-4
+gianttiger_ca,yogurt_plain_650g,Plain yogurt,650g,,yes,0.50,Activia Probiotic Vanilla Yogurt 2.4% M.F. - 650g,3.87,activia-probiotic-vanilla-yogurt-2-9-m-f-650g
+gianttiger_ca,yogurt_greek_plain_500g,"Greek yogurt, plain",500g,,no,1.00,"Oikos Greek Yogurt Plain 0% M.F., 650 g",6.78,oikos-greek-yogurt-plain-0-m-f-650-g
+gianttiger_ca,yogurt_greek_plain_500g,"Greek yogurt, plain",500g,,no,1.00,"Oikos Greek Yogurt Plain 0% M.F., 650 g",6.78,oikos-greek-yogurt-plain-0-m-f-650-g-1
+gianttiger_ca,yogurt_greek_plain_500g,"Greek yogurt, plain",500g,,no,1.00,"Oikos Greek Yogurt No Sugar Added Plain 2% M.F., 750 g",6.78,oikos-greek-yogurt-no-sugar-added-plain-2-m-f-750-g
+gianttiger_ca,yogurt_greek_plain_500g,"Greek yogurt, plain",500g,,no,1.00,Oikos Greek Yogurt Plain 0% M.F. - 750g,7.48,oikos-greek-yogurt-plain-0-m-f-750g
+gianttiger_ca,chicken_thighs_bone_in_1kg,"Chicken thighs, bone-in, value pack",about 1 kg,,yes,0.20,"Chicken Drumsticks, 1 kg",9.97,drumsticks-1-kg-1
+gianttiger_ca,chicken_thighs_bone_in_1kg,"Chicken thighs, bone-in, value pack",about 1 kg,,no,0.40,Chicken Thighs,4.97,maple-leaf-prime-maple-leaf-prime-chicken-thighs-1
+gianttiger_ca,chicken_thighs_bone_in_1kg,"Chicken thighs, bone-in, value pack",about 1 kg,,no,0.40,"Leadbetters Honey BBQ Chicken Thighs, 260 g",7.00,leadbetters-honey-bbq-chicken-thighs-260-g
+gianttiger_ca,chicken_thighs_bone_in_1kg,"Chicken thighs, bone-in, value pack",about 1 kg,,no,0.40,"Leadbetters Honey BBQ Chicken Thighs, 260 g",7.00,leadbetters-honey-bbq-chicken-thighs-260-g-1
+gianttiger_ca,chicken_thighs_boneless_700g,"Chicken thighs, boneless skinless",about 700g,,no,0.75,Boneless Skinless Chicken Breast,9.97,maple-leaf-prime-boneless-skinless-chicken-breast-1
+gianttiger_ca,chicken_thighs_boneless_700g,"Chicken thighs, boneless skinless",about 700g,,no,0.75,"Prime Boneless Skinless Chicken Breast, 474 g",9.97,prime-boneless-skinless-chicken-breast-474-g
+gianttiger_ca,chicken_thighs_boneless_700g,"Chicken thighs, boneless skinless",about 700g,,no,0.75,"Boneless Skinless Chicken Breast, 700-900 g",12.97,boneless-skinless-chicken-breast-700-900-g
+gianttiger_ca,chicken_thighs_boneless_700g,"Chicken thighs, boneless skinless",about 700g,,no,0.50,Chicken Thighs,4.97,maple-leaf-prime-maple-leaf-prime-chicken-thighs-1
+gianttiger_ca,chicken_thighs_halal_1kg,"Chicken thighs, bone-in, halal",about 1 kg,,no,0.50,"Zabiha Halal Chicken Breast Roast Cooked, 200 g",3.50,zabiha-halal-chicken-breast-roast-cooked-200-g
+gianttiger_ca,chicken_thighs_halal_1kg,"Chicken thighs, bone-in, halal",about 1 kg,,no,0.50,"Zabiha Halal Chicken Breast Roast Smoked, 200 g",4.47,zabiha-halal-smoked-chicken-breast-roast-200g-1
+gianttiger_ca,chicken_thighs_halal_1kg,"Chicken thighs, bone-in, halal",about 1 kg,,no,0.50,Chicken Thighs,4.97,maple-leaf-prime-maple-leaf-prime-chicken-thighs-1
+gianttiger_ca,chicken_thighs_halal_1kg,"Chicken thighs, bone-in, halal",about 1 kg,,no,0.50,"Maple Leaf Prime Raw Chicken Thighs, 604 g",7.00,maple-leaf-prime-raw-chicken-thighs-604-g
+gianttiger_ca,chicken_breast_3pk,"Chicken breasts, boneless skinless",3 pack,,no,1.00,Boneless Skinless Chicken Breast,9.97,maple-leaf-prime-boneless-skinless-chicken-breast-1
+gianttiger_ca,chicken_breast_3pk,"Chicken breasts, boneless skinless",3 pack,,no,1.00,"Prime Boneless Skinless Chicken Breast, 474 g",9.97,prime-boneless-skinless-chicken-breast-474-g
+gianttiger_ca,chicken_breast_3pk,"Chicken breasts, boneless skinless",3 pack,,no,1.00,"Boneless Skinless Chicken Breast, 907 g",10.00,boneless-skinless-chicken-breast-907-g
+gianttiger_ca,chicken_breast_3pk,"Chicken breasts, boneless skinless",3 pack,,no,1.00,"Boneless Skinless Chicken Breast, 700-900 g",12.97,boneless-skinless-chicken-breast-700-900-g
+gianttiger_ca,chicken_breast_halal_3pk,"Chicken breasts, boneless skinless, halal",3 pack,,no,0.80,Boneless Skinless Chicken Breast,9.97,maple-leaf-prime-boneless-skinless-chicken-breast-1
+gianttiger_ca,chicken_breast_halal_3pk,"Chicken breasts, boneless skinless, halal",3 pack,,no,0.80,"Prime Boneless Skinless Chicken Breast, 474 g",9.97,prime-boneless-skinless-chicken-breast-474-g
+gianttiger_ca,chicken_breast_halal_3pk,"Chicken breasts, boneless skinless, halal",3 pack,,no,0.80,"Boneless Skinless Chicken Breast, 700-900 g",12.97,boneless-skinless-chicken-breast-700-900-g
+gianttiger_ca,chicken_breast_halal_3pk,"Chicken breasts, boneless skinless, halal",3 pack,,no,0.60,"Zabiha Halal Chicken Breast Roast Cooked, 200 g",3.50,zabiha-halal-chicken-breast-roast-cooked-200-g
+gianttiger_ca,chicken_drumsticks_halal_1kg,"Chicken drumsticks, halal",about 1 kg,,yes,0.67,"Chicken Drumsticks, 1 kg",9.97,drumsticks-1-kg-1
+gianttiger_ca,chicken_drumsticks_halal_1kg,"Chicken drumsticks, halal",about 1 kg,,yes,0.33,"Drumsticks, 1 kg",9.97,drumsticks-1-kg
+gianttiger_ca,chicken_drumsticks_halal_1kg,"Chicken drumsticks, halal",about 1 kg,,no,0.67,Fresh Chicken Drumsticks 6pk. - 570g,4.97,fresh-chicken-drumsticks-6pk-570g-1
+gianttiger_ca,chicken_drumsticks_halal_1kg,"Chicken drumsticks, halal",about 1 kg,,no,0.67,"Maple Leaf Prime Chicken Drumsticks, 540-g",6.00,maple-leaf-prime-chicken-drumsticks-540-g
+gianttiger_ca,chicken_whole_1_8kg,Whole chicken,about 1.8 kg,,yes,0.50,"Giant Value Extra Lean Ground Chicken, 1.8 kg",9.98,giant-value-extra-lean-ground-chicken-1-8-kg
+gianttiger_ca,chicken_whole_1_8kg,Whole chicken,about 1.8 kg,,yes,0.50,"Giant Value Extra Lean Ground Chicken, 1.8 kg",9.98,giant-value-extra-lean-ground-chicken-1-8-kg-1
+gianttiger_ca,chicken_whole_1_8kg,Whole chicken,about 1.8 kg,,no,1.00,"Whole Chicken, 1.3–2 kg",12.97,whole-chicken-1-3-2-kg
+gianttiger_ca,chicken_whole_1_8kg,Whole chicken,about 1.8 kg,,no,1.00,Whole Chicken,12.97,maple-leaf-prime-whole-chicken-1
+gianttiger_ca,chicken_whole_halal_1_8kg,"Whole chicken, halal",about 1.8 kg,,no,0.67,"Zabiha Halal Chicken Breast Roast Cooked, 200 g",3.50,zabiha-halal-chicken-breast-roast-cooked-200-g
+gianttiger_ca,chicken_whole_halal_1_8kg,"Whole chicken, halal",about 1.8 kg,,no,0.67,"Zabiha Halal Chicken Breast Roast Smoked, 200 g",4.47,zabiha-halal-smoked-chicken-breast-roast-200g-1
+gianttiger_ca,chicken_whole_halal_1_8kg,"Whole chicken, halal",about 1.8 kg,,no,0.67,"Zabiha Halal Cooked Chicken Breast, 200 g",4.47,zabiha-halal-cooked-chicken-breast-200g
+gianttiger_ca,chicken_whole_halal_1_8kg,"Whole chicken, halal",about 1.8 kg,,no,0.67,"Harvest Creek Halal Chicken Wieners, 900 g, 10-Pack",5.99,harvest-creek-halal-chicken-wieners-900-g-10-pack
+gianttiger_ca,ground_chicken_450g,"Ground chicken, lean",450g,,yes,0.33,"Our Promise Medium Ground Beef, 450 g",8.00,our-promise-medium-ground-beef-450-g
+gianttiger_ca,ground_chicken_450g,"Ground chicken, lean",450g,,no,1.00,"Giant Value Extra Lean Ground Chicken, 1.8 kg",9.98,giant-value-extra-lean-ground-chicken-1-8-kg
+gianttiger_ca,ground_chicken_450g,"Ground chicken, lean",450g,,no,1.00,"Giant Value Extra Lean Ground Chicken, 1.8 kg",9.98,giant-value-extra-lean-ground-chicken-1-8-kg-1
+gianttiger_ca,ground_chicken_450g,"Ground chicken, lean",450g,,no,0.67,"Lean Ground Beef, 908-g",14.97,lean-ground-beef-908-g-2
+gianttiger_ca,ground_turkey_450g,"Ground turkey, lean",450g,,yes,0.33,"Our Promise Medium Ground Beef, 450 g",8.00,our-promise-medium-ground-beef-450-g
+gianttiger_ca,ground_turkey_450g,"Ground turkey, lean",450g,,no,0.67,"Grimm's Fine Foods Lean Turkey Pepperoni, 375-g",8.97,grimms-fine-foods-lean-turkey-pepperoni-375-g
+gianttiger_ca,ground_turkey_450g,"Ground turkey, lean",450g,,no,0.67,"Giant Value Extra Lean Ground Chicken, 1.8 kg",9.98,giant-value-extra-lean-ground-chicken-1-8-kg
+gianttiger_ca,ground_turkey_450g,"Ground turkey, lean",450g,,no,0.67,"Giant Value Extra Lean Ground Chicken, 1.8 kg",9.98,giant-value-extra-lean-ground-chicken-1-8-kg-1
+gianttiger_ca,deli_turkey_175g,"Turkey breast, sliced",175g,,no,1.00,"Giant Value Sliced Turkey Breast, 150 g",2.70,giant-value-turkey-breast-150-g
+gianttiger_ca,deli_turkey_175g,"Turkey breast, sliced",175g,,no,1.00,"Giant Value Sliced Turkey Breast, 150 g",2.97,giant-value-sliced-turkey-breast-150-g
+gianttiger_ca,deli_turkey_175g,"Turkey breast, sliced",175g,,no,1.00,"Butcher's Selection Sliced Turkey Breast, 300 g",5.97,sliced-turkey-breast-300-g-1
+gianttiger_ca,deli_turkey_175g,"Turkey breast, sliced",175g,,no,0.67,"Giant Value Sliced Chicken Breast, 150 g",2.70,giant-value-chicken-breast-150-g
+gianttiger_ca,chicken_bouillon_cubes_12,Chicken bouillon cubes,12 cubes,,no,1.00,Knorr Chicken Bouillon Cubes 6pk. - 69g,2.77,knorr-chicken-bouillon-cubes-6pk-69g-3
+gianttiger_ca,chicken_bouillon_cubes_12,Chicken bouillon cubes,12 cubes,,no,1.00,"Knorr Chicken Bouillon Cubes, 6-Pack, 69 g",2.77,knorr-chicken-bouillon-cubes-6pk-69g-2
+gianttiger_ca,chicken_bouillon_cubes_12,Chicken bouillon cubes,12 cubes,,no,0.67,"Knorr Zero Salt Chicken Bouillon, 160 g",4.77,knorr-zero-salt-chicken-bouillon-160-g
+gianttiger_ca,chicken_bouillon_cubes_12,Chicken bouillon cubes,12 cubes,,no,0.33,Knorr Beef Bouillon 6pk. - 63g,2.77,knorr-beef-bouillon-6pk-63g-1
+gianttiger_ca,chicken_bouillon_halal_200g,"Chicken bouillon powder, halal",200g,,yes,0.50,"Zabiha Halal Chicken Breast Roast Cooked, 200 g",3.50,zabiha-halal-chicken-breast-roast-cooked-200-g
+gianttiger_ca,chicken_bouillon_halal_200g,"Chicken bouillon powder, halal",200g,,no,0.50,Knorr Chicken Bouillon Cubes 6pk. - 69g,2.77,knorr-chicken-bouillon-cubes-6pk-69g-3
+gianttiger_ca,chicken_bouillon_halal_200g,"Chicken bouillon powder, halal",200g,,no,0.50,"Knorr Chicken Bouillon Cubes, 6-Pack, 69 g",2.77,knorr-chicken-bouillon-cubes-6pk-69g-2
+gianttiger_ca,chicken_bouillon_halal_200g,"Chicken bouillon powder, halal",200g,,no,0.50,"Knorr Zero Salt Chicken Bouillon, 160 g",4.77,knorr-zero-salt-chicken-bouillon-160-g
+gianttiger_ca,ground_beef_extra_lean_454g,"Ground beef, extra lean",454g,,yes,0.75,"Lean Ground Beef Chub, 454-g",7.97,lean-ground-beef-chub-454-g-1
+gianttiger_ca,ground_beef_extra_lean_454g,"Ground beef, extra lean",454g,,yes,0.75,"Fontaine Family Lean Ground Beef, 454 g",9.77,fontaine-family-lean-ground-beef-454-g
+gianttiger_ca,ground_beef_extra_lean_454g,"Ground beef, extra lean",454g,,yes,0.50,Medium Ground Beef - 454g,7.47,medium-ground-beef-454g-3
+gianttiger_ca,ground_beef_extra_lean_454g,"Ground beef, extra lean",454g,,yes,0.50,Medium Ground Beef - 454g,7.49,medium-ground-beef-454g
+gianttiger_ca,ground_beef_halal_454g,"Ground beef, lean, halal",454g,,yes,0.75,"Lean Ground Beef Chub, 454-g",7.97,lean-ground-beef-chub-454-g-1
+gianttiger_ca,ground_beef_halal_454g,"Ground beef, lean, halal",454g,,yes,0.75,"Lean Ground Beef Chub, 454-g",7.97,lean-ground-beef-chub-454-g
+gianttiger_ca,ground_beef_halal_454g,"Ground beef, lean, halal",454g,,yes,0.75,"Fontaine Family Lean Ground Beef, 454 g",9.77,fontaine-family-lean-ground-beef-454-g
+gianttiger_ca,ground_beef_halal_454g,"Ground beef, lean, halal",454g,,no,0.75,"Giant Value Lean Ground Beef, 367 g",3.99,giant-value-lean-ground-beef-367-g
+gianttiger_ca,stewing_beef_600g,Stewing beef,about 600g,,no,0.50,"Hereford Corned Beef, 340 g",4.96,hereford-corned-beef-340-g-3
+gianttiger_ca,stewing_beef_600g,Stewing beef,about 600g,,no,0.50,Medium Ground Beef - 454g,7.47,medium-ground-beef-454g-3
+gianttiger_ca,stewing_beef_halal_600g,"Stewing beef, halal",about 600g,,no,0.33,"Zabiha Halal Chicken Bologna, 375-g",2.47,zabiha-halal-chicken-bologna-375-g-1
+gianttiger_ca,stewing_beef_halal_600g,"Stewing beef, halal",about 600g,,no,0.33,"Zabiha Halal Chicken Breast Roast Cooked, 200 g",3.50,zabiha-halal-chicken-breast-roast-cooked-200-g
+gianttiger_ca,stewing_beef_halal_600g,"Stewing beef, halal",about 600g,,no,0.33,"Zabiha Halal Chicken Bologna, 375 g",3.97,375g-m-lo-halal-chick-bologna
+gianttiger_ca,stewing_beef_halal_600g,"Stewing beef, halal",about 600g,,no,0.33,"Halal Lamb Kabob Skewers, 200 g",4.00,halal-lamb-kabob-skewers-200-g
+gianttiger_ca,beef_fast_fry_500g,Inside round fast-fry steak,about 500g,,no,0.40,"Round Eye Steak, 380-g",9.97,eye-round-steak-380g
+gianttiger_ca,beef_fast_fry_500g,Inside round fast-fry steak,about 500g,,no,0.40,"Round Eye Steak, 380-g",9.97,round-eye-steak-380-g-1
+gianttiger_ca,beef_fast_fry_500g,Inside round fast-fry steak,about 500g,,no,0.20,"Lou's Kitchen Homestyle Shaved Steak Philly-Style, 400 g",9.97,lous-kitchen-homestyle-shaved-steak-philly-style-400-g
+gianttiger_ca,beef_fast_fry_500g,Inside round fast-fry steak,about 500g,,no,0.20,"Leadbetters Cowboy Steaks, 2-Pack",10.00,leadbetters-cowboy-steaks-2-pack
+gianttiger_ca,beef_bouillon_cubes_12,Beef bouillon cubes,12 cubes,,no,0.67,Knorr Beef Bouillon 6pk. - 63g,2.77,knorr-beef-bouillon-6pk-63g-1
+gianttiger_ca,beef_bouillon_cubes_12,Beef bouillon cubes,12 cubes,,no,0.67,"Knorr Chicken Bouillon Cubes, 6-Pack, 69 g",2.77,knorr-chicken-bouillon-cubes-6pk-69g-2
+gianttiger_ca,beef_bouillon_cubes_12,Beef bouillon cubes,12 cubes,,no,0.67,Knorr Chicken Bouillon Cubes 6pk. - 69g,2.77,knorr-chicken-bouillon-cubes-6pk-69g-3
+gianttiger_ca,beef_bouillon_cubes_12,Beef bouillon cubes,12 cubes,,no,0.67,"Knorr Beef Bouillon, 6-Pack, 63 g",2.77,knorr-beef-bouillon-cubes-6-pack-63-g
+gianttiger_ca,ground_pork_454g,"Ground pork, lean",454g,,yes,0.67,"Lean Ground Beef Chub, 454-g",7.97,lean-ground-beef-chub-454-g-1
+gianttiger_ca,ground_pork_454g,"Ground pork, lean",454g,,yes,0.67,"Lean Ground Beef Chub, 454-g",7.97,lean-ground-beef-chub-454-g
+gianttiger_ca,ground_pork_454g,"Ground pork, lean",454g,,yes,0.67,"Fontaine Family Lean Ground Beef, 454 g",9.77,fontaine-family-lean-ground-beef-454-g
+gianttiger_ca,ground_pork_454g,"Ground pork, lean",454g,,yes,0.33,Medium Ground Beef - 454g,7.47,medium-ground-beef-454g-3
+gianttiger_ca,pork_shoulder_1_5kg,Pork shoulder blade roast,about 1.5 kg,,no,0.50,"Legacy Cured Cottage Roll Pork Roast, 1-kg",9.97,legacy-cured-cottage-roll-pork-roast-1-kg
+gianttiger_ca,pork_shoulder_1_5kg,Pork shoulder blade roast,about 1.5 kg,,no,0.50,Boneless Pork Roast - 800g,9.97,boneless-pork-roast-800g-2
+gianttiger_ca,pork_shoulder_1_5kg,Pork shoulder blade roast,about 1.5 kg,,no,0.50,Boneless Pork Roast - 800g,9.97,boneless-pork-roast-800g-3
+gianttiger_ca,pork_shoulder_1_5kg,Pork shoulder blade roast,about 1.5 kg,,no,0.25,"Legacy Seasoned Roasted Garlic and Herbs Pork Tenderloin, 500-g",8.97,legacy-seasoned-roasted-garlic-and-herbs-pork-tenderloin-500-g
+gianttiger_ca,ham_deli_175g,"Ham, sliced",175g,,no,1.00,"Giant Value Sliced Ham Honey Ham, 150 g",2.70,giant-value-honey-ham-150-g
+gianttiger_ca,ham_deli_175g,"Ham, sliced",175g,,no,1.00,"Giant Value Sliced Ham Black Forest Ham, 150 g",2.70,giant-value-black-forest-ham-150-g
+gianttiger_ca,ham_deli_175g,"Ham, sliced",175g,,no,1.00,"Giant Value Sliced Ham Honey Ham, 150 g",2.97,giant-value-sliced-honey-ham-150-g
+gianttiger_ca,ham_deli_175g,"Ham, sliced",175g,,no,0.50,"Giant Value Sliced Salami, 250 g",2.70,giant-value-sliced-salami-250-g
+gianttiger_ca,ground_lamb_454g,Ground lamb,454g,,yes,0.50,Medium Ground Beef - 454g,7.47,medium-ground-beef-454g-3
+gianttiger_ca,ground_lamb_454g,Ground lamb,454g,,yes,0.50,Medium Ground Beef - 454g,7.49,medium-ground-beef-454g
+gianttiger_ca,ground_lamb_454g,Ground lamb,454g,,yes,0.50,"Lean Ground Beef Chub, 454-g",7.97,lean-ground-beef-chub-454-g-1
+gianttiger_ca,ground_lamb_454g,Ground lamb,454g,,yes,0.50,"Lean Ground Beef Chub, 454-g",7.97,lean-ground-beef-chub-454-g
+gianttiger_ca,ground_lamb_halal_454g,"Ground lamb, halal",454g,,yes,0.33,Medium Ground Beef - 454g,7.47,medium-ground-beef-454g-3
+gianttiger_ca,ground_lamb_halal_454g,"Ground lamb, halal",454g,,yes,0.33,Medium Ground Beef - 454g,7.49,medium-ground-beef-454g
+gianttiger_ca,ground_lamb_halal_454g,"Ground lamb, halal",454g,,yes,0.33,"Lean Ground Beef Chub, 454-g",7.97,lean-ground-beef-chub-454-g-1
+gianttiger_ca,ground_lamb_halal_454g,"Ground lamb, halal",454g,,yes,0.33,"Lean Ground Beef Chub, 454-g",7.97,lean-ground-beef-chub-454-g
+gianttiger_ca,basa_frozen,"Basa fillets, frozen",400g,,no,0.67,"Basa Fillet, 340 g",3.37,basa-fillet-340-g
+gianttiger_ca,basa_frozen,"Basa fillets, frozen",400g,,no,0.67,"Aqua Star Boneless Skinless Basa Fillets, 908 g",10.00,aqua-star-boneless-skinless-basa-fillets-908-g
+gianttiger_ca,tilapia_frozen_454g,"Tilapia fillets, frozen",454g,,no,0.33,"Basa Fillet, 340 g",3.37,basa-fillet-340-g
+gianttiger_ca,tilapia_frozen_454g,"Tilapia fillets, frozen",454g,,no,0.33,"Catch of the Day Crispy Breaded Fillets, 350 g",5.97,catch-of-the-day-crispy-breaded-fillets-350-g
+gianttiger_ca,tilapia_frozen_454g,"Tilapia fillets, frozen",454g,,no,0.33,"BlueWater Seafoods Tempura Sole Battered Fish Fillets, 6-Pack, 350 g",9.97,bluewater-seafoods-tempura-sole-battered-fish-fillets-6-pack-350-g-1
+gianttiger_ca,tilapia_frozen_454g,"Tilapia fillets, frozen",454g,,no,0.33,"BlueWater Seafoods Tempura Haddock Battered Fish Fillets, 6-Pack, 350-g",9.97,bluewater-seafoods-tempura-haddock-battered-fish-fillets-6-pack-350-g-1
+gianttiger_ca,salmon_pink_frozen_454g,"Pink salmon fillets, frozen",454g,,no,0.75,"Aqua Star Smart Seafood Pacific Pink Salmon Skin-On Fillets, 567 g, 2-Pack",11.97,aqua-star-smart-seafood-pacific-pink-salmon-skin-on-fillets-567-g-2-pack
+gianttiger_ca,salmon_pink_frozen_454g,"Pink salmon fillets, frozen",454g,,no,0.75,"High Liner Pan-Sear Selects Pacific Mediterranean Lightly Breaded Pink Salmon Fillets, 540 g",17.49,high-liner-pan-sear-selects-pacific-mediterranean-lightly-breaded-pink-salmon-fillets-540-g
+gianttiger_ca,salmon_pink_frozen_454g,"Pink salmon fillets, frozen",454g,,no,0.75,"High Liner Pan-Sear Selects Pacific Mediterranean Lightly Breaded Pink Salmon Fillets, 540 g",17.49,high-liner-pan-sear-selects-pacific-mediterranean-lightly-breaded-pink-salmon-fillets-540-g-1
+gianttiger_ca,salmon_pink_frozen_454g,"Pink salmon fillets, frozen",454g,,no,0.50,Clover Leaf Pink Salmon Wild Pacific - 142g,3.68,clover-leaf-pink-salmon-wild-pacific-142g-1
+gianttiger_ca,salmon_atlantic_frozen_454g,"Atlantic salmon fillets, frozen",454g,,no,0.50,"True North Seafood Company Atlantic Salmon Naturally Smoked, 50 g",3.47,true-north-seafood-company-atlantic-salmon-naturally-smoked-50-g-1
+gianttiger_ca,salmon_atlantic_frozen_454g,"Atlantic salmon fillets, frozen",454g,,no,0.50,"True North Seafood Company Atlantic Salmon Naturally Smoked, 50 g",3.47,true-north-seafood-company-atlantic-salmon-naturally-smoked-50-g
+gianttiger_ca,salmon_atlantic_frozen_454g,"Atlantic salmon fillets, frozen",454g,,no,0.50,"Rock Harbour Atlantic Salmon Lemon/Pepper, 113 g",5.97,rock-harbour-atlantic-salmon-lemon-pepper-113-g-1
+gianttiger_ca,salmon_atlantic_frozen_454g,"Atlantic salmon fillets, frozen",454g,,no,0.50,"Rock Harbour Atlantic Salmon Lemon/Pepper, 113 g",5.97,rock-harbour-atlantic-salmon-lemon-pepper-113-g
+gianttiger_ca,fish_sticks_700g,"Fish sticks, frozen",700g,,no,0.67,"Catch of the Day Breaded Crispy Fish Sticks, 350 g",5.97,catch-of-the-day-crispy-breaded-fish-sticks-350g-1
+gianttiger_ca,fish_sticks_700g,"Fish sticks, frozen",700g,,no,0.67,"Catch of the Day Breaded Fish Sticks Crispy Breaded, 350 g",6.99,catch-of-the-day-breaded-fish-sticks-350-g
+gianttiger_ca,fish_sticks_700g,"Fish sticks, frozen",700g,,no,0.67,"BlueWater Seafoods Value Pack Breaded Fish Sticks, 20-Pack, 500-g",9.97,bluewater-seafoods-value-pack-breaded-fish-sticks-20-pack-500-g-1
+gianttiger_ca,fish_sticks_700g,"Fish sticks, frozen",700g,,no,0.67,"High Liner Signature Cuts Crispy Breaded Haddock Fish Sticks, 350 g, 13-Pack",9.97,high-liner-signature-cuts-crispy-breaded-haddock-fish-sticks-350-g-13-pack
+gianttiger_ca,shrimp_raw_frozen_340g,"Raw shrimp, frozen",340g,,yes,0.33,"Cooked Shrimp, 340g",8.97,cooked-shrimp-340g-1
+gianttiger_ca,shrimp_raw_frozen_340g,"Raw shrimp, frozen",340g,,yes,0.33,Aqua Star Pacific White Shrimp - 340g,8.97,aqua-star-pacific-white-shrimp-340g-2
+gianttiger_ca,shrimp_raw_frozen_340g,"Raw shrimp, frozen",340g,,yes,0.33,"Aqua Star Pacific White Shrimp, 340-g",10.49,aqua-star-pacific-white-shrimp-340-g-1
+gianttiger_ca,shrimp_raw_frozen_340g,"Raw shrimp, frozen",340g,,no,1.00,"Green Ocean Frozen Raw White Shrimp, 160 g",3.50,frozen-white-shrimp-160-g
+gianttiger_ca,tofu_firm_454g,"Tofu, firm",454g,,no,1.00,"Sunrise Tofu Extra Firm, 350 g",3.27,sunrise-tofu-extra-firm-350-g
+gianttiger_ca,tofu_extra_firm_454g,"Tofu, extra firm",454g,,no,1.00,"Sunrise Tofu Extra Firm, 350 g",3.27,sunrise-tofu-extra-firm-350-g
+gianttiger_ca,soy_sauce_410ml,Soy sauce,410ml,,no,1.00,"Giant Value Soy Sauce, 450 ml",1.97,giant-value-soy-sauce-450-ml
+gianttiger_ca,soy_sauce_410ml,Soy sauce,410ml,,no,1.00,"Kikkoman Soy Sauce, 148-ml",3.78,kikkoman-soy-sauce-148-ml-2
+gianttiger_ca,soy_sauce_410ml,Soy sauce,410ml,,no,0.50,"VH Soya Sauce, 380 ml",3.37,vh-soya-sauce-380ml-2
+gianttiger_ca,soy_sauce_410ml,Soy sauce,410ml,,no,0.50,"VH Soya Sauce, 380 ml",3.37,vh-soya-sauce-380ml-3
+gianttiger_ca,soy_sauce_1l,Soy sauce,1L,,no,1.00,"Giant Value Soy Sauce, 450 ml",1.97,giant-value-soy-sauce-450-ml
+gianttiger_ca,soy_sauce_1l,Soy sauce,1L,,no,0.50,"VH Soya Sauce Lite, 380 ml",3.37,vh-lite-soya-sauce-380ml-3
+gianttiger_ca,soy_sauce_1l,Soy sauce,1L,,no,0.50,"VH Soya Sauce Lite, 380 ml",3.37,vh-lite-soya-sauce-380ml-2
+gianttiger_ca,soy_sauce_1l,Soy sauce,1L,,no,0.50,"VH Soya Sauce, 380 ml",3.37,vh-soya-sauce-380ml-3
+gianttiger_ca,peanut_butter_natural_500g,"Peanut butter, natural",500g,,yes,0.67,"Planters Peanut Butter Smooth, 500 g",2.75,planters-mr-peanut-butter-smooth-500-g
+gianttiger_ca,peanut_butter_natural_500g,"Peanut butter, natural",500g,,yes,0.67,"Giant Value Creamy Peanut Butter, 500 g",2.97,giant-value-creamy-peanut-butter-500-g
+gianttiger_ca,peanut_butter_natural_500g,"Peanut butter, natural",500g,,yes,0.67,"Giant Value Crunchy Peanut Butter, 500 g",2.97,giant-value-crunchy-peanut-butter-500-g
+gianttiger_ca,peanut_butter_natural_500g,"Peanut butter, natural",500g,,yes,0.67,"Jif Dark Roast Creamy Peanut Butter, 500 g",3.00,jif-dark-roast-creamy-peanut-butter-500-g
+gianttiger_ca,almond_butter_365g,Almond butter,365g,,no,1.00,"Waterbridge Butter Almond Thins, 100 g",3.97,t2-100g-wb-butter-almond-thins
+gianttiger_ca,almond_butter_365g,Almond butter,365g,,no,1.00,"KIND Breakfast Bars, Almond Butter, 4-Pack",4.47,kind-breakfast-bars-almond-butter-4-pack
+gianttiger_ca,almond_butter_365g,Almond butter,365g,,no,0.50,"Lactantia Butter with Provençal Garlic, 125 g",3.78,lactantia-butter-with-provencal-garlic-125-g
+gianttiger_ca,almond_butter_365g,Almond butter,365g,,no,0.50,Trophy Natural Whole Almonds - 200g,5.28,trophy-natural-whole-almonds-200g-1
+gianttiger_ca,peanuts_roasted_600g,"Peanuts, dry roasted",600g,,no,1.00,"Krispy Kernels Peanuts Honey Roasted, 60 g",1.50,krispy-kernels-peanuts-honey-roasted-60-g
+gianttiger_ca,peanuts_roasted_600g,"Peanuts, dry roasted",600g,,no,1.00,Trophy Sea Salt Roasted Peanuts - 227g,2.97,trophy-sea-salt-roasted-peanuts-227g
+gianttiger_ca,peanuts_roasted_600g,"Peanuts, dry roasted",600g,,no,1.00,"Giant Value Roasted Unsalted Shell Peanuts, 500 g",3.77,giant-value-unsalted-shell-peanut-500g-1
+gianttiger_ca,peanuts_roasted_600g,"Peanuts, dry roasted",600g,,no,1.00,"Giant Value Dry Roasted Peanuts, 700 g",4.97,giant-value-dry-roasted-peanuts-700g-3
+gianttiger_ca,almonds_whole_400g,"Almonds, whole",400g,,no,1.00,"Hershey's Creamy Milk Chocolate Whole Almonds, 100 g",2.77,hersheys-whole-almonds-milk-chocolate-bar-100g
+gianttiger_ca,almonds_whole_400g,"Almonds, whole",400g,,no,1.00,"Hershey's Creamy Milk Chocolate Whole Almonds, 100 g",2.97,hersheys-whole-almonds-creamy-milk-chocolate-bar-100-g-1
+gianttiger_ca,almonds_whole_400g,"Almonds, whole",400g,,no,1.00,Trophy Natural Whole Almonds - 200g,5.28,trophy-natural-whole-almonds-200g-1
+gianttiger_ca,almonds_whole_400g,"Almonds, whole",400g,,no,0.50,"Giant Value Sliced Almonds, 100 g",2.97,giant-value-sliced-almonds-100g-1
+gianttiger_ca,mixed_nuts_unsalted_400g,"Mixed nuts, unsalted",400g,,no,0.67,Trophy Premium Mixed Nuts - 200g,5.97,trophy-premium-mixed-nuts-200g-3
+gianttiger_ca,mixed_nuts_unsalted_400g,"Mixed nuts, unsalted",400g,,no,0.67,"Trophy Deluxe Mixed Nuts, 908-g",19.97,trophy-deluxe-mixed-nuts-908-g-1
+gianttiger_ca,mixed_nuts_unsalted_400g,"Mixed nuts, unsalted",400g,,no,0.33,"Giant Tiger Marché Organic YOHO Salty Nut Mix, 120 g",3.47,giant-tiger-marche-organic-yoho-salty-nut-mix-120-g
+gianttiger_ca,mixed_nuts_unsalted_400g,"Mixed nuts, unsalted",400g,,no,0.33,"Trophy Unsalted Cashews, 200-g",5.97,trophy-unsalted-cashews-200-g-2
+gianttiger_ca,sunflower_seeds_shelled_200g,"Sunflower seeds, shelled",200g,,no,0.67,"Spitz Smokey BBQ Sunflower Seeds, 210 g",2.97,spitz-smokey-bbq-sunflower-seeds-210g-2
+gianttiger_ca,sunflower_seeds_shelled_200g,"Sunflower seeds, shelled",200g,,no,0.67,"Spitz Seasoned Sunflower Seeds, 210 g",2.97,spitz-seasoned-sunflower-seeds-210g-3
+gianttiger_ca,sunflower_seeds_shelled_200g,"Sunflower seeds, shelled",200g,,no,0.67,"Giant Value Hulled Sunflower Seeds, 350 g",3.47,giant-value-hulled-sunflower-seeds-350g-3
+gianttiger_ca,sunflower_seeds_shelled_200g,"Sunflower seeds, shelled",200g,,no,0.67,"Giant Value Unsalted Sunflower Seeds, 350 g",3.47,giant-value-unsalted-sunflower-seeds-350g-2
+gianttiger_ca,vegetable_oil_1_42l,Vegetable oil,1.42L,,no,1.00,"Giant Value Vegetable Oil Margarine, 454 g",2.78,giant-value-vegetable-oil-margarine-454g-1
+gianttiger_ca,vegetable_oil_1_42l,Vegetable oil,1.42L,,no,1.00,"Parkay 68% Vegetable Oil Margarine, 427 g",3.49,parkay-68-vegetable-oil-margarine-427-g
+gianttiger_ca,vegetable_oil_1_42l,Vegetable oil,1.42L,,no,1.00,"Giant Value Vegetable Oil, 946 ml",3.97,giant-value-vegetable-oil-946ml-1
+gianttiger_ca,vegetable_oil_1_42l,Vegetable oil,1.42L,,no,1.00,"Aurora Mixed Vegetables in Oil Giardiniera Hot, 225 ml",4.29,aurora-hot-garden-mix-in-oil-225-ml
+gianttiger_ca,black_pepper_ground_100g,"Black pepper, ground",100g,,yes,0.33,"Giant Value Crushed Chili Pepper, 100 g",1.77,giant-value-crushed-chili-pepper-100-g-1
+gianttiger_ca,black_pepper_ground_100g,"Black pepper, ground",100g,,no,1.00,"Giant Value Ground Black Pepper, 85 g",2.27,giant-value-ground-black-pepper-85-g-1
+gianttiger_ca,black_pepper_ground_100g,"Black pepper, ground",100g,,no,1.00,"Giant Value Ground Black Pepper, 200 g",4.29,giant-value-ground-black-pepper-200g-1
+gianttiger_ca,black_pepper_ground_100g,"Black pepper, ground",100g,,no,0.67,Club House Ground Cayenne Pepper - 81g,5.97,club-house-ground-cayenne-pepper-81g-1
+gianttiger_ca,seasoning_all_purpose_250g,"Seasoning blend, all-purpose",250g,,no,0.50,"Mrs. Dash Table Blend Seasoning Blend, 70-g",4.97,mrs-dash-table-blend-seasoning-blend-70-g-1
+gianttiger_ca,seasoning_all_purpose_250g,"Seasoning blend, all-purpose",250g,,no,0.50,"Mrs Dash Original Blend Seasoning, 70-g",4.97,mrs-dash-original-blend-seasoning-70-g-1
+gianttiger_ca,seasoning_all_purpose_250g,"Seasoning blend, all-purpose",250g,,no,0.50,"Club House Blends One Step Seasonings Salad Supreme, 144 g",5.27,club-house-blends-one-step-seasonings-salad-supreme-144-g
+gianttiger_ca,seasoning_all_purpose_250g,"Seasoning blend, all-purpose",250g,,no,0.50,Club House One Step Blends Italiano Seasoning - 123g,6.26,club-house-one-step-blends-italiano-seasoning-123g
+gianttiger_ca,seasoning_salt_300g,Seasoned salt,300g,,yes,1.00,"Impérial Popcorn Seasoned Popcorn Salt & Vinegar, 300 g",3.97,imperial-popcorn-salt-vingar-300-g
+gianttiger_ca,seasoning_salt_300g,Seasoned salt,300g,,no,1.00,"Giant Value Seasoned Salt, 440 g",2.97,giant-value-seasoned-salt-440g-1
+gianttiger_ca,seasoning_salt_300g,Seasoned salt,300g,,no,0.50,"Giant Value Garlic Salt, 250 g",1.97,giant-value-garlic-salt-250-g-1
+gianttiger_ca,seasoning_salt_300g,Seasoned salt,300g,,no,0.50,Club House Sea Salt Grinder - 60g,2.97,club-house-sea-salt-grinder-60g-1
+gianttiger_ca,garlic_powder_100g,Garlic powder,100g,,no,1.00,"Giant Value Garlic Powder, 150 g",2.27,giant-value-garlic-powder-150-g-1
+gianttiger_ca,garlic_powder_100g,Garlic powder,100g,,no,1.00,"Giant Value Garlic Powder, 275 g",2.97,giant-value-garlic-powder-275g-1
+gianttiger_ca,garlic_powder_100g,Garlic powder,100g,,no,0.50,"Garlic, 3-Pack",0.97,garlic-3-pack-3
+gianttiger_ca,garlic_powder_100g,Garlic powder,100g,,no,0.50,"Garlic, 3-Pack",1.47,garlic-3-pack
+gianttiger_ca,chili_powder_100g,Chili powder,100g,,yes,0.50,"Giant Value Crushed Chili Pepper, 100 g",1.77,giant-value-crushed-chili-pepper-100-g-1
+gianttiger_ca,chili_powder_100g,Chili powder,100g,,no,1.00,"Giant Value Chili Powder, 150 g",1.97,giant-value-chili-powder-150-g-1
+gianttiger_ca,chili_powder_100g,Chili powder,100g,,no,0.50,"Old El Paso Chili Seasoning Mix, 24 g",1.27,old-el-paso-chili-seasoning-mix-24g-1
+gianttiger_ca,chili_powder_100g,Chili powder,100g,,no,0.50,"Old El Paso Chili Seasoning Mix, 24 g",1.27,old-el-paso-chili-seasoning-mix-24-g-1
+gianttiger_ca,cumin_ground_60g,"Cumin, ground",60g,,no,1.00,"Teja Cumin Ground, 200-g",2.49,teja-cumin-ground-200-g
+gianttiger_ca,cumin_ground_60g,"Cumin, ground",60g,,no,0.50,"Giant Value Ground Cinnamon, 125 g",1.97,giant-value-ground-cinnamon-125-g-1
+gianttiger_ca,cumin_ground_60g,"Cumin, ground",60g,,no,0.50,"Giant Value Ground Cinnamon, 190 g",2.97,giant-value-ground-cinnamon-190g-1
+gianttiger_ca,cumin_ground_60g,"Cumin, ground",60g,,no,0.50,"Club House Ground Cloves, 37-g",3.97,club-house-ground-cloves-37-g-1
+gianttiger_ca,curry_powder_80g,Curry powder,80g,,no,1.00,"Giant Value Curry Powder, 125 g",1.77,giant-value-curry-powder-125-g-1
+gianttiger_ca,curry_powder_80g,Curry powder,80g,,no,0.50,"Giant Value Chili Powder, 150 g",1.97,giant-value-chili-powder-150-g-1
+gianttiger_ca,curry_powder_80g,Curry powder,80g,,no,0.50,"Giant Value Garlic Powder, 150 g",2.27,giant-value-garlic-powder-150-g-1
+gianttiger_ca,curry_powder_80g,Curry powder,80g,,no,0.50,"Giant Value Garlic Powder, 275 g",2.97,giant-value-garlic-powder-275g-1
+gianttiger_ca,paprika_75g,Paprika,75g,,no,1.00,"Giant Value Paprika, 130 g",1.97,giant-value-paprika-130-g-1
+gianttiger_ca,paprika_75g,Paprika,75g,,no,1.00,"Club House Paprika, 119-g",5.97,club-house-paprika-119-g-1
+gianttiger_ca,italian_seasoning_30g,Italian seasoning,30g,,no,1.00,"Giant Value Italian Seasoning, 50 g",0.97,giant-value-italian-seasoning-50-g-1
+gianttiger_ca,italian_seasoning_30g,Italian seasoning,30g,,no,0.50,"Mama Sita's Tamarind Seasoning Mix, 50-g",1.67,mama-sitas-tamarind-seasoning-mix-50-g
+gianttiger_ca,italian_seasoning_30g,Italian seasoning,30g,,no,0.50,"Mrs. Dash Table Blend Seasoning Blend, 70-g",4.97,mrs-dash-table-blend-seasoning-blend-70-g-1
+gianttiger_ca,italian_seasoning_30g,Italian seasoning,30g,,no,0.50,"Litehouse Italian Herb Blend, 14 g",5.47,litehouse-italian-herb-blend-14-g
+gianttiger_ca,cinnamon_ground_75g,"Cinnamon, ground",75g,,no,1.00,"Giant Value Ground Cinnamon, 125 g",1.97,giant-value-ground-cinnamon-125-g-1
+gianttiger_ca,cinnamon_ground_75g,"Cinnamon, ground",75g,,no,1.00,"Giant Value Ground Cinnamon, 190 g",2.97,giant-value-ground-cinnamon-190g-1
+gianttiger_ca,cinnamon_ground_75g,"Cinnamon, ground",75g,,no,1.00,"Club House Ground Cinnamon, 125-g",6.26,club-house-ground-cinnamon-125-g-1
+gianttiger_ca,cinnamon_ground_75g,"Cinnamon, ground",75g,,no,1.00,"Starbucks Cinnamon Dolce Ground Coffee K-Cups, 10-Pack, 181-g",12.47,starbucks-cinnamon-dolce-ground-coffee-k-cups-10-pack-181-g-1
+gianttiger_ca,chili_flakes_50g,Crushed chili flakes,50g,,no,0.67,"Giant Value Crushed Chili Pepper, 100 g",1.77,giant-value-crushed-chili-pepper-100-g-1
+gianttiger_ca,chili_flakes_50g,Crushed chili flakes,50g,,no,0.33,"Ruffles Double Crunch Korean Sweet Chili Chips, 180 g",4.47,ruffles-double-crunch-korean-sweet-chili-chips-180-g
+gianttiger_ca,chili_flakes_50g,Crushed chili flakes,50g,,no,0.33,"Chili Garlic Sauce, 481-ml",4.99,chili-garlic-sauce-481-ml-1
+gianttiger_ca,vegetable_broth_900ml,"Vegetable broth, carton",900ml,,yes,0.33,Campbell's No Salt Added Chicken Broth - 900ml,1.96,campbells-no-salt-added-chicken-broth-900ml-1
+gianttiger_ca,vegetable_broth_900ml,"Vegetable broth, carton",900ml,,yes,0.33,"Campbell's Beef Broth, 900-ml",1.96,campbells-beef-broth-900-ml-2
+gianttiger_ca,vegetable_broth_900ml,"Vegetable broth, carton",900ml,,yes,0.33,Campbell's Beef Broth  30% Less Sodium - 900ml,1.97,campbells-beef-broth-30-less-sodium-900ml-1
+gianttiger_ca,vegetable_broth_900ml,"Vegetable broth, carton",900ml,,yes,0.33,Campbell's Beef Broth - 900ml,2.47,campbells-beef-broth-900ml-1
+gianttiger_ca,vegetable_bouillon_cubes_12,Vegetable bouillon cubes,12 cubes,,no,0.67,Knorr Selects Vegetable Cubes 6pk. - 66g,2.77,knorr-selects-vegetable-cubes-6pk-66g-1
+gianttiger_ca,vegetable_bouillon_cubes_12,Vegetable bouillon cubes,12 cubes,,no,0.67,"Knorr Chicken Bouillon Cubes, 6-Pack, 69 g",2.77,knorr-chicken-bouillon-cubes-6pk-69g-2
+gianttiger_ca,vegetable_bouillon_cubes_12,Vegetable bouillon cubes,12 cubes,,no,0.67,Knorr Chicken Bouillon Cubes 6pk. - 69g,2.77,knorr-chicken-bouillon-cubes-6pk-69g-3
+gianttiger_ca,vegetable_bouillon_cubes_12,Vegetable bouillon cubes,12 cubes,,no,0.67,"Knorr Selects Vegetable Cubes, 6-Pack, 66 g",2.77,knorr-vegetable-bouillon-cubes-6-pack-69-g
+walmart_ca,rice_white_900g,"White rice, long grain",900g,,,,(no candidate found),,
+walmart_ca,rice_white_2kg,"White rice, long grain",2kg,,,,(no candidate found),,
+walmart_ca,rice_parboiled_900g,Parboiled rice,900g,,,,(no candidate found),,
+walmart_ca,rice_jasmine_2kg,Jasmine rice,2kg,,,,(no candidate found),,
+walmart_ca,rice_brown_900g,Brown rice,900g,,,,(no candidate found),,
+walmart_ca,rice_brown_2kg,Brown rice,2kg,,,,(no candidate found),,
+walmart_ca,spaghetti_900g,Spaghetti,900g,,no,1.00,Great Value Spaghetti Pasta,1.97,/en/ip/Great-Value-Spaghetti-Pasta/2QV9LGU46RLX
+walmart_ca,penne_900g,Penne,900g,,,,(no candidate found),,
+walmart_ca,macaroni_900g,Elbow macaroni,900g,,,,(no candidate found),,
+walmart_ca,spaghetti_ww_900g,Whole wheat spaghetti,900g,,no,0.33,Great Value Spaghetti Pasta,1.97,/en/ip/Great-Value-Spaghetti-Pasta/2QV9LGU46RLX
+walmart_ca,egg_noodles_375g,"Egg noodles, broad",375g,,,,(no candidate found),,
+walmart_ca,ramen_single_85g,"Instant ramen, single",85g,,,,(no candidate found),,
+walmart_ca,ramen_5pk,Instant ramen,5 pack,,,,(no candidate found),,
+walmart_ca,rice_vermicelli_400g,Rice vermicelli,400g,,,,(no candidate found),,
+walmart_ca,oats_quick_1kg,Quick oats,1kg,,,,(no candidate found),,
+walmart_ca,oats_large_flake_1kg,Large flake oats,1kg,,,,(no candidate found),,
+walmart_ca,flour_ap_2_5kg,All-purpose flour,2.5kg,,,,(no candidate found),,
+walmart_ca,flour_ww_2_5kg,Whole wheat flour,2.5kg,,,,(no candidate found),,
+walmart_ca,cornmeal_1kg,"Cornmeal, yellow",1kg,,,,(no candidate found),,
+walmart_ca,couscous_500g,Couscous,500g,,,,(no candidate found),,
+walmart_ca,barley_pearl_900g,Pearl barley,900g,,,,(no candidate found),,
+walmart_ca,bread_white_675g,"White bread, sliced",675g,,yes,0.33,"Great Value Italian Style Bread, Source of 11 Essential Nutrients, 675 g",3.18,/en/ip/Great-Value-Italian-Style-Bread-Source-of-11-Essential-Nutrients-675-g/6000206630783
+walmart_ca,bread_white_675g,"White bread, sliced",675g,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,bread_white_675g,"White bread, sliced",675g,,no,0.33,"Great Value Thick Sliced Naturally Smoked Bacon, 375 g",3.97,/en/ip/Great-Value-Thick-Sliced-Naturally-Smoked-Bacon-375-g/6000192233216
+walmart_ca,bread_white_675g,"White bread, sliced",675g,,no,0.33,"Great Value Sliced Original Bologna Vacuum Pack, 500 g",5.98,/en/ip/Great-Value-Sliced-Original-Bologna-Vacuum-Pack-500-g/6000202626221
+walmart_ca,bread_ww_675g,"Whole wheat bread, sliced",675g,,yes,0.25,"Great Value Italian Style Bread, Source of 11 Essential Nutrients, 675 g",3.18,/en/ip/Great-Value-Italian-Style-Bread-Source-of-11-Essential-Nutrients-675-g/6000206630783
+walmart_ca,bread_ww_675g,"Whole wheat bread, sliced",675g,,no,0.25,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,bread_ww_675g,"Whole wheat bread, sliced",675g,,no,0.25,"Great Value Thick Sliced Naturally Smoked Bacon, 375 g",3.97,/en/ip/Great-Value-Thick-Sliced-Naturally-Smoked-Bacon-375-g/6000192233216
+walmart_ca,bread_ww_675g,"Whole wheat bread, sliced",675g,,no,0.25,"Great Value Sliced Original Bologna Vacuum Pack, 500 g",5.98,/en/ip/Great-Value-Sliced-Original-Bologna-Vacuum-Pack-500-g/6000202626221
+walmart_ca,tortillas_flour_10pk,"Flour tortillas, 10 inch",10 pack,,,,(no candidate found),,
+walmart_ca,tortillas_ww_10pk,"Whole wheat tortillas, 10 inch",10 pack,,,,(no candidate found),,
+walmart_ca,pita_6pk,Pita bread,6 pack,,no,0.50,"Great Value Italian Style Bread, Source of 11 Essential Nutrients, 675 g",3.18,/en/ip/Great-Value-Italian-Style-Bread-Source-of-11-Essential-Nutrients-675-g/6000206630783
+walmart_ca,buns_hamburger_8pk,Hamburger buns,8 pack,,,,(no candidate found),,
+walmart_ca,buns_hotdog_8pk,Hot dog buns,8 pack,,,,(no candidate found),,
+walmart_ca,bagels_6pk,"Bagels, plain",6 pack,,yes,0.50,"Great Value Everything Bagels, Source of 11 Essential Nutrients, 6 Count, 450 g",2.38,/en/ip/Great-Value-Everything-Bagels-Source-of-11-Essential-Nutrients-6-Count-450-g/6000206630407
+walmart_ca,crackers_saltine_450g,Saltine crackers,450g,,,,(no candidate found),,
+walmart_ca,black_beans_can_540ml,"Black beans, canned",540ml,,,,(no candidate found),,
+walmart_ca,black_beans_dry_900g,"Black beans, dry",900g,,,,(no candidate found),,
+walmart_ca,kidney_beans_can_540ml,"Red kidney beans, canned",540ml,,,,(no candidate found),,
+walmart_ca,kidney_beans_dry_900g,"Red kidney beans, dry",900g,,,,(no candidate found),,
+walmart_ca,white_kidney_can_540ml,"White kidney beans, canned",540ml,,,,(no candidate found),,
+walmart_ca,navy_beans_dry_900g,"Navy beans, dry",900g,,,,(no candidate found),,
+walmart_ca,chickpeas_can_540ml,"Chickpeas, canned",540ml,,,,(no candidate found),,
+walmart_ca,chickpeas_dry_900g,"Chickpeas, dry",900g,,,,(no candidate found),,
+walmart_ca,lentils_red_900g,"Red lentils, split",900g,,,,(no candidate found),,
+walmart_ca,lentils_green_900g,Green lentils,900g,,,,(no candidate found),,
+walmart_ca,lentils_can_540ml,"Lentils, canned",540ml,,,,(no candidate found),,
+walmart_ca,baked_beans_tomato_398ml,"Baked beans in tomato sauce, vegetarian",398ml,,,,(no candidate found),,
+walmart_ca,split_peas_yellow_900g,Yellow split peas,900g,,,,(no candidate found),,
+walmart_ca,onion_yellow_each,Yellow onion,each,,,,(no candidate found),,
+walmart_ca,onion_yellow_3lb,Yellow onions,3 lb bag,,,,(no candidate found),,
+walmart_ca,onion_red_each,Red onion,each,,,,(no candidate found),,
+walmart_ca,garlic_bulb_each,Garlic,1 bulb,,,,(no candidate found),,
+walmart_ca,garlic_3pk,Garlic,3 bulbs,,,,(no candidate found),,
+walmart_ca,garlic_minced_250ml,"Minced garlic, jar",250ml,,,,(no candidate found),,
+walmart_ca,potato_russet_each,Russet potato,each,,,,(no candidate found),,
+walmart_ca,potato_russet_5lb,Russet potatoes,5 lb bag,,,,(no candidate found),,
+walmart_ca,potato_russet_10lb,Russet potatoes,10 lb bag,,,,(no candidate found),,
+walmart_ca,potato_yellow_5lb,Yellow potatoes,5 lb bag,,,,(no candidate found),,
+walmart_ca,sweet_potato_each,Sweet potato,each,,,,(no candidate found),,
+walmart_ca,sweet_potato_3lb,Sweet potatoes,3 lb bag,,,,(no candidate found),,
+walmart_ca,carrots_2lb,Carrots,2 lb bag,,,,(no candidate found),,
+walmart_ca,carrots_5lb,Carrots,5 lb bag,,,,(no candidate found),,
+walmart_ca,cabbage_green_each,Green cabbage,each,,,,(no candidate found),,
+walmart_ca,celery_bunch,Celery,bunch,,,,(no candidate found),,
+walmart_ca,pepper_green_each,Green bell pepper,each,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,pepper_red_each,Red bell pepper,each,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,tomato_roma_each,Roma tomato,each,,,,(no candidate found),,
+walmart_ca,tomato_vine_each,Tomato on the vine,each,,,,(no candidate found),,
+walmart_ca,tomatoes_diced_796ml,"Diced tomatoes, canned",796ml,,,,(no candidate found),,
+walmart_ca,tomatoes_crushed_796ml,"Crushed tomatoes, canned",796ml,,,,(no candidate found),,
+walmart_ca,tomatoes_whole_796ml,"Whole tomatoes, canned",796ml,,,,(no candidate found),,
+walmart_ca,tomato_paste_156ml,Tomato paste,156ml,,,,(no candidate found),,
+walmart_ca,lettuce_iceberg_each,Iceberg lettuce,each,,,,(no candidate found),,
+walmart_ca,lettuce_romaine_3pk,Romaine hearts,3 pack,,,,(no candidate found),,
+walmart_ca,spinach_baby_142g,Baby spinach,142g,,no,0.50,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,spinach_frozen_300g,"Chopped spinach, frozen",300g,,no,1.00,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,spinach_frozen_300g,"Chopped spinach, frozen",300g,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,spinach_frozen_300g,"Chopped spinach, frozen",300g,,no,0.33,"Great Value Frozen Raspberries, 400 g",5.18,/en/ip/Great-Value-Frozen-Raspberries-400-g/2UWPR6JZ4L8J
+walmart_ca,spinach_frozen_300g,"Chopped spinach, frozen",300g,,no,0.33,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,broccoli_crown_each,Broccoli crown,each,,no,0.50,"Great Value Frozen Broccoli Florets, 1.75 Kg",6.97,/en/ip/Great-Value-Frozen-Broccoli-Florets-1-75-Kg/6000199909713
+walmart_ca,broccoli_frozen_500g,"Broccoli florets, frozen",500g,,yes,0.33,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,broccoli_frozen_500g,"Broccoli florets, frozen",500g,,yes,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,broccoli_frozen_500g,"Broccoli florets, frozen",500g,,yes,0.33,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,broccoli_frozen_500g,"Broccoli florets, frozen",500g,,no,1.00,"Great Value Frozen Broccoli Florets, 1.75 Kg",6.97,/en/ip/Great-Value-Frozen-Broccoli-Florets-1-75-Kg/6000199909713
+walmart_ca,cucumber_english_each,English cucumber,each,,,,(no candidate found),,
+walmart_ca,zucchini_each,Zucchini,each,,,,(no candidate found),,
+walmart_ca,mushrooms_white_227g,White mushrooms,227g,,,,(no candidate found),,
+walmart_ca,corn_kernel_can_341ml,"Corn kernels, canned",341ml,,,,(no candidate found),,
+walmart_ca,corn_frozen_750g,"Corn, frozen",750g,,no,0.50,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,corn_frozen_750g,"Corn, frozen",750g,,no,0.50,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,corn_frozen_750g,"Corn, frozen",750g,,no,0.50,"Great Value Frozen Raspberries, 400 g",5.18,/en/ip/Great-Value-Frozen-Raspberries-400-g/2UWPR6JZ4L8J
+walmart_ca,corn_frozen_750g,"Corn, frozen",750g,,no,0.50,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,corn_cob_each,Corn on the cob,each,,,,(no candidate found),,
+walmart_ca,green_onion_bunch,Green onions,bunch,,,,(no candidate found),,
+walmart_ca,frozen_mixed_veg_750g,"Mixed vegetables, frozen",750g,,no,0.33,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,frozen_mixed_veg_750g,"Mixed vegetables, frozen",750g,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,frozen_mixed_veg_750g,"Mixed vegetables, frozen",750g,,no,0.33,"Great Value Frozen Raspberries, 400 g",5.18,/en/ip/Great-Value-Frozen-Raspberries-400-g/2UWPR6JZ4L8J
+walmart_ca,frozen_mixed_veg_750g,"Mixed vegetables, frozen",750g,,no,0.33,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,frozen_peas_carrots_750g,"Peas and carrots, frozen",750g,,no,0.33,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,frozen_peas_carrots_750g,"Peas and carrots, frozen",750g,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,frozen_peas_carrots_750g,"Peas and carrots, frozen",750g,,no,0.33,"Great Value Frozen Raspberries, 400 g",5.18,/en/ip/Great-Value-Frozen-Raspberries-400-g/2UWPR6JZ4L8J
+walmart_ca,frozen_peas_carrots_750g,"Peas and carrots, frozen",750g,,no,0.33,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,frozen_peas_750g,"Green peas, frozen",750g,,no,0.33,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,frozen_peas_750g,"Green peas, frozen",750g,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,frozen_peas_750g,"Green peas, frozen",750g,,no,0.33,"Great Value Frozen Raspberries, 400 g",5.18,/en/ip/Great-Value-Frozen-Raspberries-400-g/2UWPR6JZ4L8J
+walmart_ca,frozen_peas_750g,"Green peas, frozen",750g,,no,0.33,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,frozen_stir_fry_750g,"Stir-fry vegetables, frozen",750g,,no,0.25,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,frozen_stir_fry_750g,"Stir-fry vegetables, frozen",750g,,no,0.25,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,frozen_stir_fry_750g,"Stir-fry vegetables, frozen",750g,,no,0.25,"Great Value Frozen Raspberries, 400 g",5.18,/en/ip/Great-Value-Frozen-Raspberries-400-g/2UWPR6JZ4L8J
+walmart_ca,frozen_stir_fry_750g,"Stir-fry vegetables, frozen",750g,,no,0.25,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,banana_each,Banana,each,,,,(no candidate found),,
+walmart_ca,banana_bunch,Bananas,about 1 kg,,,,(no candidate found),,
+walmart_ca,apple_each,Apple,each,,,,(no candidate found),,
+walmart_ca,apple_3lb,Apples,3 lb bag,,,,(no candidate found),,
+walmart_ca,orange_each,Orange,each,,,,(no candidate found),,
+walmart_ca,lemon_each,Lemon,each,,,,(no candidate found),,
+walmart_ca,lemon_juice_300ml,"Lemon juice, bottled",300ml,,,,(no candidate found),,
+walmart_ca,berries_mixed_frozen_600g,"Mixed berries, frozen",600g,,no,0.33,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,berries_mixed_frozen_600g,"Mixed berries, frozen",600g,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,berries_mixed_frozen_600g,"Mixed berries, frozen",600g,,no,0.33,"Great Value Frozen Raspberries, 400 g",5.18,/en/ip/Great-Value-Frozen-Raspberries-400-g/2UWPR6JZ4L8J
+walmart_ca,berries_mixed_frozen_600g,"Mixed berries, frozen",600g,,no,0.33,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,raisins_750g,Raisins,750g,,,,(no candidate found),,
+walmart_ca,peaches_can_398ml,"Peaches in juice, canned",398ml,,,,(no candidate found),,
+walmart_ca,fruit_cocktail_398ml,"Fruit cocktail, canned",398ml,,,,(no candidate found),,
+walmart_ca,milk_2pct_1l,"Milk, 2%",1L,,,,(no candidate found),,
+walmart_ca,milk_2pct_2l,"Milk, 2%",2L,,,,(no candidate found),,
+walmart_ca,milk_2pct_4l,"Milk, 2%, bags",4L,,,,(no candidate found),,
+walmart_ca,cheddar_400g,"Cheddar, mild, block",400g,,yes,0.33,Great Value Lactose Free Marble Cheddar 400g,5.48,/en/ip/Great-Value-Lactose-Free-Marble-Cheddar-400g/6000208885098
+walmart_ca,cheddar_400g,"Cheddar, mild, block",400g,,yes,0.33,Great Value Marble Cheddar Cheese 400g,5.48,/en/ip/Great-Value-Marble-Cheddar-Cheese-400g/6000208884276
+walmart_ca,cheddar_400g,"Cheddar, mild, block",400g,,no,0.33,Great Value Old Cheddar Cheese Slices,4.98,/en/ip/Great-Value-Old-Cheddar-Cheese-Slices/6000196142603
+walmart_ca,cheddar_400g,"Cheddar, mild, block",400g,,no,0.33,Great Value Medium Cheddar Cheese Slices,4.98,/en/ip/Great-Value-Medium-Cheddar-Cheese-Slices/6000196142600
+walmart_ca,mozzarella_400g,"Mozzarella, block",400g,,no,0.50,Great Value Marble Stringable Pizza Mozzarella Cheese,3.43,/en/ip/Great-Value-Marble-Stringable-Pizza-Mozzarella-Cheese/6000201734284
+walmart_ca,cheese_slices_24,Processed cheese slices,24 slices,,no,0.67,Great Value Old Cheddar Cheese Slices,4.98,/en/ip/Great-Value-Old-Cheddar-Cheese-Slices/6000196142603
+walmart_ca,cheese_slices_24,Processed cheese slices,24 slices,,no,0.67,Great Value Medium Cheddar Cheese Slices,4.98,/en/ip/Great-Value-Medium-Cheddar-Cheese-Slices/6000196142600
+walmart_ca,cheese_slices_24,Processed cheese slices,24 slices,,no,0.33,Great Value Cream Cheese,2.98,/en/ip/Great-Value-Cream-Cheese/10054562
+walmart_ca,cheese_slices_24,Processed cheese slices,24 slices,,no,0.33,Great Value Marble Stringable Pizza Mozzarella Cheese,3.43,/en/ip/Great-Value-Marble-Stringable-Pizza-Mozzarella-Cheese/6000201734284
+walmart_ca,parmesan_grated_250g,"Parmesan, grated",250g,,,,(no candidate found),,
+walmart_ca,yogurt_plain_650g,Plain yogurt,650g,,,,(no candidate found),,
+walmart_ca,yogurt_greek_plain_500g,"Greek yogurt, plain",500g,,,,(no candidate found),,
+walmart_ca,butter_454g,"Butter, salted",454g,,,,(no candidate found),,
+walmart_ca,sour_cream_500ml,Sour cream,500ml,,no,1.00,Great Value Sour Cream,2.68,/en/ip/Great-Value-Sour-Cream/6000196397990
+walmart_ca,sour_cream_500ml,Sour cream,500ml,,no,0.50,Great Value Cream Cheese,2.98,/en/ip/Great-Value-Cream-Cheese/10054562
+walmart_ca,sour_cream_500ml,Sour cream,500ml,,no,0.50,"Great Value Vanilla Ice Cream Sandwiches in a Box, 12 x 120mL",5.97,/en/ip/Great-Value-Vanilla-Ice-Cream-Sandwiches-in-a-Box-12-x-120mL/6000191268610
+walmart_ca,eggs_large_12,"Eggs, large",12 pack,,,,(no candidate found),,
+walmart_ca,eggs_large_18,"Eggs, large",18 pack,,,,(no candidate found),,
+walmart_ca,eggs_large_30,"Eggs, large",30 pack,,,,(no candidate found),,
+walmart_ca,chicken_thighs_bone_in_1kg,"Chicken thighs, bone-in, value pack",about 1 kg,,yes,0.40,"Great Value Ham and Cheese Stuffed Breaded Chicken Breast Cutlets, 994g",9.98,/en/ip/Great-Value-Ham-and-Cheese-Stuffed-Breaded-Chicken-Breast-Cutlets-994g/6000196287478
+walmart_ca,chicken_thighs_bone_in_1kg,"Chicken thighs, bone-in, value pack",about 1 kg,,no,0.40,"Great Value Spring Water 500ml, pack of 24",2.98,/en/ip/Great-Value-Spring-Water-500ml-pack-of-24/10295446
+walmart_ca,chicken_thighs_bone_in_1kg,"Chicken thighs, bone-in, value pack",about 1 kg,,no,0.40,"Great Value Sliced Original Bologna Vacuum Pack, 500 g",5.98,/en/ip/Great-Value-Sliced-Original-Bologna-Vacuum-Pack-500-g/6000202626221
+walmart_ca,chicken_thighs_bone_in_1kg,"Chicken thighs, bone-in, value pack",about 1 kg,,no,0.40,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,chicken_thighs_boneless_700g,"Chicken thighs, boneless skinless",about 700g,,yes,0.25,"GV Fully Cooked Chicken Breast Strips, 700g",9.98,/en/ip/GV-Fully-Cooked-Chicken-Breast-Strips-700g/3Q7PL6AXT7AD
+walmart_ca,chicken_thighs_boneless_700g,"Chicken thighs, boneless skinless",about 700g,,no,0.25,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,chicken_thighs_boneless_700g,"Chicken thighs, boneless skinless",about 700g,,no,0.25,"Great Value Fully Cooked Breaded Chicken Nuggets, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Nuggets-1-7-kg/7I5OEMAX92P5
+walmart_ca,chicken_thighs_boneless_700g,"Chicken thighs, boneless skinless",about 700g,,no,0.25,"Great Value Fully Cooked Breaded Chicken Strips, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Strips-1-7-kg/26J4IE3JRQV0
+walmart_ca,chicken_thighs_halal_1kg,"Chicken thighs, bone-in, halal",about 1 kg,,yes,0.25,"Great Value Ham and Cheese Stuffed Breaded Chicken Breast Cutlets, 994g",9.98,/en/ip/Great-Value-Ham-and-Cheese-Stuffed-Breaded-Chicken-Breast-Cutlets-994g/6000196287478
+walmart_ca,chicken_thighs_halal_1kg,"Chicken thighs, bone-in, halal",about 1 kg,,no,0.25,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,chicken_thighs_halal_1kg,"Chicken thighs, bone-in, halal",about 1 kg,,no,0.25,"Great Value Fully Cooked Breaded Chicken Nuggets, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Nuggets-1-7-kg/7I5OEMAX92P5
+walmart_ca,chicken_thighs_halal_1kg,"Chicken thighs, bone-in, halal",about 1 kg,,no,0.25,"GV Fully Cooked Chicken Breast Strips, 700g",9.98,/en/ip/GV-Fully-Cooked-Chicken-Breast-Strips-700g/3Q7PL6AXT7AD
+walmart_ca,chicken_breast_3pk,"Chicken breasts, boneless skinless",3 pack,,no,0.50,"GV Fully Cooked Chicken Breast Strips, 700g",9.98,/en/ip/GV-Fully-Cooked-Chicken-Breast-Strips-700g/3Q7PL6AXT7AD
+walmart_ca,chicken_breast_3pk,"Chicken breasts, boneless skinless",3 pack,,no,0.50,"Great Value Ham and Cheese Stuffed Breaded Chicken Breast Cutlets, 994g",9.98,/en/ip/Great-Value-Ham-and-Cheese-Stuffed-Breaded-Chicken-Breast-Cutlets-994g/6000196287478
+walmart_ca,chicken_breast_3pk,"Chicken breasts, boneless skinless",3 pack,,no,0.25,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,chicken_breast_3pk,"Chicken breasts, boneless skinless",3 pack,,no,0.25,"Great Value Fully Cooked Breaded Chicken Nuggets, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Nuggets-1-7-kg/7I5OEMAX92P5
+walmart_ca,chicken_breast_halal_3pk,"Chicken breasts, boneless skinless, halal",3 pack,,no,0.40,"GV Fully Cooked Chicken Breast Strips, 700g",9.98,/en/ip/GV-Fully-Cooked-Chicken-Breast-Strips-700g/3Q7PL6AXT7AD
+walmart_ca,chicken_breast_halal_3pk,"Chicken breasts, boneless skinless, halal",3 pack,,no,0.40,"Great Value Ham and Cheese Stuffed Breaded Chicken Breast Cutlets, 994g",9.98,/en/ip/Great-Value-Ham-and-Cheese-Stuffed-Breaded-Chicken-Breast-Cutlets-994g/6000196287478
+walmart_ca,chicken_breast_halal_3pk,"Chicken breasts, boneless skinless, halal",3 pack,,no,0.20,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,chicken_breast_halal_3pk,"Chicken breasts, boneless skinless, halal",3 pack,,no,0.20,"Great Value Fully Cooked Breaded Chicken Nuggets, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Nuggets-1-7-kg/7I5OEMAX92P5
+walmart_ca,chicken_drumsticks_1kg,"Chicken drumsticks, value pack",about 1 kg,,yes,0.50,"Great Value Ham and Cheese Stuffed Breaded Chicken Breast Cutlets, 994g",9.98,/en/ip/Great-Value-Ham-and-Cheese-Stuffed-Breaded-Chicken-Breast-Cutlets-994g/6000196287478
+walmart_ca,chicken_drumsticks_1kg,"Chicken drumsticks, value pack",about 1 kg,,no,0.50,"Great Value Spring Water 500ml, pack of 24",2.98,/en/ip/Great-Value-Spring-Water-500ml-pack-of-24/10295446
+walmart_ca,chicken_drumsticks_1kg,"Chicken drumsticks, value pack",about 1 kg,,no,0.50,"Great Value Sliced Original Bologna Vacuum Pack, 500 g",5.98,/en/ip/Great-Value-Sliced-Original-Bologna-Vacuum-Pack-500-g/6000202626221
+walmart_ca,chicken_drumsticks_1kg,"Chicken drumsticks, value pack",about 1 kg,,no,0.50,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,chicken_drumsticks_halal_1kg,"Chicken drumsticks, halal",about 1 kg,,yes,0.33,"Great Value Ham and Cheese Stuffed Breaded Chicken Breast Cutlets, 994g",9.98,/en/ip/Great-Value-Ham-and-Cheese-Stuffed-Breaded-Chicken-Breast-Cutlets-994g/6000196287478
+walmart_ca,chicken_drumsticks_halal_1kg,"Chicken drumsticks, halal",about 1 kg,,no,0.33,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,chicken_drumsticks_halal_1kg,"Chicken drumsticks, halal",about 1 kg,,no,0.33,"Great Value Fully Cooked Breaded Chicken Nuggets, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Nuggets-1-7-kg/7I5OEMAX92P5
+walmart_ca,chicken_drumsticks_halal_1kg,"Chicken drumsticks, halal",about 1 kg,,no,0.33,"GV Fully Cooked Chicken Breast Strips, 700g",9.98,/en/ip/GV-Fully-Cooked-Chicken-Breast-Strips-700g/3Q7PL6AXT7AD
+walmart_ca,chicken_whole_1_8kg,Whole chicken,about 1.8 kg,,no,0.50,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,chicken_whole_1_8kg,Whole chicken,about 1.8 kg,,no,0.50,"Great Value Fully Cooked Breaded Chicken Nuggets, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Nuggets-1-7-kg/7I5OEMAX92P5
+walmart_ca,chicken_whole_1_8kg,Whole chicken,about 1.8 kg,,no,0.50,"GV Fully Cooked Chicken Breast Strips, 700g",9.98,/en/ip/GV-Fully-Cooked-Chicken-Breast-Strips-700g/3Q7PL6AXT7AD
+walmart_ca,chicken_whole_1_8kg,Whole chicken,about 1.8 kg,,no,0.50,"Great Value Fully Cooked Breaded Chicken Strips, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Strips-1-7-kg/26J4IE3JRQV0
+walmart_ca,chicken_whole_halal_1_8kg,"Whole chicken, halal",about 1.8 kg,,no,0.33,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,chicken_whole_halal_1_8kg,"Whole chicken, halal",about 1.8 kg,,no,0.33,"Great Value Fully Cooked Breaded Chicken Nuggets, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Nuggets-1-7-kg/7I5OEMAX92P5
+walmart_ca,chicken_whole_halal_1_8kg,"Whole chicken, halal",about 1.8 kg,,no,0.33,"GV Fully Cooked Chicken Breast Strips, 700g",9.98,/en/ip/GV-Fully-Cooked-Chicken-Breast-Strips-700g/3Q7PL6AXT7AD
+walmart_ca,chicken_whole_halal_1_8kg,"Whole chicken, halal",about 1.8 kg,,no,0.33,"Great Value Fully Cooked Breaded Chicken Strips, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Strips-1-7-kg/26J4IE3JRQV0
+walmart_ca,ground_chicken_450g,"Ground chicken, lean",450g,,no,0.67,"Great Value Frozen Lean Ground Beef, 3-Pack, 1092 g, 1.09kg",12.97,/en/ip/Great-Value-Frozen-Lean-Ground-Beef-3-Pack-1092-g-1-09kg/12503S20ZEAN
+walmart_ca,ground_chicken_450g,"Ground chicken, lean",450g,,no,0.33,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,ground_chicken_450g,"Ground chicken, lean",450g,,no,0.33,"Great Value Fully Cooked Breaded Chicken Nuggets, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Nuggets-1-7-kg/7I5OEMAX92P5
+walmart_ca,ground_chicken_450g,"Ground chicken, lean",450g,,no,0.33,"GV Fully Cooked Chicken Breast Strips, 700g",9.98,/en/ip/GV-Fully-Cooked-Chicken-Breast-Strips-700g/3Q7PL6AXT7AD
+walmart_ca,ground_turkey_450g,"Ground turkey, lean",450g,,no,0.67,"Great Value Frozen Lean Ground Beef, 3-Pack, 1092 g, 1.09kg",12.97,/en/ip/Great-Value-Frozen-Lean-Ground-Beef-3-Pack-1092-g-1-09kg/12503S20ZEAN
+walmart_ca,deli_turkey_175g,"Turkey breast, sliced",175g,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,deli_turkey_175g,"Turkey breast, sliced",175g,,no,0.33,"Great Value Thick Sliced Naturally Smoked Bacon, 375 g",3.97,/en/ip/Great-Value-Thick-Sliced-Naturally-Smoked-Bacon-375-g/6000192233216
+walmart_ca,deli_turkey_175g,"Turkey breast, sliced",175g,,no,0.33,"Great Value Sliced Original Bologna Vacuum Pack, 500 g",5.98,/en/ip/Great-Value-Sliced-Original-Bologna-Vacuum-Pack-500-g/6000202626221
+walmart_ca,deli_turkey_175g,"Turkey breast, sliced",175g,,no,0.33,"GV Fully Cooked Chicken Breast Strips, 700g",9.98,/en/ip/GV-Fully-Cooked-Chicken-Breast-Strips-700g/3Q7PL6AXT7AD
+walmart_ca,chicken_broth_900ml,"Chicken broth, carton",900ml,,no,0.33,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,chicken_broth_900ml,"Chicken broth, carton",900ml,,no,0.33,"Great Value Fully Cooked Breaded Chicken Nuggets, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Nuggets-1-7-kg/7I5OEMAX92P5
+walmart_ca,chicken_broth_900ml,"Chicken broth, carton",900ml,,no,0.33,"GV Fully Cooked Chicken Breast Strips, 700g",9.98,/en/ip/GV-Fully-Cooked-Chicken-Breast-Strips-700g/3Q7PL6AXT7AD
+walmart_ca,chicken_broth_900ml,"Chicken broth, carton",900ml,,no,0.33,"Great Value Fully Cooked Breaded Chicken Strips, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Strips-1-7-kg/26J4IE3JRQV0
+walmart_ca,chicken_bouillon_cubes_12,Chicken bouillon cubes,12 cubes,,no,0.33,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,chicken_bouillon_cubes_12,Chicken bouillon cubes,12 cubes,,no,0.33,"Great Value Fully Cooked Breaded Chicken Nuggets, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Nuggets-1-7-kg/7I5OEMAX92P5
+walmart_ca,chicken_bouillon_cubes_12,Chicken bouillon cubes,12 cubes,,no,0.33,"GV Fully Cooked Chicken Breast Strips, 700g",9.98,/en/ip/GV-Fully-Cooked-Chicken-Breast-Strips-700g/3Q7PL6AXT7AD
+walmart_ca,chicken_bouillon_cubes_12,Chicken bouillon cubes,12 cubes,,no,0.33,"Great Value Fully Cooked Breaded Chicken Strips, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Strips-1-7-kg/26J4IE3JRQV0
+walmart_ca,chicken_bouillon_halal_200g,"Chicken bouillon powder, halal",200g,,no,0.25,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,chicken_bouillon_halal_200g,"Chicken bouillon powder, halal",200g,,no,0.25,"Great Value Fully Cooked Breaded Chicken Nuggets, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Nuggets-1-7-kg/7I5OEMAX92P5
+walmart_ca,chicken_bouillon_halal_200g,"Chicken bouillon powder, halal",200g,,no,0.25,"GV Fully Cooked Chicken Breast Strips, 700g",9.98,/en/ip/GV-Fully-Cooked-Chicken-Breast-Strips-700g/3Q7PL6AXT7AD
+walmart_ca,chicken_bouillon_halal_200g,"Chicken bouillon powder, halal",200g,,no,0.25,"Great Value Fully Cooked Breaded Chicken Strips, 1.7 kg",9.98,/en/ip/Great-Value-Fully-Cooked-Breaded-Chicken-Strips-1-7-kg/26J4IE3JRQV0
+walmart_ca,ground_beef_lean_454g,"Ground beef, lean",454g,,no,1.00,"Great Value Frozen Lean Ground Beef, 3-Pack, 1092 g, 1.09kg",12.97,/en/ip/Great-Value-Frozen-Lean-Ground-Beef-3-Pack-1092-g-1-09kg/12503S20ZEAN
+walmart_ca,ground_beef_lean_454g,"Ground beef, lean",454g,,no,0.33,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,ground_beef_lean_454g,"Ground beef, lean",454g,,no,0.33,"Great Value Frozen Beef Burgers, 904g",14.64,/en/ip/Great-Value-Frozen-Beef-Burgers-904g/6000193606604
+walmart_ca,ground_beef_extra_lean_454g,"Ground beef, extra lean",454g,,no,0.75,"Great Value Frozen Lean Ground Beef, 3-Pack, 1092 g, 1.09kg",12.97,/en/ip/Great-Value-Frozen-Lean-Ground-Beef-3-Pack-1092-g-1-09kg/12503S20ZEAN
+walmart_ca,ground_beef_extra_lean_454g,"Ground beef, extra lean",454g,,no,0.25,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,ground_beef_extra_lean_454g,"Ground beef, extra lean",454g,,no,0.25,"Great Value Extra Thick Cut Bacon, GV thick cut bacon",10.56,/en/ip/Great-Value-Extra-Thick-Cut-Bacon-GV-thick-cut-bacon/6000196142944
+walmart_ca,ground_beef_extra_lean_454g,"Ground beef, extra lean",454g,,no,0.25,"Great Value Frozen Beef Burgers, 904g",14.64,/en/ip/Great-Value-Frozen-Beef-Burgers-904g/6000193606604
+walmart_ca,ground_beef_halal_454g,"Ground beef, lean, halal",454g,,no,0.75,"Great Value Frozen Lean Ground Beef, 3-Pack, 1092 g, 1.09kg",12.97,/en/ip/Great-Value-Frozen-Lean-Ground-Beef-3-Pack-1092-g-1-09kg/12503S20ZEAN
+walmart_ca,ground_beef_halal_454g,"Ground beef, lean, halal",454g,,no,0.25,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,ground_beef_halal_454g,"Ground beef, lean, halal",454g,,no,0.25,"Great Value Frozen Beef Burgers, 904g",14.64,/en/ip/Great-Value-Frozen-Beef-Burgers-904g/6000193606604
+walmart_ca,stewing_beef_600g,Stewing beef,about 600g,,no,0.50,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,stewing_beef_600g,Stewing beef,about 600g,,no,0.50,"Great Value Frozen Lean Ground Beef, 3-Pack, 1092 g, 1.09kg",12.97,/en/ip/Great-Value-Frozen-Lean-Ground-Beef-3-Pack-1092-g-1-09kg/12503S20ZEAN
+walmart_ca,stewing_beef_600g,Stewing beef,about 600g,,no,0.50,"Great Value Frozen Beef Burgers, 904g",14.64,/en/ip/Great-Value-Frozen-Beef-Burgers-904g/6000193606604
+walmart_ca,stewing_beef_halal_600g,"Stewing beef, halal",about 600g,,no,0.33,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,stewing_beef_halal_600g,"Stewing beef, halal",about 600g,,no,0.33,"Great Value Frozen Lean Ground Beef, 3-Pack, 1092 g, 1.09kg",12.97,/en/ip/Great-Value-Frozen-Lean-Ground-Beef-3-Pack-1092-g-1-09kg/12503S20ZEAN
+walmart_ca,stewing_beef_halal_600g,"Stewing beef, halal",about 600g,,no,0.33,"Great Value Frozen Beef Burgers, 904g",14.64,/en/ip/Great-Value-Frozen-Beef-Burgers-904g/6000193606604
+walmart_ca,beef_fast_fry_500g,Inside round fast-fry steak,about 500g,,,,(no candidate found),,
+walmart_ca,beef_broth_900ml,"Beef broth, carton",900ml,,no,0.33,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,beef_broth_900ml,"Beef broth, carton",900ml,,no,0.33,"Great Value Frozen Lean Ground Beef, 3-Pack, 1092 g, 1.09kg",12.97,/en/ip/Great-Value-Frozen-Lean-Ground-Beef-3-Pack-1092-g-1-09kg/12503S20ZEAN
+walmart_ca,beef_broth_900ml,"Beef broth, carton",900ml,,no,0.33,"Great Value Frozen Beef Burgers, 904g",14.64,/en/ip/Great-Value-Frozen-Beef-Burgers-904g/6000193606604
+walmart_ca,beef_bouillon_cubes_12,Beef bouillon cubes,12 cubes,,no,0.33,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,beef_bouillon_cubes_12,Beef bouillon cubes,12 cubes,,no,0.33,"Great Value Frozen Lean Ground Beef, 3-Pack, 1092 g, 1.09kg",12.97,/en/ip/Great-Value-Frozen-Lean-Ground-Beef-3-Pack-1092-g-1-09kg/12503S20ZEAN
+walmart_ca,beef_bouillon_cubes_12,Beef bouillon cubes,12 cubes,,no,0.33,"Great Value Frozen Beef Burgers, 904g",14.64,/en/ip/Great-Value-Frozen-Beef-Burgers-904g/6000193606604
+walmart_ca,ground_pork_454g,"Ground pork, lean",454g,,no,0.67,"Great Value Frozen Lean Ground Beef, 3-Pack, 1092 g, 1.09kg",12.97,/en/ip/Great-Value-Frozen-Lean-Ground-Beef-3-Pack-1092-g-1-09kg/12503S20ZEAN
+walmart_ca,ground_pork_454g,"Ground pork, lean",454g,,no,0.33,"Great Value Refrigerated BBQ Pork Back Ribs, 500 g",8.46,/en/ip/Great-Value-Refrigerated-BBQ-Pork-Back-Ribs-500-g/6000201562249
+walmart_ca,pork_chops_bone_in_700g,"Pork loin chops, bone-in",about 700g,,no,0.25,"Great Value Refrigerated BBQ Pork Back Ribs, 500 g",8.46,/en/ip/Great-Value-Refrigerated-BBQ-Pork-Back-Ribs-500-g/6000201562249
+walmart_ca,pork_shoulder_1_5kg,Pork shoulder blade roast,about 1.5 kg,,no,0.25,"Great Value Refrigerated BBQ Pork Back Ribs, 500 g",8.46,/en/ip/Great-Value-Refrigerated-BBQ-Pork-Back-Ribs-500-g/6000201562249
+walmart_ca,bacon_375g,"Bacon, sliced",375g,,yes,1.00,"Great Value Thick Sliced Naturally Smoked Bacon, 375 g",3.97,/en/ip/Great-Value-Thick-Sliced-Naturally-Smoked-Bacon-375-g/6000192233216
+walmart_ca,bacon_375g,"Bacon, sliced",375g,,no,0.50,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,bacon_375g,"Bacon, sliced",375g,,no,0.50,"Great Value Sliced Original Bologna Vacuum Pack, 500 g",5.98,/en/ip/Great-Value-Sliced-Original-Bologna-Vacuum-Pack-500-g/6000202626221
+walmart_ca,bacon_375g,"Bacon, sliced",375g,,no,0.50,"Great Value Extra Thick Cut Bacon, GV thick cut bacon",10.56,/en/ip/Great-Value-Extra-Thick-Cut-Bacon-GV-thick-cut-bacon/6000196142944
+walmart_ca,ham_deli_175g,"Ham, sliced",175g,,no,0.50,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,ham_deli_175g,"Ham, sliced",175g,,no,0.50,"Great Value Thick Sliced Naturally Smoked Bacon, 375 g",3.97,/en/ip/Great-Value-Thick-Sliced-Naturally-Smoked-Bacon-375-g/6000192233216
+walmart_ca,ham_deli_175g,"Ham, sliced",175g,,no,0.50,"Great Value Sliced Original Bologna Vacuum Pack, 500 g",5.98,/en/ip/Great-Value-Sliced-Original-Bologna-Vacuum-Pack-500-g/6000202626221
+walmart_ca,ham_deli_175g,"Ham, sliced",175g,,no,0.50,"Great Value Ham and Cheese Stuffed Breaded Chicken Breast Cutlets, 994g",9.98,/en/ip/Great-Value-Ham-and-Cheese-Stuffed-Breaded-Chicken-Breast-Cutlets-994g/6000196287478
+walmart_ca,pork_sausage_500g,"Pork sausages, mild",500g,,yes,0.33,"Great Value Refrigerated BBQ Pork Back Ribs, 500 g",8.46,/en/ip/Great-Value-Refrigerated-BBQ-Pork-Back-Ribs-500-g/6000201562249
+walmart_ca,ground_lamb_454g,Ground lamb,454g,,no,0.50,"Great Value Frozen Lean Ground Beef, 3-Pack, 1092 g, 1.09kg",12.97,/en/ip/Great-Value-Frozen-Lean-Ground-Beef-3-Pack-1092-g-1-09kg/12503S20ZEAN
+walmart_ca,ground_lamb_halal_454g,"Ground lamb, halal",454g,,no,0.33,"Great Value Frozen Lean Ground Beef, 3-Pack, 1092 g, 1.09kg",12.97,/en/ip/Great-Value-Frozen-Lean-Ground-Beef-3-Pack-1092-g-1-09kg/12503S20ZEAN
+walmart_ca,basa_frozen,"Basa fillets, frozen",400g,,yes,0.33,"Great Value Frozen Raspberries, 400 g",5.18,/en/ip/Great-Value-Frozen-Raspberries-400-g/2UWPR6JZ4L8J
+walmart_ca,basa_frozen,"Basa fillets, frozen",400g,,no,0.33,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,basa_frozen,"Basa fillets, frozen",400g,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,basa_frozen,"Basa fillets, frozen",400g,,no,0.33,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,tilapia_frozen_454g,"Tilapia fillets, frozen",454g,,no,0.33,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,tilapia_frozen_454g,"Tilapia fillets, frozen",454g,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,tilapia_frozen_454g,"Tilapia fillets, frozen",454g,,no,0.33,"Great Value Frozen Raspberries, 400 g",5.18,/en/ip/Great-Value-Frozen-Raspberries-400-g/2UWPR6JZ4L8J
+walmart_ca,tilapia_frozen_454g,"Tilapia fillets, frozen",454g,,no,0.33,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,pollock_frozen_454g,"Pollock fillets, frozen",454g,,no,0.33,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,pollock_frozen_454g,"Pollock fillets, frozen",454g,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,pollock_frozen_454g,"Pollock fillets, frozen",454g,,no,0.33,"Great Value Frozen Raspberries, 400 g",5.18,/en/ip/Great-Value-Frozen-Raspberries-400-g/2UWPR6JZ4L8J
+walmart_ca,pollock_frozen_454g,"Pollock fillets, frozen",454g,,no,0.33,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,salmon_pink_frozen_454g,"Pink salmon fillets, frozen",454g,,no,0.25,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,salmon_pink_frozen_454g,"Pink salmon fillets, frozen",454g,,no,0.25,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,salmon_pink_frozen_454g,"Pink salmon fillets, frozen",454g,,no,0.25,"Great Value Frozen Raspberries, 400 g",5.18,/en/ip/Great-Value-Frozen-Raspberries-400-g/2UWPR6JZ4L8J
+walmart_ca,salmon_pink_frozen_454g,"Pink salmon fillets, frozen",454g,,no,0.25,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,salmon_atlantic_frozen_454g,"Atlantic salmon fillets, frozen",454g,,no,0.25,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,salmon_atlantic_frozen_454g,"Atlantic salmon fillets, frozen",454g,,no,0.25,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,salmon_atlantic_frozen_454g,"Atlantic salmon fillets, frozen",454g,,no,0.25,"Great Value Frozen Raspberries, 400 g",5.18,/en/ip/Great-Value-Frozen-Raspberries-400-g/2UWPR6JZ4L8J
+walmart_ca,salmon_atlantic_frozen_454g,"Atlantic salmon fillets, frozen",454g,,no,0.25,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,tuna_flaked_light_170g,"Flaked light tuna, canned",170g,,,,(no candidate found),,
+walmart_ca,tuna_chunk_light_170g,"Chunk light tuna, canned",170g,,,,(no candidate found),,
+walmart_ca,salmon_pink_can_213g,"Pink salmon, canned",213g,,,,(no candidate found),,
+walmart_ca,sardines_106g,"Sardines in oil, canned",106g,,,,(no candidate found),,
+walmart_ca,fish_sticks_700g,"Fish sticks, frozen",700g,,no,0.33,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,fish_sticks_700g,"Fish sticks, frozen",700g,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,fish_sticks_700g,"Fish sticks, frozen",700g,,no,0.33,"Great Value Frozen Raspberries, 400 g",5.18,/en/ip/Great-Value-Frozen-Raspberries-400-g/2UWPR6JZ4L8J
+walmart_ca,fish_sticks_700g,"Fish sticks, frozen",700g,,no,0.33,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,shrimp_cooked_frozen_340g,"Cooked shrimp, frozen",340g,,no,0.33,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,shrimp_cooked_frozen_340g,"Cooked shrimp, frozen",340g,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,shrimp_cooked_frozen_340g,"Cooked shrimp, frozen",340g,,no,0.33,"Great Value Frozen Raspberries, 400 g",5.18,/en/ip/Great-Value-Frozen-Raspberries-400-g/2UWPR6JZ4L8J
+walmart_ca,shrimp_cooked_frozen_340g,"Cooked shrimp, frozen",340g,,no,0.33,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,shrimp_raw_frozen_340g,"Raw shrimp, frozen",340g,,no,0.33,"Great Value Frozen Chopped Spinach Nuggets, 500 g",3.37,/en/ip/Great-Value-Frozen-Chopped-Spinach-Nuggets-500-g/6000198574809
+walmart_ca,shrimp_raw_frozen_340g,"Raw shrimp, frozen",340g,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,shrimp_raw_frozen_340g,"Raw shrimp, frozen",340g,,no,0.33,"Great Value Frozen Raspberries, 400 g",5.18,/en/ip/Great-Value-Frozen-Raspberries-400-g/2UWPR6JZ4L8J
+walmart_ca,shrimp_raw_frozen_340g,"Raw shrimp, frozen",340g,,no,0.33,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,tofu_firm_454g,"Tofu, firm",454g,,,,(no candidate found),,
+walmart_ca,tofu_extra_firm_454g,"Tofu, extra firm",454g,,no,0.33,"Great Value Extra Thick Cut Bacon, GV thick cut bacon",10.56,/en/ip/Great-Value-Extra-Thick-Cut-Bacon-GV-thick-cut-bacon/6000196142944
+walmart_ca,soy_milk_1_89l,"Soy milk, unsweetened",1.89L,,,,(no candidate found),,
+walmart_ca,soy_sauce_410ml,Soy sauce,410ml,,,,(no candidate found),,
+walmart_ca,soy_sauce_1l,Soy sauce,1L,,,,(no candidate found),,
+walmart_ca,peanut_butter_smooth_1kg,"Peanut butter, smooth",1kg,,,,(no candidate found),,
+walmart_ca,peanut_butter_crunchy_1kg,"Peanut butter, crunchy",1kg,,,,(no candidate found),,
+walmart_ca,peanut_butter_natural_500g,"Peanut butter, natural",500g,,,,(no candidate found),,
+walmart_ca,almond_butter_365g,Almond butter,365g,,,,(no candidate found),,
+walmart_ca,peanuts_roasted_600g,"Peanuts, dry roasted",600g,,,,(no candidate found),,
+walmart_ca,almonds_whole_400g,"Almonds, whole",400g,,,,(no candidate found),,
+walmart_ca,mixed_nuts_unsalted_400g,"Mixed nuts, unsalted",400g,,,,(no candidate found),,
+walmart_ca,sunflower_seeds_shelled_200g,"Sunflower seeds, shelled",200g,,,,(no candidate found),,
+walmart_ca,canola_oil_946ml,Canola oil,946ml,,,,(no candidate found),,
+walmart_ca,vegetable_oil_1_42l,Vegetable oil,1.42L,,,,(no candidate found),,
+walmart_ca,olive_oil_500ml,Olive oil,500ml,,,,(no candidate found),,
+walmart_ca,margarine_907g,"Margarine, soft",907g,,no,0.50,"Great Value, Ultra Soft Toilet Paper, 12 Double equal 24 rolls",7.94,/en/ip/Great-Value-Ultra-Soft-Toilet-Paper-12-Double-equal-24-rolls/10186201
+walmart_ca,salt_1kg,Table salt,1kg,,,,(no candidate found),,
+walmart_ca,black_pepper_ground_100g,"Black pepper, ground",100g,,no,0.33,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,black_pepper_ground_100g,"Black pepper, ground",100g,,no,0.33,"Great Value Frozen Lean Ground Beef, 3-Pack, 1092 g, 1.09kg",12.97,/en/ip/Great-Value-Frozen-Lean-Ground-Beef-3-Pack-1092-g-1-09kg/12503S20ZEAN
+walmart_ca,seasoning_all_purpose_250g,"Seasoning blend, all-purpose",250g,,no,0.25,"Great Value Frozen Sliced 3 Pepper Blend, 500 g",3.37,/en/ip/Great-Value-Frozen-Sliced-3-Pepper-Blend-500-g/6000199912167
+walmart_ca,seasoning_all_purpose_250g,"Seasoning blend, all-purpose",250g,,no,0.25,"Great Value 4 Berry Blend, 500 g, GV Frozen 4 Berry Blend",5.18,/en/ip/Great-Value-4-Berry-Blend-500-g-GV-Frozen-4-Berry-Blend/40BRV9VQC1J8
+walmart_ca,seasoning_salt_300g,Seasoned salt,300g,,,,(no candidate found),,
+walmart_ca,garlic_powder_100g,Garlic powder,100g,,,,(no candidate found),,
+walmart_ca,chili_powder_100g,Chili powder,100g,,,,(no candidate found),,
+walmart_ca,cumin_ground_60g,"Cumin, ground",60g,,no,0.50,"Great Value Frozen Lean Ground Beef, 3-Pack, 1092 g, 1.09kg",12.97,/en/ip/Great-Value-Frozen-Lean-Ground-Beef-3-Pack-1092-g-1-09kg/12503S20ZEAN
+walmart_ca,curry_powder_80g,Curry powder,80g,,,,(no candidate found),,
+walmart_ca,paprika_75g,Paprika,75g,,,,(no candidate found),,
+walmart_ca,italian_seasoning_30g,Italian seasoning,30g,,no,0.50,"Great Value Italian Style Bread, Source of 11 Essential Nutrients, 675 g",3.18,/en/ip/Great-Value-Italian-Style-Bread-Source-of-11-Essential-Nutrients-675-g/6000206630783
+walmart_ca,italian_seasoning_30g,Italian seasoning,30g,,no,0.50,"Great Value Chicken & Beef Italian-Style Meatballs Approximately 85 Pieces, GV CH BF Meatballs",9.98,/en/ip/Great-Value-Chicken-Beef-Italian-Style-Meatballs-Approximately-85-Pieces-GV-CH-BF-Meatballs/6TV08Z88MQEA
+walmart_ca,cinnamon_ground_75g,"Cinnamon, ground",75g,,no,0.50,"Great Value Frozen Lean Ground Beef, 3-Pack, 1092 g, 1.09kg",12.97,/en/ip/Great-Value-Frozen-Lean-Ground-Beef-3-Pack-1092-g-1-09kg/12503S20ZEAN
+walmart_ca,chili_flakes_50g,Crushed chili flakes,50g,,,,(no candidate found),,
+walmart_ca,ketchup_1l,Ketchup,1L,,,,(no candidate found),,
+walmart_ca,mustard_yellow_400ml,Yellow mustard,400ml,,,,(no candidate found),,
+walmart_ca,mayonnaise_890ml,Mayonnaise,890ml,,,,(no candidate found),,
+walmart_ca,hot_sauce_148ml,Hot sauce,148ml,,,,(no candidate found),,
+walmart_ca,pasta_sauce_tomato_650ml,"Pasta sauce, tomato basil",650ml,,no,0.25,Great Value Fusilli Pasta,1.97,/en/ip/Great-Value-Fusilli-Pasta/14EEGNOB0HF0
+walmart_ca,pasta_sauce_tomato_650ml,"Pasta sauce, tomato basil",650ml,,no,0.25,Great Value Spaghetti Pasta,1.97,/en/ip/Great-Value-Spaghetti-Pasta/2QV9LGU46RLX
+walmart_ca,salsa_medium_650ml,"Salsa, medium",650ml,,no,1.00,Great Value Medium Salsa,3.97,/en/ip/Great-Value-Medium-Salsa/5PU69C9IV04I
+walmart_ca,salsa_medium_650ml,"Salsa, medium",650ml,,no,0.50,Great Value Medium Cheddar Cheese Slices,4.98,/en/ip/Great-Value-Medium-Cheddar-Cheese-Slices/6000196142600
+walmart_ca,vinegar_white_1l,White vinegar,1L,,,,(no candidate found),,
+walmart_ca,bbq_sauce_425ml,BBQ sauce,425ml,,no,0.50,"Great Value Refrigerated BBQ Pork Back Ribs, 500 g",8.46,/en/ip/Great-Value-Refrigerated-BBQ-Pork-Back-Ribs-500-g/6000201562249
+walmart_ca,sugar_white_2kg,White sugar,2kg,,,,(no candidate found),,
+walmart_ca,brown_sugar_1kg,Brown sugar,1kg,,,,(no candidate found),,
+walmart_ca,baking_powder_225g,Baking powder,225g,,,,(no candidate found),,
+walmart_ca,honey_500g,Liquid honey,500g,,,,(no candidate found),,
+walmart_ca,vegetable_broth_900ml,"Vegetable broth, carton",900ml,,,,(no candidate found),,
+walmart_ca,vegetable_bouillon_cubes_12,Vegetable bouillon cubes,12 cubes,,,,(no candidate found),,
+walmart_ca,coconut_milk_400ml,"Coconut milk, canned",400ml,,,,(no candidate found),,

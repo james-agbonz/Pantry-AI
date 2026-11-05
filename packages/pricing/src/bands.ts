@@ -1,8 +1,8 @@
-import type { CostBand } from "@pantry/contract";
+import type { CostBand, Province } from "@pantry/contract";
 import { NO_DIET, type Diet, type Vocabulary } from "@pantry/vocabulary";
 import { itemOptions } from "./price";
 
-type Table = Pick<Vocabulary, "itemsFor" | "pricesFor" | "groupList">;
+type Table = Pick<Vocabulary, "itemsFor" | "pricesFor" | "groupList" | "stores">;
 
 /**
  * Each group's cost band (SPEC §7): its cheapest option under the diet on the
@@ -11,11 +11,11 @@ type Table = Pick<Vocabulary, "itemsFor" | "pricesFor" | "groupList">;
  * no price are left out. Ties rank by group id, so the bands never shift
  * between runs on the same table.
  */
-export function costBands(table: Table, on: string, diet: Diet = NO_DIET): Record<string, CostBand> {
+export function costBands(table: Table, on: string, diet: Diet = NO_DIET, province?: Province): Record<string, CostBand> {
   const priced = table
     .groupList(diet)
     .flatMap((g) => {
-      const cheapest = itemOptions(table, g.group, on, diet)[0];
+      const cheapest = itemOptions(table, g.group, on, diet, province)[0];
       return cheapest ? [{ group: g.group, cents: Math.round(cheapest.price * 100) }] : [];
     })
     .sort((a, b) => a.cents - b.cents || (a.group < b.group ? -1 : 1));

@@ -1,4 +1,4 @@
-import { Profile, type Condition, type Goal, type Limit, type Method } from "@pantry/contract";
+import { Profile, type Condition, type Goal, type Limit, type Method, type Province } from "@pantry/contract";
 
 /** Onboarding answers so far (SPEC §3). Every screen is required; each has a one-tap way through. */
 export interface Answers {
@@ -8,9 +8,11 @@ export interface Answers {
   limits_other: string[];
   appliances: Method[];
   servings: number;
+  /** `null`: not asked yet, or skipped; prices are Canada-wide. */
+  province: Province | null;
 }
 
-export const START: Answers = { goal: null, condition: null, limits: [], limits_other: [], appliances: [], servings: 1 };
+export const START: Answers = { goal: null, condition: null, limits: [], limits_other: [], appliances: [], servings: 1, province: null };
 
 export const SERVINGS = { min: 1, max: 12 } as const;
 
@@ -27,7 +29,8 @@ export type Action =
   | { type: "toggle_appliance"; method: Method }
   | { type: "typical_kitchen" }
   | { type: "no_appliances" }
-  | { type: "servings"; servings: number };
+  | { type: "servings"; servings: number }
+  | { type: "province"; province: Province | null };
 
 export function reduce(a: Answers, action: Action): Answers {
   switch (action.type) {
@@ -54,6 +57,8 @@ export function reduce(a: Answers, action: Action): Answers {
       return { ...a, appliances: [] };
     case "servings":
       return { ...a, servings: Math.min(SERVINGS.max, Math.max(SERVINGS.min, Math.round(action.servings))) };
+    case "province":
+      return { ...a, province: action.province };
   }
 }
 
@@ -71,6 +76,7 @@ export function toProfile(a: Answers): Profile {
     appliances: a.appliances,
     servings: a.servings,
     targets: null,
+    ...(a.province ? { province: a.province } : {}),
   });
 }
 

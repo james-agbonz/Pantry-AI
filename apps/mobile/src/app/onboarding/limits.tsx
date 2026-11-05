@@ -25,7 +25,7 @@ export default function Limits() {
     <Screen
       title="Anything you never eat?"
       intro="These are never in a meal, not even a pinch."
-      step="2 of 4"
+      step="2 of 5"
       back
       footer={
         <>

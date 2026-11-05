@@ -53,10 +53,18 @@ The top five hold about three-quarters of grocery sales ([The Packer](https://ww
    - Ask grocers for data once there are users.
    - Look at an Instacart "buy this list" link.
 
-## Decisions for you
+## Decided (2026-11-05)
 
-- [ ] **Regional prices in v1?** Yes means a SPEC change. Province only, or finer?
-- [ ] **How the app learns the province:** a picker, or the first letter of the postal code?
+- **Regional prices in v1: yes, by province.** A province screen in onboarding and Settings, skippable. StatCan provincial averages are imported (`statcan_provinces`).
+- **A weekly store collector, risk accepted by the owner.** Honest, polite, never works around blocking. Tested on 2026-11-05 with an identified collector:
+  - Walmart: a handful of product and browse pages were served, with prices. Building the product list (about 500 category pages at one every 4 s) was refused from the first page with **HTTP 412** (its bot check). So Walmart isn't collected either; its slot in the collector stays, in case that changes. Its terms bar automated collection anyway.
+  - Giant Tiger: Shopify's public product data, allowed by robots.txt. No clause on automated access found on its terms page (the page may not have rendered fully).
+  - No Frills, Real Canadian Superstore, Maxi (Loblaw), Food Basics, Super C (Metro), FreshCo (Sobeys): refused with HTTP 403, so they are not collected. The owner is finding another way for these.
+
+**First weekly run (2026-11-04):** Giant Tiger gave 90 prices, for 90 products checked by hand against our items (right product, right size). Items with a real price went from 63 to 111 of 196 (32% to 57%), and groups with no real price from 74 to 40. StatCan added 696 provincial prices.
+
+## Decisions for you (open)
+
 - [ ] **Project Hammer:** use it to check our numbers? Contact the maintainer first?
 - [ ] **Instacart link:** worth exploring?
 

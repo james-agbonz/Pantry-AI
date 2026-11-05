@@ -98,7 +98,8 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     images: API_URL ? httpImageSource(API_URL, deviceId, apiFetch) : mockImageSource(),
   }));
   const halal = profile?.limits.includes("halal") ?? false;
-  const pricer = useMemo(() => tablePricer(vocabulary, { halal }), [vocabulary, halal]);
+  const province = profile?.province;
+  const pricer = useMemo(() => tablePricer(vocabulary, { halal }, undefined, province), [vocabulary, halal, province]);
 
   useEffect(() => {
     AsyncStorage.getItem(COUNT_KEY)

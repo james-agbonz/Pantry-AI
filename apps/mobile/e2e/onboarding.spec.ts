@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { labelled, seed, text, watchErrors } from "./helpers";
 
-test("onboarding: four screens, saved, and skipped on the next launch", async ({ page }) => {
+test("onboarding: five screens, saved, and skipped on the next launch", async ({ page }) => {
   const errors = watchErrors(page);
   await seed(page, null);
   await page.goto("/");
@@ -20,13 +20,34 @@ test("onboarding: four screens, saved, and skipped on the next launch", async ({
 
   await expect(text(page, "Cooking for how many?")).toBeVisible();
   await labelled(page, "More").click();
+  await text(page, "Next").click();
+
+  await expect(text(page, "Where do you shop?")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Done", exact: true }).locator("visible=true")).toBeDisabled();
+  await text(page, "Ontario").click();
   await text(page, "Done").click();
 
   await expect(text(page, "What's in the fridge?")).toBeVisible();
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("pantry.profile.v1")!));
-  expect(saved).toMatchObject({ goal: "cut", limits: ["halal"], limits_other: ["cilantro"], appliances: ["stove", "fridge", "microwave"], servings: 2, targets: null });
+  expect(saved).toMatchObject({ goal: "cut", limits: ["halal"], limits_other: ["cilantro"], appliances: ["stove", "fridge", "microwave"], servings: 2, targets: null, province: "ON" });
 
   await page.reload();
   await expect(text(page, "What's in the fridge?")).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test("onboarding: skipping the province keeps prices Canada-wide", async ({ page }) => {
+  const errors = watchErrors(page);
+  await seed(page, null);
+  await page.goto("/");
+  await expect(text(page, "What's the goal?")).toBeVisible({ timeout: 60_000 });
+  await text(page, "Eat well on little").click();
+  await text(page, "No limits").click();
+  await text(page, "Stove, fridge and microwave").click();
+  await text(page, "Next").click();
+  await text(page, "Skip, use Canada-wide prices").click();
+  await expect(text(page, "What's in the fridge?")).toBeVisible();
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("pantry.profile.v1")!));
+  expect(saved).not.toHaveProperty("province");
   expect(errors).toEqual([]);
 });

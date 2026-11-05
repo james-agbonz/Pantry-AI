@@ -7,12 +7,14 @@
 import { vocabulary } from "@pantry/vocabulary";
 import type { Price } from "@pantry/vocabulary";
 import { buildTable } from "./build";
-import { PATHS, readManualFile, readMap, readStores, readTable, today, writeManualFile, writeTable } from "./files";
+import { PATHS, readManualFile, readMap, readStoreMap, readStores, readTable, today, writeManualFile, writeTable } from "./files";
 import { manualRows } from "./rank";
 import { report } from "./report";
 import type { PriceSourceAdapter } from "./sources/adapter";
 import { manualSource } from "./sources/manual";
-import { statcanSource } from "./sources/statcan";
+import { statcanProvincesSource, statcanSource } from "./sources/statcan";
+import { storeSource } from "./sources/store";
+import { politeClient } from "./web";
 
 const args = process.argv.slice(2);
 const dryRun = args.includes("--dry-run");
@@ -26,9 +28,14 @@ const manual = readManualFile(publishDate, new Set(stores.map((s) => s.id)));
 // Price sources are adapters, picked from config like the model provider.
 const available: Record<string, () => PriceSourceAdapter> = {
   statcan: () => statcanSource(readMap().items),
+  statcan_provinces: () => statcanProvincesSource(readMap().items),
   manual: () => manualSource(manual.prices),
+  // The weekly store collector (docs/PRICE-SOURCES.md): polite, identified, stops when refused.
+  walmart_ca: () => storeSource("walmart_ca", readStoreMap().stores.walmart_ca, web),
+  gianttiger_ca: () => storeSource("gianttiger_ca", readStoreMap().stores.gianttiger_ca, web),
 };
-const wanted = (process.env.PRICE_SOURCES ?? "statcan,manual").split(",").map((s) => s.trim()).filter(Boolean);
+const web = politeClient();
+const wanted = (process.env.PRICE_SOURCES ?? "statcan,statcan_provinces,manual").split(",").map((s) => s.trim()).filter(Boolean);
 const unknown = wanted.filter((w) => !available[w]);
 if (unknown.length) throw new Error(`PRICE_SOURCES names unknown source(s): ${unknown.join(", ")}. Known: ${Object.keys(available).join(", ")}`);
 

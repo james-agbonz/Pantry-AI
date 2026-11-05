@@ -307,3 +307,45 @@ describe("costBands", () => {
     expect(costBands(vocabulary, ON)).toHaveProperty("bacon");
   });
 });
+
+describe("regional prices (province)", () => {
+  // White fish: national average $7.49 (pollock); Ontario average $9.49; a BC-only store $6.99; an online store $8.25 everywhere.
+  // Basa leaves the table here so pollock is the only white fish.
+  const regional = table.withTable({
+    ...tableData,
+    version: "2026-11-05",
+    stores: [
+      ...tableData.stores,
+      { id: "statcan_on", name: "Typical price, Ontario", kind: "average", provinces: ["ON"] },
+      { id: "bc_shop", name: "A BC shop", kind: "store", provinces: ["BC"] },
+      { id: "online", name: "Online shop", kind: "store" },
+    ],
+    items: tableData.items.filter((i) => i.id !== "basa"),
+    prices: [
+      ...tableData.prices.filter((p) => p.item !== "basa"),
+      price("pollock", 9.49, { store: "statcan_on" }),
+      price("pollock", 6.99, { store: "bc_shop", source: "store" }),
+      price("pollock", 8.25, { store: "online", source: "store" }),
+    ],
+  });
+  const fish = (province?: "ON" | "BC" | "QC") => itemOptions(regional, "white_fish", ON, undefined, province).map((o) => `${o.store} ${o.price}`);
+
+  it("without a province, only prices that apply everywhere", () => {
+    expect(fish()).toEqual(["ca_typical 7.49", "online 8.25"]);
+  });
+
+  it("a provincial average replaces the national one, so Ontario never gets the cheaper national figure", () => {
+    expect(fish("ON")).toEqual(["online 8.25", "statcan_on 9.49"]);
+  });
+
+  it("a store with provinces applies only there; elsewhere the national average stays", () => {
+    expect(fish("BC")).toEqual(["bc_shop 6.99", "ca_typical 7.49", "online 8.25"]);
+    expect(fish("QC")).toEqual(["ca_typical 7.49", "online 8.25"]);
+  });
+
+  it("priceCard prices with the province's options", () => {
+    const c = card([{ group: "white_fish", qty: "300g", role: "needed" }]);
+    expect(priceCard(c, 15, regional, { on: ON, province: "ON" }).buy[0]).toMatchObject({ price: 8.25, store: "online" });
+    expect(priceCard(c, 15, regional, { on: ON, province: "BC" }).buy[0]).toMatchObject({ price: 6.99, store: "bc_shop" });
+  });
+});

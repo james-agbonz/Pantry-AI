@@ -20,6 +20,9 @@
     "e2e": "npm run e2e -w @pantry/mobile",
     "prices:import": "npm run import -w @pantry/price-tools --",
     "prices:template": "npm run template -w @pantry/price-tools",
+    "prices:find": "npm run find -w @pantry/price-tools --",
+    "prices:pick": "npm run pick -w @pantry/price-tools",
+    "prices:weekly": "npm run weekly -w @pantry/price-tools --",
     "e2e:api": "npm run e2e:api -w @pantry/mobile"
   },
   "allowScripts": {

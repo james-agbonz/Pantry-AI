@@ -1,6 +1,6 @@
 import type { Price } from "@pantry/vocabulary";
 import type { MapEntry, SeriesPoint } from "../map";
-import { fetchLatest } from "../statcan";
+import { fetchLatest, fetchProvinces, type PricedProvince, type ProvincePoint } from "../statcan";
 import type { PriceSourceAdapter } from "./adapter";
 
 const round2 = (n: number) => Math.round(n * 100) / 100;
@@ -28,6 +28,32 @@ export function statcanSource(map: Record<string, MapEntry>, fetchSeries = fetch
     async load() {
       const series = await fetchSeries(Object.values(map).map((e) => e.vector));
       return statcanRecords(map, series);
+    },
+  };
+}
+
+/** The provincial average store for a province: `statcan_on`, "Typical price, Ontario". */
+export const provinceStore = (p: PricedProvince) => `statcan_${p.toLowerCase()}`;
+
+/** This month's provincial figures as typical prices at each province's average store. No figure, no record. */
+export function provinceRecords(map: Record<string, MapEntry>, points: readonly ProvincePoint[]): Price[] {
+  const byVector = new Map<number, ProvincePoint[]>();
+  for (const p of points) byVector.set(p.vector, [...(byVector.get(p.vector) ?? []), p]);
+  return Object.entries(map).flatMap(([item, entry]) =>
+    (byVector.get(entry.vector) ?? []).flatMap((p): Price[] => {
+      if (p.value === null || !(p.value > 0)) return [];
+      const regular = entry.basis === "exact" ? p.value : p.value * entry.kg;
+      return [{ item, store: provinceStore(p.province), regular: round2(regular), sale: null, source: "statcan", updated: p.period.slice(0, 10) }];
+    }),
+  );
+}
+
+/** PRICE_SOURCES=statcan_provinces: the same mapped items, priced per province. */
+export function statcanProvincesSource(map: Record<string, MapEntry>, fetchPoints = fetchProvinces): PriceSourceAdapter {
+  return {
+    id: "statcan_provinces",
+    async load() {
+      return provinceRecords(map, await fetchPoints(Object.values(map).map((e) => e.vector)));
     },
   };
 }

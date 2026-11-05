@@ -45,14 +45,18 @@ describe("shopping list", () => {
 });
 
 describe("swapping an item", () => {
-  it("offers the group's items cheapest first, and the total follows the pick", () => {
+  it("offers the group's items real prices first, each cheapest first, and the total follows the pick", () => {
     const opts = pricer.options("white_fish");
     expect(opts.length).toBeGreaterThan(1);
-    expect(opts.map((o) => o.price)).toEqual([...opts.map((o) => o.price)].sort((a, b) => a - b));
+    const sorted = (xs: number[]) => xs.join() === [...xs].sort((a, b) => a - b).join();
+    const real = opts.filter((o) => !o.placeholder).map((o) => o.price);
+    const sample = opts.filter((o) => o.placeholder).map((o) => o.price);
+    expect(opts.map((o) => o.placeholder)).toEqual([...real.map(() => false), ...sample.map(() => true)]);
+    expect(sorted(real) && sorted(sample)).toBe(true);
     const cheapest = pricer.price(fish, 50);
     const swapped = pricer.price(fish, 50, { white_fish: opts.at(-1)!.id });
     expect(swapped.total).toBeCloseTo(cheapest.total + opts.at(-1)!.price - opts[0]!.price, 2);
-    expect(opts.at(-1)!.price).toBeGreaterThan(opts[0]!.price);
+    expect(opts.at(-1)!.id).not.toBe(opts[0]!.id);
     expect(swapped.buy.find((b) => b.group === "white_fish")?.item).toBe(opts.at(-1)!.name);
   });
 

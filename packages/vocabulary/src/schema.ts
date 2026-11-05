@@ -1,3 +1,4 @@
+import { Province } from "@pantry/contract";
 import { z } from "zod";
 
 /**
@@ -76,6 +77,11 @@ export const Store = z.strictObject({
   name: z.string().min(1),
   kind: z.enum(["average", "store"]),
   region: z.string().min(1).optional(),
+  /**
+   * Provinces the store's prices apply in. Absent: everywhere (the national
+   * average, online stores). A provincial average beats the national one.
+   */
+  provinces: z.array(Province).min(1).optional(),
 });
 export type Store = z.infer<typeof Store>;
 

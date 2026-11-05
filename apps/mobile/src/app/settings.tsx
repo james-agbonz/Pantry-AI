@@ -9,7 +9,7 @@ import { Num, T } from "@/components/Text";
 import { whole } from "@/format";
 import { reduce, SERVINGS } from "@/onboarding/answers";
 import { APPLIANCE_ICONS } from "@/onboarding/icons";
-import { APPLIANCES, CONDITION_LABEL, CONDITIONS, GOALS, LIMITS } from "@/onboarding/options";
+import { APPLIANCES, CONDITION_LABEL, CONDITIONS, GOALS, LIMITS, PROVINCES } from "@/onboarding/options";
 import { applySettings, fromProfile, isDirty } from "@/settings/apply";
 import { useProfile } from "@/state/profile";
 import { space } from "@/theme";
@@ -157,6 +157,17 @@ function SettingsForm({ note, setNote }: { note: string | null; setNote: (n: str
           unit={answers.servings === 1 ? "person" : "people"}
           onChange={(n) => dispatch({ type: "servings", servings: n })}
         />
+      </Section>
+
+      <Section title="Where you shop">
+        <T variant="body-sm" tone="muted">
+          Prices are for this province. Without one, they're Canada-wide.
+        </T>
+        <View style={styles.wrap}>
+          {PROVINCES.map((p) => (
+            <Chip key={p.province} label={p.label} selected={answers.province === p.province} onPress={() => dispatch({ type: "province", province: answers.province === p.province ? null : p.province })} />
+          ))}
+        </View>
       </Section>
 
       <Section title="Help">

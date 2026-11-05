@@ -163,7 +163,7 @@ describe("mock data", () => {
     const order = deck.map((p) => rank[badgeFor(p.pricing).status]);
     expect(order).toEqual([...order].sort());
     // Sample exactly when a line's group has no real price yet; otherwise dated.
-    for (const p of deck) expect(p.pricing.as_of).toBe(p.pricing.placeholder ? null : "2026-07");
+    for (const p of deck) expect(p.pricing.as_of).toEqual(p.pricing.placeholder ? null : expect.stringMatching(/^\d{4}-\d{2}$/));
   });
 
   it("reports the four stages in order, once each", async () => {

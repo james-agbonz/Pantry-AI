@@ -19,7 +19,7 @@ describe("dealPricedDeck", () => {
       expect(pricing.budget).toBe(12);
       const lines = [...pricing.buy, ...pricing.to_complete];
       expect(pricing.placeholder).toBe(lines.some((l) => !realGroup(l.group)));
-      expect(pricing.as_of).toBe(pricing.placeholder ? null : "2026-07");
+      expect(pricing.as_of).toEqual(pricing.placeholder ? null : expect.stringMatching(/^\d{4}-\d{2}$/));
     }
     // Step 7 made some whole cards real (the tuna salad: tuna, mayonnaise, cucumber).
     expect(deal.cards.some((c) => !c.pricing.placeholder)).toBe(true);

@@ -26,10 +26,11 @@ Every screen is required, and each has a one-tap way through.
 | 2 | Hard limits (many) | Halal · Vegetarian · No pork · No dairy · Nuts · Gluten · None, plus free text |
 | 3 | Appliances (many) | A kitchen illustration; tap to highlight: stove/hotplate · oven · microwave · fridge · freezer · kettle · blender · air fryer · rice cooker/slow cooker. Knife, pan, bowl and plate are assumed |
 | 4 | Cooking for | Defaults to 1 |
+| 5 | Where you shop | Province or territory (13). Skip keeps prices Canada-wide. Only the province is asked, never a city, postal code or location, and it stays on the phone (sent with each deck request for pricing) |
 
 **Body stats** — asked after the first meal is selected, only for cut, bulk or condition, and required for those goals: height, weight, age, sex, activity level, target weight. Only target weight may be left blank. Eat well never asks, so its `targets` stay `null`. They're asked right after the first meal is picked, before its meal screen opens, with no skip. Only the resulting targets are kept. They can be entered in cm and kg or in feet, inches and pounds, and are always stored metric; a number outside a plausible adult range is named with that range, in the units on screen.
 
-**Settings** — edit goal, hard limits, appliances and cooking for with the onboarding controls, and "Redo my numbers" to enter body stats again. Changing the goal or condition clears the targets, since they were worked out for the old goal. Their only job is computing daily needs (section 8).
+**Settings** — edit goal, hard limits, appliances, cooking for and province with the onboarding controls, and "Redo my numbers" to enter body stats again. Changing the goal or condition clears the targets, since they were worked out for the old goal. Their only job is computing daily needs (section 8).
 
 ## 4. Home
 
@@ -194,6 +195,7 @@ Output becomes `targets`. No body stats (Eat well, or before the first meal) →
 - `needed` alone over budget → the card still shows with `over_by`. Never hidden, never blocked.
 - Tax is ignored: basic groceries are zero-rated in Canada.
 - Every figure displays with `~`, and each money screen says once where the prices stand: "Typical prices, July 2026" (the month of the oldest price on the card, `as_of`, since StatCan runs a couple of months behind). While any price on a card is a placeholder (`"placeholder": true`), it says instead that they're sample prices for testing, not real: invented numbers are never called typical.
+- **Regional prices.** With a province, the prices that apply there are used: stores with no province list (the national average, online stores) everywhere, stores with a list only in those provinces. A provincial StatCan average replaces the national one for that item, so a dearer province never gets the cheaper national figure. Without a province, only the prices that apply everywhere. Nunavut has no StatCan figures and uses the national ones. Cost bands for the engine (§7) follow the same rule.
 - Within a group, a real price always beats a placeholder, however cheap; a placeholder is used only when the group has no real price. Money is added up in whole cents. Among items at the same price, the lowest item id wins, so results never shift between runs.
 
 ## 10. The deck
@@ -254,9 +256,9 @@ Charge for what costs money to run, never for what the user needs.
 - Package size versus recipe amount — the minimum sellable unit is the price
 - Pantry memory between sessions — only what the user has right now
 - Unit conversion — the client's job
-- Regional price differences
+- Prices finer than a province (a city, a branch)
 - Batch cooking
-- Store APIs and per-store prices
+- Store APIs; per-branch prices (stores are read online, at each site's default prices)
 
 ## 16. Architecture
 
@@ -277,7 +279,8 @@ Prices and items change monthly; groups never do. So the price table is versione
 - **One table, versioned by publish date.** `{ "schema": 2, "version": "2026-09-25", "stores": [...], "items": [...], "prices": [...] }` (§6). The version is the day the table was published (`YYYY-MM-DD`), so a later table always compares as newer. The placeholder table is `2026-09-01`. Every item must have a price; a table that doesn't fit the groups is refused, naming the problem.
 - **The app fetches it** from the backend (`GET /api/prices`, suggested) and caches the last good copy. A copy is bundled with the app as the fallback. Order of preference: a freshly fetched table that checks out; else the cached one if it's at least as new as the bundled one; else the bundled one. A monthly refresh reaches phones without an app release.
 - **One pricing module** (`@pantry/pricing`) runs on the server for decks and on the phone for swaps, over whichever table is in use. It prices on a given day (the phone's local date), so a sale stops applying the day after it ends, even from a cached table. A real price at any store beats a placeholder; otherwise the cheapest price on the day wins, and each line names its store.
-- **Price sources are adapters** (`tools/prices`): StatCan, the manual CSV, later one per store (official APIs, feeds or licensed data only; never around bot detection), chosen by `PRICE_SOURCES` like `LLM_PROVIDER`. The monthly import merges them and refuses two prices for one item at one store.
+- **Price sources are adapters** (`tools/prices`), chosen by `PRICE_SOURCES` like `LLM_PROVIDER`: StatCan national (`statcan`) and provincial (`statcan_provinces`), the manual CSV (`manual`), and the weekly store collector (`walmart_ca`, `gianttiger_ca`). The import merges them and refuses two prices for one item at one store. Run weekly with `npm run prices:weekly`.
+- **The store collector** reads each store's online prices for the products a person has matched to our items (`store-map.json`, via `prices:find` and `prices:pick`; only the item's own size, halal only for halal items). It identifies itself as `PantryPriceBot` (plus `PRICE_BOT_CONTACT`), keeps out of what robots.txt disallows, waits between requests, and stops at a site's first refusal. It never disguises itself or works around blocking. Walmart's terms bar automated collection; the owner accepted that risk (docs/PRICE-SOURCES.md). A sale it sees is trusted for 6 days, so a missed week falls back to the regular price.
 - **Where the table lives:** the Worker serves the table bundled with it, so a monthly refresh is a data commit and a backend redeploy, and no app release.
 
 ### API (Cloudflare Worker)

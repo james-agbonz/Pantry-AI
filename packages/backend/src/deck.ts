@@ -29,10 +29,12 @@ export async function dealPricedDeck(
 
   // Cost bands from the same table and day the cards are priced on, so the
   // model's sense of cheap matches the prices the user sees.
-  const deal = await dealDeck(input, diet, { ...engineOpts, vocabulary, bands: costBands(vocabulary, on, diet) });
+  const deal = await dealDeck(input, diet, { ...engineOpts, vocabulary, bands: costBands(vocabulary, on, diet, profile.province) });
   onStage?.("building");
 
-  const priced = deal.cards.map((card) => ({ card, pricing: priceCard(card, input.budget, vocabulary, { diet, on }) }));
+  // Regional prices when the profile names a province (SPEC §9).
+  const region = profile.province ? { province: profile.province } : {};
+  const priced = deal.cards.map((card) => ({ card, pricing: priceCard(card, input.budget, vocabulary, { diet, on, ...region }) }));
   onStage?.("pricing");
 
   const cards = sortDeck(priced, input.targets);

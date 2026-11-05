@@ -31,7 +31,7 @@ export const mockDeckSource = (getVocabulary: () => Vocabulary, buildMs = 900): 
     onStage?.("building");
 
     const vocabulary = getVocabulary();
-    const priced = pick.map((c) => ({ card: { ...c, id: `mock-${nextId++}` }, pricing: priceCard(c, session.budget, vocabulary, { diet, on: dayKey(new Date()) }) }));
+    const priced = pick.map((c) => ({ card: { ...c, id: `mock-${nextId++}` }, pricing: priceCard(c, session.budget, vocabulary, { diet, on: dayKey(new Date()), ...(profile.province ? { province: profile.province } : {}) }) }));
     onStage?.("pricing");
 
     const sorted = sortDeck(priced, profile.targets);

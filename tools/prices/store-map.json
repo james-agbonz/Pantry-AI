@@ -1,0 +1,368 @@
+{
+  "_about": "Which product each item is at each collector store, picked and checked by a person: npm run prices:find proposes candidates into store-candidates.csv, you mark the right one with x in the pick column, and npm run prices:pick copies it here. Only pick a product of the item's own size (the price is for the whole unit) and, for halal items, a halal-certified one. ref is the Walmart product page path or the Giant Tiger product handle.",
+  "stores": {
+    "walmart_ca": {},
+    "gianttiger_ca": {
+      "rice_white_900g": {
+        "ref": "dainty-royal-rice-900-g",
+        "product": "Dainty Royal Rice, 900-g"
+      },
+      "spaghetti_900g": {
+        "ref": "giant-value-spaghetti-pasta-900-g",
+        "product": "Giant Value Spaghetti Pasta, 900 g"
+      },
+      "penne_900g": {
+        "ref": "giant-value-penne-rigate-pasta-900-g",
+        "product": "Giant Value Penne Rigate Pasta, 900 g"
+      },
+      "macaroni_900g": {
+        "ref": "giant-value-elbow-macaroni-pasta-900-g",
+        "product": "Giant Value Elbow Macaroni Pasta, 900 g"
+      },
+      "ramen_single_85g": {
+        "ref": "mr-noodles-instant-noodles-chicken-simulated-flavour-85g-1",
+        "product": "Mr. Noodles Instant Noodles Chicken Simulated Flavour - 85g"
+      },
+      "ramen_5pk": {
+        "ref": "wingsfood-mi-sedaap-instant-noodles-450-g-5-pack",
+        "product": "Wingsfood Mi Sedaap Instant Noodles, 5-Pack"
+      },
+      "oats_quick_1kg": {
+        "ref": "giant-value-quick-oats-1kg-2",
+        "product": "Giant Value Quick Oats, 1 kg"
+      },
+      "oats_large_flake_1kg": {
+        "ref": "giant-value-large-flake-oats-1-kg",
+        "product": "Giant Value Large Flake Oats, 1 kg"
+      },
+      "flour_ap_2_5kg": {
+        "ref": "giant-value-all-purpose-flour-2-5-kg",
+        "product": "Giant Value All Purpose Flour, 2.5 kg"
+      },
+      "bread_white_675g": {
+        "ref": "ditaliano-original-thick-sliced-white-bread-675g-1",
+        "product": "D'Italiano Original Thick Sliced White Bread -  675g"
+      },
+      "bread_ww_675g": {
+        "ref": "ditaliano-100-whole-wheat-thick-sliced-bread-675g-1",
+        "product": "D'Italiano 100% Whole Wheat Thick Sliced Bread - 675g"
+      },
+      "tortillas_ww_10pk": {
+        "ref": "casa-mendosa-whole-wheat-triple-baked-tortillas-10pk-340g-1",
+        "product": "Casa Mendosa Whole Wheat  Triple Baked Tortillas 10pk - 340g"
+      },
+      "pita_6pk": {
+        "ref": "boulangerie-hannas-original-white-pita-6-pack-225-g-1",
+        "product": "Boulangerie Hanna's Original White Pita, 6-Pack, 225-g"
+      },
+      "buns_hamburger_8pk": {
+        "ref": "wonder-classics-limited-edition-ballpark-hamburger-buns-8pk-560g-1",
+        "product": "Wonder Ballpark Classics Hamburger Buns, 8-Pack, 560 g"
+      },
+      "bagels_6pk": {
+        "ref": "giant-value-plain-bagels-510-g",
+        "product": "Giant Value Plain Bagels, 6-Pack, 510 g"
+      },
+      "crackers_saltine_450g": {
+        "ref": "christie-premium-plus-salted-tops-crackers-450g-1",
+        "product": "Christie Premium Plus Salted Tops Crackers - 450g"
+      },
+      "black_beans_can_540ml": {
+        "ref": "primo-black-beans-540ml-1",
+        "product": "Primo Black Beans, 540ml"
+      },
+      "black_beans_dry_900g": {
+        "ref": "clic-black-turtle-beans-907-g",
+        "product": "Clic Black Turtle Beans, 907 g"
+      },
+      "kidney_beans_can_540ml": {
+        "ref": "primo-red-kidney-beans-540ml-1",
+        "product": "Primo Red Kidney Beans - 540ml"
+      },
+      "white_kidney_can_540ml": {
+        "ref": "primo-white-kidney-cannellini-beans-540ml-1",
+        "product": "Primo White Kidney Cannellini Beans - 540ml"
+      },
+      "navy_beans_dry_900g": {
+        "ref": "clic-white-navy-beans-907-g",
+        "product": "Clic White Navy Beans, 907 g"
+      },
+      "chickpeas_dry_900g": {
+        "ref": "clic-chickpeas-907-g",
+        "product": "Clic Chickpeas, 907 g"
+      },
+      "lentils_green_900g": {
+        "ref": "clic-laird-green-lentils-907-g",
+        "product": "Clic Laird Green Lentils, 907 g"
+      },
+      "baked_beans_tomato_398ml": {
+        "ref": "giant-value-baked-beans-in-tomato-sauce-398-ml",
+        "product": "Giant Value Baked Beans in Tomato Sauce, 398 ml"
+      },
+      "split_peas_yellow_900g": {
+        "ref": "clic-yellow-split-peas-907-g",
+        "product": "Clic Yellow Split Peas, 907 g"
+      },
+      "potato_russet_5lb": {
+        "ref": "white-mini-potatoes-5-lb-1",
+        "product": "Russet Potatoes, 5-lb"
+      },
+      "potato_russet_10lb": {
+        "ref": "russet-potatoes-poly-bag-10-lb-1",
+        "product": "Russet Potatoes, 10-lb."
+      },
+      "potato_yellow_5lb": {
+        "ref": "yellow-potatoes-5lb-3",
+        "product": "Yellow Potatoes - 5lb."
+      },
+      "sweet_potato_3lb": {
+        "ref": "sweet-potatoes-3lb-2",
+        "product": "Sweet Potatoes - 3lb."
+      },
+      "carrots_2lb": {
+        "ref": "carrots-2lb",
+        "product": "Carrots, 2 lb"
+      },
+      "tomatoes_diced_796ml": {
+        "ref": "giant-value-diced-tomatoes-796-ml-1",
+        "product": "Giant Value Diced Tomatoes, 796 ml"
+      },
+      "tomatoes_crushed_796ml": {
+        "ref": "primo-crushed-tomatoes-796ml",
+        "product": "Primo Crushed Tomatoes - 796ml"
+      },
+      "tomatoes_whole_796ml": {
+        "ref": "giant-value-whole-tomatoes-796-ml-1",
+        "product": "Giant Value Whole Tomatoes, 796 ml"
+      },
+      "tomato_paste_156ml": {
+        "ref": "primo-tomato-paste-156ml-3",
+        "product": "Primo Tomato Paste, 156 ml"
+      },
+      "lettuce_romaine_3pk": {
+        "ref": "lettuce-romaine-cello-24",
+        "product": "Romaine Lettuce Hearts, 3-Pack"
+      },
+      "spinach_baby_142g": {
+        "ref": "baby-spinach-141-g",
+        "product": "Baby Spinach, 141-g"
+      },
+      "broccoli_frozen_500g": {
+        "ref": "giant-value-frozen-broccoli-florets-500-g",
+        "product": "Giant Value Frozen Broccoli Florets, 500 g"
+      },
+      "mushrooms_white_227g": {
+        "ref": "white-mushrooms-227g-1",
+        "product": "White Mushrooms - 227g"
+      },
+      "corn_kernel_can_341ml": {
+        "ref": "giant-value-whole-kernel-corn-341-ml",
+        "product": "Giant Value Whole Kernel Corn, 341 ml"
+      },
+      "corn_frozen_750g": {
+        "ref": "giant-value-super-sweet-frozen-corn-750g-3",
+        "product": "Giant Value Super Sweet Frozen Corn - 750g"
+      },
+      "frozen_mixed_veg_750g": {
+        "ref": "giant-value-frozen-mixed-vegetables-750g-3",
+        "product": "Giant Value Frozen Mixed Vegetables, 750 g"
+      },
+      "frozen_peas_750g": {
+        "ref": "giant-value-frozen-peas-750g-3",
+        "product": "Giant Value Frozen Peas - 750g"
+      },
+      "apple_3lb": {
+        "ref": "macintosh-apples-3-lb-1",
+        "product": "Macintosh Apples, 3-lb"
+      },
+      "berries_mixed_frozen_600g": {
+        "ref": "giant-tiger-marche-frozen-4-berry-blend-600-g",
+        "product": "Giant Tiger Marché Frozen 4-Berry Blend, 600-g"
+      },
+      "peaches_can_398ml": {
+        "ref": "del-monte-sliced-peaches-in-water-398-ml-1",
+        "product": "Del Monte Sliced Peaches in Water, 398-ml"
+      },
+      "fruit_cocktail_398ml": {
+        "ref": "del-monte-fruit-cocktail-398ml-1",
+        "product": "Del Monte Fruit Cocktail, 398 ml"
+      },
+      "milk_2pct_1l": {
+        "ref": "adl-partly-skimmed-milk-2-m-f-1l-1",
+        "product": "ADL Partly Skimmed Milk 2% M.F. - 1L"
+      },
+      "milk_2pct_2l": {
+        "ref": "beatrice-fresh-partly-skimmed-milk-2-m-f-2l-5",
+        "product": "Beatrice Fresh Partly Skimmed Milk 2% M.F. - 2L"
+      },
+      "milk_2pct_4l": {
+        "ref": "laiterie-de-loutaouais-2-m-f-partly-skimmed-milk-4-l",
+        "product": "Laiterie de l'Outaouais 2% M.F. Partly Skimmed Milk, 4-L"
+      },
+      "cheddar_400g": {
+        "ref": "ptit-quebec-very-mild-cheddar-34-m-f-cheese-400-g-1",
+        "product": "P'tit Québec Very Mild Cheddar 34 % M.F Cheese, 400-g"
+      },
+      "mozzarella_400g": {
+        "ref": "giant-value-mozzarella-cheese-400g",
+        "product": "Giant Value Cheese Mozzarella 27% M.F., 400 g"
+      },
+      "parmesan_grated_250g": {
+        "ref": "kraft-grated-parmesan-cheese-250-g",
+        "product": "Kraft Grated Parmesan Cheese, 250 g"
+      },
+      "butter_454g": {
+        "ref": "giant-value-salted-butter-454-g",
+        "product": "Giant Value Salted Butter, 454 g"
+      },
+      "sour_cream_500ml": {
+        "ref": "beatrice-light-sour-cream-5-m-f-500ml-3",
+        "product": "Beatrice Light Sour Cream 5 % M.F. - 500 ml"
+      },
+      "eggs_large_12": {
+        "ref": "burnbrae-farms-large-eggs-12-pack-8",
+        "product": "Burnbrae Farms Large Eggs, 12-Pack"
+      },
+      "eggs_large_18": {
+        "ref": "oeufs-famiale-18",
+        "product": "Nutri Large White Eggs, 18-Pack"
+      },
+      "eggs_large_30": {
+        "ref": "burnbrae-farms-large-white-eggs-30-pack-2",
+        "product": "Burnbrae Farms Large White Eggs, 30-Pack"
+      },
+      "chicken_drumsticks_1kg": {
+        "ref": "drumsticks-1-kg-1",
+        "product": "Chicken Drumsticks, 1 kg"
+      },
+      "chicken_broth_900ml": {
+        "ref": "campbells-no-salt-added-chicken-broth-900ml-1",
+        "product": "Campbell's No Salt Added Chicken Broth - 900ml"
+      },
+      "ground_beef_lean_454g": {
+        "ref": "lean-ground-beef-chub-454-g-1",
+        "product": "Lean Ground Beef Chub, 454-g"
+      },
+      "beef_broth_900ml": {
+        "ref": "campbells-beef-broth-900-ml-2",
+        "product": "Campbell's Beef Broth, 900-ml"
+      },
+      "pork_chops_bone_in_700g": {
+        "ref": "bone-in-pork-chop-680-g",
+        "product": "Bone-In Pork Chop, 680 g"
+      },
+      "bacon_375g": {
+        "ref": "schneiders-sliced-bacon-375-g",
+        "product": "Schneiders Sliced Bacon, 375 g"
+      },
+      "pork_sausage_500g": {
+        "ref": "johnsonville-pure-pork-mild-italian-sausages-500-g-1",
+        "product": "Johnsonville Pure Pork Mild Italian Sausages, 500-g"
+      },
+      "pollock_frozen_454g": {
+        "ref": "oc-ancharm-pollock-fillets-454-g",
+        "product": "OC Ancharm Pollock Fillets, 454 g"
+      },
+      "tuna_flaked_light_170g": {
+        "ref": "giant-value-flaked-light-tuna-170g-1",
+        "product": "Giant Value Flaked Light Tuna, 170 g"
+      },
+      "tuna_chunk_light_170g": {
+        "ref": "clover-leaf-chunk-light-tuna-skipjack-in-water-170g",
+        "product": "Clover Leaf Chunk Light Tuna Skipjack in Water - 170g"
+      },
+      "salmon_pink_can_213g": {
+        "ref": "gold-seal-wild-pink-salmon-213-g-1",
+        "product": "Gold Seal Wild Pink Salmon, 213 g"
+      },
+      "sardines_106g": {
+        "ref": "brunswick-sardines-soya-oil-106-g",
+        "product": "Brunswick Sardines Soya Oil, 106 g"
+      },
+      "shrimp_cooked_frozen_340g": {
+        "ref": "cooked-shrimp-340g-1",
+        "product": "Cooked Shrimp, 340g"
+      },
+      "soy_milk_1_89l": {
+        "ref": "silk-original-organic-soy-fortified-soy-beverage-1-89-l-1",
+        "product": "Silk Fortified Soy Beverage Original, 1.89 L"
+      },
+      "peanut_butter_smooth_1kg": {
+        "ref": "planters-smooth-peanut-butter-1kg-1",
+        "product": "Planters Smooth Peanut Butter - 1kg"
+      },
+      "peanut_butter_crunchy_1kg": {
+        "ref": "planters-crunchy-peanut-butter-1kg-1",
+        "product": "Planters Crunchy Peanut Butter - 1kg"
+      },
+      "canola_oil_946ml": {
+        "ref": "giant-value-canola-oil-946ml-1",
+        "product": "Giant Value Canola Oil, 946 ml"
+      },
+      "olive_oil_500ml": {
+        "ref": "terra-delyssa-first-cold-press-extra-virgin-olive-oil-smooth-500-ml",
+        "product": "Terra Delyssa First Cold Press Extra Virgin Olive Oil Smooth, 500 ml"
+      },
+      "margarine_907g": {
+        "ref": "giant-value-68-vegetable-oil-margarine-907-g",
+        "product": "Giant Value 68% Vegetable Oil Margarine, 907-g"
+      },
+      "salt_1kg": {
+        "ref": "windsor-iodized-table-salt-1-kg",
+        "product": "Windsor Iodized Table Salt, 1 kg"
+      },
+      "ketchup_1l": {
+        "ref": "giant-value-tomato-ketchup-1-l",
+        "product": "Giant Value Tomato Ketchup, 1 L"
+      },
+      "mustard_yellow_400ml": {
+        "ref": "giant-value-prepared-yellow-mustard-400ml",
+        "product": "Giant Value Yellow Mustard, 400 ml"
+      },
+      "mayonnaise_890ml": {
+        "ref": "giant-value-mayonnaise-890ml-1",
+        "product": "Giant Value Mayonnaise, 890 ml"
+      },
+      "hot_sauce_148ml": {
+        "ref": "cholula-hot-sauce-chili-garlic-150-ml",
+        "product": "Cholula Hot Sauce Chili Garlic, 150 ml"
+      },
+      "pasta_sauce_tomato_650ml": {
+        "ref": "prego-tomato-onion-and-garlic-pasta-sauce-645ml-3",
+        "product": "Prego Tomato Onion and Garlic Pasta Sauce - 645ml"
+      },
+      "salsa_medium_650ml": {
+        "ref": "old-el-paso-medium-thick-n-chunky-salsa-650ml",
+        "product": "Old El Paso Medium Thick n' Chunky Salsa - 650ml"
+      },
+      "vinegar_white_1l": {
+        "ref": "giant-value-white-vinegar-1l-1",
+        "product": "Giant Value White Vinegar, 1 L"
+      },
+      "bbq_sauce_425ml": {
+        "ref": "bulls-eye-barbecue-sauce-grilled-onion-garlic-showdown-425-ml",
+        "product": "Bull's-Eye Barbecue Sauce Grilled Onion & Garlic Showdown, 425 ml"
+      },
+      "sugar_white_2kg": {
+        "ref": "redpath-granulated-white-sugar-2kg",
+        "product": "Redpath Granulated White Sugar - 2kg"
+      },
+      "brown_sugar_1kg": {
+        "ref": "redpath-dark-brown-sugar-1kg-1",
+        "product": "Redpath Dark Brown Sugar - 1kg"
+      },
+      "baking_powder_225g": {
+        "ref": "giant-value-baking-powder-225-g",
+        "product": "Giant Value Baking Powder, 225 g"
+      },
+      "honey_500g": {
+        "ref": "giant-value-liquid-honey-500-g",
+        "product": "Giant Value Liquid Honey, 500 g"
+      },
+      "coconut_milk_400ml": {
+        "ref": "grace-coconut-milk-400-ml",
+        "product": "Grace Coconut Milk, 400-ml"
+      }
+    }
+  }
+}

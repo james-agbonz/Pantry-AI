@@ -57,3 +57,68 @@ export async function fetchLatest(
   for (const v of unique) if (!out.has(v)) throw new Error(`StatCan returned nothing for vector ${v}`);
   return out;
 }
+
+/** StatCan geography members of table 18-10-0245-01 with a province (or territory) to price for. Nunavut has none. */
+export const PROVINCE_GEO = {
+  NL: { member: 1, name: "Newfoundland and Labrador" },
+  PE: { member: 2, name: "Prince Edward Island" },
+  NS: { member: 3, name: "Nova Scotia" },
+  NB: { member: 4, name: "New Brunswick" },
+  QC: { member: 5, name: "Quebec" },
+  ON: { member: 6, name: "Ontario" },
+  MB: { member: 7, name: "Manitoba" },
+  SK: { member: 8, name: "Saskatchewan" },
+  AB: { member: 9, name: "Alberta" },
+  BC: { member: 10, name: "British Columbia" },
+  YT: { member: 12, name: "Whitehorse, Yukon" },
+  NT: { member: 13, name: "Yellowknife, Northwest Territories" },
+} as const;
+export type PricedProvince = keyof typeof PROVINCE_GEO;
+
+/** A provincial reading: `value` is null when StatCan has no figure there this month. */
+export interface ProvincePoint {
+  vector: number;
+  province: PricedProvince;
+  period: string;
+  value: number | null;
+}
+
+/**
+ * The same products' latest prices in every province, from each Canada
+ * vector's cube coordinate (`<geography>.<product>.0…`). Throws if the
+ * service fails; a province with no figure comes back with `value: null`.
+ */
+export async function fetchProvinces(
+  vectors: readonly number[],
+  fetchImpl: Fetch = fetch as unknown as Fetch,
+): Promise<ProvincePoint[]> {
+  const post = async <T>(path: string, body: unknown): Promise<WdsReply<T>[]> => {
+    const res = await fetchImpl(`${WDS}/${path}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    if (!res.ok) throw new Error(`StatCan ${path}: HTTP ${res.status}`);
+    return (await res.json()) as WdsReply<T>[];
+  };
+  const unique = [...new Set(vectors)];
+  const info = await post<{ vectorId: number; productId: number; coordinate: string }>("getSeriesInfoFromVector", unique.map((vectorId) => ({ vectorId })));
+  const product = new Map<number, { pid: number; rest: string }>();
+  for (const r of info) {
+    if (r.status !== "SUCCESS") throw new Error(`StatCan series info failed: ${JSON.stringify(r).slice(0, 200)}`);
+    product.set(r.object.vectorId, { pid: r.object.productId, rest: r.object.coordinate.split(".").slice(1).join(".") });
+  }
+  const asks = unique.flatMap((vector) =>
+    (Object.keys(PROVINCE_GEO) as PricedProvince[]).map((province) => ({ vector, province, coordinate: `${PROVINCE_GEO[province].member}.${product.get(vector)!.rest}` })),
+  );
+  const out: ProvincePoint[] = [];
+  for (let i = 0; i < asks.length; i += 100) {
+    const chunk = asks.slice(i, i + 100);
+    const data = await post<{ coordinate: string; vectorDataPoint: { refPer: string; value: number | null }[] }>(
+      "getDataFromCubePidCoordAndLatestNPeriods",
+      chunk.map((a) => ({ productId: product.get(a.vector)!.pid, coordinate: a.coordinate, latestN: 1 })),
+    );
+    chunk.forEach((a, n) => {
+      const r = data[n];
+      const point = r?.status === "SUCCESS" ? r.object.vectorDataPoint[0] : undefined;
+      out.push({ vector: a.vector, province: a.province, period: point?.refPer ?? "", value: point?.value ?? null });
+    });
+  }
+  return out;
+}

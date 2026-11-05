@@ -1,7 +1,21 @@
 {
-  "_about": "Stores the price table knows. ca_typical is the national typical price (StatCan, and placeholders until a real price exists). Add a store here before entering its prices in manual-prices.csv.",
+  "_about": "Stores the price table knows. walmart_ca and gianttiger_ca are read weekly by the store collector (npm run prices:weekly) from the products in store-map.json; their prices are each site's online default, not one branch's. ca_typical is the national typical price (StatCan, and placeholders until a real price exists); statcan_<province> are StatCan's provincial averages, which replace the national one in that province (Yukon and Northwest Territories are Whitehorse and Yellowknife; Nunavut has none). Add a store here before entering its prices in manual-prices.csv.",
   "stores": [
-    { "id": "ca_typical", "name": "Typical price, Canada", "kind": "average" },
-    { "id": "nofrills_lucianos_toronto", "name": "Luciano's No Frills", "kind": "store", "region": "Toronto" }
+    {"id": "ca_typical", "name": "Typical price, Canada", "kind": "average"},
+    {"id": "statcan_nl", "name": "Typical price, Newfoundland and Labrador", "kind": "average", "provinces": ["NL"]},
+    {"id": "statcan_pe", "name": "Typical price, Prince Edward Island", "kind": "average", "provinces": ["PE"]},
+    {"id": "statcan_ns", "name": "Typical price, Nova Scotia", "kind": "average", "provinces": ["NS"]},
+    {"id": "statcan_nb", "name": "Typical price, New Brunswick", "kind": "average", "provinces": ["NB"]},
+    {"id": "statcan_qc", "name": "Typical price, Quebec", "kind": "average", "provinces": ["QC"]},
+    {"id": "statcan_on", "name": "Typical price, Ontario", "kind": "average", "provinces": ["ON"]},
+    {"id": "statcan_mb", "name": "Typical price, Manitoba", "kind": "average", "provinces": ["MB"]},
+    {"id": "statcan_sk", "name": "Typical price, Saskatchewan", "kind": "average", "provinces": ["SK"]},
+    {"id": "statcan_ab", "name": "Typical price, Alberta", "kind": "average", "provinces": ["AB"]},
+    {"id": "statcan_bc", "name": "Typical price, British Columbia", "kind": "average", "provinces": ["BC"]},
+    {"id": "statcan_yt", "name": "Typical price, Yukon", "kind": "average", "provinces": ["YT"], "region": "Whitehorse"},
+    {"id": "statcan_nt", "name": "Typical price, Northwest Territories", "kind": "average", "provinces": ["NT"], "region": "Yellowknife"},
+    {"id": "nofrills_lucianos_toronto", "name": "Luciano's No Frills", "kind": "store", "region": "Toronto"},
+    {"id": "walmart_ca", "name": "Walmart", "kind": "store", "region": "Canada, online"},
+    {"id": "gianttiger_ca", "name": "Giant Tiger", "kind": "store", "region": "Canada, online"}
   ]
 }

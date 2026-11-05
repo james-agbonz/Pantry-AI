@@ -2,13 +2,16 @@
   "name": "@pantry/price-tools",
   "version": "0.1.0",
   "private": true,
-  "description": "Monthly price refresh: StatCan import and hand-entry CSV (build step 7). Produces data only.",
+  "description": "Price refresh: StatCan import, hand-entry CSV, and the weekly store collector (Walmart, Giant Tiger). Produces data only.",
   "type": "module",
   "scripts": {
     "import": "tsx src/import.ts",
     "template": "tsx src/template.ts",
     "test": "vitest run",
-    "typecheck": "tsc -p ."
+    "typecheck": "tsc -p .",
+    "find": "tsx src/find.ts",
+    "pick": "tsx src/pick.ts",
+    "weekly": "PRICE_SOURCES=statcan,statcan_provinces,manual,walmart_ca,gianttiger_ca tsx src/import.ts"
   },
   "dependencies": {
     "@pantry/pricing": "*",

@@ -15,7 +15,7 @@ export default function Goal() {
   const next = () => router.push("/onboarding/limits");
 
   return (
-    <Screen title="What's the goal?" step="1 of 4">
+    <Screen title="What's the goal?" step="1 of 5">
       <View style={{ gap: space["space-2"] }}>
         {GOALS.map((g) => (
           <OptionRow

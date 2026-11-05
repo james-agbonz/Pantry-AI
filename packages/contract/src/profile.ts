@@ -5,6 +5,13 @@ import { Condition, Goal, GroupId, Method, Targets } from "./input";
 export const Limit = z.enum(["halal", "vegetarian", "no_pork", "no_dairy", "nuts", "gluten"]);
 export type Limit = z.infer<typeof Limit>;
 
+/**
+ * Where the user shops, for regional prices (SPEC §3, §9). Postal-abbreviation
+ * codes. Only the province is ever asked: never a city, postal code or location.
+ */
+export const Province = z.enum(["NL", "PE", "NS", "NB", "QC", "ON", "MB", "SK", "AB", "BC", "YT", "NT", "NU"]);
+export type Province = z.infer<typeof Province>;
+
 /** What onboarding collects once (SPEC §3), plus `targets` from the needs calculator (§8). */
 export const Profile = z.strictObject({
   goal: Goal,
@@ -17,6 +24,8 @@ export const Profile = z.strictObject({
   servings: z.number().int().positive(),
   /** `null` when body stats were skipped. */
   targets: Targets.nullable(),
+  /** Absent: national prices only (profiles saved before the province was asked). */
+  province: Province.optional(),
 });
 export type Profile = z.infer<typeof Profile>;
 

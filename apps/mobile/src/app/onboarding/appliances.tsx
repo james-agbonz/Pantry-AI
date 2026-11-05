@@ -20,7 +20,7 @@ export default function Appliances() {
     <Screen
       title="What can you cook with?"
       intro="Tap what you have. A knife, pan, bowl and plate are a given."
-      step="3 of 4"
+      step="3 of 5"
       back
       footer={
         <>

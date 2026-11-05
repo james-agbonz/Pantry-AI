@@ -195,10 +195,11 @@ describe("manual-prices.csv", () => {
     expect(parseCsv(writeManual(r.rows))[1]).toEqual(["", "a", "", "", "", "shop", "3.49", "", "", "Walmart, Scarborough", 'said "rollback"', "2026-09-20", ""]);
   });
 
-  it("the committed CSV reads cleanly, with the canola oil price as row 1", () => {
+  it("the committed CSV reads cleanly and keeps the hand-entered canola oil price", () => {
     const r = readManual(readFileSync(new URL("../manual-prices.csv", import.meta.url), "utf8"), "2026-09-25", new Set(stores.map((s: { id: string }) => s.id)));
     expect(r.errors).toEqual([]);
-    expect(r.rows[0]).toMatchObject({ rank: "1", item_id: "canola_oil_946ml", store: "nofrills_lucianos_toronto", price: "4.29", date: "2026-09-25" });
+    // Filled rows stay, wherever the fill order puts them.
+    expect(r.rows.find((x) => x.item_id === "canola_oil_946ml")).toMatchObject({ store: "nofrills_lucianos_toronto", price: "4.29", date: "2026-09-25" });
   });
 });
 

@@ -10,6 +10,7 @@ export function fromProfile(p: Profile): Answers {
     limits_other: [...p.limits_other],
     appliances: [...p.appliances],
     servings: p.servings,
+    province: p.province ?? null,
   };
 }
 
@@ -34,6 +35,7 @@ export function isDirty(p: Profile, a: Answers): boolean {
     same(a.limits, p.limits) &&
     same(a.limits_other, p.limits_other) &&
     same(a.appliances, p.appliances) &&
-    a.servings === p.servings
+    a.servings === p.servings &&
+    a.province === (p.province ?? null)
   );
 }

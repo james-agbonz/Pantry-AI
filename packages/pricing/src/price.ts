@@ -1,4 +1,4 @@
-import type { Card, Pricing } from "@pantry/contract";
+import type { Card, Pricing, Province } from "@pantry/contract";
 import { NO_DIET, type Diet, type Price, type Vocabulary } from "@pantry/vocabulary";
 
 /** One way to buy a group: an item at a store, at its price on the day priced. */
@@ -25,9 +25,28 @@ export interface PriceOptions {
   diet?: Diet;
   /** Group → option id (`item@store`) picked on the meal screen. Otherwise the default pick. */
   choices?: Readonly<Record<string, string>>;
+  /** The user's province: its stores and provincial averages apply. Absent: national prices only. */
+  province?: Province;
 }
 
-type Table = Pick<Vocabulary, "itemsFor" | "pricesFor">;
+type Table = Pick<Vocabulary, "itemsFor" | "pricesFor" | "stores">;
+
+/**
+ * The prices that apply in a province, for one item. A store with no
+ * `provinces` applies everywhere; one with a list, only there. Without a
+ * province, only the everywhere stores apply. A provincial average replaces
+ * the national one when it has a real price, so a province's typical price
+ * is never undercut by the country's.
+ */
+function regionalPrices(table: Table, item: string, province: Province | undefined) {
+  const store = new Map(table.stores.map((s) => [s.id, s]));
+  const here = table.pricesFor(item).filter((p) => {
+    const serves = store.get(p.store)?.provinces;
+    return serves === undefined || (province !== undefined && serves.includes(province));
+  });
+  const regionalAverage = here.some((p) => p.source !== "placeholder" && store.get(p.store)?.kind === "average" && store.get(p.store)?.provinces);
+  return regionalAverage ? here.filter((p) => !(store.get(p.store)?.kind === "average" && !store.get(p.store)?.provinces)) : here;
+}
 
 const cents = (dollars: number) => Math.round(dollars * 100);
 const dollars = (c: number) => c / 100;
@@ -44,11 +63,11 @@ export function effectivePrice(p: Pick<Price, "regular" | "sale">, on: string): 
  * shifts between runs. A placeholder is only picked when the group has no
  * real price, so an invented number never beats a real one.
  */
-export function itemOptions(table: Table, group: string, on: string, diet: Diet = NO_DIET): ItemOption[] {
+export function itemOptions(table: Table, group: string, on: string, diet: Diet = NO_DIET, province?: Province): ItemOption[] {
   return table
     .itemsFor(group, diet)
     .flatMap((item) =>
-      table.pricesFor(item.id).map((p): ItemOption => {
+      regionalPrices(table, item.id, province).map((p): ItemOption => {
         const now = effectivePrice(p, on);
         return {
           id: `${item.id}@${p.store}`,
@@ -100,7 +119,7 @@ export function priceCard(card: Card, budget: number, table: Table, opts: PriceO
   let placeholder = false;
   let asOf: string | null = null;
   const line = (group: string) => {
-    const options = itemOptions(table, group, on, diet);
+    const options = itemOptions(table, group, on, diet, opts.province);
     const pick = options.find((o) => o.id === choices[group]) ?? options[0];
     if (!pick) throw new Error(`no item for group '${group}' under this diet`);
     placeholder ||= pick.placeholder;

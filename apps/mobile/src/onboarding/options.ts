@@ -1,4 +1,4 @@
-import type { Condition, Goal, Limit, Method } from "@pantry/contract";
+import type { Condition, Goal, Limit, Method, Province } from "@pantry/contract";
 
 /** Onboarding wording (SPEC §3). Sentence case; short; no judgment (DESIGN.md › Content). */
 
@@ -38,4 +38,21 @@ export const APPLIANCES: { method: Method; label: string }[] = [
   { method: "blender", label: "Blender" },
   { method: "air_fryer", label: "Air fryer" },
   { method: "rice_cooker", label: "Rice or slow cooker" },
+];
+
+/** Provinces and territories, west to east then north, as the province screen lists them. */
+export const PROVINCES: { province: Province; label: string }[] = [
+  { province: "BC", label: "British Columbia" },
+  { province: "AB", label: "Alberta" },
+  { province: "SK", label: "Saskatchewan" },
+  { province: "MB", label: "Manitoba" },
+  { province: "ON", label: "Ontario" },
+  { province: "QC", label: "Quebec" },
+  { province: "NB", label: "New Brunswick" },
+  { province: "NS", label: "Nova Scotia" },
+  { province: "PE", label: "Prince Edward Island" },
+  { province: "NL", label: "Newfoundland and Labrador" },
+  { province: "YT", label: "Yukon" },
+  { province: "NT", label: "Northwest Territories" },
+  { province: "NU", label: "Nunavut" },
 ];
