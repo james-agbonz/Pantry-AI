@@ -121,7 +121,7 @@ Three levels: **family** (fish) → **group** (white fish) → **item** (basa fi
 
 ## 7. Recipe engine
 
-**Gets** the contract input and the group list, never prices. Each group may carry a cost band (`low`, `mid`, `high`): its cheapest item ranked against every other group's in the current price table, in thirds. Words only, so the model can favour cheap groups without ever seeing a dollar figure. **Returns** a deck of six cards.
+**Gets** the contract input and the group list, never prices. Each group may carry a cost band (`low`, `mid`, `high`): its cheapest item ranked against every other group's in the current price table, in thirds. Words only, so the model can favour cheap groups without ever seeing a dollar figure. When the budget is tight (it buys about 6 low-cost things or fewer: the budget over the median low-band price, from `@pantry/pricing`), the prompt also says how many things each dish may buy, as a count. **Returns** a deck of six cards.
 
 Rules:
 - Never uses anything in `exclude`

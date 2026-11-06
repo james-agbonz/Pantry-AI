@@ -21,6 +21,8 @@ export interface DealOptions {
   maxAttempts?: number;
   /** Group → cost band from the price table, shown in the prompt's group list. Omitted: no bands. */
   bands?: Readonly<Record<string, CostBand>>;
+  /** About how many things the budget buys, from the pricing module. Shown only when the budget is tight. */
+  affordable?: number | null;
   /** Receives one `card_validation` event per deck. Default: a JSON line on `console.info`. */
   log?: (event: { event: "card_validation" } & ValidationStats) => void;
 }
@@ -40,7 +42,8 @@ export interface Deal {
  * unchecked. Ids are assigned here, after validation.
  */
 export async function dealDeck(input: EngineInput, diet: Diet, opts: DealOptions): Promise<Deal> {
-  const { llm, vocabulary, maxAttempts = 3, log = defaultLog, bands } = opts;
+  const { llm, vocabulary, maxAttempts = 3, log = defaultLog, bands, affordable } = opts;
+  const hints = affordable === undefined ? {} : { affordable };
   const groups = vocabulary.groupList(diet);
   const promptGroups: PromptGroup[] = groups.map((g) => {
     const band = bands?.[g.group];
@@ -51,7 +54,7 @@ export async function dealDeck(input: EngineInput, diet: Diet, opts: DealOptions
   let validated = input.deck;
   let failed = 0;
 
-  const first = validateDeck(parseReply(await llm.complete(deckPrompt(input, promptGroups))), ctx, input.deck);
+  const first = validateDeck(parseReply(await llm.complete(deckPrompt(input, promptGroups, hints))), ctx, input.deck);
   failed += first.failed.length;
 
   // Slot index → card, so regenerated cards land back in their place.
@@ -69,7 +72,7 @@ export async function dealDeck(input: EngineInput, diet: Diet, opts: DealOptions
       let last = errors;
       for (let attempt = 2; attempt <= maxAttempts; attempt++) {
         validated++;
-        const result = validateCard(parseReply(await llm.complete(cardPrompt(input, promptGroups, last, keep))), ctx);
+        const result = validateCard(parseReply(await llm.complete(cardPrompt(input, promptGroups, last, keep, hints))), ctx);
         if (result.ok) {
           slots.set(index, result.card);
           return;

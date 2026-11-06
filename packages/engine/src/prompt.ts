@@ -45,13 +45,22 @@ You suggest realistic home-cooked dishes built around what the user already has.
 Reply with JSON only: no prose, no markdown fences.`;
 
 /** The prompt for a whole deck. */
-export function deckPrompt(input: EngineInput, groups: readonly PromptGroup[]): LlmRequest {
+/** Extra guidance from the pricing module. Counts and words only, never a price. */
+export interface PromptHints {
+  /** About how many things the budget buys at low-band prices. */
+  affordable?: number | null;
+}
+
+/** Above this many things, the budget isn't tight and the prompt says nothing about how many. */
+export const TIGHT_ITEMS = 6;
+
+export function deckPrompt(input: EngineInput, groups: readonly PromptGroup[], hints: PromptHints = {}): LlmRequest {
   return {
     system: SYSTEM,
     user: [
       `Suggest ${input.deck} different dishes. Reply with a JSON array of exactly ${input.deck} cards, each shaped like this:`,
       CARD_SHAPE,
-      ...context(input, groups),
+      ...context(input, groups, hints),
       `The ${input.deck} dishes must differ from each other in main protein, cooking method or cuisine.`,
     ].join("\n\n"),
   };
@@ -67,6 +76,7 @@ export function cardPrompt(
   groups: readonly PromptGroup[],
   errors: readonly CardError[],
   keep: readonly string[],
+  hints: PromptHints = {},
 ): LlmRequest {
   const problems = errors.map((e) => `- ${e.path ? `${e.path}: ` : ""}${e.message}`).join("\n");
   return {
@@ -74,7 +84,7 @@ export function cardPrompt(
     user: [
       `Suggest one dish. Reply with a single JSON card object (not an array), shaped like this:`,
       CARD_SHAPE,
-      ...context(input, groups),
+      ...context(input, groups, hints),
       `A previous attempt was rejected for:\n${problems}`,
       keep.length ? `It must differ in main protein, cooking method or cuisine from: ${keep.join("; ")}.` : "",
     ]
@@ -84,7 +94,7 @@ export function cardPrompt(
 }
 
 /** Everything both prompts share: the §7 rules, the user's situation and the group list. */
-function context(input: EngineInput, groups: readonly PromptGroup[]): string[] {
+function context(input: EngineInput, groups: readonly PromptGroup[], hints: PromptHints = {}): string[] {
   const allowed = groups.filter((g) => excludedBy(g, input.exclude, groups).length === 0);
   const allowedIds = new Set(allowed.map((g) => g.group));
   const have = input.have.map((h) => h.group).filter((g) => allowedIds.has(g));
@@ -116,6 +126,9 @@ function context(input: EngineInput, groups: readonly PromptGroup[]): string[] {
       `- Budget is ${input.budget} CAD for everything bought: favour cheap staples. Never state a cost; leave all money out of the card.`,
       groups.some((g) => g.band)
         ? `- Each group in the list is marked low, mid or high: what buying it costs next to the others (a whole pack, so big bags rank high). The user's own groups cost nothing. Build what must be bought on low groups. With a tight budget, buy at most one high group per dish.`
+        : "",
+      hints.affordable != null && hints.affordable <= TIGHT_ITEMS
+        ? `- This budget buys only about ${hints.affordable} low-cost thing${hints.affordable === 1 ? "" : "s"}. Each dish must buy at most ${hints.affordable} (needed and completes together); lean on what the user has.`
         : "",
       `- ${GOAL_RULES[input.goal]}`,
       perDish ? `- ${perDish}` : "",

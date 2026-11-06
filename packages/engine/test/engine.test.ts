@@ -181,6 +181,24 @@ describe("prompts", () => {
     expect(plain.calls[0]!.user).not.toMatch(/\((low|mid|high)\)$/m);
   });
 
+  it("say how many things a tight budget buys, as a count, and say nothing when it isn't tight", async () => {
+    const tight = new RecordedLlm([fixture("clean-deck.json")]);
+    await dealDeck(input, diet, { llm: tight, vocabulary, affordable: 3, log: () => {} });
+    expect(tight.calls[0]!.user).toMatch(/This budget buys only about 3 low-cost things\. Each dish must buy at most 3/);
+    expect(tight.calls[0]!.user).not.toMatch(/\$\s?\d/);
+    const roomy = new RecordedLlm([fixture("clean-deck.json")]);
+    await dealDeck(input, diet, { llm: roomy, vocabulary, affordable: 9, log: () => {} });
+    expect(roomy.calls[0]!.user).not.toMatch(/This budget buys only/);
+  });
+
+  it("carry the count into a regenerated card's prompt too", async () => {
+    const bad = JSON.parse(fixture("clean-deck.json"));
+    bad[4].methods = ["oven"];
+    const llm = new RecordedLlm([JSON.stringify(bad), fixture("card-fix-chicken.json")]);
+    await dealDeck(input, diet, { llm, vocabulary, affordable: 2, log: () => {} });
+    expect(llm.calls[1]!.user).toMatch(/at most 2/);
+  });
+
   it("ask for an image prompt that describes only the food, since the server adds the photo style", async () => {
     const { llm } = await deal([fixture("clean-deck.json")]);
     const user = llm.calls[0]!.user;

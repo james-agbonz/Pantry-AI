@@ -1,7 +1,7 @@
 import { budgetStatus, type Card, type PricedCard } from "@pantry/contract";
 import { loadVocabulary, vocabulary } from "@pantry/vocabulary";
 import { describe, expect, it } from "vitest";
-import { costBands, itemOptions, priceCard, sortDeck } from "../src";
+import { affordableItems, costBands, itemOptions, priceCard, sortDeck } from "../src";
 
 // A small hand-set table, so the money in these tests never moves when the
 // shipped prices do. Figures follow the SPEC §9 example.
@@ -347,5 +347,16 @@ describe("regional prices (province)", () => {
     const c = card([{ group: "white_fish", qty: "300g", role: "needed" }]);
     expect(priceCard(c, 15, regional, { on: ON, province: "ON" }).buy[0]).toMatchObject({ price: 8.25, store: "online" });
     expect(priceCard(c, 15, regional, { on: ON, province: "BC" }).buy[0]).toMatchObject({ price: 6.99, store: "bc_shop" });
+  });
+});
+
+describe("affordableItems", () => {
+  it("is the budget over the median low-band price, rounded down, at least 1", () => {
+
+    const n6 = affordableItems(vocabulary, 6, ON)!;
+    const n15 = affordableItems(vocabulary, 15, ON)!;
+    expect(n6).toBeGreaterThanOrEqual(1);
+    expect(n15).toBeGreaterThan(n6);
+    expect(affordableItems(vocabulary, 0.01, ON)).toBe(1);
   });
 });

@@ -25,3 +25,21 @@ export function costBands(table: Table, on: string, diet: Diet = NO_DIET, provin
   });
   return bands;
 }
+
+/**
+ * About how many things the budget buys (SPEC §7): the budget over the
+ * median price of a low-band group's cheapest item, rounded down, at least 1.
+ * A count, never dollars, so the engine can be told how much to buy without
+ * seeing a price. `null` when nothing is priced.
+ */
+export function affordableItems(table: Table, budget: number, on: string, diet: Diet = NO_DIET, province?: Province): number | null {
+  const bands = costBands(table, on, diet, province);
+  const low = Object.entries(bands)
+    .filter(([, b]) => b === "low")
+    .map(([group]) => Math.round((itemOptions(table, group, on, diet, province)[0]?.price ?? 0) * 100))
+    .filter((c) => c > 0)
+    .sort((a, b) => a - b);
+  if (!low.length) return null;
+  const median = low[Math.floor(low.length / 2)]!;
+  return Math.max(1, Math.floor((budget * 100) / median));
+}
