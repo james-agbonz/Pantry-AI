@@ -8,6 +8,22 @@ How a run is measured: decks go to `POST /api/deck` from a script, each with its
 
 ---
 
+## Run 9 — 2026-11-06: how many things a tight budget buys
+
+**Config:** as before, plus `affordableItems` (`@pantry/pricing`): the budget over the median low-band price, as a count. When it's 6 or fewer, the prompt says each dish may buy at most that many things. Worker `e8e203e1`. Price table `2026-11-06` (the first weekly job run). Decks only, from the 3 tight profiles, via `tools/eval/run.mjs`.
+
+| Profile | Count told to the model | Over budget | Run 3 (cost bands only) | Run 1 |
+|---|---|---|---|---|
+| Halal, $8 | 4 | **0 of 6** | 0 of 6 | 5 of 6 |
+| Blood pressure, instant noodles, $5 | 2 | **0 of 6** | 0 of 6 | 3 of 6 |
+| Microwave + kettle, $6 | 3 | **0 of 6** | 6 of 6 (worst ~$8.83) | 2 of 6 |
+
+- Each dish bought 1 to 3 things; totals from ~$1.37 to ~$6.62.
+- The $6 deck leans hard on tuna, which that profile has. Variety may suffer on very tight budgets; worth watching.
+- One deck per profile: a strong signal, not proof.
+
+**Verdict:** keep.
+
 ## Run 8 — 2026-11-05: recording the engine's test samples
 
 **Config:** as Run 7, plus photos in the app (`httpImageSource`) and Report a problem. Worker `5dec9096`. Three decks with the engine tests' own input, made up, about 65 s apart; replies captured from `wrangler tail`.
