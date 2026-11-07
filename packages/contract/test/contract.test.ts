@@ -309,3 +309,25 @@ describe("completes is never seasoning or flavour", () => {
     expect(validateCard({ ...good, missing: [...good.missing, { group: "spinach", qty: "2 cups", role: "completes" }] }, c).ok).toBe(true);
   });
 });
+
+describe("uses only what the user has", () => {
+  it("moves a used group the user doesn't have to the shopping list, as needed; what they have stays", () => {
+    const r = validateCard({ ...good, uses: ["rice", "corn", "frozen_veg", "leftover chili"], missing: [{ group: "white_fish", qty: "300g", role: "needed" }] }, ctx);
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    expect(r.card.uses).toEqual(["rice", "corn", "leftover chili"]);
+    expect(r.card.missing).toEqual([
+      { group: "white_fish", qty: "300g", role: "needed" },
+      { group: "frozen_veg", qty: "as needed", role: "needed" },
+    ]);
+  });
+
+  it("a moved group already on the list as completes becomes needed, and isn't listed twice", () => {
+    const r = validateCard({ ...good, uses: ["rice", "frozen_veg"] }, ctx);
+    expect(r.ok && r.card.missing.filter((m) => m.group === "frozen_veg")).toEqual([{ group: "frozen_veg", qty: "1 cup", role: "needed" }]);
+  });
+
+  it("a card that already uses only what the user has is unchanged", () => {
+    expect(validateCard(good, ctx)).toEqual({ ok: true, card: good });
+  });
+});

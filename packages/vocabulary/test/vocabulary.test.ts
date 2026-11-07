@@ -93,7 +93,7 @@ describe("allergen tags", () => {
   });
 
   it("reach the validator through groupList", () => {
-    const input = { exclude: ["gluten"], methods: [], have_other: [] };
+    const input = { exclude: ["gluten"], methods: [], have_other: [], have: [] };
     const card = (group: string): Card => ({
       id: "",
       name: "Noodle bowl",
@@ -133,7 +133,7 @@ describe("halal diet", () => {
   });
 
   it("makes validateCard reject a halal card that needs a non-halal group", () => {
-    const input: Pick<EngineInput, "exclude" | "methods" | "have_other"> = { exclude: ["pork"], methods: ["stove"], have_other: [] };
+    const input: Pick<EngineInput, "exclude" | "methods" | "have_other" | "have"> = { exclude: ["pork"], methods: ["stove"], have_other: [], have: [] };
     const card: Card = {
       id: "",
       name: "Chicken rice",
@@ -154,7 +154,7 @@ describe("halal diet", () => {
 
 describe("exclude by family", () => {
   it("catches peanut butter when nuts are excluded", () => {
-    const input = { exclude: ["nuts"], methods: [], have_other: [] };
+    const input = { exclude: ["nuts"], methods: [], have_other: [], have: [] };
     const card: Card = {
       id: "",
       name: "Satay noodles",

@@ -35,7 +35,7 @@ export interface CardError {
 export type CardCheck = { ok: true; card: Card } | { ok: false; errors: CardError[] };
 
 export interface ValidateContext {
-  input: Pick<EngineInput, "exclude" | "methods" | "have_other">;
+  input: Pick<EngineInput, "exclude" | "methods" | "have_other" | "have">;
   groups: readonly GroupRef[];
 }
 
@@ -65,7 +65,7 @@ export function validateCard(raw: unknown, ctx: ValidateContext): CardCheck {
       })),
     };
   }
-  const card = parsed.data;
+  const card = moveUnowned(parsed.data, ctx);
 
   const errors = [
     ...checkGroups(card, ctx),
@@ -117,6 +117,29 @@ function allFailed(expected: number, error: CardError): DeckCheck {
 }
 
 // ── Checks ────────────────────────────────────────────────────────────────
+
+/**
+ * A group in `uses` that the user doesn't have is something to buy: it moves
+ * to `missing` as needed, so it's priced and on the shopping list, and the
+ * card isn't rejected for it (SPEC §7). Free-text items (`have_other`) and
+ * unknown names stay put; unknown ones fail the group check as before.
+ */
+export function moveUnowned(card: Card, ctx: ValidateContext): Card {
+  const known = new Set(ctx.groups.map((g) => g.group));
+  const have = new Set(ctx.input.have.map((h) => h.group));
+  const freeText = new Set(ctx.input.have_other.map(normalize));
+  const moved = card.uses.filter((u) => known.has(u) && !have.has(u) && !freeText.has(normalize(u)));
+  if (!moved.length) return card;
+  const already = new Set(card.missing.map((m) => m.group));
+  return {
+    ...card,
+    uses: card.uses.filter((u) => !moved.includes(u)),
+    missing: [
+      ...card.missing.map((m) => (moved.includes(m.group) ? { ...m, role: "needed" as const } : m)),
+      ...moved.filter((g) => !already.has(g)).map((group) => ({ group, qty: "as needed", role: "needed" as const })),
+    ],
+  };
+}
 
 function checkGroups(card: Card, ctx: ValidateContext): CardError[] {
   const known = new Set(ctx.groups.map((g) => g.group));
