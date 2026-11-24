@@ -55,8 +55,12 @@ describe("price note", () => {
   it("never calls placeholder prices typical", () => {
     expect(priceNote(true)).toBe("Sample prices for testing, not real.");
     expect(priceNote(false, "2026-07")).toBe("Typical prices, July 2026.");
+    expect(priceNote(false, "2026-09", "2026-11")).toBe("Typical prices, September to November 2026.");
+    expect(priceNote(false, "2025-11", "2026-01")).toBe("Typical prices, November 2025 to January 2026.");
+    expect(priceNote(false, "2026-09", "2026-09")).toBe("Typical prices, September 2026.");
     expect(monthLabel("2026-12")).toBe("December 2026");
-    expect(deckPriceNote([{ placeholder: false, as_of: "2026-08" }, { placeholder: false, as_of: "2026-07" }])).toBe("Typical prices, July 2026.");
+    expect(deckPriceNote([{ placeholder: false, as_of: "2026-08", as_of_latest: "2026-11" }, { placeholder: false, as_of: "2026-07", as_of_latest: "2026-07" }])).toBe("Typical prices, July to November 2026.");
+    expect(deckPriceNote([{ placeholder: false, as_of: "2026-07", as_of_latest: "2026-07" }])).toBe("Typical prices, July 2026.");
     expect(deckPriceNote([{ placeholder: false, as_of: "2026-07" }, { placeholder: true, as_of: null }])).toBe("Sample prices for testing, not real.");
   });
 });

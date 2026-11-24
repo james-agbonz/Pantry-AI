@@ -118,6 +118,7 @@ export function priceCard(card: Card, budget: number, table: Table, opts: PriceO
   // 1–2. Resolve and price.
   let placeholder = false;
   let asOf: string | null = null;
+  let latest: string | null = null;
   const line = (group: string) => {
     const options = itemOptions(table, group, on, diet, opts.province);
     const pick = options.find((o) => o.id === choices[group]) ?? options[0];
@@ -126,6 +127,7 @@ export function priceCard(card: Card, budget: number, table: Table, opts: PriceO
     // The oldest real price on the card dates the whole card.
     const month = pick.updated?.slice(0, 7) ?? null;
     if (month && (asOf === null || month < asOf)) asOf = month;
+    if (month && (latest === null || month > latest)) latest = month;
     return { group, item: pick.name, unit: pick.unit, cents: cents(pick.price), store: pick.store, sale_ends: pick.sale_ends };
   };
   const lines = [...merged].map(([group, role]) => ({ ...line(group), role }));
@@ -159,5 +161,6 @@ export function priceCard(card: Card, budget: number, table: Table, opts: PriceO
     complete_cost: dollars(toComplete.reduce((s, l) => s + l.cents, 0)),
     placeholder,
     as_of: placeholder ? null : asOf,
+    as_of_latest: placeholder ? null : latest,
   };
 }

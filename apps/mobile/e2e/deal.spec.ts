@@ -19,7 +19,7 @@ test("home → loading → deck: swipe, rewind, pass all, new deck", async ({ pa
   await expect(text(page, "1 of 6", false)).toBeVisible();
 
   // Exactly one honest price note: sample while any line is a placeholder, else dated.
-  await expect(page.getByText(/^(Sample prices for testing, not real\.|Typical prices, [A-Z][a-z]+ \d{4}\.)$/).locator("visible=true")).toHaveCount(1);
+  await expect(page.getByText(/^(Sample prices for testing, not real\.|Typical prices, [A-Z][a-z]+( \d{4})?( to [A-Z][a-z]+ \d{4})?\.)$/).locator("visible=true")).toHaveCount(1);
 
   await expect(labelled(page, "Rewind")).toBeDisabled();
   await swipe(page, "left");
@@ -74,6 +74,6 @@ test("swipe right on a cut: body stats in ft/lb first, then the meal, swap and c
   await expect(text(page, "Copied. Paste it into your notes or a message.")).toBeVisible();
   const list = await page.evaluate(() => navigator.clipboard.readText());
   expect(list).toMatch(/^.+\n\nBuy \(~\$\d+\.\d\d of \$15\):\n- /);
-  expect(list.trimEnd()).toMatch(/(Sample prices for testing, not real\.|Typical prices, [A-Z][a-z]+ \d{4}\.)$/);
+  expect(list.trimEnd()).toMatch(/(Sample prices for testing, not real\.|Typical prices, [A-Z][a-z]+( \d{4})?( to [A-Z][a-z]+ \d{4})?\.)$/);
   expect(errors).toEqual([]);
 });

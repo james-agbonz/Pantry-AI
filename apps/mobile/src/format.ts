@@ -51,14 +51,19 @@ export function monthLabel(yyyyMm: string): string {
  * called typical: while any price is a placeholder, it says so. Real prices
  * say which month they're from, since StatCan runs a couple of months behind.
  */
-export function priceNote(placeholder: boolean, asOf: string | null = null): string {
+export function priceNote(placeholder: boolean, asOf: string | null = null, latest: string | null = null): string {
   if (placeholder) return "Sample prices for testing, not real.";
-  return asOf ? `Typical prices, ${monthLabel(asOf)}.` : "Typical prices.";
+  if (!asOf) return "Typical prices.";
+  if (!latest || latest === asOf) return `Typical prices, ${monthLabel(asOf)}.`;
+  // "September to November 2026"; the first month keeps its year only when it differs.
+  const from = asOf.slice(0, 4) === latest.slice(0, 4) ? monthLabel(asOf).replace(/ \d{4}$/, "") : monthLabel(asOf);
+  return `Typical prices, ${from} to ${monthLabel(latest)}.`;
 }
 
-/** The note for several cards: sample if any is, else dated by the oldest. */
-export function deckPriceNote(pricings: readonly { placeholder: boolean; as_of: string | null }[]): string {
+/** The note for several cards: sample if any is, else the span from the oldest month to the newest. */
+export function deckPriceNote(pricings: readonly { placeholder: boolean; as_of: string | null; as_of_latest?: string | null }[]): string {
   if (pricings.some((p) => p.placeholder)) return priceNote(true);
-  const months = pricings.map((p) => p.as_of).filter((m): m is string => m !== null).sort();
-  return priceNote(false, months[0] ?? null);
+  const oldest = pricings.map((p) => p.as_of).filter((m): m is string => m !== null).sort();
+  const newest = pricings.map((p) => p.as_of_latest ?? p.as_of).filter((m): m is string => m !== null).sort();
+  return priceNote(false, oldest[0] ?? null, newest.at(-1) ?? null);
 }

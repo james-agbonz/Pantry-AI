@@ -40,6 +40,12 @@ export const Pricing = z.strictObject({
    * "Typical prices, July 2026".
    */
   as_of: z.string().regex(/^\d{4}-\d{2}$/).nullable(),
+  /**
+   * The month of the newest price on the card, YYYY-MM. With `as_of` it
+   * gives the range: a card mixing StatCan's September average and a store's
+   * November price says "September to November 2026". Null with `as_of`.
+   */
+  as_of_latest: z.string().regex(/^\d{4}-\d{2}$/).nullable(),
 });
 export type Pricing = z.infer<typeof Pricing>;
 

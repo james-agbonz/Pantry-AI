@@ -93,6 +93,7 @@ describe("priceCard (SPEC §9)", () => {
       complete_cost: 2.0,
       placeholder: false,
       as_of: "2026-09",
+      as_of_latest: "2026-09",
     });
   });
 
@@ -237,7 +238,7 @@ describe("stores and sales", () => {
 describe("sortDeck (SPEC §10)", () => {
   const priced = (name: string, protein_g: number, pricing: Partial<PricedCard["pricing"]>): PricedCard => ({
     card: card([], { id: name, name, protein_g }),
-    pricing: { buy: [], to_complete: [], total: 10, budget: 15, over_by: 0, complete_cost: 0, placeholder: false, as_of: null, ...pricing },
+    pricing: { buy: [], to_complete: [], total: 10, budget: 15, over_by: 0, complete_cost: 0, placeholder: false, as_of: null, as_of_latest: null, ...pricing },
   });
   const extra = { to_complete: [{ group: "g", item: "i", unit: "u", price: 2, store: "ca_typical", sale_ends: null }], complete_cost: 2 };
 
