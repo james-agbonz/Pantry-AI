@@ -44,13 +44,13 @@ A short summary to pick up from at the start of a session. Updated after every p
   - Added the staging smoke test (`npm run smoke`). It passed 8 of 8 and is logged as Run 10.
   - Added the allergen checker (`npm run allergens:check`). It compares our tags with Open Food Facts and only reports.
   - The allergen checker now retries when Open Food Facts is busy.
+  - Restored 388 Giant Tiger product suggestions that had been removed by accident.
 - **2026-11-07:** cards can only "use" food the user has. Anything else goes to the Buy list.
 - **2026-11-06:** tight budgets now fit, and the first weekly price run happened.
 
 ## Open items, most urgent first
 
 - **Allergen tags:** check the checker's leads against real labels. You decide every change. The leads are in `BACKLOG.md`.
-- **Giant Tiger suggestions file:** 388 rows were removed by accident and restored on 2026-11-24.
 - **Project Hammer:** ask permission to use their prices. It would add No Frills and more Walmart prices in Ontario.
 - **Weekly prices:** run them by hand on the Sunday reminder.
 - **Before launch:** pick an app name and logo, write the privacy policy, get a paid AI key with a spending limit, deploy to production, and decide on Workers Paid (about $5 a month).
