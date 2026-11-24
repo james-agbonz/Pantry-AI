@@ -9,7 +9,8 @@ Everything parked so far. `docs/SPEC.md` is what the app does; this is what's st
   - Row 1 is done: No Name canola oil 946 ml, $4.29, 2026-09-25. It reaches the table at the next `npm run prices:import`.
   - Browser lookups are paused until nofrills.ca is allowed in the Claude extension's site permissions.
 - **Check allergen tags against real product labels.** The `contains` tags in `packages/vocabulary/data/groups.json` were set by hand. `npm run allergens:check` helps but doesn't settle it:
-  - First run (2026-11-24): 71 of 121 groups got HTTP 503 from Open Food Facts. The checker needs a retry with a longer wait before its report covers every group.
+  - First run (2026-11-24): 71 of 121 groups got HTTP 503 from Open Food Facts. The checker now retries up to 4 times, and a second run answered 64 of those 71. Still unchecked: bagels, butter, pork shoulder, seasoning, mayonnaise, plus 2 groups that found no products.
+  - More leads from the second run: instant noodles (milk, sesame, fish in over half), pasta sauce (milk in 73%), and beef and vegetable broth (wheat tagged but rarely declared).
   - Searches often hit processed products (potato finds chips, onion finds soup mix), and "may contain" traces count as declared. Treat its flags as leads to check on a label, not answers.
   - Leads worth a label check: margarine (soy in 90%), baked beans (mustard in 92%), tortillas (soy, sesame), bread (milk tagged but rarely declared), pork sausage (wheat tagged but rarely declared).
 - **Photo style is plate-v4** for now (best so far, user's call 2026-11-04). Herbs on dishes that don't list them, look-alike foods and varying plate size are **parked** until the app is stable.

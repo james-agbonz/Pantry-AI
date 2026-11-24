@@ -53,12 +53,17 @@ for (const [n, g] of todo.entries()) {
   const q = QUERY[g.id] ?? g.label;
   const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(q)}&search_simple=1&action=process&json=1&page_size=24&tagtype_0=countries&tag_contains_0=contains&tag_0=canada&fields=product_name,allergens_tags,traces_tags`;
   let products = [];
-  try {
-    const res = await fetch(url, { headers: { "User-Agent": "PantryAllergenCheck/0.1 (meal app; contact via GitHub james-agbonz/Pantry-AI)" } });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    products = (await res.json()).products ?? [];
-  } catch (e) {
-    console.log(`${g.id}: ${e.message}`);
+  // Open Food Facts often answers 503 when busy: wait longer each time, up to 4 tries.
+  for (let attempt = 1; attempt <= 4; attempt++) {
+    try {
+      const res = await fetch(url, { headers: { "User-Agent": "PantryAllergenCheck/0.1 (meal app; contact via GitHub james-agbonz/Pantry-AI)" } });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      products = (await res.json()).products ?? [];
+      break;
+    } catch (e) {
+      console.log(`${g.id}: ${e.message}${attempt < 4 ? `, retrying in ${15 * attempt} s` : ", giving up"}`);
+      if (attempt < 4) await sleep(15000 * attempt);
+    }
   }
   // Count each of our tags over the products that declare any allergen info at all.
   const declared = products.filter((p) => (p.allergens_tags?.length ?? 0) + (p.traces_tags?.length ?? 0) > 0);
