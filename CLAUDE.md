@@ -33,6 +33,8 @@ Pantry is a working name.
 - Zod for runtime validation; types are inferred from the schemas. Vitest for tests.
 - `packages/contract` — engine input, card output, card validation, and the onboarding profile and session (SPEC §3–§5, §7).
 - `packages/vocabulary` — families → groups → items (SPEC §6). `data/groups.json` never changes; `data/price-table.json` is the versioned monthly table (items and prices), checked on load. A monthly refresh edits only the price table, and the app fetches it from the backend (SPEC §16), so no release is needed.
+- `npm run smoke` — proves staging end to end in one command (health, prices, a deck with photos, a report). Run it after every staging deploy.
+- `tools/allergens` — `npm run allergens:check` compares the hand-set allergen tags with what products on Open Food Facts declare. Reports only.
 - `tools/eval` — staging eval runs (docs/STAGING-LOG.md): a fixed 12-dish photo set and 10 made-up profiles. `node tools/eval/run.mjs --base <url> --out <dir> --photos --profiles halal-8,noodles-5`.
 - `tools/prices` — the monthly price refresh (step 7): StatCan import, hand-entry CSV, coverage report. Produces data only.
 - `packages/pricing` — pricing and deck sort (SPEC §9, §10), in whole cents. Pure; runs on the server and on the phone for swaps.

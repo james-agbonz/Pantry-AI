@@ -23,6 +23,8 @@
     "prices:find": "npm run find -w @pantry/price-tools --",
     "prices:pick": "npm run pick -w @pantry/price-tools",
     "prices:weekly": "npm run weekly -w @pantry/price-tools --",
+    "smoke": "node tools/eval/smoke.mjs",
+    "allergens:check": "node tools/allergens/check.mjs",
     "e2e:api": "npm run e2e:api -w @pantry/mobile"
   },
   "allowScripts": {
