@@ -50,7 +50,7 @@ A short summary to pick up from at the start of a session. Updated after every p
 ## Open items, most urgent first
 
 - **Allergen tags:** check the checker's leads against real labels. You decide every change. The leads are in `BACKLOG.md`.
-- **Giant Tiger suggestions file:** 388 unpicked rows were deleted before 2026-11-24. Restore them or confirm the deletion.
+- **Giant Tiger suggestions file:** 388 rows were removed by accident and restored on 2026-11-24.
 - **Project Hammer:** ask permission to use their prices. It would add No Frills and more Walmart prices in Ontario.
 - **Weekly prices:** run them by hand on the Sunday reminder.
 - **Before launch:** pick an app name and logo, write the privacy policy, get a paid AI key with a spending limit, deploy to production, and decide on Workers Paid (about $5 a month).
