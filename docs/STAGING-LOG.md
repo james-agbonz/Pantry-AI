@@ -8,6 +8,16 @@ How a run is measured: decks go to `POST /api/deck` from a script, each with its
 
 ---
 
+## Run 10 — 2026-11-24: first smoke test
+
+**Config:** as Run 9, plus `as_of_latest` on every card's pricing (the price note can now read "September to November 2026"). Worker `dce0cd19`. Price table `2026-11-06`. One `npm run smoke` against staging.
+
+- **8 of 8 checks passed:** health, price table (935 prices), a deck of 6 with none dropped, every card priced, "uses" only what the profile has, 3 of 3 photos, a problem report, and a deck refused without a device ID.
+- **Deck time:** 9.4 s. **Photos:** 1.9 s, 2.2 s and 12.6 s (the slow one is likely a cold start).
+- The smoke test leaves one report marked "smoke test" in `REPORTS`.
+
+**Verdict:** keep. Run `npm run smoke` after every staging deploy.
+
 ## Run 9 — 2026-11-06: how many things a tight budget buys
 
 **Config:** as before, plus `affordableItems` (`@pantry/pricing`): the budget over the median low-band price, as a count. When it's 6 or fewer, the prompt says each dish may buy at most that many things. Worker `e8e203e1`. Price table `2026-11-06` (the first weekly job run). Decks only, from the 3 tight profiles, via `tools/eval/run.mjs`.
